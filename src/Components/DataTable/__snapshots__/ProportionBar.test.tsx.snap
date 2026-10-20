@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ProportionBar > renders correctly 1`] = `
+<div>
+  <div
+    aria-hidden="true"
+    class="h-0.5 w-full bg-gray-100"
+    data-testid="proportion-bar"
+  >
+    <div
+      class="h-full bg-gray-500"
+      style="width: 50%;"
+    />
+  </div>
+</div>
+`;

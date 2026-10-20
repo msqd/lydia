@@ -1,0 +1,145 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Documentation/Testing" />
+
+# Testing Guide
+
+This document provides information about the testing setup in the Lydia project.
+
+## Test Types
+
+The project uses several types of tests:
+
+1. **Unit tests**: Vitest with React Testing Library, in jsdom
+2. **Component tests**: the stories themselves, run in a real Chromium through the Storybook Vitest addon
+
+There is no visual regression testing today. `jest-image-snapshot` is in `package.json` and nothing
+imports it.
+
+## Test Commands
+
+The following test commands are available:
+
+- `test` - Run unit tests
+- `test (update snapshots)` - Run unit tests and update snapshots
+- `test storybook` - Run Storybook tests
+- `test storybook (update snapshots)` - Run Storybook tests and update snapshots
+
+## Writing Tests
+
+### Unit Tests
+
+Unit tests are written using Vitest and React Testing Library. A test sits beside the file it
+tests, with a `.test.tsx` suffix. There are no `__tests__` directories.
+
+```tsx
+// Button.test.tsx
+import { render, screen } from '@testing-library/react';
+import { Button } from './Button';
+import { expect, test } from 'vitest';
+
+test('renders a button with text', () => {
+  render(<Button>Click me</Button>);
+  expect(screen.getByText('Click me')).toBeInTheDocument();
+});
+```
+
+### Component Tests with Storybook
+
+Component tests can be written directly in Storybook stories using the `play` function:
+
+```tsx
+export const WithInteractionTest: Story = {
+  args: {
+    children: "Click Me",
+    onClick: fn(),
+  },
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByText("Click Me");
+    
+    // Verify button is in the document
+    expect(button).toBeInTheDocument();
+    
+    // Click the button
+    await userEvent.click(button);
+    
+    // Verify onClick was called
+    expect(args.onClick).toHaveBeenCalled();
+  },
+};
+```
+
+### Testing the first render
+
+Some defects only exist in the first paint. A component that mirrors props into state and corrects
+them in an effect renders once with the uncorrected values, and that is a real frame a user can see
+and click in.
+
+**`render()` cannot catch this.** React Testing Library flushes effects inside `act`, so by the time
+an assertion runs the effect has already repaired the output, and a test asserting on the corrected
+value passes whether or not the defect is there. It is one of the few cases where the obvious test
+is worse than no test, because it reports coverage it does not have.
+
+Render without effects instead:
+
+```tsx
+import { renderToStaticMarkup } from "react-dom/server";
+
+it("already forbids past dates when asked to", () => {
+  const today = new Date().toISOString().split("T")[0];
+
+  const html = renderToStaticMarkup(<DateRangeSelector disablePastDates />);
+
+  expect(html).toContain(`min="${today}"`);
+});
+```
+
+A server render never runs effects, so it shows exactly what the browser paints first. A component
+that derives the value during render passes; one that corrects it afterwards fails, which is the
+whole point of the probe. It is also what a consumer rendering this library on the server gets, so
+it covers a real scenario rather than only a diagnostic one.
+
+Reach for it whenever a value is derived from props: if an assertion only holds after an effect, the
+component has a frame in which it is wrong.
+
+### What to mock, and what not to
+
+**Mock only what the component or page hands no props to.** Design-system children render for real,
+including in page tests and in page snapshots.
+
+This is not a style preference. Before it was the rule, the mocks in this repository had drifted
+from the components they stood in for: a `TpdexBadge` mock recomputed the score and returned 93
+where the real mapping returns 95, a `CacheIndicator` mock dropped the `aria-label` and `title` of a
+component rendered on every table row, and an `ExplorerPage` mock invented a `data-testid` that
+exists nowhere in the real `Drawer`, so the test could not have failed had the drawer stopped
+working. A mock is a second implementation that nobody maintains and no test exercises.
+
+Mocking is right for a genuine boundary, and each one says why in a comment beside it:
+
+- an environment jsdom does not provide, such as ECharts drawing to a canvas, or a Headless UI
+  transition that needs animation frames
+- a third-party lookup table, where the test should state the values it expects
+- **another page**, when the test is about the page that embeds it rather than the one embedded
+
+One consequence worth knowing before it surprises you: because page tests render design-system
+components for real, **a change to a shared component moves the snapshots of the pages that render
+it**. That is the signal working. Regenerate those snapshots in the same change, and read the diff
+rather than running with `-u` and trusting it.
+
+## Setup in CI
+
+For continuous integration, ensure both test types are run:
+
+```yaml
+# Example CI workflow
+- name: Run all tests
+  run: pnpm run test && pnpm run test:storybook
+```
+
+## Test Configuration
+
+- **Vitest configuration**: `vitest.config.ts`, which defines both the `unit` and `storybook` projects
+- **Storybook setup for tests**: `.storybook/vitest.setup.ts`
+
+The test setup integrates Vitest with Storybook Test Runner to provide a unified testing experience.

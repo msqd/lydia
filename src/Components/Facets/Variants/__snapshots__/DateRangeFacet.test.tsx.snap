@@ -1,0 +1,302 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DateRangeFacet > matches snapshot 1`] = `
+<div
+  class="px-4 py-3 relative"
+  data-headlessui-state="open"
+  data-open=""
+>
+  <div
+    class="flex w-full items-start"
+  >
+    <h5
+      class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+    >
+      <button
+        aria-controls="headlessui-disclosure-panel-_r_j_"
+        aria-expanded="true"
+        class="flex w-full items-start text-left cursor-pointer"
+        data-headlessui-state="open"
+        data-open=""
+        id="headlessui-disclosure-button-_r_i_"
+        type="button"
+      >
+        <span
+          class="grow truncate font-semibold"
+        >
+          Date Range
+        </span>
+        <svg
+          aria-hidden="true"
+          class="h-4 w-4 min-w-4 text-gray-600"
+          data-slot="icon"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m4.5 15.75 7.5-7.5 7.5 7.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </h5>
+  </div>
+  <div
+    class="mt-2 space-y-2"
+    data-headlessui-state="open"
+    data-open=""
+    id="headlessui-disclosure-panel-_r_j_"
+  >
+    <div
+      class="w-full"
+    >
+      <div
+        class="grid grid-cols-2 gap-2"
+      >
+        <div
+          class="w-full"
+        >
+          <div
+            class="mt-2"
+          >
+            <div
+              class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+            >
+              <input
+                aria-label="Start date"
+                class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
+                placeholder="Start date"
+                type="date"
+                value=""
+              />
+              <div
+                class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+              >
+                <svg
+                  class="size-5 sm:size-4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="w-full"
+        >
+          <div
+            class="mt-2"
+          >
+            <div
+              class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+            >
+              <input
+                aria-label="End date"
+                class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
+                placeholder="End date"
+                type="date"
+                value=""
+              />
+              <div
+                class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+              >
+                <svg
+                  class="size-5 sm:size-4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DateRangeFacet > matches snapshot with selected dates 1`] = `
+<div
+  class="px-4 py-3 relative"
+  data-headlessui-state="open"
+  data-open=""
+>
+  <div
+    class="flex w-full items-start"
+  >
+    <h5
+      class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+    >
+      <button
+        aria-controls="headlessui-disclosure-panel-_r_l_"
+        aria-expanded="true"
+        class="flex w-full items-start text-left cursor-pointer"
+        data-headlessui-state="open"
+        data-open=""
+        id="headlessui-disclosure-button-_r_k_"
+        type="button"
+      >
+        <span
+          class="grow truncate font-semibold"
+        >
+          Date Range
+        </span>
+        <svg
+          aria-hidden="true"
+          class="h-4 w-4 min-w-4 text-gray-600"
+          data-slot="icon"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m4.5 15.75 7.5-7.5 7.5 7.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </h5>
+    <div
+      class="ml-2 shrink-0 leading-5"
+    >
+      <a
+        aria-label="Reset Date Range"
+        class="text-gray-500 font-normal text-[11px] hover:text-gray-700 transition-colors"
+        href="#"
+      >
+        <svg
+          aria-hidden="true"
+          class="h-2.5 w-2.5 inline-block mr-0.5"
+          data-slot="icon"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M13.836 2.477a.75.75 0 0 1 .75.75v3.182a.75.75 0 0 1-.75.75h-3.182a.75.75 0 0 1 0-1.5h1.37l-.84-.841a4.5 4.5 0 0 0-7.08.932.75.75 0 0 1-1.3-.75 6 6 0 0 1 9.44-1.242l.842.84V3.227a.75.75 0 0 1 .75-.75Zm-.911 7.5A.75.75 0 0 1 13.199 11a6 6 0 0 1-9.44 1.241l-.84-.84v1.371a.75.75 0 0 1-1.5 0V9.591a.75.75 0 0 1 .75-.75H5.35a.75.75 0 0 1 0 1.5H3.98l.841.841a4.5 4.5 0 0 0 7.08-.932.75.75 0 0 1 1.025-.273Z"
+            fill-rule="evenodd"
+          />
+        </svg>
+        reset
+      </a>
+    </div>
+  </div>
+  <div
+    class="mt-2 space-y-2"
+    data-headlessui-state="open"
+    data-open=""
+    id="headlessui-disclosure-panel-_r_l_"
+  >
+    <div
+      class="w-full"
+    >
+      <div
+        class="grid grid-cols-2 gap-2"
+      >
+        <div
+          class="w-full"
+        >
+          <div
+            class="mt-2"
+          >
+            <div
+              class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+            >
+              <input
+                aria-label="Start date"
+                class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
+                max="2024-01-31"
+                placeholder="Start date"
+                type="date"
+                value="2024-01-01"
+              />
+              <div
+                class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+              >
+                <svg
+                  class="size-5 sm:size-4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="w-full"
+        >
+          <div
+            class="mt-2"
+          >
+            <div
+              class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+            >
+              <input
+                aria-label="End date"
+                class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
+                min="2024-01-01"
+                placeholder="End date"
+                type="date"
+                value="2024-01-31"
+              />
+              <div
+                class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+              >
+                <svg
+                  class="size-5 sm:size-4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

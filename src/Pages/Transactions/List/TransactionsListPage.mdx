@@ -1,0 +1,131 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Pages/Transactions/List/Driving the list" />
+
+# Driving the transactions list
+
+`TransactionsListPage` renders the transactions it is handed and reports intent upward. **It does
+not filter, search or paginate.** Those are the consumer's, because only the consumer knows where
+the whole dataset lives.
+
+If you are wiring this page to a server, that is the entire contract: give it a page of rows and the
+totals, take the callbacks, fetch again.
+
+## What comes in, what goes out
+
+| In | Out | Meaning |
+| --- | --- | --- |
+| `transactions` | | The rows to render, exactly as given. Already filtered, searched and paginated. |
+| `filters` | `onFiltersChange(name, value)` | Facet selections. Displayed and reported, never applied. |
+| | `onResetFilters()` | Start over. Expected to clear the facets **and** the search term. |
+| `search` | `onSearchChange(term)` | The search term. Committed on Enter, not on each keystroke. |
+| `page` | `onPageChange(page)` | Current page, 1-based. |
+| `total` | | Total matching transactions. A page of results cannot infer it. |
+| `pageCount` | | Number of pages. Derived from `total` and `itemsPerPage` when omitted. |
+| `facets` | | Values each facet can offer, with counts. Displayed as given. |
+| `isLoading` | | True while you are fetching. |
+
+Every one of them is optional, and **a control renders only when it can lead somewhere**: no
+`onSearchChange`, no search field; no `onFiltersChange`, no filters sidebar. A page that shows a
+control it cannot honour is worse than one that shows less.
+
+## Driving it from a server
+
+The shape a real consumer has. Filter state lives in the URL, so a reload restores the view and a
+link reproduces it.
+
+```tsx
+const [params, setParams] = useSearchParams();
+const { data, isLoading } = useTransactions(params); // your fetch, your backend
+
+<TransactionsListPage
+  transactions={data?.items ?? []}
+  total={data?.total}
+  page={Number(params.get("page") ?? 1)}
+  filters={filtersFromParams(params)}
+  search={params.get("q") ?? ""}
+  isLoading={isLoading}
+  onFiltersChange={(name, value) => setParams(withFilter(params, name, value))}
+  onResetFilters={() => setParams(new URLSearchParams())}
+  onSearchChange={(term) => setParams(withSearch(params, term))}
+  onPageChange={(page) => setParams(withPage(params, page))}
+/>
+```
+
+See the **Driven from the URL** story for a working version of exactly this.
+
+## The facets it offers are yours too
+
+The page knows **which** facets exist. It does not know **what** they can offer, because only you
+see the whole result set:
+
+```tsx
+facets={{
+  endpoint: [{ name: "/v1/checkout", label: "/v1/checkout", count: 3120 }],
+  method: [{ name: "POST", label: "POST", count: 4700 }],
+}}
+```
+
+A facet you say nothing about renders empty and says so. It never falls back to a built-in list,
+not even for facets that look closed: `method` is a plain string and open by spec, and the status
+facet's vocabulary (classes like `4` with their codes nested, plus `failure`, which is not a code at all) is our own invention. A
+value the library supplies that your data does not contain is a claim about your data.
+
+Counts are displayed exactly as given, and are of your whole result set rather than of the page.
+**A zero count and an absent count are different claims**: `count: 0` renders `0`, a measurement;
+omitting `count` renders no number, because absence is not zero.
+
+Counts do not narrow as other facets are selected. That matches HARP, whose facet counts are
+populated independently of the current query, and changing it would be a change to both sides.
+
+## Driving it without a backend
+
+When the whole list is already in memory and small, `useClientSideTransactions` does the filtering,
+searching and pagination for you and returns the whole prop bundle:
+
+```tsx
+<TransactionsListPage {...useClientSideTransactions(transactions)} />
+```
+
+**This is the fallback, not the recommended path.** Applied to a page of results fetched from a
+server it narrows only that page, and the totals it reports are the totals of that page, which is
+worse than no filtering because it looks like it worked. Reach for it in stories, demos, and fixed
+lists such as the transactions attached to a single alert.
+
+It derives the facet vocabulary too, from the **full list you handed it**, so the sidebar offers
+exactly the endpoints, methods, statuses, cache statuses and tags that occur in your data, with
+honest counts. It never derives them from the filtered set: doing so would remove every unselected
+value the moment you select one, leaving no way to undo the selection.
+
+It is built on `filterTransactions(transactions, { filters, search })` and
+`deriveTransactionFacets(transactions)`, both exported from `@msqd/lydia/Models/Transactions` if you want
+the rules without the state. They share their encodings on purpose, so the vocabulary and the
+filter cannot drift apart.
+
+## Three empty states, not one
+
+An empty table is ambiguous, so the page distinguishes:
+
+- **Loading**, while `isLoading` is true. The pagination frame stays in place so the layout does not
+  jump when rows arrive.
+- **No transactions match these filters**, when the list is empty and something is narrowing it,
+  with a reset control so the user is not stuck.
+- **No transactions yet**, when nothing is narrowing it.
+
+"Something is narrowing it" is derived from the props you pass, by `hasActiveFilters`. An untouched
+facet arrives as an empty array and a cleared range as `{}`; neither counts, so a consumer with no
+data is never told its filters are at fault.
+
+## What the client-side fallback cannot answer
+
+- **`flags`** are per-user state, kept in their own table and mutated through their own endpoint, so
+  they are not on a transaction at all. The derivation omits the key entirely rather than returning
+  an empty list, because an empty list says "we looked and found none" where the truth is "this
+  cannot be answered from here". A flags facet is answerable server-side and nowhere else.
+- **`tpdex`** is absent while a transaction is still running. An absent score matches no bounded
+  range, because substituting a value would make a fabricated score indistinguishable from a
+  measured one. `TpdexBadge` still shows a score for those rows, derived from the response time,
+  but marks it as an estimate with a leading `~` and a dashed outline, so a row excluded by a
+  `tpdex >= 90` filter has already said on screen that its grade was never measured.
+- **`tags`** are matched as `key=value` pairs, and offered the same way. `domain=user` is
+  unambiguous where a bare `user` would conflate two keys that happen to share a value.

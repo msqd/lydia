@@ -1,0 +1,166 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Card > accepts additional className for the outer div > Card-with-custom-class 1`] = `
+<div>
+  <div
+    class="overflow-hidden bg-white ring-1 ring-gray-200 sm:rounded-sm test-outer-class"
+    data-testid="card"
+  >
+    <div
+      class="px-4 py-5 sm:p-6"
+    >
+      Content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card > accepts additional contentClassName for the inner div > Card-with-content-class 1`] = `
+<div>
+  <div
+    class="overflow-hidden bg-white ring-1 ring-gray-200 sm:rounded-sm"
+    data-testid="card"
+  >
+    <div
+      class="px-4 py-5 sm:p-6 test-inner-class"
+    >
+      Content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card > accepts additional headerClassName and footerClassName > Card-with-custom-classes 1`] = `
+<div>
+  <div
+    class="overflow-hidden bg-white ring-1 ring-gray-200 sm:rounded-sm divide-y divide-gray-200"
+    data-testid="card"
+  >
+    <div
+      class="px-4 py-5 sm:px-6 test-header-class"
+    >
+      Header Text
+    </div>
+    <div
+      class="px-4 py-5 sm:p-6"
+    >
+      Content
+    </div>
+    <div
+      class="px-4 py-4 sm:px-6 test-footer-class"
+    >
+      Footer Text
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card > renders with a footer > Card-with-footer 1`] = `
+<div>
+  <div
+    class="overflow-hidden bg-white ring-1 ring-gray-200 sm:rounded-sm divide-y divide-gray-200"
+    data-testid="card"
+  >
+    <div
+      class="px-4 py-5 sm:p-6"
+    >
+      Content
+    </div>
+    <div
+      class="px-4 py-4 sm:px-6"
+    >
+      Footer Text
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card > renders with a header > Card-with-header 1`] = `
+<div>
+  <div
+    class="overflow-hidden bg-white ring-1 ring-gray-200 sm:rounded-sm divide-y divide-gray-200"
+    data-testid="card"
+  >
+    <div
+      class="px-4 py-5 sm:px-6"
+    >
+      Header Text
+    </div>
+    <div
+      class="px-4 py-5 sm:p-6"
+    >
+      Content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card > renders with both header and footer > Card-with-header-and-footer 1`] = `
+<div>
+  <div
+    class="overflow-hidden bg-white ring-1 ring-gray-200 sm:rounded-sm divide-y divide-gray-200"
+    data-testid="card"
+  >
+    <div
+      class="px-4 py-5 sm:px-6"
+    >
+      Header Text
+    </div>
+    <div
+      class="px-4 py-5 sm:p-6"
+    >
+      Content
+    </div>
+    <div
+      class="px-4 py-4 sm:px-6"
+    >
+      Footer Text
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card > renders with default props 1`] = `
+<div>
+  <div
+    class="overflow-hidden bg-white ring-1 ring-gray-200 sm:rounded-sm"
+    data-testid="card"
+  >
+    <div
+      class="px-4 py-5 sm:p-6"
+    >
+      Content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card > renders without padding > Card-without-padding 1`] = `
+<div>
+  <div
+    class="overflow-hidden bg-white ring-1 ring-gray-200 sm:rounded-sm"
+    data-testid="card"
+  >
+    <div
+      class=""
+    >
+      Content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Card > renders without shadow and rounding > Card-without-rounding 1`] = `
+<div>
+  <div
+    class="overflow-hidden bg-white ring-1 ring-gray-200"
+    data-testid="card"
+  >
+    <div
+      class="px-4 py-5 sm:p-6"
+    >
+      Content
+    </div>
+  </div>
+</div>
+`;

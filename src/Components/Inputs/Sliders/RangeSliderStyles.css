@@ -1,0 +1,92 @@
+/*
+ * Plain CSS on theme variables, no Tailwind directive: this file ships as a source for a consumer's own
+ * Tailwind build and must not need Tailwind, or a second copy of it, to compile.
+ */
+@layer components {
+  .range-slider-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 3;
+    padding: 0;
+    cursor: pointer;
+    pointer-events: none;
+    appearance: none;
+  }
+
+  /* Styles for WebKit (Chrome, Safari, modern Edge) */
+  .range-slider-input::-webkit-slider-thumb {
+    pointer-events: auto;
+    cursor: grab;
+    border: 0;
+    border-radius: 0;
+    background-color: var(--color-primary-500);
+    -webkit-appearance: none;
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+  }
+
+  .range-slider-input::-webkit-slider-thumb:active {
+    cursor: grabbing;
+  }
+
+  .range-slider-input:focus::-webkit-slider-runnable-track {
+    background-color: transparent;
+    border-color: transparent;
+    appearance: none;
+  }
+
+  /* Styles for Firefox */
+  .range-slider-input::-moz-range-thumb {
+    pointer-events: auto;
+    cursor: grab;
+    border: 0;
+    border-radius: 0;
+    background-color: var(--color-primary-500);
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+  }
+
+  .range-slider-input::-moz-range-thumb:active {
+    cursor: grabbing;
+  }
+
+  .range-slider-input:focus::-moz-range-track {
+    background-color: transparent;
+    border-color: transparent;
+    appearance: none;
+  }
+
+  /* Styles for IE and legacy Edge */
+  .range-slider-input::-ms-thumb {
+    pointer-events: auto;
+    cursor: grab;
+    border: 0;
+    border-radius: 0;
+    background-color: var(--color-primary-500);
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+  }
+
+  .range-slider-input::-ms-thumb:active {
+    cursor: grabbing;
+  }
+
+  .range-slider-input:focus::-ms-track {
+    background-color: transparent;
+    border-color: transparent;
+    appearance: none;
+  }
+
+  /*
+   * The inputs are invisible and the drawn thumbs live in a sibling subtree, so the focus of an
+   * input is shown on its thumb from the common wrapper. The outline sits outside the thumb, so it
+   * stays visible when the twin thumb paints over it.
+   */
+  .range-slider:has(input:nth-of-type(1):focus-visible) [data-thumb="min"],
+  .range-slider:has(input:nth-of-type(2):focus-visible) [data-thumb="max"] {
+    outline: 2px solid var(--color-primary-600);
+    outline-offset: 2px;
+  }
+}

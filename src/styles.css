@@ -1,0 +1,4 @@
+/* Precompiled stylesheet entry point (`@msqd/lydia/styles`): Tailwind, the theme and the component styles in one file. */
+/*! Includes the PrismJS default theme. MIT License | Copyright (c) 2012 Lea Verou | https://github.com/PrismJS/prism/blob/master/LICENSE */
+@import "./main.css";
+@import "./components.css";

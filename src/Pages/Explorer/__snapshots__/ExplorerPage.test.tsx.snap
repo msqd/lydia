@@ -1,0 +1,202 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ExplorerPage > renders the ExplorerPage component 1`] = `
+<div>
+  <div
+    class="h-full"
+  >
+    <section
+      class="mb-6"
+    >
+      <h2
+        class="pb-4 text-xl font-semibold text-gray-900"
+      >
+        API Explorer
+      </h2>
+      <p
+        class="mb-2 text-base text-gray-500 mt-2"
+      >
+        Browse and explore API endpoints hierarchically. Select an API or endpoint to view related transactions.
+      </p>
+    </section>
+    <div
+      class="flex gap-4 h-[calc(100%-8rem)]"
+    >
+      <div
+        class="bg-white rounded-lg shadow overflow-hidden flex flex-col w-80"
+      >
+        <div
+          class="px-4 py-3 border-b border-gray-200 bg-gray-50"
+        >
+          <div
+            class="flex items-center justify-between"
+          >
+            <h3
+              class="text-sm font-medium text-gray-900"
+            >
+              API Endpoints
+            </h3>
+          </div>
+        </div>
+        <div
+          class="flex-1 overflow-y-auto p-2"
+        >
+          <div>
+            <div
+              class="flex items-center px-2 py-1 cursor-pointer hover:bg-gray-100 rounded text-sm"
+              style="padding-left: 0.5rem;"
+            >
+              <button
+                aria-expanded="false"
+                aria-label="products-api"
+                class="p-0.5 hover:bg-gray-200 rounded mr-1"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="h-3 w-3"
+                  data-slot="icon"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+              <div
+                class="flex items-center space-x-2 flex-1"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="h-4 w-4 text-blue-500"
+                  data-slot="icon"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span
+                  class="truncate"
+                >
+                  products-api
+                </span>
+                <span
+                  class="text-[11px] text-gray-600 font-light ml-auto"
+                >
+                  2
+                </span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div
+              class="flex items-center px-2 py-1 cursor-pointer hover:bg-gray-100 rounded text-sm"
+              style="padding-left: 0.5rem;"
+            >
+              <button
+                aria-expanded="false"
+                aria-label="users-api"
+                class="p-0.5 hover:bg-gray-200 rounded mr-1"
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="h-3 w-3"
+                  data-slot="icon"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+              <div
+                class="flex items-center space-x-2 flex-1"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="h-4 w-4 text-blue-500"
+                  data-slot="icon"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span
+                  class="truncate"
+                >
+                  users-api
+                </span>
+                <span
+                  class="text-[11px] text-gray-600 font-light ml-auto"
+                >
+                  2
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex-1 bg-white rounded-lg shadow overflow-hidden"
+      >
+        <div
+          class="h-full flex items-center justify-center"
+        >
+          <div
+            class="text-center"
+          >
+            <svg
+              aria-hidden="true"
+              class="h-12 w-12 text-gray-300 mx-auto mb-3"
+              data-slot="icon"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <p
+              class="text-sm text-gray-500"
+            >
+              Select an API or endpoint to view transactions
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

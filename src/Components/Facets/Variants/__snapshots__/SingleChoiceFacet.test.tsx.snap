@@ -1,0 +1,360 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SingleChoiceFacet > matches snapshot 1`] = `
+<div
+  class="px-4 py-3 relative"
+  data-headlessui-state="open"
+  data-open=""
+>
+  <div
+    class="flex w-full items-start"
+  >
+    <h5
+      class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+    >
+      <button
+        aria-controls="headlessui-disclosure-panel-_r_16_"
+        aria-expanded="true"
+        class="flex w-full items-start text-left cursor-pointer"
+        data-headlessui-state="open"
+        data-open=""
+        id="headlessui-disclosure-button-_r_15_"
+        type="button"
+      >
+        <span
+          class="grow truncate font-semibold"
+        >
+          Test Filter
+        </span>
+        <svg
+          aria-hidden="true"
+          class="h-4 w-4 min-w-4 text-gray-600"
+          data-slot="icon"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m4.5 15.75 7.5-7.5 7.5 7.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </h5>
+  </div>
+  <div
+    class="mt-2 space-y-2"
+    data-headlessui-state="open"
+    data-open=""
+    id="headlessui-disclosure-panel-_r_16_"
+  >
+    <p
+      class="text-xs text-gray-600"
+      id="_r_14_"
+    >
+      Counts cover all transactions
+    </p>
+    <div
+      aria-describedby="_r_14_"
+      aria-label="Test Filter"
+      class="space-y-2"
+      role="radiogroup"
+    >
+      <div
+        class="flex items-center gap-x-3 w-full cursor-pointer"
+      >
+        <input
+          class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+          id="testFilter-option1"
+          name="testFilter"
+          type="radio"
+          value="option1"
+        />
+        <label
+          class="block text-sm font-medium leading-6 text-gray-900 flex-1 cursor-pointer"
+          for="testFilter-option1"
+        >
+          <div
+            class="flex items-center justify-between w-full group"
+          >
+            <span
+              class="truncate"
+            >
+              Option 1
+            </span>
+            <div
+              class="flex items-center space-x-2 ml-auto"
+            >
+              <div
+                class="opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+              <span
+                class="text-[11px] text-gray-500 font-light"
+              >
+                10
+              </span>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div
+        class="flex items-center gap-x-3 w-full cursor-pointer"
+      >
+        <input
+          class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+          id="testFilter-option2"
+          name="testFilter"
+          type="radio"
+          value="option2"
+        />
+        <label
+          class="block text-sm font-medium leading-6 text-gray-900 flex-1 cursor-pointer"
+          for="testFilter-option2"
+        >
+          <div
+            class="flex items-center justify-between w-full group"
+          >
+            <span
+              class="truncate"
+            >
+              Option 2
+            </span>
+            <div
+              class="flex items-center space-x-2 ml-auto"
+            >
+              <div
+                class="opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+              <span
+                class="text-[11px] text-gray-500 font-light"
+              >
+                5
+              </span>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div
+        class="flex items-center gap-x-3 w-full cursor-pointer"
+      >
+        <input
+          class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+          id="testFilter-option3"
+          name="testFilter"
+          type="radio"
+          value="option3"
+        />
+        <label
+          class="block text-sm font-medium leading-6 text-gray-900 flex-1 cursor-pointer"
+          for="testFilter-option3"
+        >
+          <div
+            class="flex items-center justify-between w-full group"
+          >
+            <span
+              class="truncate"
+            >
+              Option 3
+            </span>
+            <div
+              class="flex items-center space-x-2 ml-auto"
+            >
+              <div
+                class="opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+              <span
+                class="text-[11px] text-gray-500 font-light"
+              >
+                3
+              </span>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`SingleChoiceFacet > matches snapshot with selection 1`] = `
+<div
+  class="px-4 py-3 relative"
+  data-headlessui-state="open"
+  data-open=""
+>
+  <div
+    class="flex w-full items-start"
+  >
+    <h5
+      class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+    >
+      <button
+        aria-controls="headlessui-disclosure-panel-_r_19_"
+        aria-expanded="true"
+        class="flex w-full items-start text-left cursor-pointer"
+        data-headlessui-state="open"
+        data-open=""
+        id="headlessui-disclosure-button-_r_18_"
+        type="button"
+      >
+        <span
+          class="grow truncate font-semibold"
+        >
+          Test Filter
+        </span>
+        <svg
+          aria-hidden="true"
+          class="h-4 w-4 min-w-4 text-gray-600"
+          data-slot="icon"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m4.5 15.75 7.5-7.5 7.5 7.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </h5>
+  </div>
+  <div
+    class="mt-2 space-y-2"
+    data-headlessui-state="open"
+    data-open=""
+    id="headlessui-disclosure-panel-_r_19_"
+  >
+    <p
+      class="text-xs text-gray-600"
+      id="_r_17_"
+    >
+      Counts cover all transactions
+    </p>
+    <div
+      aria-describedby="_r_17_"
+      aria-label="Test Filter"
+      class="space-y-2"
+      role="radiogroup"
+    >
+      <div
+        class="flex items-center gap-x-3 w-full cursor-pointer"
+      >
+        <input
+          class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+          id="testFilter-option1"
+          name="testFilter"
+          type="radio"
+          value="option1"
+        />
+        <label
+          class="block text-sm font-medium leading-6 text-gray-900 flex-1 cursor-pointer"
+          for="testFilter-option1"
+        >
+          <div
+            class="flex items-center justify-between w-full group"
+          >
+            <span
+              class="truncate"
+            >
+              Option 1
+            </span>
+            <div
+              class="flex items-center space-x-2 ml-auto"
+            >
+              <div
+                class="opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+              <span
+                class="text-[11px] text-gray-500 font-light"
+              >
+                10
+              </span>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div
+        class="flex items-center gap-x-3 w-full cursor-pointer"
+      >
+        <input
+          checked=""
+          class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+          id="testFilter-option2"
+          name="testFilter"
+          type="radio"
+          value="option2"
+        />
+        <label
+          class="block text-sm font-medium leading-6 text-gray-900 flex-1 cursor-pointer"
+          for="testFilter-option2"
+        >
+          <div
+            class="flex items-center justify-between w-full group"
+          >
+            <span
+              class="truncate"
+            >
+              Option 2
+            </span>
+            <div
+              class="flex items-center space-x-2 ml-auto"
+            >
+              <div
+                class="opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+              <span
+                class="text-[11px] text-gray-500 font-light"
+              >
+                5
+              </span>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div
+        class="flex items-center gap-x-3 w-full cursor-pointer"
+      >
+        <input
+          class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+          id="testFilter-option3"
+          name="testFilter"
+          type="radio"
+          value="option3"
+        />
+        <label
+          class="block text-sm font-medium leading-6 text-gray-900 flex-1 cursor-pointer"
+          for="testFilter-option3"
+        >
+          <div
+            class="flex items-center justify-between w-full group"
+          >
+            <span
+              class="truncate"
+            >
+              Option 3
+            </span>
+            <div
+              class="flex items-center space-x-2 ml-auto"
+            >
+              <div
+                class="opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+              <span
+                class="text-[11px] text-gray-500 font-light"
+              >
+                3
+              </span>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;

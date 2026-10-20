@@ -1,0 +1,114 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Button > merges custom className with default styles > Component-with-custom-class 1`] = `
+<div>
+  <button
+    class="font-semibold cursor-pointer shadow-xs text-white bg-primary-500 hover:bg-primary-400 focus-visible:outline-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 ring-1 ring-inset ring-primary-600 disabled:ring-gray-300 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed active:bg-primary-600 active:ring-primary-700 rounded-sm px-2.5 py-1.5 text-sm custom-class"
+  >
+    Custom Button
+  </button>
+</div>
+`;
+
+exports[`Button > passes additional props to the button element > Component-with-additional-props 1`] = `
+<div>
+  <button
+    aria-label="test button"
+    class="font-semibold cursor-pointer shadow-xs text-white bg-primary-500 hover:bg-primary-400 focus-visible:outline-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 ring-1 ring-inset ring-primary-600 disabled:ring-gray-300 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed active:bg-primary-600 active:ring-primary-700 rounded-sm px-2.5 py-1.5 text-sm"
+    data-testid="button-element"
+  >
+    Test Button
+  </button>
+</div>
+`;
+
+exports[`Button > renders all sizes correctly > Component-size-lg 1`] = `
+<div>
+  <button
+    class="font-semibold cursor-pointer shadow-xs text-white bg-primary-500 hover:bg-primary-400 focus-visible:outline-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 ring-1 ring-inset ring-primary-600 disabled:ring-gray-300 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed active:bg-primary-600 active:ring-primary-700 rounded-sm px-3 py-2 text-sm"
+  >
+    Test Size Button
+  </button>
+</div>
+`;
+
+exports[`Button > renders all sizes correctly > Component-size-md 1`] = `
+<div>
+  <button
+    class="font-semibold cursor-pointer shadow-xs text-white bg-primary-500 hover:bg-primary-400 focus-visible:outline-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 ring-1 ring-inset ring-primary-600 disabled:ring-gray-300 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed active:bg-primary-600 active:ring-primary-700 rounded-sm px-2.5 py-1.5 text-sm"
+  >
+    Test Size Button
+  </button>
+</div>
+`;
+
+exports[`Button > renders all sizes correctly > Component-size-sm 1`] = `
+<div>
+  <button
+    class="font-semibold cursor-pointer shadow-xs text-white bg-primary-500 hover:bg-primary-400 focus-visible:outline-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 ring-1 ring-inset ring-primary-600 disabled:ring-gray-300 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed active:bg-primary-600 active:ring-primary-700 rounded-sm px-2 py-1 text-sm"
+  >
+    Test Size Button
+  </button>
+</div>
+`;
+
+exports[`Button > renders all sizes correctly > Component-size-xl 1`] = `
+<div>
+  <button
+    class="font-semibold cursor-pointer shadow-xs text-white bg-primary-500 hover:bg-primary-400 focus-visible:outline-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 ring-1 ring-inset ring-primary-600 disabled:ring-gray-300 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed active:bg-primary-600 active:ring-primary-700 rounded-sm px-3.5 py-2.5 text-sm"
+  >
+    Test Size Button
+  </button>
+</div>
+`;
+
+exports[`Button > renders all sizes correctly > Component-size-xs 1`] = `
+<div>
+  <button
+    class="font-semibold cursor-pointer shadow-xs text-white bg-primary-500 hover:bg-primary-400 focus-visible:outline-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 ring-1 ring-inset ring-primary-600 disabled:ring-gray-300 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed active:bg-primary-600 active:ring-primary-700 rounded-sm px-2 py-1 text-xs"
+  >
+    Test Size Button
+  </button>
+</div>
+`;
+
+exports[`Button > renders all variants correctly > Component-variant-primary 1`] = `
+<div>
+  <button
+    class="font-semibold cursor-pointer shadow-xs text-white bg-primary-500 hover:bg-primary-400 focus-visible:outline-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 ring-1 ring-inset ring-primary-600 disabled:ring-gray-300 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed active:bg-primary-600 active:ring-primary-700 rounded-sm px-2.5 py-1.5 text-sm"
+  >
+    Test Button
+  </button>
+</div>
+`;
+
+exports[`Button > renders all variants correctly > Component-variant-secondary 1`] = `
+<div>
+  <button
+    class="font-semibold cursor-pointer shadow-xs bg-white text-gray-900 hover:bg-gray-50 focus-visible:outline-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 ring-1 ring-inset ring-gray-300 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed active:bg-gray-100 active:ring-gray-300 rounded-sm px-2.5 py-1.5 text-sm"
+  >
+    Test Button
+  </button>
+</div>
+`;
+
+exports[`Button > renders in disabled state > Component-disabled 1`] = `
+<div>
+  <button
+    class="font-semibold cursor-pointer shadow-xs text-white bg-primary-500 hover:bg-primary-400 focus-visible:outline-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 ring-1 ring-inset ring-primary-600 disabled:ring-gray-300 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed active:bg-primary-600 active:ring-primary-700 rounded-sm px-2.5 py-1.5 text-sm"
+    disabled=""
+  >
+    Disabled Button
+  </button>
+</div>
+`;
+
+exports[`Button > renders with default props (primary variant, md size) 1`] = `
+<div>
+  <button
+    class="font-semibold cursor-pointer shadow-xs text-white bg-primary-500 hover:bg-primary-400 focus-visible:outline-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 ring-1 ring-inset ring-primary-600 disabled:ring-gray-300 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed active:bg-primary-600 active:ring-primary-700 rounded-sm px-2.5 py-1.5 text-sm"
+  >
+    Default Button
+  </button>
+</div>
+`;

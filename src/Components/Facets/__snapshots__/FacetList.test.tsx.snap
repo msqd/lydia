@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FacetList > matches snapshot 1`] = `
+<div
+  class="overflow-hidden text-gray-900 sm:text-sm divide-y divide-gray-100"
+>
+  <p>
+    a facet
+  </p>
+</div>
+`;

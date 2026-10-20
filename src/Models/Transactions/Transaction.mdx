@@ -1,0 +1,66 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Models/Transactions/Transaction" />
+
+# The Transaction model
+
+`Transaction` is the shape every transaction view renders from, and the one a consumer writes its
+own data against. Import it from `@msqd/lydia`:
+
+```ts
+import type { Transaction } from "@msqd/lydia";
+```
+
+The type itself is in `src/Models/Transactions/types.ts`. This page exists for the part a type
+cannot state: **what it means when a field is absent**, and which fields are deliberately not here.
+
+## Required
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `id` | `string` | Stable identity; used as the table row key |
+| `url` | `string` | Full request URL. Views split path from query themselves |
+| `method` | `string` | Not a union, and deliberately so: any HTTP token is valid, and a proxy sees whatever crosses it, `PROPFIND` included |
+| `status` | `"Successful" \| "Pending" \| "Failed"` | The transaction's own outcome, distinct from the response code |
+| `statusCode` | `number` | HTTP response status |
+| `timestamp` | `string` | ISO 8601 |
+| `responseTime` | `number` | Milliseconds. Elapsed so far while a transaction is still running |
+| `client` | `string` | Who made the call |
+
+## Optional, and what absence means
+
+| Field | Type | What absence means |
+| --- | --- | --- |
+| `apiName` | `string` | Not attributed to a named API |
+| `tags` | `Record<string, string>` | No annotations. **Both halves carry meaning**: HARP fills these from `x-harp-*` request headers, and facets offer them as `key=value` pairs, because a bare `production` would conflate two keys that share a value |
+| `userAgent`, `remoteAddress` | `string` | Not captured |
+| `cached` | `boolean` | Legacy. Prefer `cacheStatus`. `cached: true` reads as a `hit`, an explicit `cached: false` as a `miss` |
+| `cacheStatus` | `"hit" \| "miss" \| "stale" \| "bypass"` | Falls back to `cached`, then to `unknown`, which facets offer as **Not reported** |
+| `tpdex` | `number` | **The transaction has not finished**, so nothing has been scored yet |
+
+## Three rules worth knowing before you populate it
+
+**An absent `tpdex` is not a low score, and not a middle one.** A transaction that is still running
+has not been scored. Substituting a value would make a fabricated score indistinguishable from a
+measured one, so nothing here does: an absent score matches no bounded `tpdex` filter, and
+`TpdexBadge` marks the score it derives from `responseTime` as an estimate rather than showing it
+as a measurement. Populate `tpdex` only with a score you measured.
+
+**`cached` is legacy, and an absent cache status is not a miss.** `cacheStatus` supersedes it. Where
+both are absent the transaction resolves to `unknown`, which facets offer as **Not reported** and
+count separately. "Nothing was reported" and "the cache was consulted and did not have it" are
+different facts and only the second is a miss, so an explicit `cached: false` stays a miss while
+silence does not become one. That is the rule above applied to a second field: an absence is never
+filled in with a value a reader could not tell apart from a reported one. Send `cacheStatus` in new
+code.
+
+**Flags are not on this model, and cannot be.** Favourites and similar are per-user state: HARP
+keys them by (user, transaction, flag) in their own table and mutates them through their own
+endpoint. A transaction payload cannot carry them, so they cannot be read from one or filtered on
+one client-side. A flags facet is answerable by a consumer that can ask that question, and by
+nothing else.
+
+## Related
+
+- [Driving the transactions list](/docs/pages-transactions-list-driving-the-list--docs): how a consumer feeds these to the page, and why the page does not filter them
+- `filterTransactions` and `deriveTransactionFacets` in `@msqd/lydia/Models/Transactions`: the client-side fallback that consumes and produces these fields, sharing one set of encodings so the two cannot disagree

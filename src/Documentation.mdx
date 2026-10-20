@@ -1,0 +1,74 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Documentation/Overview" />
+
+# Lydia Documentation
+
+Lydia is a React component library built with TypeScript, TailwindCSS 4 and Vite, shared by several
+API observability projects as their frontend base.
+
+**It is a pure presentation library.** Components render from their props and hold no data fetching,
+no routing and no application logic. The data layer lives in the consuming application: when a
+component needs remote data, it takes it as a prop and the consumer fetches it. That boundary is not
+a convention, it is enforced by `src/architecture-boundary.test.ts`, which fails the build if an
+HTTP call or a data-layer import appears anywhere in the library.
+
+## Where the documentation lives
+
+Documentation sits beside the code it describes, as an `.mdx` file in the same directory, so it
+moves with the thing it documents and cannot be forgotten in a folder nobody opens.
+
+That is the convention for **new** documentation. It is not yet a description of the whole
+repository: most components today are documented by their stories and their prop tables alone, and
+prose exists only where a component needs more explaining than its stories can carry. The pages that
+exist are listed below; if you write a new one, add it here.
+
+| Kind | Where it goes | Example |
+| --- | --- | --- |
+| Component or page | `.mdx` beside the component | `src/Pages/Transactions/List/TransactionsListPage.mdx` |
+| Public type | `.mdx` beside the model | `src/Models/Transactions/Transaction.mdx` |
+| Everything else | its stories | any `*.stories.tsx` with `tags: ["autodocs"]` |
+
+**A public type is documented like a component**, because a consumer writes their data against it
+and the `.d.ts` alone cannot say what an absent field means. Where a field's absence carries
+meaning, prose is the only place that can be said.
+
+## Pages
+
+- [Driving the transactions list](/docs/pages-transactions-list-driving-the-list--docs): what comes in, what goes out, and why the page does not filter
+- [The Transaction model](/docs/models-transactions-transaction--docs): the shape consumers write their data against, and what an absent field means
+- [Testing guide](/docs/documentation-testing--docs): testing setup and practice
+
+Component APIs are documented by their stories. For filtering, start with
+[FacetListCard](/docs/components-facets-facetlistcard--docs) and the facet variants beside it.
+
+## Key features
+
+- **UI components**: badges, buttons, cards, data tables, facets, charts
+- **Pages and elements**: composed views for transactions, alerts, system topology and overview
+- **TypeScript**: fully typed, with the public surface generated per directory
+- **TailwindCSS 4**: configured in `src/main.css`, with no `tailwind.config.js`
+- **Vite**: library build with per-directory exports
+
+## Development
+
+```
+pnpm build              # build the library
+pnpm check              # format, lint and typecheck
+pnpm test               # unit tests
+pnpm test:storybook     # component tests in a real browser
+```
+
+Append `:update` to either test command to refresh snapshots. A snapshot is refreshed only after
+reading what changed in it.
+
+## Contributing to documentation
+
+Write the `.mdx` beside the code, give it a `<Meta title="..." />` that places it in the sidebar,
+and link it from the **Pages** list above. `src/documentation-links.test.ts` resolves every
+documentation link against the pages that actually exist, so a link to a page that was never
+written, or one whose title later changed, fails the build rather than reaching a reader.
+
+A page is worth writing when the stories cannot carry the explanation on their own: a contract
+between a component and its consumer, a rule that is not visible in a prop's type, or a decision
+whose reasoning a future reader will need.

@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`P (Paragraph) > accepts additional className 1`] = `
+<p
+  class="mb-2 text-base text-gray-700 test-class"
+  data-testid="paragraph"
+>
+  Test content
+</p>
+`;
+
+exports[`P (Paragraph) > renders with default props 1`] = `
+<p
+  class="mb-2 text-base text-gray-700"
+  data-testid="paragraph"
+>
+  Test content
+</p>
+`;

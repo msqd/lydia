@@ -1,0 +1,177 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Badge > merges custom className with default styles > Component-with-custom-class 1`] = `
+<div>
+  <span
+    class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-gray-50 text-gray-700 ring-gray-600/20 px-2 py-1 text-xs custom-class"
+    data-testid="badge-default"
+  >
+    Custom Badge
+  </span>
+</div>
+`;
+
+exports[`Badge > passes additional props to the span element > Component-with-additional-props 1`] = `
+<div>
+  <span
+    class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-gray-50 text-gray-700 ring-gray-600/20 px-2 py-1 text-xs"
+    data-testid="badge-element"
+  >
+    Test Badge
+  </span>
+</div>
+`;
+
+exports[`Badge > renders with custom color > Component-color-blue 1`] = `
+<div>
+  <span
+    class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-blue-50 text-blue-700 ring-blue-600/20 px-2 py-1 text-xs"
+    data-testid="badge-blue"
+  >
+    Test Badge
+  </span>
+</div>
+`;
+
+exports[`Badge > renders with custom color > Component-color-danger 1`] = `
+<div>
+  <span
+    class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-danger-50 text-danger-700 ring-danger-600/20 px-2 py-1 text-xs"
+    data-testid="badge-danger"
+  >
+    Test Badge
+  </span>
+</div>
+`;
+
+exports[`Badge > renders with custom color > Component-color-default 1`] = `
+<div>
+  <span
+    class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-gray-50 text-gray-700 ring-gray-600/20 px-2 py-1 text-xs"
+    data-testid="badge-default"
+  >
+    Test Badge
+  </span>
+</div>
+`;
+
+exports[`Badge > renders with custom color > Component-color-green 1`] = `
+<div>
+  <span
+    class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-green-50 text-green-700 ring-green-600/20 px-2 py-1 text-xs"
+    data-testid="badge-green"
+  >
+    Test Badge
+  </span>
+</div>
+`;
+
+exports[`Badge > renders with custom color > Component-color-orange 1`] = `
+<div>
+  <span
+    class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-orange-50 text-orange-700 ring-orange-600/20 px-2 py-1 text-xs"
+    data-testid="badge-orange"
+  >
+    Test Badge
+  </span>
+</div>
+`;
+
+exports[`Badge > renders with custom color > Component-color-primary 1`] = `
+<div>
+  <span
+    class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-primary-50 text-primary-700 ring-primary-600/20 px-2 py-1 text-xs"
+    data-testid="badge-primary"
+  >
+    Test Badge
+  </span>
+</div>
+`;
+
+exports[`Badge > renders with custom color > Component-color-purple 1`] = `
+<div>
+  <span
+    class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-purple-50 text-purple-700 ring-purple-600/20 px-2 py-1 text-xs"
+    data-testid="badge-purple"
+  >
+    Test Badge
+  </span>
+</div>
+`;
+
+exports[`Badge > renders with custom color > Component-color-red 1`] = `
+<div>
+  <span
+    class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-red-50 text-red-700 ring-red-600/20 px-2 py-1 text-xs"
+    data-testid="badge-red"
+  >
+    Test Badge
+  </span>
+</div>
+`;
+
+exports[`Badge > renders with custom color > Component-color-success 1`] = `
+<div>
+  <span
+    class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-success-50 text-success-700 ring-success-600/20 px-2 py-1 text-xs"
+    data-testid="badge-success"
+  >
+    Test Badge
+  </span>
+</div>
+`;
+
+exports[`Badge > renders with custom color > Component-color-warning 1`] = `
+<div>
+  <span
+    class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-warning-50 text-warning-700 ring-warning-600/20 px-2 py-1 text-xs"
+    data-testid="badge-warning"
+  >
+    Test Badge
+  </span>
+</div>
+`;
+
+exports[`Badge > renders with custom color > Component-color-yellow 1`] = `
+<div>
+  <span
+    class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-yellow-50 text-yellow-700 ring-yellow-600/20 px-2 py-1 text-xs"
+    data-testid="badge-yellow"
+  >
+    Test Badge
+  </span>
+</div>
+`;
+
+exports[`Badge > renders with default props 1`] = `
+<div>
+  <span
+    class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-gray-50 text-gray-700 ring-gray-600/20 px-2 py-1 text-xs"
+    data-testid="badge-default"
+  >
+    Default Badge
+  </span>
+</div>
+`;
+
+exports[`Badge > renders with size variants > Component-size-default 1`] = `
+<div>
+  <span
+    class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-gray-50 text-gray-700 ring-gray-600/20 px-2 py-1 text-xs"
+    data-testid="badge-default"
+  >
+    Size Test
+  </span>
+</div>
+`;
+
+exports[`Badge > renders with size variants > Component-size-jumbo 1`] = `
+<div>
+  <span
+    class="inline-flex items-center rounded-md ring-1 ring-inset bg-gray-50 text-gray-700 ring-gray-600/20 select-none px-2 py-1 font-semibold text-2xl md:text-3xl lg:text-4xl"
+    data-testid="badge-default"
+  >
+    Size Test
+  </span>
+</div>
+`;

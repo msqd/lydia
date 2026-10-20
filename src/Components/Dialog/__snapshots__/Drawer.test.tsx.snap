@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Drawer > matches snapshot when closed 1`] = `null`;
+
+exports[`Drawer > matches snapshot when open 1`] = `null`;
+
+exports[`Drawer > matches snapshot with left position 1`] = `null`;
