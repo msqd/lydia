@@ -1,0 +1,122 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Foldable > matches snapshot with default state 1`] = `
+<div
+  class="px-4 py-3 relative"
+  data-headlessui-state="open"
+  data-open=""
+>
+  <div
+    class="flex w-full items-start"
+  >
+    <h5
+      class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+    >
+      <button
+        aria-controls="headlessui-disclosure-panel-_r_g_"
+        aria-expanded="true"
+        class="flex w-full items-start text-left cursor-pointer"
+        data-headlessui-state="open"
+        data-open=""
+        id="headlessui-disclosure-button-_r_f_"
+        type="button"
+      >
+        <span
+          class="grow truncate font-semibold"
+        >
+          Test Title
+        </span>
+        <svg
+          aria-hidden="true"
+          class="h-4 w-4 min-w-4 text-gray-600"
+          data-slot="icon"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m4.5 15.75 7.5-7.5 7.5 7.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </h5>
+  </div>
+  <div
+    class="mt-2 space-y-2"
+    data-headlessui-state="open"
+    data-open=""
+    id="headlessui-disclosure-panel-_r_g_"
+  >
+    <div>
+      Test content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Foldable > matches snapshot with subtitle 1`] = `
+<div
+  class="px-4 py-3 relative"
+  data-headlessui-state="open"
+  data-open=""
+>
+  <div
+    class="flex w-full items-start"
+  >
+    <h5
+      class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+    >
+      <button
+        aria-controls="headlessui-disclosure-panel-_r_i_"
+        aria-expanded="true"
+        class="flex w-full items-start text-left cursor-pointer"
+        data-headlessui-state="open"
+        data-open=""
+        id="headlessui-disclosure-button-_r_h_"
+        type="button"
+      >
+        <span
+          class="grow truncate font-semibold"
+        >
+          Test Title
+        </span>
+        <svg
+          aria-hidden="true"
+          class="h-4 w-4 min-w-4 text-gray-600"
+          data-slot="icon"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m4.5 15.75 7.5-7.5 7.5 7.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </h5>
+  </div>
+  <div
+    class="mt-1"
+  >
+    Test subtitle
+  </div>
+  <div
+    class="mt-2 space-y-2"
+    data-headlessui-state="open"
+    data-open=""
+    id="headlessui-disclosure-panel-_r_i_"
+  >
+    <div>
+      Test content
+    </div>
+  </div>
+</div>
+`;

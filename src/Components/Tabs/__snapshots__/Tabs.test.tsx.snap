@@ -1,0 +1,329 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Tabs > passes the onChange callback prop > tabs-with-on-change 1`] = `
+<div>
+  <div
+    class="w-full max-w-3xl mx-auto"
+  >
+    <div>
+      <div
+        class="grid grid-cols-1 sm:hidden"
+      >
+        <div
+          aria-orientation="horizontal"
+          class="relative"
+          role="tablist"
+        >
+          <select
+            aria-label="Select a tab"
+            class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary-600 focus-visible:outline-primary-600 focus:outline-none"
+          >
+            <option
+              value="0"
+            >
+              My Account
+            </option>
+            <option
+              value="1"
+            >
+              Company
+            </option>
+            <option
+              value="2"
+            >
+              Team Members
+            </option>
+            <option
+              disabled=""
+              value="3"
+            >
+              Billing
+            </option>
+          </select>
+          <svg
+            aria-hidden="true"
+            class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 size-5 fill-gray-500"
+            data-slot="icon"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="hidden sm:block"
+      >
+        <div
+          aria-orientation="horizontal"
+          class="border-b border-gray-200 -mb-px flex space-x-8 w-full justify-center"
+          role="tablist"
+        >
+          <a
+            aria-controls="headlessui-tabs-panel-_r_28_"
+            aria-disabled="false"
+            aria-selected="true"
+            class="border-primary-500 text-primary-600 cursor-pointer border-b-2 px-4 py-4 text-sm font-medium whitespace-nowrap min-w-[100px] text-center outline-none focus-visible:outline-2 focus-visible:outline-primary-600"
+            data-headlessui-state="selected"
+            data-selected=""
+            href="#account"
+            id="headlessui-tabs-tab-_r_20_"
+            role="tab"
+            tabindex="0"
+          >
+            My Account
+          </a>
+          <a
+            aria-controls="headlessui-tabs-panel-_r_2a_"
+            aria-disabled="false"
+            aria-selected="false"
+            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 cursor-pointer border-b-2 px-4 py-4 text-sm font-medium whitespace-nowrap min-w-[100px] text-center outline-none focus-visible:outline-2 focus-visible:outline-primary-600"
+            data-headlessui-state=""
+            href="#company"
+            id="headlessui-tabs-tab-_r_22_"
+            role="tab"
+            tabindex="-1"
+          >
+            Company
+          </a>
+          <a
+            aria-controls="headlessui-tabs-panel-_r_2c_"
+            aria-disabled="false"
+            aria-selected="false"
+            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 cursor-pointer border-b-2 px-4 py-4 text-sm font-medium whitespace-nowrap min-w-[100px] text-center outline-none focus-visible:outline-2 focus-visible:outline-primary-600"
+            data-headlessui-state=""
+            href="#team"
+            id="headlessui-tabs-tab-_r_24_"
+            role="tab"
+            tabindex="-1"
+          >
+            Team Members
+          </a>
+          <a
+            aria-controls="headlessui-tabs-panel-_r_2e_"
+            aria-disabled="true"
+            aria-selected="false"
+            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 cursor-not-allowed opacity-50 border-b-2 px-4 py-4 text-sm font-medium whitespace-nowrap min-w-[100px] text-center outline-none focus-visible:outline-2 focus-visible:outline-primary-600"
+            data-disabled=""
+            data-headlessui-state="disabled"
+            disabled=""
+            href="#billing"
+            id="headlessui-tabs-tab-_r_26_"
+            role="tab"
+            tabindex="-1"
+          >
+            Billing
+          </a>
+        </div>
+      </div>
+      <div
+        class="mt-4"
+      >
+        <div
+          aria-labelledby="headlessui-tabs-tab-_r_20_"
+          data-headlessui-state="selected"
+          data-selected=""
+          id="headlessui-tabs-panel-_r_28_"
+          role="tabpanel"
+          tabindex="0"
+        >
+          Account Content
+        </div>
+        <span
+          aria-hidden="true"
+          aria-labelledby="headlessui-tabs-tab-_r_22_"
+          id="headlessui-tabs-panel-_r_2a_"
+          role="tabpanel"
+          style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+          tabindex="-1"
+        />
+        <span
+          aria-hidden="true"
+          aria-labelledby="headlessui-tabs-tab-_r_24_"
+          id="headlessui-tabs-panel-_r_2c_"
+          role="tabpanel"
+          style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+          tabindex="-1"
+        />
+        <span
+          aria-hidden="true"
+          aria-labelledby="headlessui-tabs-tab-_r_26_"
+          id="headlessui-tabs-panel-_r_2e_"
+          role="tabpanel"
+          style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+          tabindex="-1"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Tabs > renders tabs correctly 1`] = `
+<div>
+  <div
+    class="w-full max-w-3xl mx-auto"
+  >
+    <div>
+      <div
+        class="grid grid-cols-1 sm:hidden"
+      >
+        <div
+          aria-orientation="horizontal"
+          class="relative"
+          role="tablist"
+        >
+          <select
+            aria-label="Select a tab"
+            class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-primary-600 focus-visible:outline-primary-600 focus:outline-none"
+          >
+            <option
+              value="0"
+            >
+              My Account
+            </option>
+            <option
+              value="1"
+            >
+              Company
+            </option>
+            <option
+              value="2"
+            >
+              Team Members
+            </option>
+            <option
+              disabled=""
+              value="3"
+            >
+              Billing
+            </option>
+          </select>
+          <svg
+            aria-hidden="true"
+            class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 size-5 fill-gray-500"
+            data-slot="icon"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="hidden sm:block"
+      >
+        <div
+          aria-orientation="horizontal"
+          class="border-b border-gray-200 -mb-px flex space-x-8 w-full justify-center"
+          role="tablist"
+        >
+          <a
+            aria-controls="headlessui-tabs-panel-_r_8_"
+            aria-disabled="false"
+            aria-selected="true"
+            class="border-primary-500 text-primary-600 cursor-pointer border-b-2 px-4 py-4 text-sm font-medium whitespace-nowrap min-w-[100px] text-center outline-none focus-visible:outline-2 focus-visible:outline-primary-600"
+            data-headlessui-state="selected"
+            data-selected=""
+            href="#account"
+            id="headlessui-tabs-tab-_r_0_"
+            role="tab"
+            tabindex="0"
+          >
+            My Account
+          </a>
+          <a
+            aria-controls="headlessui-tabs-panel-_r_a_"
+            aria-disabled="false"
+            aria-selected="false"
+            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 cursor-pointer border-b-2 px-4 py-4 text-sm font-medium whitespace-nowrap min-w-[100px] text-center outline-none focus-visible:outline-2 focus-visible:outline-primary-600"
+            data-headlessui-state=""
+            href="#company"
+            id="headlessui-tabs-tab-_r_2_"
+            role="tab"
+            tabindex="-1"
+          >
+            Company
+          </a>
+          <a
+            aria-controls="headlessui-tabs-panel-_r_c_"
+            aria-disabled="false"
+            aria-selected="false"
+            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 cursor-pointer border-b-2 px-4 py-4 text-sm font-medium whitespace-nowrap min-w-[100px] text-center outline-none focus-visible:outline-2 focus-visible:outline-primary-600"
+            data-headlessui-state=""
+            href="#team"
+            id="headlessui-tabs-tab-_r_4_"
+            role="tab"
+            tabindex="-1"
+          >
+            Team Members
+          </a>
+          <a
+            aria-controls="headlessui-tabs-panel-_r_e_"
+            aria-disabled="true"
+            aria-selected="false"
+            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 cursor-not-allowed opacity-50 border-b-2 px-4 py-4 text-sm font-medium whitespace-nowrap min-w-[100px] text-center outline-none focus-visible:outline-2 focus-visible:outline-primary-600"
+            data-disabled=""
+            data-headlessui-state="disabled"
+            disabled=""
+            href="#billing"
+            id="headlessui-tabs-tab-_r_6_"
+            role="tab"
+            tabindex="-1"
+          >
+            Billing
+          </a>
+        </div>
+      </div>
+      <div
+        class="mt-4"
+      >
+        <div
+          aria-labelledby="headlessui-tabs-tab-_r_0_"
+          data-headlessui-state="selected"
+          data-selected=""
+          id="headlessui-tabs-panel-_r_8_"
+          role="tabpanel"
+          tabindex="0"
+        >
+          Account Content
+        </div>
+        <span
+          aria-hidden="true"
+          aria-labelledby="headlessui-tabs-tab-_r_2_"
+          id="headlessui-tabs-panel-_r_a_"
+          role="tabpanel"
+          style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+          tabindex="-1"
+        />
+        <span
+          aria-hidden="true"
+          aria-labelledby="headlessui-tabs-tab-_r_4_"
+          id="headlessui-tabs-panel-_r_c_"
+          role="tabpanel"
+          style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+          tabindex="-1"
+        />
+        <span
+          aria-hidden="true"
+          aria-labelledby="headlessui-tabs-tab-_r_6_"
+          id="headlessui-tabs-panel-_r_e_"
+          role="tabpanel"
+          style="position: fixed; top: 1px; left: 1px; width: 1px; height: 0px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;"
+          tabindex="-1"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

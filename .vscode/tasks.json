@@ -1,0 +1,41 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "check",
+			"type": "shell",
+			"command": "pnpm run check",
+			"problemMatcher": []
+		},
+		{
+			"label": "build",
+			"type": "shell",
+			"command": "pnpm run build",
+			"problemMatcher": []
+		},
+		{
+			"label": "test",
+			"type": "shell",
+			"command": "pnpm run test",
+			"problemMatcher": []
+		},
+		{
+			"label": "test (update snapshots)",
+			"type": "shell",
+			"command": "pnpm run test:update",
+			"problemMatcher": [],
+		},
+		{
+			"label": "test storybook",
+			"type": "shell",
+			"command": "pnpm run test:storybook",
+			"problemMatcher": [],
+		},
+		{
+			"label": "test storybook (update snapshots)",
+			"type": "shell",
+			"command": "pnpm run test:storybook:update",
+			"problemMatcher": [],
+		},
+	]
+}

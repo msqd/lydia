@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Section > accepts additional className 1`] = `
+<section
+  class="mb-6 test-class"
+  data-testid="section"
+>
+  Test content
+</section>
+`;
+
+exports[`Section > renders with default props 1`] = `
+<section
+  class="mb-6"
+  data-testid="section"
+>
+  Test content
+</section>
+`;

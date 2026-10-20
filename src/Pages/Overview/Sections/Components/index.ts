@@ -1,0 +1,1 @@
+export { TransactionsHistoryView } from "./TransactionsHistoryView";

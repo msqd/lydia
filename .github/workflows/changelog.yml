@@ -1,0 +1,36 @@
+name: Changelog
+
+on:
+  pull_request:
+    branches: [ main ]
+    types: [ opened, synchronize, reopened, labeled, unlabeled ]
+
+permissions:
+  contents: read
+
+jobs:
+  fragment:
+    name: Changelog fragment
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'no-changelog') }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+
+      - name: Require a fragment when src/ changes
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if [ -z "$(git diff --name-only "$BASE_SHA...$HEAD_SHA" -- src/)" ]; then
+            echo "No change under src/, no fragment needed."
+            exit 0
+          fi
+          if [ -n "$(git diff --name-only --diff-filter=A "$BASE_SHA...$HEAD_SHA" -- 'changelog.d/*.md')" ]; then
+            exit 0
+          fi
+          echo "::error::This PR changes src/ but adds no changelog.d/<issue>.<type>.md fragment. Add one, or label the PR no-changelog. See RELEASING.md."
+          exit 1

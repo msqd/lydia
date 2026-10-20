@@ -1,0 +1,211 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RangeSlider > renders with custom thumbSize 1`] = `
+<div>
+  <div
+    class="range-slider relative flex items-center"
+    style="height: calc(24px + 1.6rem);"
+  >
+    <div
+      class="relative w-full"
+      style="height: 24px;"
+    >
+      <input
+        aria-label="Minimum"
+        class="range-slider-input"
+        max="10"
+        min="0"
+        step="1"
+        style="--thumb-size: 24px;"
+        type="range"
+        value="0"
+      />
+      <input
+        aria-label="Maximum"
+        class="range-slider-input"
+        max="10"
+        min="0"
+        step="1"
+        style="--thumb-size: 24px;"
+        type="range"
+        value="10"
+      />
+    </div>
+    <div
+      class="w-full absolute"
+      style="height: 24px;"
+    >
+      <div
+        class="absolute w-full top-1/2 -translate-y-1/2 h-[6px] rounded-[3px] bg-gray-200"
+      >
+        <div
+          class="absolute h-full left-0 top-0 bg-primary-200 opacity-50"
+          style="left: 0%; width: 100%; transition: left 0.02s ease-out, width 0.02s ease-out;"
+        />
+      </div>
+      <div
+        class="absolute rounded-full bg-primary-900 top-1/2 -translate-x-1/2 -translate-y-1/2 ring-1 ring-white cursor-grab z-[2]"
+        data-thumb="min"
+        style="width: 24px; height: 24px; transition: left 0.02s ease-out; left: 0%;"
+      />
+      <div
+        class="absolute rounded-full bg-primary-900 top-1/2 -translate-x-1/2 -translate-y-1/2 ring-1 ring-white cursor-grab z-[2]"
+        data-thumb="max"
+        style="width: 24px; height: 24px; transition: left 0.02s ease-out; left: 100%;"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`RangeSlider > renders with default props 1`] = `
+<div>
+  <div
+    class="range-slider relative flex items-center"
+    style="height: calc(16px + 1.6rem);"
+  >
+    <div
+      class="relative w-full"
+      style="height: 16px;"
+    >
+      <input
+        aria-label="Minimum"
+        class="range-slider-input"
+        max="10"
+        min="0"
+        step="1"
+        style="--thumb-size: 16px;"
+        type="range"
+        value="0"
+      />
+      <input
+        aria-label="Maximum"
+        class="range-slider-input"
+        max="10"
+        min="0"
+        step="1"
+        style="--thumb-size: 16px;"
+        type="range"
+        value="10"
+      />
+    </div>
+    <div
+      class="w-full absolute"
+      style="height: 16px;"
+    >
+      <div
+        class="absolute w-full top-1/2 -translate-y-1/2 h-[6px] rounded-[3px] bg-gray-200"
+      >
+        <div
+          class="absolute h-full left-0 top-0 bg-primary-200 opacity-50"
+          style="left: 0%; width: 100%; transition: left 0.02s ease-out, width 0.02s ease-out;"
+        />
+      </div>
+      <div
+        class="absolute rounded-full bg-primary-900 top-1/2 -translate-x-1/2 -translate-y-1/2 ring-1 ring-white cursor-grab z-[2]"
+        data-thumb="min"
+        style="width: 16px; height: 16px; transition: left 0.02s ease-out; left: 0%;"
+      />
+      <div
+        class="absolute rounded-full bg-primary-900 top-1/2 -translate-x-1/2 -translate-y-1/2 ring-1 ring-white cursor-grab z-[2]"
+        data-thumb="max"
+        style="width: 16px; height: 16px; transition: left 0.02s ease-out; left: 100%;"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`RangeSlider > renders with marks 1`] = `
+<div>
+  <div
+    class="range-slider relative flex items-center"
+    style="height: calc(16px + 1.6rem);"
+  >
+    <div
+      class="relative w-full"
+      style="height: 16px;"
+    >
+      <input
+        aria-label="Minimum"
+        class="range-slider-input"
+        max="100"
+        min="0"
+        step="1"
+        style="--thumb-size: 16px;"
+        type="range"
+        value="0"
+      />
+      <input
+        aria-label="Maximum"
+        class="range-slider-input"
+        max="100"
+        min="0"
+        step="1"
+        style="--thumb-size: 16px;"
+        type="range"
+        value="100"
+      />
+    </div>
+    <div
+      class="w-full absolute"
+      style="height: 16px;"
+    >
+      <div
+        class="absolute w-full top-1/2 -translate-y-1/2 h-[6px] rounded-[3px] bg-gray-200"
+      >
+        <div
+          class="absolute h-full left-0 top-0 bg-primary-200 opacity-50"
+          style="left: 0%; width: 100%; transition: left 0.02s ease-out, width 0.02s ease-out;"
+        />
+        <div
+          style="position: absolute; left: 0%; top: 50%;"
+        >
+          <div
+            class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+          />
+          <div
+            class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+          >
+            0
+          </div>
+        </div>
+        <div
+          style="position: absolute; left: 50%; top: 50%;"
+        >
+          <div
+            class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+          />
+          <div
+            class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+          >
+            50
+          </div>
+        </div>
+        <div
+          style="position: absolute; left: 100%; top: 50%;"
+        >
+          <div
+            class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+          />
+          <div
+            class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+          >
+            100
+          </div>
+        </div>
+      </div>
+      <div
+        class="absolute rounded-full bg-primary-900 top-1/2 -translate-x-1/2 -translate-y-1/2 ring-1 ring-white cursor-grab z-[2]"
+        data-thumb="min"
+        style="width: 16px; height: 16px; transition: left 0.02s ease-out; left: 0%;"
+      />
+      <div
+        class="absolute rounded-full bg-primary-900 top-1/2 -translate-x-1/2 -translate-y-1/2 ring-1 ring-white cursor-grab z-[2]"
+        data-thumb="max"
+        style="width: 16px; height: 16px; transition: left 0.02s ease-out; left: 100%;"
+      />
+    </div>
+  </div>
+</div>
+`;

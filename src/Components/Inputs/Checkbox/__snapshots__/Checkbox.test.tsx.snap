@@ -1,0 +1,30 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Checkbox component > renders correctly with default props 1`] = `
+<div>
+  <div
+    class="relative flex gap-x-3 select-none w-full cursor-pointer"
+  >
+    <div
+      class="flex h-6 items-center"
+    >
+      <input
+        class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+        id="test-checkbox"
+        name="test-checkbox"
+        type="checkbox"
+      />
+    </div>
+    <div
+      class="text-sm leading-6 flex-1 min-w-0"
+    >
+      <label
+        class="font-medium text-gray-900 block cursor-pointer"
+        for="test-checkbox"
+      >
+        test-checkbox
+      </label>
+    </div>
+  </div>
+</div>
+`;

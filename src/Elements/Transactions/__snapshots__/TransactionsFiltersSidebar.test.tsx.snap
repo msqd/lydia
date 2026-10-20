@@ -1,0 +1,2721 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] = `
+<div
+  class="bg-white rounded-lg shadow overflow-hidden flex flex-col"
+>
+  <div
+    class="px-4 py-3 border-b border-gray-200 bg-gray-50"
+  >
+    <div
+      class="flex items-center justify-between"
+    >
+      <h3
+        class="text-sm font-medium text-gray-900"
+      >
+        Filters
+      </h3>
+    </div>
+  </div>
+  <div
+    class="flex-1 overflow-y-auto p-2"
+  >
+    <div
+      class="overflow-hidden text-gray-900 sm:text-sm divide-y divide-gray-100"
+    >
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_89_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_88_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Time
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_89_"
+        >
+          <div
+            class="w-full"
+          >
+            <div
+              class="grid grid-cols-2 gap-2"
+            >
+              <div
+                class="w-full"
+              >
+                <div
+                  class="mt-2"
+                >
+                  <div
+                    class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+                  >
+                    <input
+                      aria-label="Start date"
+                      class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
+                      placeholder="Start date"
+                      type="date"
+                      value=""
+                    />
+                    <div
+                      class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+                    >
+                      <svg
+                        class="size-5 sm:size-4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="w-full"
+              >
+                <div
+                  class="mt-2"
+                >
+                  <div
+                    class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+                  >
+                    <input
+                      aria-label="End date"
+                      class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
+                      placeholder="End date"
+                      type="date"
+                      value=""
+                    />
+                    <div
+                      class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+                    >
+                      <svg
+                        class="size-5 sm:size-4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_8c_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_8b_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Endpoint
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_8c_"
+        >
+          <p
+            class="text-xs text-gray-600"
+            id="_r_8a_-caption"
+          >
+            Counts cover all transactions
+          </p>
+          <div
+            aria-describedby="_r_8a_-caption"
+            aria-label="Endpoint"
+            class="space-y-2"
+            role="group"
+          >
+            <div
+              class="group relative flex items-center pr-14"
+            >
+              <div
+                class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+              >
+                <div
+                  class="flex h-6 items-center"
+                >
+                  <input
+                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    id="_r_8a_-0"
+                    name="_r_8a_-0"
+                    type="checkbox"
+                  />
+                </div>
+                <div
+                  class="text-sm leading-6 flex-1 min-w-0"
+                >
+                  <label
+                    class="font-medium text-gray-900 block cursor-pointer"
+                    for="_r_8a_-0"
+                  >
+                    <span
+                      class="block truncate"
+                    >
+                      /api/users
+                    </span>
+                    <span
+                      class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                    >
+                      245
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="group relative flex items-center pr-14"
+            >
+              <div
+                class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+              >
+                <div
+                  class="flex h-6 items-center"
+                >
+                  <input
+                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    id="_r_8a_-1"
+                    name="_r_8a_-1"
+                    type="checkbox"
+                  />
+                </div>
+                <div
+                  class="text-sm leading-6 flex-1 min-w-0"
+                >
+                  <label
+                    class="font-medium text-gray-900 block cursor-pointer"
+                    for="_r_8a_-1"
+                  >
+                    <span
+                      class="block truncate"
+                    >
+                      /api/orders
+                    </span>
+                    <span
+                      class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                    >
+                      189
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_8f_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_8e_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Method
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_8f_"
+        >
+          <p
+            class="text-xs text-gray-600"
+            id="_r_8d_-caption"
+          >
+            Counts cover all transactions
+          </p>
+          <div
+            aria-describedby="_r_8d_-caption"
+            aria-label="Method"
+            class="space-y-2"
+            role="group"
+          >
+            <div
+              class="group relative flex items-center pr-14"
+            >
+              <div
+                class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+              >
+                <div
+                  class="flex h-6 items-center"
+                >
+                  <input
+                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    id="_r_8d_-0"
+                    name="_r_8d_-0"
+                    type="checkbox"
+                  />
+                </div>
+                <div
+                  class="text-sm leading-6 flex-1 min-w-0"
+                >
+                  <label
+                    class="font-medium text-gray-900 block cursor-pointer"
+                    for="_r_8d_-0"
+                  >
+                    <span
+                      class="block truncate"
+                    >
+                      GET
+                    </span>
+                    <span
+                      class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                    >
+                      543
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="group relative flex items-center pr-14"
+            >
+              <div
+                class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+              >
+                <div
+                  class="flex h-6 items-center"
+                >
+                  <input
+                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    id="_r_8d_-1"
+                    name="_r_8d_-1"
+                    type="checkbox"
+                  />
+                </div>
+                <div
+                  class="text-sm leading-6 flex-1 min-w-0"
+                >
+                  <label
+                    class="font-medium text-gray-900 block cursor-pointer"
+                    for="_r_8d_-1"
+                  >
+                    <span
+                      class="block truncate"
+                    >
+                      POST
+                    </span>
+                    <span
+                      class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                    >
+                      234
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_8i_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_8h_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Status
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_8i_"
+        >
+          <p
+            class="text-xs text-gray-600"
+            id="_r_8g_-caption"
+          >
+            Counts cover all transactions
+          </p>
+          <div
+            aria-describedby="_r_8g_-caption"
+            aria-label="Status"
+            class="space-y-2"
+            role="group"
+          >
+            <div>
+              <div
+                class="group relative flex items-center pr-14"
+              >
+                <button
+                  aria-controls="_r_8g_-0-codes"
+                  aria-expanded="false"
+                  aria-label="2xx codes"
+                  class="-ms-1 me-1 flex h-6 w-4 shrink-0 cursor-pointer items-center justify-center text-gray-600 hover:text-gray-900"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="h-4 w-4"
+                    data-slot="icon"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M6.22 4.22a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+                <div
+                  class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+                >
+                  <div
+                    class="flex h-6 items-center"
+                  >
+                    <input
+                      class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                      id="_r_8g_-0"
+                      name="_r_8g_-0"
+                      type="checkbox"
+                    />
+                  </div>
+                  <div
+                    class="text-sm leading-6 flex-1 min-w-0"
+                  >
+                    <label
+                      class="font-medium text-gray-900 block cursor-pointer"
+                      for="_r_8g_-0"
+                    >
+                      <span
+                        class="block truncate"
+                      >
+                        2xx
+                      </span>
+                      <span
+                        class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                      >
+                        756
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div
+                aria-label="2xx"
+                class="space-y-2 ps-11 pt-2"
+                hidden=""
+                id="_r_8g_-0-codes"
+                role="group"
+              >
+                <div
+                  class="group relative flex items-center pr-14"
+                >
+                  <div
+                    class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+                  >
+                    <div
+                      class="flex h-6 items-center"
+                    >
+                      <input
+                        class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                        id="_r_8g_-0-0"
+                        name="_r_8g_-0-0"
+                        type="checkbox"
+                      />
+                    </div>
+                    <div
+                      class="text-sm leading-6 flex-1 min-w-0"
+                    >
+                      <label
+                        class="font-medium text-gray-900 block cursor-pointer"
+                        for="_r_8g_-0-0"
+                      >
+                        <span
+                          class="block truncate"
+                        >
+                          200
+                        </span>
+                        <span
+                          class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                        >
+                          756
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                class="group relative flex items-center pr-14"
+              >
+                <button
+                  aria-controls="_r_8g_-1-codes"
+                  aria-expanded="false"
+                  aria-label="4xx codes"
+                  class="-ms-1 me-1 flex h-6 w-4 shrink-0 cursor-pointer items-center justify-center text-gray-600 hover:text-gray-900"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="h-4 w-4"
+                    data-slot="icon"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M6.22 4.22a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+                <div
+                  class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+                >
+                  <div
+                    class="flex h-6 items-center"
+                  >
+                    <input
+                      class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                      id="_r_8g_-1"
+                      name="_r_8g_-1"
+                      type="checkbox"
+                    />
+                  </div>
+                  <div
+                    class="text-sm leading-6 flex-1 min-w-0"
+                  >
+                    <label
+                      class="font-medium text-gray-900 block cursor-pointer"
+                      for="_r_8g_-1"
+                    >
+                      <span
+                        class="block truncate"
+                      >
+                        4xx
+                      </span>
+                      <span
+                        class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                      >
+                        123
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div
+                aria-label="4xx"
+                class="space-y-2 ps-11 pt-2"
+                hidden=""
+                id="_r_8g_-1-codes"
+                role="group"
+              >
+                <div
+                  class="group relative flex items-center pr-14"
+                >
+                  <div
+                    class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+                  >
+                    <div
+                      class="flex h-6 items-center"
+                    >
+                      <input
+                        class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                        id="_r_8g_-1-0"
+                        name="_r_8g_-1-0"
+                        type="checkbox"
+                      />
+                    </div>
+                    <div
+                      class="text-sm leading-6 flex-1 min-w-0"
+                    >
+                      <label
+                        class="font-medium text-gray-900 block cursor-pointer"
+                        for="_r_8g_-1-0"
+                      >
+                        <span
+                          class="block truncate"
+                        >
+                          404
+                        </span>
+                        <span
+                          class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                        >
+                          123
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_8l_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_8k_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Cache Status
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_8l_"
+        >
+          <p
+            class="text-xs text-gray-600"
+            id="_r_8j_-caption"
+          >
+            Counts cover all transactions
+          </p>
+          <div
+            aria-describedby="_r_8j_-caption"
+            aria-label="Cache Status"
+            class="space-y-2"
+            role="group"
+          >
+            <div
+              class="group relative flex items-center pr-14"
+            >
+              <div
+                class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+              >
+                <div
+                  class="flex h-6 items-center"
+                >
+                  <input
+                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    id="_r_8j_-0"
+                    name="_r_8j_-0"
+                    type="checkbox"
+                  />
+                </div>
+                <div
+                  class="text-sm leading-6 flex-1 min-w-0"
+                >
+                  <label
+                    class="font-medium text-gray-900 block cursor-pointer"
+                    for="_r_8j_-0"
+                  >
+                    <span
+                      class="block truncate"
+                    >
+                      Cache Hit
+                    </span>
+                    <span
+                      class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                    >
+                      234
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_8o_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_8n_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Flags
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_8o_"
+        >
+          <p
+            class="text-xs text-gray-600"
+            id="_r_8m_-caption"
+          >
+            Counts cover all transactions
+          </p>
+          <div
+            aria-describedby="_r_8m_-caption"
+            aria-label="Flags"
+            class="space-y-2"
+            role="group"
+          >
+            <div
+              class="group relative flex items-center pr-14"
+            >
+              <div
+                class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+              >
+                <div
+                  class="flex h-6 items-center"
+                >
+                  <input
+                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    id="_r_8m_-0"
+                    name="_r_8m_-0"
+                    type="checkbox"
+                  />
+                </div>
+                <div
+                  class="text-sm leading-6 flex-1 min-w-0"
+                >
+                  <label
+                    class="font-medium text-gray-900 block cursor-pointer"
+                    for="_r_8m_-0"
+                  >
+                    <span
+                      class="block truncate"
+                    >
+                      Favorite
+                    </span>
+                    <span
+                      class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                    >
+                      45
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_8r_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_8q_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Tags
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_8r_"
+        >
+          <p
+            class="text-xs text-gray-600"
+            id="_r_8p_-caption"
+          >
+            Counts cover all transactions
+          </p>
+          <div
+            aria-describedby="_r_8p_-caption"
+            aria-label="Tags"
+            class="space-y-2"
+            role="group"
+          >
+            <div
+              class="group relative flex items-center pr-14"
+            >
+              <div
+                class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+              >
+                <div
+                  class="flex h-6 items-center"
+                >
+                  <input
+                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    id="_r_8p_-0"
+                    name="_r_8p_-0"
+                    type="checkbox"
+                  />
+                </div>
+                <div
+                  class="text-sm leading-6 flex-1 min-w-0"
+                >
+                  <label
+                    class="font-medium text-gray-900 block cursor-pointer"
+                    for="_r_8p_-0"
+                  >
+                    <span
+                      class="block truncate"
+                    >
+                      env=production
+                    </span>
+                    <span
+                      class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                    >
+                      234
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_8t_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_8s_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Performance Index
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_8t_"
+        >
+          <div
+            class="range-slider relative flex items-center mt-4"
+            style="height: calc(16px + 1.6rem);"
+          >
+            <div
+              class="relative w-full"
+              style="height: 16px;"
+            >
+              <input
+                aria-label="Performance Index, minimum"
+                class="range-slider-input"
+                max="80"
+                min="0"
+                step="10"
+                style="--thumb-size: 16px;"
+                type="range"
+                value="0"
+              />
+              <input
+                aria-label="Performance Index, maximum"
+                class="range-slider-input"
+                max="80"
+                min="0"
+                step="10"
+                style="--thumb-size: 16px;"
+                type="range"
+                value="80"
+              />
+            </div>
+            <div
+              class="w-full absolute"
+              style="height: 16px;"
+            >
+              <div
+                class="absolute w-full top-1/2 -translate-y-1/2 h-[6px] rounded-[3px] bg-gray-200"
+              >
+                <div
+                  class="absolute h-full left-0 top-0 bg-primary-200 opacity-50"
+                  style="left: 0%; width: 100%; transition: left 0.02s ease-out, width 0.02s ease-out;"
+                />
+                <div
+                  style="position: absolute; left: 0%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    A++
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 12.5%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    A+
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 25%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    A
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 37.5%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    B
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 50%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    C
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 62.5%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    D
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 75%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    E
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 87.5%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    F
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 100%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    G
+                  </div>
+                </div>
+              </div>
+              <div
+                class="absolute rounded-full bg-primary-900 top-1/2 -translate-x-1/2 -translate-y-1/2 ring-1 ring-white cursor-grab z-[2]"
+                data-thumb="min"
+                style="width: 16px; height: 16px; transition: left 0.02s ease-out; left: 0%;"
+              />
+              <div
+                class="absolute rounded-full bg-primary-900 top-1/2 -translate-x-1/2 -translate-y-1/2 ring-1 ring-white cursor-grab z-[2]"
+                data-thumb="max"
+                style="width: 16px; height: 16px; transition: left 0.02s ease-out; left: 100%;"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] = `
+<div
+  class="bg-white rounded-lg shadow overflow-hidden flex flex-col"
+>
+  <div
+    class="px-4 py-3 border-b border-gray-200 bg-gray-50"
+  >
+    <div
+      class="flex items-center justify-between"
+    >
+      <h3
+        class="text-sm font-medium text-gray-900"
+      >
+        Filters
+      </h3>
+      <a
+        aria-label="Reset all filters"
+        class="text-gray-500 font-normal text-[11px] hover:text-gray-700 transition-colors"
+        href="#"
+      >
+        <svg
+          aria-hidden="true"
+          class="h-2.5 w-2.5 inline-block mr-0.5"
+          data-slot="icon"
+          fill="currentColor"
+          viewBox="0 0 16 16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M13.836 2.477a.75.75 0 0 1 .75.75v3.182a.75.75 0 0 1-.75.75h-3.182a.75.75 0 0 1 0-1.5h1.37l-.84-.841a4.5 4.5 0 0 0-7.08.932.75.75 0 0 1-1.3-.75 6 6 0 0 1 9.44-1.242l.842.84V3.227a.75.75 0 0 1 .75-.75Zm-.911 7.5A.75.75 0 0 1 13.199 11a6 6 0 0 1-9.44 1.241l-.84-.84v1.371a.75.75 0 0 1-1.5 0V9.591a.75.75 0 0 1 .75-.75H5.35a.75.75 0 0 1 0 1.5H3.98l.841.841a4.5 4.5 0 0 0 7.08-.932.75.75 0 0 1 1.025-.273Z"
+            fill-rule="evenodd"
+          />
+        </svg>
+        reset all
+      </a>
+    </div>
+  </div>
+  <div
+    class="flex-1 overflow-y-auto p-2"
+  >
+    <div
+      class="overflow-hidden text-gray-900 sm:text-sm divide-y divide-gray-100"
+    >
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_8v_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_8u_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Time
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+          <div
+            class="ml-2 shrink-0 leading-5"
+          >
+            <a
+              aria-label="Reset Time"
+              class="text-gray-500 font-normal text-[11px] hover:text-gray-700 transition-colors"
+              href="#"
+            >
+              <svg
+                aria-hidden="true"
+                class="h-2.5 w-2.5 inline-block mr-0.5"
+                data-slot="icon"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M13.836 2.477a.75.75 0 0 1 .75.75v3.182a.75.75 0 0 1-.75.75h-3.182a.75.75 0 0 1 0-1.5h1.37l-.84-.841a4.5 4.5 0 0 0-7.08.932.75.75 0 0 1-1.3-.75 6 6 0 0 1 9.44-1.242l.842.84V3.227a.75.75 0 0 1 .75-.75Zm-.911 7.5A.75.75 0 0 1 13.199 11a6 6 0 0 1-9.44 1.241l-.84-.84v1.371a.75.75 0 0 1-1.5 0V9.591a.75.75 0 0 1 .75-.75H5.35a.75.75 0 0 1 0 1.5H3.98l.841.841a4.5 4.5 0 0 0 7.08-.932.75.75 0 0 1 1.025-.273Z"
+                  fill-rule="evenodd"
+                />
+              </svg>
+              reset
+            </a>
+          </div>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_8v_"
+        >
+          <div
+            class="w-full"
+          >
+            <div
+              class="grid grid-cols-2 gap-2"
+            >
+              <div
+                class="w-full"
+              >
+                <div
+                  class="mt-2"
+                >
+                  <div
+                    class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+                  >
+                    <input
+                      aria-label="Start date"
+                      class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
+                      max="2024-01-31"
+                      placeholder="Start date"
+                      type="date"
+                      value="2024-01-01"
+                    />
+                    <div
+                      class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+                    >
+                      <svg
+                        class="size-5 sm:size-4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="w-full"
+              >
+                <div
+                  class="mt-2"
+                >
+                  <div
+                    class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+                  >
+                    <input
+                      aria-label="End date"
+                      class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
+                      min="2024-01-01"
+                      placeholder="End date"
+                      type="date"
+                      value="2024-01-31"
+                    />
+                    <div
+                      class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+                    >
+                      <svg
+                        class="size-5 sm:size-4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_92_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_91_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Endpoint
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+          <div
+            class="ml-2 shrink-0 leading-5"
+          >
+            <a
+              aria-label="Reset Endpoint"
+              class="text-gray-500 font-normal text-[11px] hover:text-gray-700 transition-colors"
+              href="#"
+            >
+              <svg
+                aria-hidden="true"
+                class="h-2.5 w-2.5 inline-block mr-0.5"
+                data-slot="icon"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M13.836 2.477a.75.75 0 0 1 .75.75v3.182a.75.75 0 0 1-.75.75h-3.182a.75.75 0 0 1 0-1.5h1.37l-.84-.841a4.5 4.5 0 0 0-7.08.932.75.75 0 0 1-1.3-.75 6 6 0 0 1 9.44-1.242l.842.84V3.227a.75.75 0 0 1 .75-.75Zm-.911 7.5A.75.75 0 0 1 13.199 11a6 6 0 0 1-9.44 1.241l-.84-.84v1.371a.75.75 0 0 1-1.5 0V9.591a.75.75 0 0 1 .75-.75H5.35a.75.75 0 0 1 0 1.5H3.98l.841.841a4.5 4.5 0 0 0 7.08-.932.75.75 0 0 1 1.025-.273Z"
+                  fill-rule="evenodd"
+                />
+              </svg>
+              reset
+            </a>
+          </div>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_92_"
+        >
+          <p
+            class="text-xs text-gray-600"
+            id="_r_90_-caption"
+          >
+            Counts cover all transactions
+          </p>
+          <div
+            aria-describedby="_r_90_-caption"
+            aria-label="Endpoint"
+            class="space-y-2"
+            role="group"
+          >
+            <div
+              class="group relative flex items-center pr-14"
+            >
+              <div
+                class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+              >
+                <div
+                  class="flex h-6 items-center"
+                >
+                  <input
+                    checked=""
+                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    id="_r_90_-0"
+                    name="_r_90_-0"
+                    type="checkbox"
+                  />
+                </div>
+                <div
+                  class="text-sm leading-6 flex-1 min-w-0"
+                >
+                  <label
+                    class="font-medium text-gray-900 block cursor-pointer"
+                    for="_r_90_-0"
+                  >
+                    <span
+                      class="block truncate"
+                    >
+                      /api/users
+                    </span>
+                    <span
+                      class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                    >
+                      245
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="group relative flex items-center pr-14"
+            >
+              <div
+                class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+              >
+                <div
+                  class="flex h-6 items-center"
+                >
+                  <input
+                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    id="_r_90_-1"
+                    name="_r_90_-1"
+                    type="checkbox"
+                  />
+                </div>
+                <div
+                  class="text-sm leading-6 flex-1 min-w-0"
+                >
+                  <label
+                    class="font-medium text-gray-900 block cursor-pointer"
+                    for="_r_90_-1"
+                  >
+                    <span
+                      class="block truncate"
+                    >
+                      /api/orders
+                    </span>
+                    <span
+                      class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                    >
+                      189
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <span
+                class="shrink-0 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity"
+              >
+                <button
+                  class="text-gray-500 mx-1 font-normal text-xs hover:text-gray-700 transition-colors cursor-pointer"
+                  type="button"
+                >
+                  only
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_95_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_94_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Method
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+          <div
+            class="ml-2 shrink-0 leading-5"
+          >
+            <a
+              aria-label="Reset Method"
+              class="text-gray-500 font-normal text-[11px] hover:text-gray-700 transition-colors"
+              href="#"
+            >
+              <svg
+                aria-hidden="true"
+                class="h-2.5 w-2.5 inline-block mr-0.5"
+                data-slot="icon"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M13.836 2.477a.75.75 0 0 1 .75.75v3.182a.75.75 0 0 1-.75.75h-3.182a.75.75 0 0 1 0-1.5h1.37l-.84-.841a4.5 4.5 0 0 0-7.08.932.75.75 0 0 1-1.3-.75 6 6 0 0 1 9.44-1.242l.842.84V3.227a.75.75 0 0 1 .75-.75Zm-.911 7.5A.75.75 0 0 1 13.199 11a6 6 0 0 1-9.44 1.241l-.84-.84v1.371a.75.75 0 0 1-1.5 0V9.591a.75.75 0 0 1 .75-.75H5.35a.75.75 0 0 1 0 1.5H3.98l.841.841a4.5 4.5 0 0 0 7.08-.932.75.75 0 0 1 1.025-.273Z"
+                  fill-rule="evenodd"
+                />
+              </svg>
+              reset
+            </a>
+          </div>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_95_"
+        >
+          <p
+            class="text-xs text-gray-600"
+            id="_r_93_-caption"
+          >
+            Counts cover all transactions
+          </p>
+          <div
+            aria-describedby="_r_93_-caption"
+            aria-label="Method"
+            class="space-y-2"
+            role="group"
+          >
+            <div
+              class="group relative flex items-center pr-14"
+            >
+              <div
+                class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+              >
+                <div
+                  class="flex h-6 items-center"
+                >
+                  <input
+                    checked=""
+                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    id="_r_93_-0"
+                    name="_r_93_-0"
+                    type="checkbox"
+                  />
+                </div>
+                <div
+                  class="text-sm leading-6 flex-1 min-w-0"
+                >
+                  <label
+                    class="font-medium text-gray-900 block cursor-pointer"
+                    for="_r_93_-0"
+                  >
+                    <span
+                      class="block truncate"
+                    >
+                      GET
+                    </span>
+                    <span
+                      class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                    >
+                      543
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <span
+                class="shrink-0 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity"
+              >
+                <button
+                  class="text-gray-500 mx-1 font-normal text-xs hover:text-gray-700 transition-colors cursor-pointer"
+                  type="button"
+                >
+                  only
+                </button>
+              </span>
+            </div>
+            <div
+              class="group relative flex items-center pr-14"
+            >
+              <div
+                class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+              >
+                <div
+                  class="flex h-6 items-center"
+                >
+                  <input
+                    checked=""
+                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    id="_r_93_-1"
+                    name="_r_93_-1"
+                    type="checkbox"
+                  />
+                </div>
+                <div
+                  class="text-sm leading-6 flex-1 min-w-0"
+                >
+                  <label
+                    class="font-medium text-gray-900 block cursor-pointer"
+                    for="_r_93_-1"
+                  >
+                    <span
+                      class="block truncate"
+                    >
+                      POST
+                    </span>
+                    <span
+                      class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                    >
+                      234
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <span
+                class="shrink-0 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity"
+              >
+                <button
+                  class="text-gray-500 mx-1 font-normal text-xs hover:text-gray-700 transition-colors cursor-pointer"
+                  type="button"
+                >
+                  only
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_98_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_97_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Status
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+          <div
+            class="ml-2 shrink-0 leading-5"
+          >
+            <a
+              aria-label="Reset Status"
+              class="text-gray-500 font-normal text-[11px] hover:text-gray-700 transition-colors"
+              href="#"
+            >
+              <svg
+                aria-hidden="true"
+                class="h-2.5 w-2.5 inline-block mr-0.5"
+                data-slot="icon"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M13.836 2.477a.75.75 0 0 1 .75.75v3.182a.75.75 0 0 1-.75.75h-3.182a.75.75 0 0 1 0-1.5h1.37l-.84-.841a4.5 4.5 0 0 0-7.08.932.75.75 0 0 1-1.3-.75 6 6 0 0 1 9.44-1.242l.842.84V3.227a.75.75 0 0 1 .75-.75Zm-.911 7.5A.75.75 0 0 1 13.199 11a6 6 0 0 1-9.44 1.241l-.84-.84v1.371a.75.75 0 0 1-1.5 0V9.591a.75.75 0 0 1 .75-.75H5.35a.75.75 0 0 1 0 1.5H3.98l.841.841a4.5 4.5 0 0 0 7.08-.932.75.75 0 0 1 1.025-.273Z"
+                  fill-rule="evenodd"
+                />
+              </svg>
+              reset
+            </a>
+          </div>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_98_"
+        >
+          <p
+            class="text-xs text-gray-600"
+            id="_r_96_-caption"
+          >
+            Counts cover all transactions
+          </p>
+          <div
+            aria-describedby="_r_96_-caption"
+            aria-label="Status"
+            class="space-y-2"
+            role="group"
+          >
+            <div>
+              <div
+                class="group relative flex items-center pr-14"
+              >
+                <button
+                  aria-controls="_r_96_-0-codes"
+                  aria-expanded="true"
+                  aria-label="2xx codes"
+                  class="-ms-1 me-1 flex h-6 w-4 shrink-0 cursor-pointer items-center justify-center text-gray-600 hover:text-gray-900"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="h-4 w-4"
+                    data-slot="icon"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+                <div
+                  class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+                >
+                  <div
+                    class="flex h-6 items-center"
+                  >
+                    <input
+                      checked=""
+                      class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                      id="_r_96_-0"
+                      name="_r_96_-0"
+                      type="checkbox"
+                    />
+                  </div>
+                  <div
+                    class="text-sm leading-6 flex-1 min-w-0"
+                  >
+                    <label
+                      class="font-medium text-gray-900 block cursor-pointer"
+                      for="_r_96_-0"
+                    >
+                      <span
+                        class="block truncate"
+                      >
+                        2xx
+                      </span>
+                      <span
+                        class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                      >
+                        756
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div
+                aria-label="2xx"
+                class="space-y-2 ps-11 pt-2"
+                id="_r_96_-0-codes"
+                role="group"
+              >
+                <div
+                  class="group relative flex items-center pr-14"
+                >
+                  <div
+                    class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+                  >
+                    <div
+                      class="flex h-6 items-center"
+                    >
+                      <input
+                        checked=""
+                        class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                        id="_r_96_-0-0"
+                        name="_r_96_-0-0"
+                        type="checkbox"
+                      />
+                    </div>
+                    <div
+                      class="text-sm leading-6 flex-1 min-w-0"
+                    >
+                      <label
+                        class="font-medium text-gray-900 block cursor-pointer"
+                        for="_r_96_-0-0"
+                      >
+                        <span
+                          class="block truncate"
+                        >
+                          200
+                        </span>
+                        <span
+                          class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                        >
+                          756
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                  <span
+                    class="shrink-0 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity"
+                  >
+                    <button
+                      class="text-gray-500 mx-1 font-normal text-xs hover:text-gray-700 transition-colors cursor-pointer"
+                      type="button"
+                    >
+                      only
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                class="group relative flex items-center pr-14"
+              >
+                <button
+                  aria-controls="_r_96_-1-codes"
+                  aria-expanded="false"
+                  aria-label="4xx codes"
+                  class="-ms-1 me-1 flex h-6 w-4 shrink-0 cursor-pointer items-center justify-center text-gray-600 hover:text-gray-900"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="h-4 w-4"
+                    data-slot="icon"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M6.22 4.22a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+                <div
+                  class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+                >
+                  <div
+                    class="flex h-6 items-center"
+                  >
+                    <input
+                      class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                      id="_r_96_-1"
+                      name="_r_96_-1"
+                      type="checkbox"
+                    />
+                  </div>
+                  <div
+                    class="text-sm leading-6 flex-1 min-w-0"
+                  >
+                    <label
+                      class="font-medium text-gray-900 block cursor-pointer"
+                      for="_r_96_-1"
+                    >
+                      <span
+                        class="block truncate"
+                      >
+                        4xx
+                      </span>
+                      <span
+                        class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                      >
+                        123
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <span
+                  class="shrink-0 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="text-gray-500 mx-1 font-normal text-xs hover:text-gray-700 transition-colors cursor-pointer"
+                    type="button"
+                  >
+                    only
+                  </button>
+                </span>
+              </div>
+              <div
+                aria-label="4xx"
+                class="space-y-2 ps-11 pt-2"
+                hidden=""
+                id="_r_96_-1-codes"
+                role="group"
+              >
+                <div
+                  class="group relative flex items-center pr-14"
+                >
+                  <div
+                    class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+                  >
+                    <div
+                      class="flex h-6 items-center"
+                    >
+                      <input
+                        class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                        id="_r_96_-1-0"
+                        name="_r_96_-1-0"
+                        type="checkbox"
+                      />
+                    </div>
+                    <div
+                      class="text-sm leading-6 flex-1 min-w-0"
+                    >
+                      <label
+                        class="font-medium text-gray-900 block cursor-pointer"
+                        for="_r_96_-1-0"
+                      >
+                        <span
+                          class="block truncate"
+                        >
+                          404
+                        </span>
+                        <span
+                          class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                        >
+                          123
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                  <span
+                    class="shrink-0 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity"
+                  >
+                    <button
+                      class="text-gray-500 mx-1 font-normal text-xs hover:text-gray-700 transition-colors cursor-pointer"
+                      type="button"
+                    >
+                      only
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_9b_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_9a_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Cache Status
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_9b_"
+        >
+          <p
+            class="text-xs text-gray-600"
+            id="_r_99_-caption"
+          >
+            Counts cover all transactions
+          </p>
+          <div
+            aria-describedby="_r_99_-caption"
+            aria-label="Cache Status"
+            class="space-y-2"
+            role="group"
+          >
+            <div
+              class="group relative flex items-center pr-14"
+            >
+              <div
+                class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+              >
+                <div
+                  class="flex h-6 items-center"
+                >
+                  <input
+                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    id="_r_99_-0"
+                    name="_r_99_-0"
+                    type="checkbox"
+                  />
+                </div>
+                <div
+                  class="text-sm leading-6 flex-1 min-w-0"
+                >
+                  <label
+                    class="font-medium text-gray-900 block cursor-pointer"
+                    for="_r_99_-0"
+                  >
+                    <span
+                      class="block truncate"
+                    >
+                      Cache Hit
+                    </span>
+                    <span
+                      class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                    >
+                      234
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_9e_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_9d_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Flags
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+          <div
+            class="ml-2 shrink-0 leading-5"
+          >
+            <a
+              aria-label="Reset Flags"
+              class="text-gray-500 font-normal text-[11px] hover:text-gray-700 transition-colors"
+              href="#"
+            >
+              <svg
+                aria-hidden="true"
+                class="h-2.5 w-2.5 inline-block mr-0.5"
+                data-slot="icon"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M13.836 2.477a.75.75 0 0 1 .75.75v3.182a.75.75 0 0 1-.75.75h-3.182a.75.75 0 0 1 0-1.5h1.37l-.84-.841a4.5 4.5 0 0 0-7.08.932.75.75 0 0 1-1.3-.75 6 6 0 0 1 9.44-1.242l.842.84V3.227a.75.75 0 0 1 .75-.75Zm-.911 7.5A.75.75 0 0 1 13.199 11a6 6 0 0 1-9.44 1.241l-.84-.84v1.371a.75.75 0 0 1-1.5 0V9.591a.75.75 0 0 1 .75-.75H5.35a.75.75 0 0 1 0 1.5H3.98l.841.841a4.5 4.5 0 0 0 7.08-.932.75.75 0 0 1 1.025-.273Z"
+                  fill-rule="evenodd"
+                />
+              </svg>
+              reset
+            </a>
+          </div>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_9e_"
+        >
+          <p
+            class="text-xs text-gray-600"
+            id="_r_9c_-caption"
+          >
+            Counts cover all transactions
+          </p>
+          <div
+            aria-describedby="_r_9c_-caption"
+            aria-label="Flags"
+            class="space-y-2"
+            role="group"
+          >
+            <div
+              class="group relative flex items-center pr-14"
+            >
+              <div
+                class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+              >
+                <div
+                  class="flex h-6 items-center"
+                >
+                  <input
+                    checked=""
+                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    id="_r_9c_-0"
+                    name="_r_9c_-0"
+                    type="checkbox"
+                  />
+                </div>
+                <div
+                  class="text-sm leading-6 flex-1 min-w-0"
+                >
+                  <label
+                    class="font-medium text-gray-900 block cursor-pointer"
+                    for="_r_9c_-0"
+                  >
+                    <span
+                      class="block truncate"
+                    >
+                      Favorite
+                    </span>
+                    <span
+                      class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                    >
+                      45
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_9h_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_9g_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Tags
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+          <div
+            class="ml-2 shrink-0 leading-5"
+          >
+            <a
+              aria-label="Reset Tags"
+              class="text-gray-500 font-normal text-[11px] hover:text-gray-700 transition-colors"
+              href="#"
+            >
+              <svg
+                aria-hidden="true"
+                class="h-2.5 w-2.5 inline-block mr-0.5"
+                data-slot="icon"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M13.836 2.477a.75.75 0 0 1 .75.75v3.182a.75.75 0 0 1-.75.75h-3.182a.75.75 0 0 1 0-1.5h1.37l-.84-.841a4.5 4.5 0 0 0-7.08.932.75.75 0 0 1-1.3-.75 6 6 0 0 1 9.44-1.242l.842.84V3.227a.75.75 0 0 1 .75-.75Zm-.911 7.5A.75.75 0 0 1 13.199 11a6 6 0 0 1-9.44 1.241l-.84-.84v1.371a.75.75 0 0 1-1.5 0V9.591a.75.75 0 0 1 .75-.75H5.35a.75.75 0 0 1 0 1.5H3.98l.841.841a4.5 4.5 0 0 0 7.08-.932.75.75 0 0 1 1.025-.273Z"
+                  fill-rule="evenodd"
+                />
+              </svg>
+              reset
+            </a>
+          </div>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_9h_"
+        >
+          <p
+            class="text-xs text-gray-600"
+            id="_r_9f_-caption"
+          >
+            Counts cover all transactions
+          </p>
+          <div
+            aria-describedby="_r_9f_-caption"
+            aria-label="Tags"
+            class="space-y-2"
+            role="group"
+          >
+            <div
+              class="group relative flex items-center pr-14"
+            >
+              <div
+                class="flex gap-x-3 select-none static w-auto min-w-0 cursor-pointer"
+              >
+                <div
+                  class="flex h-6 items-center"
+                >
+                  <input
+                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    id="_r_9f_-0"
+                    name="_r_9f_-0"
+                    type="checkbox"
+                  />
+                </div>
+                <div
+                  class="text-sm leading-6 flex-1 min-w-0"
+                >
+                  <label
+                    class="font-medium text-gray-900 block cursor-pointer"
+                    for="_r_9f_-0"
+                  >
+                    <span
+                      class="block truncate"
+                    >
+                      env=production
+                    </span>
+                    <span
+                      class="text-[11px] text-gray-500 font-light absolute right-0 top-1/2 -translate-y-1/2 tabular-nums"
+                    >
+                      234
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <span
+                class="shrink-0 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity"
+              >
+                <button
+                  class="text-gray-500 mx-1 font-normal text-xs hover:text-gray-700 transition-colors cursor-pointer"
+                  type="button"
+                >
+                  only
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-4 py-3 relative"
+        data-headlessui-state="open"
+        data-open=""
+      >
+        <div
+          class="flex w-full items-start"
+        >
+          <h4
+            class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+          >
+            <button
+              aria-controls="headlessui-disclosure-panel-_r_9j_"
+              aria-expanded="true"
+              class="flex w-full items-start text-left cursor-pointer"
+              data-headlessui-state="open"
+              data-open=""
+              id="headlessui-disclosure-button-_r_9i_"
+              type="button"
+            >
+              <span
+                class="grow truncate font-semibold"
+              >
+                Performance Index
+              </span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 min-w-4 text-gray-600"
+                data-slot="icon"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </h4>
+        </div>
+        <div
+          class="mt-2 space-y-2"
+          data-headlessui-state="open"
+          data-open=""
+          id="headlessui-disclosure-panel-_r_9j_"
+        >
+          <div
+            class="range-slider relative flex items-center mt-4"
+            style="height: calc(16px + 1.6rem);"
+          >
+            <div
+              class="relative w-full"
+              style="height: 16px;"
+            >
+              <input
+                aria-label="Performance Index, minimum"
+                class="range-slider-input"
+                max="80"
+                min="0"
+                step="10"
+                style="--thumb-size: 16px;"
+                type="range"
+                value="0"
+              />
+              <input
+                aria-label="Performance Index, maximum"
+                class="range-slider-input"
+                max="80"
+                min="0"
+                step="10"
+                style="--thumb-size: 16px;"
+                type="range"
+                value="80"
+              />
+            </div>
+            <div
+              class="w-full absolute"
+              style="height: 16px;"
+            >
+              <div
+                class="absolute w-full top-1/2 -translate-y-1/2 h-[6px] rounded-[3px] bg-gray-200"
+              >
+                <div
+                  class="absolute h-full left-0 top-0 bg-primary-200 opacity-50"
+                  style="left: 0%; width: 100%; transition: left 0.02s ease-out, width 0.02s ease-out;"
+                />
+                <div
+                  style="position: absolute; left: 0%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    A++
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 12.5%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    A+
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 25%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    A
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 37.5%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    B
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 50%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    C
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 62.5%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    D
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 75%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    E
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 87.5%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    F
+                  </div>
+                </div>
+                <div
+                  style="position: absolute; left: 100%; top: 50%;"
+                >
+                  <div
+                    class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+                  />
+                  <div
+                    class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
+                  >
+                    G
+                  </div>
+                </div>
+              </div>
+              <div
+                class="absolute rounded-full bg-primary-900 top-1/2 -translate-x-1/2 -translate-y-1/2 ring-1 ring-white cursor-grab z-[2]"
+                data-thumb="min"
+                style="width: 16px; height: 16px; transition: left 0.02s ease-out; left: 0%;"
+              />
+              <div
+                class="absolute rounded-full bg-primary-900 top-1/2 -translate-x-1/2 -translate-y-1/2 ring-1 ring-white cursor-grab z-[2]"
+                data-thumb="max"
+                style="width: 16px; height: 16px; transition: left 0.02s ease-out; left: 100%;"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

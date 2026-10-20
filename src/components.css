@@ -1,0 +1,4 @@
+/* Component styles. Needs a Tailwind 4 build that imports `theme.css`; it does not import Tailwind itself. */
+@import "./Components/Inputs/Input/Input.css";
+@import "./Components/Inputs/Sliders/RangeSliderStyles.css";
+@import "./Components/Formatter/prism.css";

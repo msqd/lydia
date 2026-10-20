@@ -1,0 +1,138 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DataTable > renders correctly 1`] = `
+<div>
+  <table
+    class="min-w-full divide-y divide-gray-300 text-left"
+  >
+    <thead>
+      <tr>
+        <th
+          class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900 "
+          scope="col"
+        >
+          First name
+        </th>
+        <th
+          class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900 "
+          scope="col"
+        >
+          Last name
+        </th>
+        <th
+          class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900 "
+          scope="col"
+        >
+          Instrument
+        </th>
+        <th
+          class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900 "
+          scope="col"
+        >
+          Country
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      class="divide-y divide-gray-200 bg-white"
+    >
+      <tr
+        class="hover:bg-slate-50"
+      >
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          John
+        </td>
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          Coltrane
+        </td>
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          Saxophone
+        </td>
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          USA
+        </td>
+      </tr>
+      <tr
+        class="hover:bg-slate-50"
+      >
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          Miles
+        </td>
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          Davis
+        </td>
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          Trumpet
+        </td>
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          USA
+        </td>
+      </tr>
+      <tr
+        class="hover:bg-slate-50"
+      >
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          Thelonious
+        </td>
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          Monk
+        </td>
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          Piano
+        </td>
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          USA
+        </td>
+      </tr>
+      <tr
+        class="hover:bg-slate-50"
+      >
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          Charles
+        </td>
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          Mingus
+        </td>
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          Double Bass
+        </td>
+        <td
+          class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900 "
+        >
+          USA
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

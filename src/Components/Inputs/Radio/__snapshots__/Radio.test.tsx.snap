@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Radio component > renders correctly with default props 1`] = `
+<div>
+  <div
+    class="flex items-center gap-x-3 w-full cursor-pointer"
+  >
+    <input
+      class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+      id="_r_0_"
+      name="test-radio"
+      type="radio"
+    />
+    <label
+      class="block text-sm font-medium leading-6 text-gray-900 flex-1 cursor-pointer"
+      for="_r_0_"
+    >
+      test-radio
+    </label>
+  </div>
+</div>
+`;

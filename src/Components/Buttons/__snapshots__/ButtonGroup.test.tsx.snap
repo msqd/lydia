@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ButtonGroup > renders correctly with multiple buttons 1`] = `
+<div>
+  <span
+    class="isolate inline-flex rounded-md shadow-xs"
+    role="group"
+  >
+    <button
+      class="font-semibold cursor-pointer shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 disabled:ring-gray-300 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed active:bg-primary-600 active:ring-primary-700 text-sm relative inline-flex items-center focus:z-10 px-3 py-2 rounded-none rounded-l-sm text-white bg-blue-600 hover:bg-blue-600 focus-visible:outline-blue-500 ring-1 ring-inset ring-blue-700"
+      type="button"
+    >
+      Button 1
+    </button>
+    <button
+      class="font-semibold cursor-pointer shadow-xs bg-white text-gray-900 hover:bg-gray-50 focus-visible:outline-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 ring-1 ring-inset ring-gray-300 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed active:bg-gray-100 active:ring-gray-300 text-sm relative inline-flex items-center focus:z-10 px-3 py-2 rounded-none -ml-px"
+      type="button"
+    >
+      Button 2
+    </button>
+    <button
+      class="font-semibold cursor-pointer shadow-xs bg-white text-gray-900 hover:bg-gray-50 focus-visible:outline-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 ring-1 ring-inset ring-gray-300 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed active:bg-gray-100 active:ring-gray-300 text-sm relative inline-flex items-center focus:z-10 px-3 py-2 rounded-none -ml-px rounded-r-sm"
+      type="button"
+    >
+      Button 3
+    </button>
+  </span>
+</div>
+`;

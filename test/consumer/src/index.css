@@ -1,0 +1,4 @@
+@import "tailwindcss";
+@import "@msqd/lydia/theme.css";
+@import "@msqd/lydia/components.css";
+@source "../node_modules/@msqd/lydia/dist";
