@@ -10,6 +10,7 @@ import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { useMemo } from "react";
 import { ReactEChartsCore } from "./Utils/ReactEChartsCore";
+import { TimeFormatter } from "./Utils/TimeFormatter";
 
 import { getTpdexRating, tpdexScale } from "@msqd/lydia/Models/Tpdex";
 import { defaultEchartOptions } from "../../Settings";
@@ -40,11 +41,6 @@ const tooltipFormatter = (params: any[]) => {
   return tooltipContent;
 };
 
-const tickFormatter = (tick: string) => {
-  const date = new Date(tick);
-  return date.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
-};
-
 const SummaryPerformancesChart = ({ data }: SummaryPerformancesChartProps) => {
   const colors = useThemeColors(tpdexTokens);
   const outOfRangeColor = useThemeColor("--color-chart-out-of-range");
@@ -61,7 +57,7 @@ const SummaryPerformancesChart = ({ data }: SummaryPerformancesChartProps) => {
       },
       xAxis: {
         type: "category",
-        data: data.map((x) => tickFormatter(x.datetime)),
+        data: data.map((x) => TimeFormatter.formatTick(x.datetime, "24h")),
       },
       yAxis: {
         type: "value",

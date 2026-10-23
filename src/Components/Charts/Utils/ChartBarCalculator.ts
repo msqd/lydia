@@ -44,7 +44,7 @@ export class ChartBarCalculator {
     } = options;
 
     // Try both configurations and see which one works better
-    const wideBarConfig = this.calculateWideBarConfig({
+    const wideBarConfig = this.calculateBarSizing({
       dataLength,
       chartAreaWidth,
       gapWidth: wideBarGapWidth,
@@ -52,7 +52,7 @@ export class ChartBarCalculator {
       maxBarWidth,
     });
 
-    const thinBarConfig = this.calculateThinBarConfig({
+    const thinBarConfig = this.calculateBarSizing({
       dataLength,
       chartAreaWidth,
       gapWidth: thinBarGapWidth,
@@ -88,28 +88,11 @@ export class ChartBarCalculator {
     };
   }
 
-  private static calculateWideBarConfig(options: {
-    dataLength: number;
-    chartAreaWidth: number;
-    gapWidth: number;
-    minBarWidth: number;
-    maxBarWidth: number;
-  }) {
-    const { dataLength, chartAreaWidth, gapWidth, minBarWidth, maxBarWidth } = options;
-
-    const totalGapSpace = (dataLength - 1) * gapWidth;
-    const availableBarSpace = chartAreaWidth - totalGapSpace;
-    const maxPossibleBarWidth = Math.floor(availableBarSpace / dataLength);
-    const constrainedBarWidth = Math.max(minBarWidth, Math.min(maxBarWidth, maxPossibleBarWidth));
-
-    return {
-      barWidth: constrainedBarWidth,
-      gapWidth,
-      totalGapSpace,
-    };
-  }
-
-  private static calculateThinBarConfig(options: {
+  /**
+   * Width of the bars that fit side by side in the chart area, once the gaps between them are
+   * reserved, clamped to the allowed range.
+   */
+  static calculateBarSizing(options: {
     dataLength: number;
     chartAreaWidth: number;
     gapWidth: number;
