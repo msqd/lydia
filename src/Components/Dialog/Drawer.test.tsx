@@ -263,6 +263,28 @@ describe("Drawer", () => {
     expect(document.body.style.top).toBe("");
     expect(document.body.style.width).toBe("");
   });
+
+  it("heads the panel with a plain h3 and p without backdrop", () => {
+    render(
+      <Drawer {...defaultProps} backdrop={false} title="Test Title" description="Test Description">
+        <div>Content</div>
+      </Drawer>,
+    );
+
+    expect(screen.getByText("Test Title").tagName).toBe("H3");
+    expect(screen.getByText("Test Description").tagName).toBe("P");
+  });
+
+  it("heads the panel with the dialog's h2 title and description with backdrop", () => {
+    render(
+      <Drawer {...defaultProps} backdrop={true} title="Test Title" description="Test Description">
+        <div>Content</div>
+      </Drawer>,
+    );
+
+    expect(screen.getByText("Test Title").tagName).toBe("H2");
+    expect(screen.getByText("Test Description").tagName).toBe("P");
+  });
 });
 
 describe("DrawerTitle", () => {
