@@ -1,6 +1,6 @@
 import { FacetResetLink } from "@msqd/lydia/Components/Facets";
 import { HeadingLevel } from "@msqd/lydia/Components/Typography/HeadingLevel";
-import type { FilterChangeHandler, Filters } from "@msqd/lydia/Models/Filters";
+import { countActiveFilters, type FilterChangeHandler, type Filters } from "@msqd/lydia/Models/Filters";
 import { TransactionFiltersCard } from "@msqd/lydia/Pages/Transactions/TransactionFiltersCard";
 import { type ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
@@ -40,14 +40,7 @@ export function TransactionsFiltersSidebar({
   className,
   ...props
 }: TransactionsFiltersSidebarProps) {
-  // Count active filters
-  const activeFilterCount = Object.values(filters).reduce((count, value) => {
-    if (Array.isArray(value)) return count + value.length;
-    if (typeof value === "object" && value !== null) {
-      return count + Object.values(value).filter((v) => v !== undefined && v !== null && v !== false).length;
-    }
-    return value !== undefined && value !== null && value !== "" ? count + 1 : count;
-  }, 0);
+  const activeFilterCount = countActiveFilters(filters);
 
   return (
     <div className={twMerge("bg-white rounded-lg shadow overflow-hidden flex flex-col", className)} {...props}>

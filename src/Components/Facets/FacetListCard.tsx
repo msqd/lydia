@@ -1,7 +1,7 @@
 import { ArrowPathIcon } from "@heroicons/react/16/solid";
 import { Card } from "@msqd/lydia/Components/Cards";
 import { HeadingLevel } from "@msqd/lydia/Components/Typography/HeadingLevel";
-import type { Filters } from "@msqd/lydia/Models/Filters";
+import { countActiveFilters, type Filters } from "@msqd/lydia/Models/Filters";
 import { type ComponentProps, type ReactNode } from "react";
 import { FacetList } from "./FacetList";
 
@@ -56,13 +56,7 @@ export function FacetListCard({
   skipCardWrapper = false,
   ...cardProps
 }: FacetListCardProps) {
-  const hasActiveFilters = Object.values(filters).some((value) => {
-    if (Array.isArray(value)) return value.length > 0;
-    if (typeof value === "object" && value !== null) {
-      return Object.values(value).some((v) => v !== undefined && v !== null && v !== false);
-    }
-    return value !== undefined && value !== null && value !== "";
-  });
+  const hasActiveFilters = countActiveFilters(filters) > 0;
 
   const defaultHeader = showDefaultHeader ? (
     <div className="flex justify-between items-center">
