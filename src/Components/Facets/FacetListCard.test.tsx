@@ -30,6 +30,26 @@ describe("FacetListCard", () => {
     expect(screen.getByRole("button", { name: "Reset all filters" })).toBeInTheDocument();
   });
 
+  it("offers no reset when the only bounds set are empty", () => {
+    render(
+      <FacetListCard filters={{ time: { startDate: "", endDate: "" } }} onResetFilters={vi.fn()} showDefaultHeader>
+        {child}
+      </FacetListCard>,
+    );
+
+    expect(screen.queryByRole("button", { name: "Reset all filters" })).not.toBeInTheDocument();
+  });
+
+  it("offers a reset once a choice is selected", () => {
+    render(
+      <FacetListCard filters={{ method: ["GET"] }} onResetFilters={vi.fn()} showDefaultHeader>
+        {child}
+      </FacetListCard>,
+    );
+
+    expect(screen.getByRole("button", { name: "Reset all filters" })).toBeInTheDocument();
+  });
+
   it("resets when the reset is pressed", async () => {
     const onResetFilters = vi.fn();
     render(

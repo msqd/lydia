@@ -4,19 +4,13 @@ import { useScrollLock } from "@msqd/lydia/Components/Utilities/useScrollLock";
 import { Fragment } from "react";
 import type { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
-import type { BaseModalProps, ModalSize } from "./modal.types";
+import { type BaseModalProps, type ModalSize, modalSizeClasses } from "./modal.types";
 
 export type DialogSize = ModalSize;
 
 export interface DialogProps extends BaseModalProps {
   size?: DialogSize;
 }
-
-const sizeClasses: Record<DialogSize, string> = {
-  sm: "max-w-[30vw]",
-  md: "max-w-[55vw]",
-  lg: "max-w-[80vw]",
-};
 
 /**
  * Dialog component for displaying modal dialogs and popovers.
@@ -106,7 +100,7 @@ export function Dialog({
               <HeadlessDialog.Panel
                 className={twMerge(
                   "w-full transform overflow-hidden rounded-lg bg-white p-6 shadow-xl transition-all",
-                  sizeClasses[size],
+                  modalSizeClasses[size],
                   contentClassName,
                 )}
               >

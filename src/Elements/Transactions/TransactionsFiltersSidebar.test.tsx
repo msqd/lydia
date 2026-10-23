@@ -199,4 +199,18 @@ describe("TransactionsFiltersSidebar", () => {
     // the data-testid will be on the main container div
     expect(container.firstChild).toHaveAttribute("data-testid", "filters-sidebar");
   });
+
+  // After the snapshot tests: React's generated ids are part of the snapshots and depend on how
+  // many components rendered before them.
+  it("offers no reset when the only bounds set are empty", () => {
+    render(<TransactionsFiltersSidebar {...defaultProps} filters={{ time: { startDate: "", endDate: "" } }} />);
+
+    expect(screen.queryByRole("link", { name: "Reset all filters" })).not.toBeInTheDocument();
+  });
+
+  it("offers a reset once a choice is selected", () => {
+    render(<TransactionsFiltersSidebar {...defaultProps} filters={{ method: ["GET"] }} />);
+
+    expect(screen.getByRole("link", { name: "Reset all filters" })).toBeInTheDocument();
+  });
 });
