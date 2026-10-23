@@ -46,3 +46,10 @@ export type ModalSize = "sm" | "md" | "lg";
  * Position options for drawer components
  */
 export type DrawerPosition = "left" | "right";
+
+/** Maximum width of the panel for each modal size */
+export const modalSizeClasses: Record<ModalSize, string> = {
+  sm: "max-w-[30vw]",
+  md: "max-w-[55vw]",
+  lg: "max-w-[80vw]",
+};

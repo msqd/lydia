@@ -1,7 +1,7 @@
 import { ArrowPathIcon } from "@heroicons/react/16/solid";
 import { Card } from "@msqd/lydia/Components/Cards";
 import { HeadingLevel } from "@msqd/lydia/Components/Typography/HeadingLevel";
-import { countActiveFilters, type Filters } from "@msqd/lydia/Models/Filters";
+import { type Filters, countActiveFilters } from "@msqd/lydia/Models/Filters";
 import { type ComponentProps, type ReactNode } from "react";
 import { FacetList } from "./FacetList";
 
