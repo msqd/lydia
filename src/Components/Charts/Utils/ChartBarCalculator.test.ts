@@ -2,6 +2,26 @@ import { describe, expect, it } from "vitest";
 import { ChartBarCalculator } from "./ChartBarCalculator";
 
 describe("ChartBarCalculator", () => {
+  describe("calculateBarSizing", () => {
+    const options = { chartAreaWidth: 260, gapWidth: 2, minBarWidth: 2, maxBarWidth: 19 };
+
+    it("fills the area left once the gaps are reserved", () => {
+      expect(ChartBarCalculator.calculateBarSizing({ ...options, dataLength: 20 })).toEqual({
+        barWidth: 11,
+        gapWidth: 2,
+        totalGapSpace: 38,
+      });
+    });
+
+    it("never exceeds the maximum width", () => {
+      expect(ChartBarCalculator.calculateBarSizing({ ...options, dataLength: 3 }).barWidth).toBe(19);
+    });
+
+    it("never goes under the minimum width", () => {
+      expect(ChartBarCalculator.calculateBarSizing({ ...options, dataLength: 200 }).barWidth).toBe(2);
+    });
+  });
+
   describe("calculateBarConfig", () => {
     it("should return wide bars configuration for large containers with few data points", () => {
       const config = ChartBarCalculator.calculateBarConfig({

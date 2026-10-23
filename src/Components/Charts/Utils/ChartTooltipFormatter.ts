@@ -29,29 +29,32 @@ export class ChartTooltipFormatter {
   }
 
   /**
+   * The Transactions / Cached / Errors block shared by every tooltip
+   */
+  private static formatBreakdown({ count, cached, errors }: Omit<TooltipData, "name">): string {
+    const errorRate = ChartTooltipFormatter.formatPercentage(errors, count);
+    const cachedRate = ChartTooltipFormatter.formatPercentage(cached, count);
+
+    return (
+      `<small>Transactions: ${count}<br/>` +
+      `Cached: ${cached} (${cachedRate})<br/>` +
+      `Errors: ${errors} (${errorRate})<br/>` +
+      "</small>"
+    );
+  }
+
+  /**
    * Create tooltip content for split bar charts (wide bars with separate error/cached bars)
    */
   static formatSplitBarsTooltip(params: SplitTooltipParams[]): string {
-    const countSerie = params[0];
-    const errorsSerie = params[1];
-    const cachedSerie = params[2];
+    const [countSerie, errorsSerie, cachedSerie] = params;
 
-    const errorRate = ChartTooltipFormatter.formatPercentage(errorsSerie?.value || 0, countSerie?.value || 0);
-
-    const cachedRate = ChartTooltipFormatter.formatPercentage(cachedSerie?.value || 0, countSerie?.value || 0);
-
-    let tooltipContent = `<strong>${countSerie.name}</strong><br/>`;
-
-    if (countSerie.value) {
-      tooltipContent += `<small>Transactions: ${countSerie.value}<br/>`;
-      tooltipContent += `Cached: ${cachedSerie?.value || 0} (${cachedRate})<br/>`;
-      tooltipContent += `Errors: ${errorsSerie?.value || 0} (${errorRate})<br/>`;
-      tooltipContent += "</small>";
-    } else {
-      tooltipContent += `<small>No transactions</small>`;
-    }
-
-    return tooltipContent;
+    return ChartTooltipFormatter.formatTooltipFromData({
+      name: countSerie.name,
+      count: countSerie.value,
+      errors: errorsSerie?.value || 0,
+      cached: cachedSerie?.value || 0,
+    });
   }
 
   /**
@@ -63,41 +66,19 @@ export class ChartTooltipFormatter {
       return `<strong>${params[0]?.name || "Unknown"}</strong><br/><small>No data available</small>`;
     }
 
-    const transactionData = data[dataIndex];
-    const { count: totalCount, errors, cached } = transactionData;
+    const { count, errors, cached } = data[dataIndex];
 
-    const errorRate = ChartTooltipFormatter.formatPercentage(errors, totalCount);
-    const cachedRate = ChartTooltipFormatter.formatPercentage(cached, totalCount);
-
-    let tooltipContent = `<strong>${params[0].name}</strong><br/>`;
-    tooltipContent += `<small>Transactions: ${totalCount}<br/>`;
-    tooltipContent += `Cached: ${cached} (${cachedRate})<br/>`;
-    tooltipContent += `Errors: ${errors} (${errorRate})<br/>`;
-    tooltipContent += "</small>";
-
-    return tooltipContent;
+    return `<strong>${params[0].name}</strong><br/>${ChartTooltipFormatter.formatBreakdown({ count, errors, cached })}`;
   }
 
   /**
    * Create tooltip content from transaction data directly
    */
-  static formatTooltipFromData(data: TooltipData): string {
-    const { count, errors, cached, name } = data;
+  static formatTooltipFromData({ count, errors, cached, name }: TooltipData): string {
+    const header = `<strong>${name}</strong><br/>`;
 
-    const errorRate = ChartTooltipFormatter.formatPercentage(errors, count);
-    const cachedRate = ChartTooltipFormatter.formatPercentage(cached, count);
-
-    let tooltipContent = `<strong>${name}</strong><br/>`;
-
-    if (count) {
-      tooltipContent += `<small>Transactions: ${count}<br/>`;
-      tooltipContent += `Cached: ${cached} (${cachedRate})<br/>`;
-      tooltipContent += `Errors: ${errors} (${errorRate})<br/>`;
-      tooltipContent += "</small>";
-    } else {
-      tooltipContent += `<small>No transactions</small>`;
-    }
-
-    return tooltipContent;
+    return count
+      ? header + ChartTooltipFormatter.formatBreakdown({ count, errors, cached })
+      : `${header}<small>No transactions</small>`;
   }
 }

@@ -181,6 +181,37 @@ describe("SummaryRateChart", () => {
     });
   });
 
+  describe("Pinned output", () => {
+    const lastOption = () => {
+      const calls = vi.mocked(ReactEChartsCore).mock.calls;
+      return calls[calls.length - 1][0].option as {
+        series: Array<{ barWidth: string }>;
+        xAxis: { data: string[] };
+      };
+    };
+
+    // jsdom lays nothing out, so the chart measures 0 and falls back to 300px wide, a 260px area.
+    it.each([
+      [3, "19px"],
+      [20, "11px"],
+      [60, "2px"],
+    ])("sizes the bars of %i points at %s", (count, barWidth) => {
+      render(<SummaryRateChart data={createMockData(count)} />);
+
+      expect(lastOption().series[0].barWidth).toBe(barWidth);
+    });
+
+    it("labels the x axis with the time of each point", () => {
+      const datetime = "2025-06-04T10:05:00Z";
+
+      render(<SummaryRateChart data={[{ value: 1, datetime }]} />);
+
+      expect(lastOption().xAxis.data).toEqual([
+        new Date(datetime).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
+      ]);
+    });
+  });
+
   describe("Colour", () => {
     const seriesColor = () => {
       const calls = vi.mocked(ReactEChartsCore).mock.calls;

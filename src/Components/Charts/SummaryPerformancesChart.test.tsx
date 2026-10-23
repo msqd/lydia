@@ -30,6 +30,18 @@ describe("SummaryPerformancesChart", () => {
     expect(chart).toHaveTextContent("Chart Mock");
   });
 
+  it("labels the x axis with the time of each point", () => {
+    render(<SummaryPerformancesChart data={mockData} />);
+
+    const calls = vi.mocked(ReactEChartsCore).mock.calls;
+    const option = calls[calls.length - 1][0].option as { xAxis: { data: string[] } };
+    expect(option.xAxis.data).toEqual(
+      mockData.map(({ datetime }) =>
+        new Date(datetime).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" }),
+      ),
+    );
+  });
+
   describe("colours", () => {
     const lastVisualMap = () => {
       const calls = vi.mocked(ReactEChartsCore).mock.calls;
