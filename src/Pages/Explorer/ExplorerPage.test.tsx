@@ -189,6 +189,30 @@ describe("ExplorerPage", () => {
     expect(screen.getByTestId("transactions-list")).toBeInTheDocument();
   });
 
+  it.each([
+    ["an unnamed API", { apiName: undefined, url: "/api/a" }, "unknown-api", "Transactions: 1"],
+    ["a query string", { url: "/api/users?page=2" }, "users-api", "Transactions: 3"],
+    ["a full URL", { url: "https://host/api/users" }, "users-api", "Transactions: 3"],
+  ])("lists the transactions the tree counts for %s", (_label, overrides, apiName, listed) => {
+    const extra = toDetailedTransaction({ ...mockBasicTransactions[0], id: "extra", ...overrides });
+    render(<ExplorerPage transactions={[...mockTransactions, extra]} />);
+
+    fireEvent.click(screen.getByText(apiName));
+
+    expect(screen.getByText(listed)).toBeInTheDocument();
+  });
+
+  it("does not list /api/users transactions under /api/user", () => {
+    const sibling = toDetailedTransaction({ ...mockBasicTransactions[0], id: "sibling", url: "/api/user" });
+    render(<ExplorerPage transactions={[sibling, ...mockTransactions]} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "users-api" }));
+    fireEvent.click(screen.getByRole("button", { name: "api" }));
+    fireEvent.click(screen.getByText("user"));
+
+    expect(screen.getByText("Transactions: 1")).toBeInTheDocument();
+  });
+
   it("shows folder and endpoint icons correctly", () => {
     render(<ExplorerPage transactions={mockTransactions} />);
 
