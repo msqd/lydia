@@ -1,4 +1,5 @@
 import { fireEvent } from "@testing-library/react";
+import type { SyntheticEvent } from "react";
 import { describe, expect, it, vi } from "vitest";
 import {
   customRender,
@@ -123,6 +124,35 @@ describe("Button", () => {
       expectations: (button) => {
         expect(button).toHaveAttribute("aria-label", "test button");
       },
+    });
+  });
+
+  describe("inside a form", () => {
+    it("renders type=button by default", () => {
+      customRender(<Button>Cancel</Button>);
+      expect(screen.getByRole("button", { name: "Cancel" })).toHaveAttribute("type", "button");
+    });
+
+    it("does not submit the form by default", () => {
+      const onSubmit = vi.fn((event: SyntheticEvent) => event.preventDefault());
+      customRender(
+        <form onSubmit={onSubmit}>
+          <Button>Cancel</Button>
+        </form>,
+      );
+      fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
+
+    it("submits the form with type=submit", () => {
+      const onSubmit = vi.fn((event: SyntheticEvent) => event.preventDefault());
+      customRender(
+        <form onSubmit={onSubmit}>
+          <Button type="submit">Save</Button>
+        </form>,
+      );
+      fireEvent.click(screen.getByRole("button", { name: "Save" }));
+      expect(onSubmit).toHaveBeenCalledOnce();
     });
   });
 });
