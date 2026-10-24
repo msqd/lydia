@@ -90,7 +90,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                   >
                     <input
                       aria-label="Start date"
-                      class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
+                      class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
                       placeholder="Start date"
                       type="date"
                       value=""
@@ -127,7 +127,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                   >
                     <input
                       aria-label="End date"
-                      class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
+                      class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
                       placeholder="End date"
                       type="date"
                       value=""
@@ -229,7 +229,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                   class="flex h-6 items-center"
                 >
                   <input
-                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                     id="_r_ce_-0"
                     name="_r_ce_-0"
                     type="checkbox"
@@ -266,7 +266,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                   class="flex h-6 items-center"
                 >
                   <input
-                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                     id="_r_ce_-1"
                     name="_r_ce_-1"
                     type="checkbox"
@@ -368,7 +368,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                   class="flex h-6 items-center"
                 >
                   <input
-                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                     id="_r_cj_-0"
                     name="_r_cj_-0"
                     type="checkbox"
@@ -405,7 +405,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                   class="flex h-6 items-center"
                 >
                   <input
-                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                     id="_r_cj_-1"
                     name="_r_cj_-1"
                     type="checkbox"
@@ -530,7 +530,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                     class="flex h-6 items-center"
                   >
                     <input
-                      class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                      class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                       id="_r_co_-0"
                       name="_r_co_-0"
                       type="checkbox"
@@ -574,7 +574,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                       class="flex h-6 items-center"
                     >
                       <input
-                        class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                        class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                         id="_r_co_-0-0"
                         name="_r_co_-0-0"
                         type="checkbox"
@@ -636,7 +636,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                     class="flex h-6 items-center"
                   >
                     <input
-                      class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                      class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                       id="_r_co_-1"
                       name="_r_co_-1"
                       type="checkbox"
@@ -680,7 +680,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                       class="flex h-6 items-center"
                     >
                       <input
-                        class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                        class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                         id="_r_co_-1-0"
                         name="_r_co_-1-0"
                         type="checkbox"
@@ -784,7 +784,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                   class="flex h-6 items-center"
                 >
                   <input
-                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                     id="_r_cv_-0"
                     name="_r_cv_-0"
                     type="checkbox"
@@ -886,7 +886,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                   class="flex h-6 items-center"
                 >
                   <input
-                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                     id="_r_d3_-0"
                     name="_r_d3_-0"
                     type="checkbox"
@@ -988,7 +988,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                   class="flex h-6 items-center"
                 >
                   <input
-                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                     id="_r_d7_-0"
                     name="_r_d7_-0"
                     type="checkbox"
@@ -1078,7 +1078,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
             >
               <input
                 aria-label="Performance Index, minimum"
-                class="range-slider-input"
+                class="range-slider-input lydia-input"
                 max="80"
                 min="0"
                 step="10"
@@ -1088,7 +1088,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
               />
               <input
                 aria-label="Performance Index, maximum"
-                class="range-slider-input"
+                class="range-slider-input lydia-input"
                 max="80"
                 min="0"
                 step="10"
@@ -1372,7 +1372,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                   >
                     <input
                       aria-label="Start date"
-                      class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
+                      class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
                       max="2024-01-31"
                       placeholder="Start date"
                       type="date"
@@ -1410,7 +1410,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                   >
                     <input
                       aria-label="End date"
-                      class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
+                      class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
                       min="2024-01-01"
                       placeholder="End date"
                       type="date"
@@ -1539,7 +1539,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 >
                   <input
                     checked=""
-                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                     id="_r_df_-0"
                     name="_r_df_-0"
                     type="checkbox"
@@ -1576,7 +1576,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                   class="flex h-6 items-center"
                 >
                   <input
-                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                     id="_r_df_-1"
                     name="_r_df_-1"
                     type="checkbox"
@@ -1714,7 +1714,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 >
                   <input
                     checked=""
-                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                     id="_r_dk_-0"
                     name="_r_dk_-0"
                     type="checkbox"
@@ -1762,7 +1762,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 >
                   <input
                     checked=""
-                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                     id="_r_dk_-1"
                     name="_r_dk_-1"
                     type="checkbox"
@@ -1923,7 +1923,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                   >
                     <input
                       checked=""
-                      class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                      class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                       id="_r_dp_-0"
                       name="_r_dp_-0"
                       type="checkbox"
@@ -1967,7 +1967,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                     >
                       <input
                         checked=""
-                        class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                        class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                         id="_r_dp_-0-0"
                         name="_r_dp_-0-0"
                         type="checkbox"
@@ -2039,7 +2039,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                     class="flex h-6 items-center"
                   >
                     <input
-                      class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                      class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                       id="_r_dp_-1"
                       name="_r_dp_-1"
                       type="checkbox"
@@ -2093,7 +2093,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                       class="flex h-6 items-center"
                     >
                       <input
-                        class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                        class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                         id="_r_dp_-1-0"
                         name="_r_dp_-1-0"
                         type="checkbox"
@@ -2207,7 +2207,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                   class="flex h-6 items-center"
                 >
                   <input
-                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                     id="_r_e0_-0"
                     name="_r_e0_-0"
                     type="checkbox"
@@ -2335,7 +2335,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 >
                   <input
                     checked=""
-                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                     id="_r_e4_-0"
                     name="_r_e4_-0"
                     type="checkbox"
@@ -2462,7 +2462,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                   class="flex h-6 items-center"
                 >
                   <input
-                    class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+                    class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
                     id="_r_e8_-0"
                     name="_r_e8_-0"
                     type="checkbox"
@@ -2562,7 +2562,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
             >
               <input
                 aria-label="Performance Index, minimum"
-                class="range-slider-input"
+                class="range-slider-input lydia-input"
                 max="80"
                 min="0"
                 step="10"
@@ -2572,7 +2572,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
               />
               <input
                 aria-label="Performance Index, maximum"
-                class="range-slider-input"
+                class="range-slider-input lydia-input"
                 max="80"
                 min="0"
                 step="10"

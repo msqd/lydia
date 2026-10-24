@@ -14,7 +14,7 @@ export interface SearchInputProps extends Omit<ComponentProps<"input">, "onChang
 const baseClassName = "w-full";
 const wrapperClassName =
   "mt-2 space-x-1 py-1 pl-1.5 flex text-base items-center rounded ring-1 text-gray-900 ring-inset ring-gray-200 placeholder:text-gray-400 focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary-600";
-const inputClassName = "overflow-ellipsis w-full border-0 p-0 focus:outline-none focus:ring-0 ml-1";
+const inputClassName = "lydia-input overflow-ellipsis w-full border-0 p-0 focus:outline-none focus:ring-0 ml-1";
 const enterBtnClassName = "inset-y-0 right-0 flex hover:cursor-pointer";
 const labelClassName = "block text-sm font-medium leading-6 text-gray-900";
 

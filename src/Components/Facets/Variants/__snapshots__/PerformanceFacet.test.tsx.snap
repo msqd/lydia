@@ -61,7 +61,7 @@ exports[`PerformanceFacet > matches snapshot 1`] = `
       >
         <input
           aria-label="Performance Index, minimum"
-          class="range-slider-input"
+          class="range-slider-input lydia-input"
           max="80"
           min="0"
           step="10"
@@ -71,7 +71,7 @@ exports[`PerformanceFacet > matches snapshot 1`] = `
         />
         <input
           aria-label="Performance Index, maximum"
-          class="range-slider-input"
+          class="range-slider-input lydia-input"
           max="80"
           min="0"
           step="10"
@@ -302,7 +302,7 @@ exports[`PerformanceFacet > matches snapshot with range selected 1`] = `
       >
         <input
           aria-label="Performance Index, minimum"
-          class="range-slider-input"
+          class="range-slider-input lydia-input"
           max="80"
           min="0"
           step="10"
@@ -312,7 +312,7 @@ exports[`PerformanceFacet > matches snapshot with range selected 1`] = `
         />
         <input
           aria-label="Performance Index, maximum"
-          class="range-slider-input"
+          class="range-slider-input lydia-input"
           max="80"
           min="0"
           step="10"

@@ -15,7 +15,7 @@ exports[`Input (Group) > renders with default props 1`] = `
           class="mt-2 flex items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600"
         >
           <input
-            class="w-full border-0 px-1.5 text-gray-900 text-left placeholder:text-gray-400 focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px]"
+            class="lydia-input w-full border-0 px-1.5 text-gray-900 text-left placeholder:text-gray-400 focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px]"
             placeholder="Test input"
             type="text"
           />
