@@ -1,7 +1,17 @@
 import { customRender, screen } from "@/Components/Utilities/Testing";
 import { fireEvent } from "@testing-library/react";
+import type { ComponentProps } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { DownloadButton } from "./DownloadButton";
+
+// jsdom's Blob has no arrayBuffer()
+const readBytes = (blob: Blob) =>
+  new Promise<Uint8Array>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(new Uint8Array(reader.result as ArrayBuffer));
+    reader.onerror = () => reject(reader.error);
+    reader.readAsArrayBuffer(blob);
+  });
 
 describe("DownloadButton", () => {
   // Mock anchor click to prevent jsdom navigation warning
@@ -43,37 +53,97 @@ describe("DownloadButton", () => {
     expect(screen.getByRole("button", { name: /export pdf/i })).toBeInTheDocument();
   });
 
-  it("handles download click", () => {
-    // Mock URL methods
-    const createObjectURLSpy = vi.fn(() => "blob:mock-url");
-    const revokeObjectURLSpy = vi.fn();
-    global.URL.createObjectURL = createObjectURLSpy;
-    global.URL.revokeObjectURL = revokeObjectURLSpy;
+  describe("download", () => {
+    const createObjectURL = vi.fn((_blob: Blob) => "blob:mock-url");
+    const revokeObjectURL = vi.fn();
 
-    customRender(<DownloadButton data="Hello, World!" filename="hello.txt" mimeType="text/plain" />);
+    beforeEach(() => {
+      global.URL.createObjectURL = createObjectURL;
+      global.URL.revokeObjectURL = revokeObjectURL;
+    });
+    afterEach(() => {
+      vi.useRealTimers();
+      createObjectURL.mockClear();
+      revokeObjectURL.mockClear();
+    });
 
-    fireEvent.click(screen.getByRole("button"));
+    /** Click the button and return the blob that was offered for download. */
+    const download = async (data: ComponentProps<typeof DownloadButton>["data"], mimeType?: string) => {
+      customRender(<DownloadButton data={data} filename="file" mimeType={mimeType} />);
+      fireEvent.click(screen.getByRole("button"));
+      const blob = createObjectURL.mock.calls[0]?.[0] as Blob;
+      const bytes = await readBytes(blob);
+      return { type: blob.type, bytes, text: new TextDecoder().decode(bytes) };
+    };
 
-    // Verify blob was created for download
-    expect(createObjectURLSpy).toHaveBeenCalled();
-    expect(revokeObjectURLSpy).toHaveBeenCalledWith("blob:mock-url");
+    it("revokes the object URL after a delay, not synchronously", () => {
+      vi.useFakeTimers();
+      customRender(<DownloadButton data="Hello, World!" filename="hello.txt" mimeType="text/plain" />);
 
-    vi.restoreAllMocks();
-  });
+      fireEvent.click(screen.getByRole("button"));
+      expect(createObjectURL).toHaveBeenCalled();
+      expect(revokeObjectURL).not.toHaveBeenCalled();
 
-  it("handles JSON data from objects", () => {
-    const createObjectURLSpy = vi.fn(() => "blob:mock-url");
-    global.URL.createObjectURL = createObjectURLSpy;
+      vi.runAllTimers();
+      expect(revokeObjectURL).toHaveBeenCalledWith("blob:mock-url");
+    });
 
-    const testData = { message: "Hello", value: 42 };
+    it("saves plain text as text/plain by default", async () => {
+      expect(await download("Hello, World!")).toMatchObject({ type: "text/plain", text: "Hello, World!" });
+    });
 
-    customRender(<DownloadButton data={testData} filename="data.json" />);
+    it("saves a base64 data URL as bytes with its own type", async () => {
+      const result = await download("data:application/pdf;base64,AAH/");
+      expect(result.type).toBe("application/pdf");
+      expect(Array.from(result.bytes)).toEqual([0, 1, 255]);
+    });
 
-    fireEvent.click(screen.getByRole("button"));
+    it("saves a percent-encoded data URL", async () => {
+      expect(await download("data:text/csv,a%2Cb%20%E2%82%AC")).toMatchObject({ type: "text/csv", text: "a,b €" });
+    });
 
-    expect(createObjectURLSpy).toHaveBeenCalled();
+    it("keeps the commas of the payload", async () => {
+      expect(await download("data:text/plain,a,b")).toMatchObject({ type: "text/plain", text: "a,b" });
+    });
 
-    vi.restoreAllMocks();
+    it("lets mimeType override the type of the data URL", async () => {
+      expect(await download("data:text/plain,hi", "application/x-custom")).toMatchObject({
+        type: "application/x-custom",
+        text: "hi",
+      });
+    });
+
+    it("saves an object as indented JSON", async () => {
+      expect(await download({ message: "Hello", value: 42 })).toMatchObject({
+        type: "application/json",
+        text: JSON.stringify({ message: "Hello", value: 42 }, null, 2),
+      });
+    });
+
+    it("saves an array as indented JSON", async () => {
+      expect(await download([1, 2])).toMatchObject({ type: "application/json", text: JSON.stringify([1, 2], null, 2) });
+    });
+
+    it("shows an alert and offers nothing when the data URL is invalid", () => {
+      const onDownload = vi.fn();
+      customRender(<DownloadButton data="data:text/plain;base64,@@@" filename="f" onDownload={onDownload} />);
+
+      fireEvent.click(screen.getByRole("button"));
+
+      expect(screen.getByRole("alert")).toHaveTextContent(/invalid base64/i);
+      expect(createObjectURL).not.toHaveBeenCalled();
+      expect(onDownload).not.toHaveBeenCalled();
+    });
+
+    it("clears the alert once a download succeeds", () => {
+      const { rerender } = customRender(<DownloadButton data="data:text/plain" filename="f" />);
+      fireEvent.click(screen.getByRole("button"));
+      expect(screen.getByRole("alert")).toBeInTheDocument();
+
+      rerender(<DownloadButton data="data:text/plain,ok" filename="f" />);
+      fireEvent.click(screen.getByRole("button"));
+      expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+    });
   });
 
   it("calls onDownload callback when provided", () => {

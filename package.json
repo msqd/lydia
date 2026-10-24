@@ -580,9 +580,25 @@
       "types": "./dist/Models/Http/index.d.ts",
       "import": "./dist/Models/Http/index.js"
     },
+    "./Models/Http/body": {
+      "types": "./dist/Models/Http/body.d.ts",
+      "import": "./dist/Models/Http/body.js"
+    },
+    "./Models/Http/contentDisposition": {
+      "types": "./dist/Models/Http/contentDisposition.d.ts",
+      "import": "./dist/Models/Http/contentDisposition.js"
+    },
+    "./Models/Http/dataUrl": {
+      "types": "./dist/Models/Http/dataUrl.d.ts",
+      "import": "./dist/Models/Http/dataUrl.js"
+    },
     "./Models/Http/headers": {
       "types": "./dist/Models/Http/headers.d.ts",
       "import": "./dist/Models/Http/headers.js"
+    },
+    "./Models/Http/percent": {
+      "types": "./dist/Models/Http/percent.d.ts",
+      "import": "./dist/Models/Http/percent.js"
     },
     "./Models/Http/requestTarget": {
       "types": "./dist/Models/Http/requestTarget.d.ts",

@@ -402,6 +402,32 @@ export const BinaryResponse: Story = {
   },
 };
 
+// Binary Response With An Extended Filename Example
+export const BinaryResponseExtendedFilename: Story = {
+  args: {
+    transaction: createTransactionWithContent("tx-binary-extended", "binary", null, "data:text/plain,a,b", {
+      url: "/api/files/rates",
+      method: "GET",
+      response: {
+        headers: [
+          { name: "Content-Type", value: "text/plain" },
+          { name: "Content-Disposition", value: "attachment; filename*=UTF-8''%E2%82%AC%20rates.html" },
+        ],
+        body: "data:text/plain,a,b",
+        contentType: "binary",
+      },
+    }),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Binary response whose filename comes from `filename*` (shown as `€ rates.html`) and whose body is a non-base64 data URL: Download saves `a,b`.",
+      },
+    },
+  },
+};
+
 // Large JSON Response Example
 export const LargeJsonResponse: Story = {
   args: {
