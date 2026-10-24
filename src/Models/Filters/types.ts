@@ -38,6 +38,14 @@ export interface FilterMeta {
   description?: string;
 }
 
+/**
+ * A value of a facet. With `under`, it is a class whose values hang beneath it (a status class and its codes): its
+ * `name` is the class token and each `under` name a code token (ADR 0002).
+ */
+export interface FacetOption extends FilterMeta {
+  under?: FilterMeta[];
+}
+
 /** Range filter metadata with marks for sliders */
 export interface RangeFilterMeta {
   min: number;

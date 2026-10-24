@@ -1,4 +1,3 @@
-import { DataTable } from "@msqd/lydia/Components/DataTable";
 import type { HttpBody } from "@msqd/lydia/Models/Http/body";
 import type { DetailedTransaction, HttpMessage, Transaction } from "./types";
 
@@ -24,6 +23,3 @@ declare const message: HttpMessage;
 message.body satisfies HttpBody | undefined;
 // @ts-expect-error a body is not assumed to be a string
 message.body.toUpperCase();
-
-/** A closed row type still fits the table. */
-export const table = <DataTable<Transaction> rows={[]} types={{ url: { label: "URL" } }} columns={["url"]} />;

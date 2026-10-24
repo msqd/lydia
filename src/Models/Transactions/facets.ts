@@ -1,5 +1,4 @@
-import type { FacetOption } from "@msqd/lydia/Components/Facets/Variants";
-import type { FilterMeta } from "@msqd/lydia/Models/Filters";
+import type { FacetOption, FilterMeta } from "@msqd/lydia/Models/Filters";
 import { cacheStatusOrder, effectiveCacheStatus, statusClassOrder, statusGroupsOf, tagPairsOf } from "./encoding";
 import type { Transaction } from "./types";
 
