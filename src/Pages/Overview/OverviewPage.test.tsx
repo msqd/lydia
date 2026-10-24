@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import type { LinkComponentType } from "../../Components/NavBar";
 import OverviewPage from "./OverviewPage";
 import { sampleHistoryData } from "./Sections/HistorySection.samples";
 import { sampleSummary } from "./Sections/SummarySection.samples";
@@ -65,16 +66,32 @@ describe("OverviewPage", () => {
     expect(hasCharts).toBe(true);
   });
 
-  it("links the errors to the transactions filtered on the 5 class and failures", () => {
+  it("links the panes where the consumer says, through its link component", () => {
+    const RoutedLink: LinkComponentType = ({ href, ...rest }) => <a data-routed="" href={href} {...rest} />;
+
+    render(
+      <OverviewPage
+        summary={{
+          ...sampleSummary,
+          links: { performance: "/p", transactions: "/t", errors: "/e" },
+          linkComponent: RoutedLink,
+          windowLabel: "24h",
+        }}
+        history={sampleHistory}
+      />,
+    );
+
+    const links = screen.getAllByRole("link", { name: /details/ });
+    expect(links.map((link) => link.getAttribute("href"))).toEqual(["/p", "/t", "/e"]);
+    for (const link of links) {
+      expect(link).toHaveAttribute("data-routed");
+    }
+    expect(screen.getByRole("heading", { name: "Errors (24h)" })).toBeInTheDocument();
+  });
+
+  it("renders no link without links", () => {
     render(<OverviewPage summary={sampleSummary} history={sampleHistory} />);
 
-    const hrefs = screen.getAllByRole("link", { name: /details/ }).map((link) => link.getAttribute("href") ?? "");
-    const statuses = hrefs.flatMap((href) => new URL(href, "http://localhost").searchParams.getAll("status"));
-
-    expect(hrefs).toContain("/transactions?status=5&status=failure");
-    expect(statuses.length).toBeGreaterThan(0);
-    for (const status of statuses) {
-      expect(status).toMatch(/^(?:[1-5]|[1-5]\d\d|failure)$/);
-    }
+    expect(screen.queryAllByRole("link", { name: /details/ })).toHaveLength(0);
   });
 });
