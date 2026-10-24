@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
 import { Paginator } from "./Paginator";
@@ -27,6 +27,45 @@ describe("Paginator", () => {
     expect(screen.getByText(/results/)).toBeInTheDocument(); // Use regex to match "results" text
   });
 
+  it("reads 0 to 0 of 0 results for an empty list", () => {
+    render(<Paginator total={0} />);
+    expect(screen.getByText(/Showing/).textContent).toBe("Showing 0 to 0 of 0 results");
+  });
+
+  it("clamps the last figure to the total", () => {
+    render(<Paginator total={45} perPage={20} current={3} pages={3} />);
+    expect(screen.getByText(/Showing/).textContent).toBe("Showing 41 to 45 of 45 results");
+  });
+
+  it("renders a single page by default", () => {
+    render(<Paginator setPage={vi.fn()} />);
+    const nav = screen.getByRole("navigation");
+    expect(within(nav).getAllByRole("button", { name: /^\d+$/ })).toHaveLength(1);
+  });
+
+  it("renders its controls as buttons, not links", () => {
+    render(<Paginator pages={3} setPage={vi.fn()} />);
+    expect(screen.queryAllByRole("link")).toHaveLength(0);
+    for (const button of screen.getAllByRole("button")) {
+      expect(button).toHaveAttribute("type", "button");
+    }
+  });
+
+  it("disables previous on the first page and next on the last", () => {
+    const { rerender } = render(<Paginator pages={3} current={1} setPage={vi.fn()} />);
+    for (const button of screen.getAllByRole("button", { name: "Previous" })) expect(button).toBeDisabled();
+    for (const button of screen.getAllByRole("button", { name: "Next" })) expect(button).toBeEnabled();
+
+    rerender(<Paginator pages={3} current={3} setPage={vi.fn()} />);
+    for (const button of screen.getAllByRole("button", { name: "Previous" })) expect(button).toBeEnabled();
+    for (const button of screen.getAllByRole("button", { name: "Next" })) expect(button).toBeDisabled();
+  });
+
+  it("disables every control without setPage", () => {
+    render(<Paginator pages={5} current={3} />);
+    for (const button of screen.getAllByRole("button")) expect(button).toBeDisabled();
+  });
+
   it("hides summary when showSummary is false", () => {
     const { container } = render(<Paginator showSummary={false} />);
     expect(container.querySelector(".invisible")).toBeTruthy();
@@ -35,7 +74,7 @@ describe("Paginator", () => {
   describe("when Previous button is clicked", () => {
     it("calls setPage with correct value when previous button clicked", () => {
       const setPage = vi.fn();
-      const { getAllByText } = render(<Paginator current={2} setPage={setPage} />);
+      const { getAllByText } = render(<Paginator current={2} pages={5} setPage={setPage} />);
 
       fireEvent.click(getAllByText("Previous")[0]); // Click the mobile view button
       expect(setPage).toHaveBeenCalledWith(1);
@@ -45,7 +84,7 @@ describe("Paginator", () => {
   describe("when Next button is clicked", () => {
     it("calls setPage with correct value when next button clicked", () => {
       const setPage = vi.fn();
-      const { getAllByText } = render(<Paginator current={2} setPage={setPage} />);
+      const { getAllByText } = render(<Paginator current={2} pages={5} setPage={setPage} />);
 
       fireEvent.click(getAllByText("Next")[0]); // Click the mobile view button
       expect(setPage).toHaveBeenCalledWith(3);
