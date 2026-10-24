@@ -1,0 +1,27 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PerformanceMetrics > shows size and virtualization 1`] = `
+<div>
+  <div
+    class="text-xs text-gray-500 "
+  >
+    <div
+      class="flex gap-4 items-center"
+    >
+      <span>
+        120
+         lines
+      </span>
+      <span>
+        2 KB
+      </span>
+      <span
+        class="text-blue-600"
+      >
+        Virtualized 
+        (20 visible)
+      </span>
+    </div>
+  </div>
+</div>
+`;

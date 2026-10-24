@@ -2,124 +2,81 @@ import { memo, useMemo } from "react";
 import { SyntaxHighlighter, type SyntaxTree } from "./SyntaxHighlighter";
 import { useVirtualization } from "./useVirtualization";
 
-/**
- * Above this many lines the view virtualizes, and a virtualized view draws
- * plain text: the highlighted tree is not split by line.
- */
+/** Above this many lines the view only draws the lines in view. */
 export const VIRTUALIZATION_THRESHOLD = 50;
 
+/** Height of a code line in pixels (`text-xs` with `leading-5`). */
+export const LINE_HEIGHT = 20;
+
 interface VirtualizedCodeViewProps {
-  /** The formatted content to display */
-  content: string;
-  /** Optional syntax tree for highlighting */
-  highlightedAST?: SyntaxTree | null;
+  /** The formatted content, one entry per line */
+  lines: string[];
+  /** Highlights one line; lines are drawn as plain text without it */
+  highlightLine?: (line: string) => SyntaxTree | null;
   /** Height of the container in pixels */
   containerHeight: number;
   /** Whether to show line numbers */
   showLineNumbers?: boolean;
+  /** Whether to draw only the lines in view above `VIRTUALIZATION_THRESHOLD` lines */
+  virtualized?: boolean;
   /** Additional CSS classes */
   className?: string;
 }
 
 /**
- * Component for efficiently rendering large code files using virtualization
- * Only renders visible lines plus a small buffer for optimal performance
+ * Renders code line by line, highlighting and drawing only the lines in view
+ * when there are many. Short bodies are drawn whole through the same path.
  */
 export const VirtualizedCodeView = memo<VirtualizedCodeViewProps>(
-  ({ content, highlightedAST, containerHeight, showLineNumbers = false, className = "" }) => {
-    // Split content into lines for virtualization
-    const lines = useMemo(() => content.split("\n"), [content]);
-
-    // Configuration for virtualization
+  ({ lines, highlightLine, containerHeight, showLineNumbers = false, virtualized = true, className = "" }) => {
     const virtualizationConfig = useMemo(
       () => ({
-        itemHeight: 20, // 20px per line (text-xs with leading-5)
+        itemHeight: LINE_HEIGHT,
         containerHeight,
-        overscan: 10, // Render 10 extra lines above/below for smooth scrolling
-        virtualizationThreshold: VIRTUALIZATION_THRESHOLD,
+        overscan: 10,
+        virtualizationThreshold: virtualized ? VIRTUALIZATION_THRESHOLD : Number.POSITIVE_INFINITY,
       }),
-      [containerHeight],
+      [containerHeight, virtualized],
     );
 
-    const { isVirtualized, startIndex, endIndex, totalHeight, offsetY, onScroll, containerRef } = useVirtualization(
+    const { isVirtualized, startIndex, endIndex, totalHeight, offsetY, onScroll } = useVirtualization(
       lines.length,
       virtualizationConfig,
     );
 
-    // Get visible lines
-    const visibleLines = useMemo(() => {
-      if (!isVirtualized) return lines;
-      return lines.slice(startIndex, endIndex + 1);
-    }, [lines, startIndex, endIndex, isVirtualized]);
+    const visibleLines = useMemo(
+      () =>
+        lines.slice(startIndex, endIndex + 1).map((line, index) => {
+          const lineIndex = startIndex + index;
+          const tree = highlightLine?.(line);
+          return (
+            <div key={lineIndex} className="font-mono text-xs leading-5 whitespace-pre" style={{ height: LINE_HEIGHT }}>
+              {showLineNumbers && (
+                <span className="text-gray-500 select-none mr-3">{String(lineIndex + 1).padStart(4, " ")}</span>
+              )}
+              {tree ? <SyntaxHighlighter ast={tree} /> : line}
+            </div>
+          );
+        }),
+      [lines, startIndex, endIndex, highlightLine, showLineNumbers],
+    );
 
     // The box scrolls and holds nothing focusable, so without a tab stop a
     // keyboard cannot scroll it (WCAG 2.1.1). Named, so the stop says what it is;
     // a group rather than a region, since a page holds several and a landmark
     // per code block would crowd the landmark list.
-    const scrollable = { tabIndex: 0, role: "group", "aria-label": "Code" } as const;
-
-    // If we have syntax highlighting, we need to handle it differently
-    // This is simplified - in practice, you'd need to split the AST by lines
-    if (highlightedAST && !isVirtualized) {
-      return (
-        <div
-          ref={containerRef}
-          className={`overflow-auto ${className}`}
-          style={{ height: containerHeight }}
-          onScroll={onScroll}
-          {...scrollable}
-        >
-          <SyntaxHighlighter ast={highlightedAST} showLineNumbers={showLineNumbers} />
-        </div>
-      );
-    }
-
-    // Render plain text with optional virtualization
     return (
       <div
-        ref={containerRef}
         className={`overflow-auto ${className}`}
         style={{ height: containerHeight }}
         onScroll={onScroll}
-        {...scrollable}
+        tabIndex={0}
+        role="group"
+        aria-label="Code"
       >
-        {/* Virtual spacer for total height */}
-        {isVirtualized && (
-          <div style={{ height: totalHeight, position: "relative" }}>
-            {/* Visible content positioned correctly */}
-            <div style={{ transform: `translateY(${offsetY}px)` }}>
-              {visibleLines.map((line, index) => {
-                const lineNumber = startIndex + index + 1;
-                return (
-                  <div
-                    key={startIndex + index}
-                    className="font-mono text-xs leading-5 whitespace-pre"
-                    style={{ height: 20 }}
-                  >
-                    {showLineNumbers && (
-                      <span className="text-gray-500 select-none mr-3">{String(lineNumber).padStart(4, " ")}</span>
-                    )}
-                    {line}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        {/* Non-virtualized rendering */}
-        {!isVirtualized && (
-          <div>
-            {lines.map((line, index) => (
-              <div key={index} className="font-mono text-xs leading-5 whitespace-pre">
-                {showLineNumbers && (
-                  <span className="text-gray-500 select-none mr-3">{String(index + 1).padStart(4, " ")}</span>
-                )}
-                {line}
-              </div>
-            ))}
-          </div>
-        )}
+        <div style={isVirtualized ? { height: totalHeight, position: "relative" } : undefined}>
+          <div style={isVirtualized ? { transform: `translateY(${offsetY}px)` } : undefined}>{visibleLines}</div>
+        </div>
       </div>
     );
   },

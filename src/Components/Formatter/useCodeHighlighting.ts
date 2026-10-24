@@ -44,7 +44,11 @@ function formatContent(content: string, language: CodeLanguage): string {
 }
 
 /**
- * Performs syntax highlighting using refractor
+ * Highlights one line with refractor.
+ *
+ * Lines are highlighted on their own, so a token spanning lines (a block comment,
+ * a template string) is only coloured on the line that opens it. Formatted JSON and
+ * markup, the bodies this displays, put each token on one line.
  */
 function highlightCode(content: string, language: CodeLanguage): SyntaxTree | null {
   if (language === "text") {
@@ -52,44 +56,33 @@ function highlightCode(content: string, language: CodeLanguage): SyntaxTree | nu
   }
 
   try {
-    const normalizedLang = normalizeLanguage(language);
-    return refractor.highlight(content, normalizedLang);
+    return refractor.highlight(content, normalizeLanguage(language));
   } catch (error) {
     console.warn(`Failed to highlight code for language "${language}":`, error);
     return null;
   }
 }
 
-export interface HighlightingOptions {
-  /** Whether the result will be drawn at all */
-  enabled?: boolean;
-  /** Skip highlighting above this many lines, where the result would not be drawn */
-  maxLines?: number;
-}
-
 /**
- * Custom hook for code highlighting and formatting
+ * Formats a body, splits it into lines once, and highlights lines on demand.
  *
- * Highlighting costs seconds on a body of a few megabytes, so it is skipped
- * whenever the caller will not draw the result.
+ * The view highlights only the lines it draws, so the cost follows the window
+ * and not the size of the body. Results are cached per line text.
  */
 export function useCodeHighlighting(
   content: string,
   language: CodeLanguage,
-  { enabled = true, maxLines = Number.POSITIVE_INFINITY }: HighlightingOptions = {},
-): { formattedContent: string; highlightedAST: SyntaxTree | null; isHighlighted: boolean } {
-  const formattedContent = useMemo(() => {
-    return formatContent(content, language);
-  }, [content, language]);
+): { formattedContent: string; lines: string[]; highlightLine: (line: string) => SyntaxTree | null } {
+  const formattedContent = useMemo(() => formatContent(content, language), [content, language]);
+  const lines = useMemo(() => formattedContent.split("\n"), [formattedContent]);
 
-  const highlightedAST = useMemo(() => {
-    if (!enabled || formattedContent.split("\n").length > maxLines) return null;
-    return highlightCode(formattedContent, language);
-  }, [formattedContent, language, enabled, maxLines]);
+  const highlightLine = useMemo(() => {
+    const cache = new Map<string, SyntaxTree | null>();
+    return (line: string) => {
+      if (!cache.has(line)) cache.set(line, highlightCode(line, language));
+      return cache.get(line) ?? null;
+    };
+  }, [language]);
 
-  return {
-    formattedContent,
-    highlightedAST,
-    isHighlighted: highlightedAST !== null,
-  };
+  return { formattedContent, lines, highlightLine };
 }
