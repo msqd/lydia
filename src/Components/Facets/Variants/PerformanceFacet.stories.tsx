@@ -36,6 +36,15 @@ export const WithSelectedRange: Story = {
   },
 };
 
+export const WithThresholdBetweenMarks: Story = {
+  args: {
+    ...defaultArgs,
+    filters: {
+      tpdex: { min: 50 },
+    },
+  },
+};
+
 export const InteractiveExample: Story = {
   render: (args) => {
     const { filters, handleFilterChange } = useFacetState();

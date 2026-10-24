@@ -5,45 +5,55 @@ import { tpdexScale } from "@msqd/lydia/Models/Tpdex";
 import { type ComponentProps } from "react";
 import { FacetResetLink } from "../FacetResetLink";
 
-// TPDEX marks and threshold mappings — derived once from the module-level tpdexScale.
+const MARK_STEP = 10;
+
 const marks = tpdexScale.map((rating, index) => ({
-  value: index * 10,
+  value: index * MARK_STEP,
   label: rating.label,
   className: rating.className,
 }));
 
-const markValueToThresholdForMin = new Map(tpdexScale.map((rating, index) => [index * 10, rating.threshold]));
-const markValueToThresholdForMax = new Map(
-  tpdexScale.map((rating, index) => [(index + 1) * 10, rating.threshold ? rating.threshold - 1 : undefined]),
-);
-
-const maxKey = Math.max(...Array.from(markValueToThresholdForMin.keys()));
-const minKey = Math.min(...Array.from(markValueToThresholdForMin.keys()));
-
-// Remove the last mark for min and the first mark for max.
-markValueToThresholdForMin.set(maxKey, undefined);
-markValueToThresholdForMax.set(minKey, undefined);
-
-const thresholdToMarkValueForMin = new Map<number, number>();
-markValueToThresholdForMin.forEach((value, key) => {
-  if (value !== undefined) {
-    thresholdToMarkValueForMin.set(value, key);
-  }
-});
-
-const thresholdToMarkValueForMax = new Map<number, number>();
-markValueToThresholdForMax.forEach((value, key) => {
-  if (value !== undefined) {
-    thresholdToMarkValueForMax.set(value, key);
-  }
-});
-
 const range: RangeFilterMeta = {
-  min: minKey,
-  max: maxKey,
-  step: 10,
+  min: 0,
+  max: (tpdexScale.length - 1) * MARK_STEP,
+  step: MARK_STEP,
   marks: marks,
 };
+
+type SliderValue = { min: number; max: number };
+type TpdexBounds = { min?: number; max?: number };
+
+/**
+ * Slider positions to tpdex bounds.
+ *
+ * Marks follow `tpdexScale`, best rating first, so the left thumb bounds the score from above and the
+ * right thumb from below. A thumb at its end of the track sets no bound.
+ */
+export function sliderToFilter(slider: SliderValue): TpdexBounds {
+  const upper = slider.min === range.min ? undefined : tpdexScale[slider.min / MARK_STEP]?.threshold;
+  const lower = tpdexScale[slider.max / MARK_STEP]?.threshold;
+  return {
+    ...(lower !== undefined && { min: lower }),
+    ...(upper !== undefined && { max: upper - 1 }),
+  };
+}
+
+/**
+ * Tpdex bounds to slider positions. A bound between two marks sits on the next mark at or below it,
+ * and a bound that no mark can show leaves its thumb at the end of the track.
+ */
+export function filterToSlider({ min, max }: TpdexBounds): SliderValue {
+  const lowerIndex =
+    min === undefined ? -1 : tpdexScale.findIndex((r) => r.threshold !== undefined && r.threshold <= min);
+  const upperIndex =
+    max === undefined
+      ? -1
+      : tpdexScale.findIndex((r, i) => i > 0 && r.threshold !== undefined && r.threshold - 1 <= max);
+  return {
+    min: upperIndex < 0 || (max ?? 0) >= 100 ? range.min : upperIndex * MARK_STEP,
+    max: lowerIndex < 0 ? range.max : lowerIndex * MARK_STEP,
+  };
+}
 
 export interface PerformanceFacetProps extends ComponentProps<"div"> {
   /** Filter name/key in the filters object */
@@ -95,48 +105,12 @@ export function PerformanceFacet({
   const currentValue = readRange(filters, name);
 
   const handleChange = (value: { min?: number; max?: number }) => {
-    if (value && typeof value === "object" && "min" in value && "max" in value) {
-      // The marks follow `tpdexScale`, best rating first, so the left thumb (`min`) bounds the highest
-      // threshold and the right thumb (`max`) the lowest.
-      const maxValue = markValueToThresholdForMax.get(value.min ?? -1);
-      const minValue = markValueToThresholdForMin.get(value.max ?? -1);
-
-      const newValue: { min?: number; max?: number } = {};
-
-      if (minValue !== null && minValue !== undefined) {
-        newValue.min = minValue;
-      }
-
-      if (maxValue !== null && maxValue !== undefined) {
-        newValue.max = maxValue;
-      }
-
-      onFiltersChange(name, Object.keys(newValue).length > 0 ? newValue : undefined);
-    }
+    const bounds = sliderToFilter({ min: value.min ?? range.min, max: value.max ?? range.max });
+    onFiltersChange(name, Object.keys(bounds).length > 0 ? bounds : undefined);
   };
 
-  // Convert current TPDEX thresholds to slider values for display
-  const getSliderValues = () => {
-    const defaultMin = range.min;
-    const defaultMax = range.max;
-
-    if (!currentValue.min && !currentValue.max) {
-      return { min: defaultMin, max: defaultMax };
-    }
-
-    const sliderMin =
-      currentValue.max !== undefined ? (thresholdToMarkValueForMax.get(currentValue.max) ?? defaultMin) : defaultMin;
-
-    const sliderMax =
-      currentValue.min !== undefined ? (thresholdToMarkValueForMin.get(currentValue.min) ?? defaultMax) : defaultMax;
-
-    return { min: sliderMin, max: sliderMax };
-  };
-
-  const sliderValues = getSliderValues();
-
-  // Check if there are active filters (different from default range)
-  const hasActiveFilters = sliderValues.min !== range.min || sliderValues.max !== range.max;
+  const sliderValues = filterToSlider(currentValue);
+  const hasActiveFilters = currentValue.min !== undefined || currentValue.max !== undefined;
 
   const handleReset = () => {
     onFiltersChange(name, undefined);
