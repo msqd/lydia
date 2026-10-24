@@ -346,6 +346,7 @@ Report a vulnerability through [SECURITY.md](../SECURITY.md).
 | Type or runtime break after `pnpm up` | A release with breaking changes. | Read the `### Breaking` sections of [CHANGELOG.md](../CHANGELOG.md) between your version and the new one before upgrading. |
 | Image or PDF body preview stays blank, or Lato does not load, with a CSP violation in the console | The Content-Security-Policy blocks `data:` in `img-src`, `frame-src` or (`@msqd/lydia/styles` only) `font-src`. | Add `img-src data:`, `frame-src data:` and, for `styles`, `font-src data:`, see [Security](#security). |
 | A test that renders a chart passes, but vitest exits 1 with `TypeError: Cannot set properties of null (setting 'dpr')` | jsdom has no canvas: zrender paints on the next frame, after the test, on a null context. | Add the `vitest.setup.ts` of [Vitest](#vitest) to `test.setupFiles`. |
+| Server-side rendering (`renderToString`) of a page with charts: no error, but the server output carries none of the theme's colours | Charts render on the server. Theme colours are CSS variables, read from the computed style of the document, which only the browser has. | Nothing to fix: the colours resolve on the client, so the chart takes the theme's colours there. Do not rely on them in server output. |
 | Changes in the linked clone do not show | `dist` is stale. | `pnpm build` in the clone, then restart the dev server. |
 
 ## Upgrading

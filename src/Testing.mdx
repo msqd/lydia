@@ -13,24 +13,27 @@ The project uses several types of tests:
 1. **Unit tests**: Vitest with React Testing Library, in jsdom
 2. **Component tests**: the stories themselves, run in a real Chromium through the Storybook Vitest addon
 
-There is no visual regression testing today. `jest-image-snapshot` is in `package.json` and nothing
-imports it.
+There is no visual regression or screenshot comparison. Rendering is covered by DOM snapshots in the unit tests.
 
 ## Test Commands
 
 The following test commands are available:
 
-- `test` - Run unit tests
-- `test (update snapshots)` - Run unit tests and update snapshots
-- `test storybook` - Run Storybook tests
-- `test storybook (update snapshots)` - Run Storybook tests and update snapshots
+- `pnpm test` - Build the library, then run unit tests; `pnpm test <name>` runs the matching files only
+- `pnpm test:update` - Run unit tests and update snapshots
+- `pnpm test:storybook` - Run the stories as tests in Chromium; `pnpm test:storybook <name>` runs the matching ones
+- `pnpm test:storybook:update` - Run the story tests and update snapshots
+- `pnpm test:all` - Run unit and story tests; `make test-all` is the same
+
+Story tests need Playwright's Chromium: `pnpm exec playwright install chromium` and, for the system libraries,
+`pnpm exec playwright install-deps chromium`.
 
 ## Writing Tests
 
 ### Unit Tests
 
 Unit tests are written using Vitest and React Testing Library. A test sits beside the file it
-tests, with a `.test.tsx` suffix. There are no `__tests__` directories.
+tests, with a `.test.ts` or `.test.tsx` suffix. There are no `__tests__` directories.
 
 ```tsx
 // Button.test.tsx
@@ -129,12 +132,11 @@ rather than running with `-u` and trusting it.
 
 ## Setup in CI
 
-For continuous integration, ensure both test types are run:
+CI builds the library, then runs both test types with the command below (`.github/workflows/run-tests.yml`):
 
 ```yaml
-# Example CI workflow
-- name: Run all tests
-  run: pnpm run test && pnpm run test:storybook
+- name: Run tests
+  run: make test-all
 ```
 
 ## Test Configuration
@@ -142,4 +144,4 @@ For continuous integration, ensure both test types are run:
 - **Vitest configuration**: `vitest.config.ts`, which defines both the `unit` and `storybook` projects
 - **Storybook setup for tests**: `.storybook/vitest.setup.ts`
 
-The test setup integrates Vitest with Storybook Test Runner to provide a unified testing experience.
+One Vitest configuration runs both projects, so unit tests and story tests share a single runner, through `@storybook/addon-vitest`.

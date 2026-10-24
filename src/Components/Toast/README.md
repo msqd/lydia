@@ -125,7 +125,7 @@ addToast({
   
   // Optional fields
   message: "Your changes have been saved.", // Additional details
-  duration: 3000, // Override default duration (set to null for no auto-dismiss)
+  duration: 3000, // Override default duration in milliseconds (set to 0 for no auto-dismiss)
   onClose: () => console.log("Toast closed"), // Callback when toast is closed
 });
 ```
@@ -141,7 +141,7 @@ const { addToast, removeToast, clearAllToasts } = useToast();
 const toastId = addToast({
   type: "info",
   title: "Processing...",
-  duration: null, // Don't auto-dismiss
+  duration: 0, // Don't auto-dismiss
 });
 
 // Later, remove the specific toast

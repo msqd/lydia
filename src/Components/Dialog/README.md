@@ -5,7 +5,7 @@ A fully accessible, customizable dialog (modal) component for React applications
 ## Features
 
 - 🚀 Simple API with multiple customization options
-- 🎨 Six different size variants (xs, sm, md, lg, xl, full)
+- 🎨 Three size variants (sm, md, lg)
 - ♿ Fully accessible with proper ARIA attributes
 - ⌨️ Keyboard navigation support (Escape to close, Tab/Shift+Tab for focus)
 - 📱 Responsive design for all screen sizes
@@ -52,7 +52,7 @@ function Example() {
 
 ### Different Sizes
 
-The Dialog component supports six different sizes: `xs`, `sm`, `md` (default), `lg`, `xl`, and `full`.
+The Dialog component supports three sizes: `sm`, `md` (default) and `lg`.
 
 ```tsx
 <Dialog
@@ -102,13 +102,14 @@ function CustomExample() {
 | `title` | string | - | Optional dialog title |
 | `description` | string | - | Optional dialog description |
 | `children` | ReactNode | - | Dialog content |
-| `size` | "xs" \| "sm" \| "md" \| "lg" \| "xl" \| "full" | "md" | Controls the width of the dialog |
+| `size` | "sm" \| "md" \| "lg" | "md" | Controls the width of the dialog |
 | `className` | string | - | Additional classes for the outermost dialog container |
 | `contentClassName` | string | - | Additional classes for the dialog panel |
 | `titleClassName` | string | - | Additional classes for the title |
 | `descriptionClassName` | string | - | Additional classes for the description |
 | `showCloseButton` | boolean | true | Whether to show the X close button |
-| `initialFocus` | RefObject<HTMLElement> | - | Element to focus when dialog opens |
+| `initialFocus` | RefObject&lt;HTMLElement&gt; \| boolean | true | Ref of the element to focus when the dialog opens; a boolean keeps Headless UI's default focus |
+| `backdrop` | boolean | true | Shows the backdrop, which closes the dialog on click and blocks background scroll. When `false`, there is no backdrop, the background stays interactive, and only the close button or your own code closes the dialog |
 
 ### DialogTitle Props
 

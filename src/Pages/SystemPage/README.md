@@ -1,15 +1,15 @@
 # SystemPage
 
-A network architecture visualization page that displays a comprehensive map of the system topology.
+A network architecture visualization page that displays a map of the system topology.
 
 ## Overview
 
-The SystemPage presents a network diagram showing traffic flow from ingresses through proxies to endpoints, with real-time status information for circuit breakers and service health.
+The SystemPage presents a network diagram showing traffic flow from ingresses through proxies to endpoints, with the circuit breaker status and health status each connection and endpoint carries. It renders the `topology` it is given; fetching and refreshing it is up to the consuming application.
 
 ## Architecture
 
 ### SystemPage
-The main page component located in `src/Pages/System/SystemPage.tsx` that orchestrates the network visualization.
+The page component in `src/Pages/SystemPage/SystemPage.tsx`. It takes a required `topology` prop and renders it in a `NetworkMap`.
 
 ### Elements/System Components
 Network visualization components are organized in the `src/Elements/System/` namespace:
@@ -48,64 +48,69 @@ A directed acyclic graph (DAG) visualization that displays the system architectu
 
 ## Features
 
-- **Real-time Monitoring**: Circuit breaker status and failure rates
-- **Service Health**: Visual health indicators for all endpoints  
-- **Network Topology**: Clear visualization of traffic flow
-- **Responsive Design**: Adapts to different screen sizes
-- **Interactive Elements**: Hover states and status indicators
+- **Circuit breaker status**: status and failure rate on each proxy-endpoint connection
+- **Service health**: visual health indicators for all endpoints
+- **Network topology**: clear visualization of traffic flow
+- **Responsive design**: adapts to different screen sizes
 
 ## Usage
 
+Every example needs a `NetworkTopology`: the entrypoints, proxies and endpoints, and the connections between them.
+
 ```tsx
-import { SystemPage } from "@/Pages/System";
-import { NetworkMap, EntrypointNode, CircuitBreakerStatus } from "@/Elements/System";
+import { SystemPage } from "@msqd/lydia/Pages/SystemPage";
+import { NetworkMap, type NetworkTopology } from "@msqd/lydia/Elements/System";
+
+const topology: NetworkTopology = {
+  entrypoints: [{ id: "ep-payments", name: "payments", port: 8080, path: "/api/payments" }],
+  proxies: [{ id: "proxy-api", name: "API Gateway", implementation: "harp" }],
+  endpoints: [{ id: "svc-payments", name: "Payment Service", url: "payments-svc:8080", health: "healthy" }],
+  connections: [
+    { from: "ep-payments", to: "proxy-api", type: "entrypoint-proxy" },
+    {
+      from: "proxy-api",
+      to: "svc-payments",
+      type: "proxy-endpoint",
+      circuitBreaker: { status: "closed", failureRate: 1.2 },
+    },
+  ],
+};
 
 function App() {
-  return <SystemPage />;
+  return <SystemPage topology={topology} />;
 }
 
-// Using individual components
+// Using the map on its own
 function CustomSystemView() {
-  return <NetworkMap />;
+  return <NetworkMap topology={topology} />;
 }
+```
 
-// Using individual nodes
+Individual nodes take one item of the topology:
+
+```tsx
+import { EntrypointNode } from "@msqd/lydia/Elements/System";
+
 function CustomEntrypoint() {
-  return (
-    <EntrypointNode 
-      entrypoint={{
-        id: "ep-1",
-        name: "payments",
-        port: 8080,
-        path: "/api/payments"
-      }} 
-    />
-  );
+  return <EntrypointNode entrypoint={{ id: "ep-1", name: "payments", port: 8080, path: "/api/payments" }} />;
 }
 ```
 
 ## Testing
 
-The SystemPage includes comprehensive tests covering:
-- Component rendering
-- Network map display
-- Circuit breaker status display
-- Health status indicators
-- Props handling
-
-Run tests with:
+Run the tests with:
 ```bash
-pnpm test src/Pages/System/ src/Elements/System/
+pnpm test src/Pages/SystemPage/ src/Elements/System/
 ```
 
 ## Storybook
 
-Interactive documentation available in Storybook:
-- Pages/System/SystemPage variations
-- Elements/System/NetworkMap component  
-- Elements/System/CircuitBreakerStatus states
+Interactive documentation is built from the stories:
+- Pages/SystemPage
+- Elements/System/NetworkMap
+- Elements/System/CircuitBreakerStatus
 
-Access via:
+Build it with:
 ```bash
 pnpm storybook
 ```
