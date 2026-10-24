@@ -1,5 +1,6 @@
 import { type ComponentProps, useMemo } from "react";
 import { twMerge } from "tailwind-merge";
+import { BodyNotice } from "./BodyNotice";
 import { type PerformanceData, PerformanceMetrics } from "./PerformanceMetrics";
 import { LINE_HEIGHT, VIRTUALIZATION_THRESHOLD, VirtualizedCodeView } from "./VirtualizedCodeView";
 import { type CodeLanguage, useCodeHighlighting } from "./useCodeHighlighting";
@@ -73,7 +74,7 @@ export function CodeFormatter({
   const showPerformance = performance !== "none";
   const showDetailedPerformance = performance === "detailed";
 
-  const { formattedContent, lines, highlightLine } = useCodeHighlighting(code, language);
+  const { formattedContent, lines, highlightLine, tooLargeToHighlight } = useCodeHighlighting(code, language);
 
   const performanceData = useMemo(
     (): PerformanceData => ({
@@ -94,6 +95,8 @@ export function CodeFormatter({
           <PerformanceMetrics data={performanceData} showDetails={showDetailedPerformance} />
         </div>
       )}
+
+      {tooLargeToHighlight && <BodyNotice>Too large to highlight: shown as plain text.</BodyNotice>}
 
       <div className="relative">
         <VirtualizedCodeView

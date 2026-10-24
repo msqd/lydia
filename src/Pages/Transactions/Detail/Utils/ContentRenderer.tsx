@@ -1,11 +1,13 @@
 import { DocumentIcon, PhotoIcon } from "@heroicons/react/24/outline";
 import { CodeFormatter, type CodeLanguage } from "@msqd/lydia/Components/Formatter";
+import { FORMAT_CAP } from "@msqd/lydia/Components/Formatter/bodyLimits";
 import { type HttpBody, stringifyBody } from "@msqd/lydia/Models/Http/body";
 import { contentDispositionFilename } from "@msqd/lydia/Models/Http/contentDisposition";
 import { type HttpHeader, findHeader } from "@msqd/lydia/Models/Http/headers";
 import type { ContentType } from "@msqd/lydia/Models/Transactions/types";
 import { useMemo } from "react";
 import { DownloadButton } from "../Components/DownloadButton";
+import { BodyPreview } from "./BodyPreview";
 
 export interface ContentRendererProps {
   /**
@@ -31,6 +33,13 @@ const PDF_DATA_URL = /^data:application\/pdf(;[^,]*)?,/i;
 const isPdfMediaType = (contentTypeHeader: string | undefined) =>
   contentTypeHeader?.split(";")[0]?.trim().toLowerCase() === "application/pdf";
 
+/** Whether the body is code too large to format, which is shown as a preview. */
+export function isPreviewedBody(content: HttpBody | undefined, contentType: ContentType | undefined): boolean {
+  return (
+    typeof content === "string" && contentType !== "image" && contentType !== "binary" && content.length > FORMAT_CAP
+  );
+}
+
 // Map content types to supported CodeLanguage types
 function getLanguage(type: ContentType | undefined, content: HttpBody): CodeLanguage {
   switch (type) {
@@ -52,10 +61,11 @@ function getLanguage(type: ContentType | undefined, content: HttpBody): CodeLang
  */
 export function ContentRenderer({ content, contentType, headers, maxHeight = 384 }: ContentRendererProps) {
   const contentDisposition = findHeader(headers, "Content-Disposition");
-  const filename = useMemo(
-    () => (contentDisposition === undefined ? undefined : contentDispositionFilename(contentDisposition)) ?? "file.bin",
+  const dispositionFilename = useMemo(
+    () => (contentDisposition === undefined ? undefined : contentDispositionFilename(contentDisposition)),
     [contentDisposition],
   );
+  const filename = dispositionFilename ?? "file.bin";
 
   const stringContent = useMemo(() => (content === undefined ? "" : stringifyBody(content)), [content]);
 
@@ -145,6 +155,16 @@ export function ContentRenderer({ content, contentType, headers, maxHeight = 384
     }
 
     default:
+      if (isPreviewedBody(stringContent, contentType)) {
+        return (
+          <BodyPreview
+            body={stringContent}
+            filename={dispositionFilename ?? "body.txt"}
+            mimeType={contentTypeHeader}
+            maxHeight={maxHeight}
+          />
+        );
+      }
       return <CodeFormatter language={getLanguage(contentType, content)} code={stringContent} maxHeight={maxHeight} />;
   }
 }

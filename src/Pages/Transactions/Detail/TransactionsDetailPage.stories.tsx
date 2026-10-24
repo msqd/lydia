@@ -1,6 +1,7 @@
 import { ToastProvider } from "@msqd/lydia/Components/Toast";
 import type { ContentType, DetailedTransaction } from "@msqd/lydia/Models/Transactions/types";
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, userEvent, within } from "storybook/test";
 import { TransactionsDetailPage } from "./TransactionsDetailPage";
 import { sampleDetailedTransaction } from "./TransactionsDetailPage.samples";
 
@@ -543,5 +544,44 @@ export const FormDataResponse: Story = {
         story: "Transaction with form data request and JSON response. Shows handling of URL-encoded form data.",
       },
     },
+  },
+};
+
+const minifiedHtml = (size: number) =>
+  `<!doctype html><html><body>${'<div class="row"><a href="/p/1">link</a></div>'.repeat(Math.ceil(size / 42))}</body></html>`;
+
+const withHtmlBody = (id: string, body: string) =>
+  createTransactionWithContent(id, "html", undefined, body, { url: "/catalog" });
+
+const bodyStateParameters = (story: string) => ({
+  controls: { exclude: ["transaction"] },
+  docs: { description: { story } },
+});
+
+export const BodyHighlighted: Story = {
+  args: { transaction: withHtmlBody("tx-body-highlighted", minifiedHtml(2_000)) },
+  parameters: bodyStateParameters("Up to 100 KB: highlighted, painted right after the drawer opens."),
+};
+
+export const BodyPlain: Story = {
+  args: { transaction: withHtmlBody("tx-body-plain", minifiedHtml(500_000)) },
+  parameters: bodyStateParameters("Between 100 KB and 2 MB: plain text with a notice."),
+};
+
+export const BodyPreview: Story = {
+  args: { transaction: withHtmlBody("tx-body-preview", minifiedHtml(2_500_000)) },
+  parameters: bodyStateParameters(
+    "Over 2 MB: the Response section starts collapsed; open it for the first 64 KB, Show all and a download.",
+  ),
+};
+
+export const BodyExpanded: Story = {
+  args: BodyPreview.args,
+  parameters: bodyStateParameters("Over 2 MB after Show all: the whole body as plain text, with a way back."),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(await canvas.findByRole("button", { name: /Response/ }));
+    await userEvent.click(await canvas.findByRole("button", { name: "Show all" }));
+    await expect(await canvas.findByRole("button", { name: "Show preview only" })).toBeVisible();
   },
 };

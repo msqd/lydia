@@ -11,6 +11,7 @@
   "exclude": [
     "**/*.stories.tsx",
     "**/*.test.tsx",
+    "**/*.bench.ts",
     "**/*.test.ts",
     "**/*.test-d.ts",
     "**/*.test-d.tsx",
