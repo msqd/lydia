@@ -198,3 +198,33 @@ describe("DateRangeSelector", () => {
     });
   });
 });
+
+describe("DateRangeSelector error", () => {
+  const reversed = { startDate: "2025-05-10", endDate: "2025-05-01" };
+
+  it.each([
+    ["with", "Period"],
+    ["without", undefined],
+  ])("shows and announces its error %s a label", (_, label) => {
+    render(<DateRangeSelector label={label} value={reversed} />);
+    const error = screen.getByText("Start date cannot be after end date");
+
+    for (const input of screen.getAllByLabelText(/date/i)) {
+      expect(input).toHaveAttribute("aria-invalid", "true");
+      expect(input).toHaveAttribute("aria-describedby", error.id);
+    }
+  });
+
+  it("names the pair of inputs by its label", () => {
+    render(<DateRangeSelector label="Period" />);
+    expect(screen.getByRole("group", { name: "Period" })).toBeInTheDocument();
+  });
+
+  it("marks nothing invalid without an error", () => {
+    render(<DateRangeSelector label="Period" />);
+    for (const input of screen.getAllByLabelText(/date/i)) {
+      expect(input).not.toHaveAttribute("aria-invalid");
+      expect(input).not.toHaveAttribute("aria-describedby");
+    }
+  });
+});

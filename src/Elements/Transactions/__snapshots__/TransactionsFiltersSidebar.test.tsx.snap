@@ -35,12 +35,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_cd_"
+              aria-controls="headlessui-disclosure-panel-_r_dt_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_cc_"
+              id="headlessui-disclosure-button-_r_ds_"
               type="button"
             >
               <span
@@ -71,10 +71,11 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_cd_"
+          id="headlessui-disclosure-panel-_r_dt_"
         >
           <div
             class="w-full"
+            role="group"
           >
             <div
               class="grid grid-cols-2 gap-2"
@@ -83,36 +84,33 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 class="w-full"
               >
                 <div
-                  class="mt-2"
+                  class="mt-2 rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 items-center h-[38px] grid grid-cols-1 pl-0 relative"
                 >
+                  <input
+                    aria-label="Start date"
+                    class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
+                    id="_r_e0_"
+                    placeholder="Start date"
+                    type="date"
+                    value=""
+                  />
                   <div
-                    class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+                    class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
                   >
-                    <input
-                      aria-label="Start date"
-                      class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
-                      placeholder="Start date"
-                      type="date"
-                      value=""
-                    />
-                    <div
-                      class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+                    <svg
+                      class="size-5 sm:size-4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <svg
-                        class="size-5 sm:size-4"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                    </div>
+                      <path
+                        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -120,36 +118,33 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 class="w-full"
               >
                 <div
-                  class="mt-2"
+                  class="mt-2 rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 items-center h-[38px] grid grid-cols-1 pl-0 relative"
                 >
+                  <input
+                    aria-label="End date"
+                    class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
+                    id="_r_e1_"
+                    placeholder="End date"
+                    type="date"
+                    value=""
+                  />
                   <div
-                    class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+                    class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
                   >
-                    <input
-                      aria-label="End date"
-                      class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
-                      placeholder="End date"
-                      type="date"
-                      value=""
-                    />
-                    <div
-                      class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+                    <svg
+                      class="size-5 sm:size-4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <svg
-                        class="size-5 sm:size-4"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                    </div>
+                      <path
+                        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -169,12 +164,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_cg_"
+              aria-controls="headlessui-disclosure-panel-_r_e4_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_cf_"
+              id="headlessui-disclosure-button-_r_e3_"
               type="button"
             >
               <span
@@ -205,16 +200,16 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_cg_"
+          id="headlessui-disclosure-panel-_r_e4_"
         >
           <p
             class="text-xs text-gray-600"
-            id="_r_ce_-caption"
+            id="_r_e2_-caption"
           >
             Counts cover all transactions
           </p>
           <div
-            aria-describedby="_r_ce_-caption"
+            aria-describedby="_r_e2_-caption"
             aria-label="Endpoint"
             class="space-y-2"
             role="group"
@@ -230,8 +225,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 >
                   <input
                     class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                    id="_r_ce_-0"
-                    name="_r_ce_-0"
+                    id="_r_e2_-0"
+                    name="_r_e2_-0"
                     type="checkbox"
                   />
                 </div>
@@ -240,7 +235,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 >
                   <label
                     class="font-medium text-gray-900 block cursor-pointer"
-                    for="_r_ce_-0"
+                    for="_r_e2_-0"
                   >
                     <span
                       class="block truncate"
@@ -267,8 +262,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 >
                   <input
                     class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                    id="_r_ce_-1"
-                    name="_r_ce_-1"
+                    id="_r_e2_-1"
+                    name="_r_e2_-1"
                     type="checkbox"
                   />
                 </div>
@@ -277,7 +272,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 >
                   <label
                     class="font-medium text-gray-900 block cursor-pointer"
-                    for="_r_ce_-1"
+                    for="_r_e2_-1"
                   >
                     <span
                       class="block truncate"
@@ -308,12 +303,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_cl_"
+              aria-controls="headlessui-disclosure-panel-_r_e9_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_ck_"
+              id="headlessui-disclosure-button-_r_e8_"
               type="button"
             >
               <span
@@ -344,16 +339,16 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_cl_"
+          id="headlessui-disclosure-panel-_r_e9_"
         >
           <p
             class="text-xs text-gray-600"
-            id="_r_cj_-caption"
+            id="_r_e7_-caption"
           >
             Counts cover all transactions
           </p>
           <div
-            aria-describedby="_r_cj_-caption"
+            aria-describedby="_r_e7_-caption"
             aria-label="Method"
             class="space-y-2"
             role="group"
@@ -369,8 +364,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 >
                   <input
                     class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                    id="_r_cj_-0"
-                    name="_r_cj_-0"
+                    id="_r_e7_-0"
+                    name="_r_e7_-0"
                     type="checkbox"
                   />
                 </div>
@@ -379,7 +374,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 >
                   <label
                     class="font-medium text-gray-900 block cursor-pointer"
-                    for="_r_cj_-0"
+                    for="_r_e7_-0"
                   >
                     <span
                       class="block truncate"
@@ -406,8 +401,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 >
                   <input
                     class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                    id="_r_cj_-1"
-                    name="_r_cj_-1"
+                    id="_r_e7_-1"
+                    name="_r_e7_-1"
                     type="checkbox"
                   />
                 </div>
@@ -416,7 +411,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 >
                   <label
                     class="font-medium text-gray-900 block cursor-pointer"
-                    for="_r_cj_-1"
+                    for="_r_e7_-1"
                   >
                     <span
                       class="block truncate"
@@ -447,12 +442,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_cq_"
+              aria-controls="headlessui-disclosure-panel-_r_ee_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_cp_"
+              id="headlessui-disclosure-button-_r_ed_"
               type="button"
             >
               <span
@@ -483,16 +478,16 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_cq_"
+          id="headlessui-disclosure-panel-_r_ee_"
         >
           <p
             class="text-xs text-gray-600"
-            id="_r_co_-caption"
+            id="_r_ec_-caption"
           >
             Counts cover all transactions
           </p>
           <div
-            aria-describedby="_r_co_-caption"
+            aria-describedby="_r_ec_-caption"
             aria-label="Status"
             class="space-y-2"
             role="group"
@@ -502,7 +497,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 class="group relative flex items-center pr-14"
               >
                 <button
-                  aria-controls="_r_co_-0-codes"
+                  aria-controls="_r_ec_-0-codes"
                   aria-expanded="false"
                   aria-label="2xx codes"
                   class="-ms-1 me-1 flex h-6 w-4 shrink-0 cursor-pointer items-center justify-center text-gray-600 hover:text-gray-900"
@@ -531,8 +526,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                   >
                     <input
                       class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                      id="_r_co_-0"
-                      name="_r_co_-0"
+                      id="_r_ec_-0"
+                      name="_r_ec_-0"
                       type="checkbox"
                     />
                   </div>
@@ -541,7 +536,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                   >
                     <label
                       class="font-medium text-gray-900 block cursor-pointer"
-                      for="_r_co_-0"
+                      for="_r_ec_-0"
                     >
                       <span
                         class="block truncate"
@@ -561,7 +556,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 aria-label="2xx"
                 class="space-y-2 ps-11 pt-2"
                 hidden=""
-                id="_r_co_-0-codes"
+                id="_r_ec_-0-codes"
                 role="group"
               >
                 <div
@@ -575,8 +570,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                     >
                       <input
                         class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                        id="_r_co_-0-0"
-                        name="_r_co_-0-0"
+                        id="_r_ec_-0-0"
+                        name="_r_ec_-0-0"
                         type="checkbox"
                       />
                     </div>
@@ -585,7 +580,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                     >
                       <label
                         class="font-medium text-gray-900 block cursor-pointer"
-                        for="_r_co_-0-0"
+                        for="_r_ec_-0-0"
                       >
                         <span
                           class="block truncate"
@@ -608,7 +603,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 class="group relative flex items-center pr-14"
               >
                 <button
-                  aria-controls="_r_co_-1-codes"
+                  aria-controls="_r_ec_-1-codes"
                   aria-expanded="false"
                   aria-label="4xx codes"
                   class="-ms-1 me-1 flex h-6 w-4 shrink-0 cursor-pointer items-center justify-center text-gray-600 hover:text-gray-900"
@@ -637,8 +632,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                   >
                     <input
                       class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                      id="_r_co_-1"
-                      name="_r_co_-1"
+                      id="_r_ec_-1"
+                      name="_r_ec_-1"
                       type="checkbox"
                     />
                   </div>
@@ -647,7 +642,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                   >
                     <label
                       class="font-medium text-gray-900 block cursor-pointer"
-                      for="_r_co_-1"
+                      for="_r_ec_-1"
                     >
                       <span
                         class="block truncate"
@@ -667,7 +662,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 aria-label="4xx"
                 class="space-y-2 ps-11 pt-2"
                 hidden=""
-                id="_r_co_-1-codes"
+                id="_r_ec_-1-codes"
                 role="group"
               >
                 <div
@@ -681,8 +676,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                     >
                       <input
                         class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                        id="_r_co_-1-0"
-                        name="_r_co_-1-0"
+                        id="_r_ec_-1-0"
+                        name="_r_ec_-1-0"
                         type="checkbox"
                       />
                     </div>
@@ -691,7 +686,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                     >
                       <label
                         class="font-medium text-gray-900 block cursor-pointer"
-                        for="_r_co_-1-0"
+                        for="_r_ec_-1-0"
                       >
                         <span
                           class="block truncate"
@@ -724,12 +719,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_d1_"
+              aria-controls="headlessui-disclosure-panel-_r_el_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_d0_"
+              id="headlessui-disclosure-button-_r_ek_"
               type="button"
             >
               <span
@@ -760,16 +755,16 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_d1_"
+          id="headlessui-disclosure-panel-_r_el_"
         >
           <p
             class="text-xs text-gray-600"
-            id="_r_cv_-caption"
+            id="_r_ej_-caption"
           >
             Counts cover all transactions
           </p>
           <div
-            aria-describedby="_r_cv_-caption"
+            aria-describedby="_r_ej_-caption"
             aria-label="Cache Status"
             class="space-y-2"
             role="group"
@@ -785,8 +780,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 >
                   <input
                     class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                    id="_r_cv_-0"
-                    name="_r_cv_-0"
+                    id="_r_ej_-0"
+                    name="_r_ej_-0"
                     type="checkbox"
                   />
                 </div>
@@ -795,7 +790,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 >
                   <label
                     class="font-medium text-gray-900 block cursor-pointer"
-                    for="_r_cv_-0"
+                    for="_r_ej_-0"
                   >
                     <span
                       class="block truncate"
@@ -826,12 +821,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_d5_"
+              aria-controls="headlessui-disclosure-panel-_r_ep_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_d4_"
+              id="headlessui-disclosure-button-_r_eo_"
               type="button"
             >
               <span
@@ -862,16 +857,16 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_d5_"
+          id="headlessui-disclosure-panel-_r_ep_"
         >
           <p
             class="text-xs text-gray-600"
-            id="_r_d3_-caption"
+            id="_r_en_-caption"
           >
             Counts cover all transactions
           </p>
           <div
-            aria-describedby="_r_d3_-caption"
+            aria-describedby="_r_en_-caption"
             aria-label="Flags"
             class="space-y-2"
             role="group"
@@ -887,8 +882,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 >
                   <input
                     class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                    id="_r_d3_-0"
-                    name="_r_d3_-0"
+                    id="_r_en_-0"
+                    name="_r_en_-0"
                     type="checkbox"
                   />
                 </div>
@@ -897,7 +892,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 >
                   <label
                     class="font-medium text-gray-900 block cursor-pointer"
-                    for="_r_d3_-0"
+                    for="_r_en_-0"
                   >
                     <span
                       class="block truncate"
@@ -928,12 +923,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_d9_"
+              aria-controls="headlessui-disclosure-panel-_r_et_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_d8_"
+              id="headlessui-disclosure-button-_r_es_"
               type="button"
             >
               <span
@@ -964,16 +959,16 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_d9_"
+          id="headlessui-disclosure-panel-_r_et_"
         >
           <p
             class="text-xs text-gray-600"
-            id="_r_d7_-caption"
+            id="_r_er_-caption"
           >
             Counts cover all transactions
           </p>
           <div
-            aria-describedby="_r_d7_-caption"
+            aria-describedby="_r_er_-caption"
             aria-label="Tags"
             class="space-y-2"
             role="group"
@@ -989,8 +984,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 >
                   <input
                     class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                    id="_r_d7_-0"
-                    name="_r_d7_-0"
+                    id="_r_er_-0"
+                    name="_r_er_-0"
                     type="checkbox"
                   />
                 </div>
@@ -999,7 +994,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
                 >
                   <label
                     class="font-medium text-gray-900 block cursor-pointer"
-                    for="_r_d7_-0"
+                    for="_r_er_-0"
                   >
                     <span
                       class="block truncate"
@@ -1030,12 +1025,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_dc_"
+              aria-controls="headlessui-disclosure-panel-_r_f0_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_db_"
+              id="headlessui-disclosure-button-_r_ev_"
               type="button"
             >
               <span
@@ -1066,7 +1061,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with default filters 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_dc_"
+          id="headlessui-disclosure-panel-_r_f0_"
         >
           <div
             class="range-slider relative flex items-center mt-4"
@@ -1292,12 +1287,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_de_"
+              aria-controls="headlessui-disclosure-panel-_r_f2_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_dd_"
+              id="headlessui-disclosure-button-_r_f1_"
               type="button"
             >
               <span
@@ -1353,10 +1348,11 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_de_"
+          id="headlessui-disclosure-panel-_r_f2_"
         >
           <div
             class="w-full"
+            role="group"
           >
             <div
               class="grid grid-cols-2 gap-2"
@@ -1365,37 +1361,34 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 class="w-full"
               >
                 <div
-                  class="mt-2"
+                  class="mt-2 rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 items-center h-[38px] grid grid-cols-1 pl-0 relative"
                 >
+                  <input
+                    aria-label="Start date"
+                    class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
+                    id="_r_f5_"
+                    max="2024-01-31"
+                    placeholder="Start date"
+                    type="date"
+                    value="2024-01-01"
+                  />
                   <div
-                    class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+                    class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
                   >
-                    <input
-                      aria-label="Start date"
-                      class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
-                      max="2024-01-31"
-                      placeholder="Start date"
-                      type="date"
-                      value="2024-01-01"
-                    />
-                    <div
-                      class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+                    <svg
+                      class="size-5 sm:size-4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <svg
-                        class="size-5 sm:size-4"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                    </div>
+                      <path
+                        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -1403,37 +1396,34 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 class="w-full"
               >
                 <div
-                  class="mt-2"
+                  class="mt-2 rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 items-center h-[38px] grid grid-cols-1 pl-0 relative"
                 >
+                  <input
+                    aria-label="End date"
+                    class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
+                    id="_r_f6_"
+                    min="2024-01-01"
+                    placeholder="End date"
+                    type="date"
+                    value="2024-01-31"
+                  />
                   <div
-                    class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+                    class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
                   >
-                    <input
-                      aria-label="End date"
-                      class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
-                      min="2024-01-01"
-                      placeholder="End date"
-                      type="date"
-                      value="2024-01-31"
-                    />
-                    <div
-                      class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+                    <svg
+                      class="size-5 sm:size-4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <svg
-                        class="size-5 sm:size-4"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                    </div>
+                      <path
+                        d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -1453,12 +1443,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_dh_"
+              aria-controls="headlessui-disclosure-panel-_r_f9_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_dg_"
+              id="headlessui-disclosure-button-_r_f8_"
               type="button"
             >
               <span
@@ -1514,16 +1504,16 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_dh_"
+          id="headlessui-disclosure-panel-_r_f9_"
         >
           <p
             class="text-xs text-gray-600"
-            id="_r_df_-caption"
+            id="_r_f7_-caption"
           >
             Counts cover all transactions
           </p>
           <div
-            aria-describedby="_r_df_-caption"
+            aria-describedby="_r_f7_-caption"
             aria-label="Endpoint"
             class="space-y-2"
             role="group"
@@ -1540,8 +1530,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                   <input
                     checked=""
                     class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                    id="_r_df_-0"
-                    name="_r_df_-0"
+                    id="_r_f7_-0"
+                    name="_r_f7_-0"
                     type="checkbox"
                   />
                 </div>
@@ -1550,7 +1540,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 >
                   <label
                     class="font-medium text-gray-900 block cursor-pointer"
-                    for="_r_df_-0"
+                    for="_r_f7_-0"
                   >
                     <span
                       class="block truncate"
@@ -1577,8 +1567,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 >
                   <input
                     class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                    id="_r_df_-1"
-                    name="_r_df_-1"
+                    id="_r_f7_-1"
+                    name="_r_f7_-1"
                     type="checkbox"
                   />
                 </div>
@@ -1587,7 +1577,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 >
                   <label
                     class="font-medium text-gray-900 block cursor-pointer"
-                    for="_r_df_-1"
+                    for="_r_f7_-1"
                   >
                     <span
                       class="block truncate"
@@ -1628,12 +1618,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_dm_"
+              aria-controls="headlessui-disclosure-panel-_r_fe_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_dl_"
+              id="headlessui-disclosure-button-_r_fd_"
               type="button"
             >
               <span
@@ -1689,16 +1679,16 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_dm_"
+          id="headlessui-disclosure-panel-_r_fe_"
         >
           <p
             class="text-xs text-gray-600"
-            id="_r_dk_-caption"
+            id="_r_fc_-caption"
           >
             Counts cover all transactions
           </p>
           <div
-            aria-describedby="_r_dk_-caption"
+            aria-describedby="_r_fc_-caption"
             aria-label="Method"
             class="space-y-2"
             role="group"
@@ -1715,8 +1705,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                   <input
                     checked=""
                     class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                    id="_r_dk_-0"
-                    name="_r_dk_-0"
+                    id="_r_fc_-0"
+                    name="_r_fc_-0"
                     type="checkbox"
                   />
                 </div>
@@ -1725,7 +1715,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 >
                   <label
                     class="font-medium text-gray-900 block cursor-pointer"
-                    for="_r_dk_-0"
+                    for="_r_fc_-0"
                   >
                     <span
                       class="block truncate"
@@ -1763,8 +1753,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                   <input
                     checked=""
                     class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                    id="_r_dk_-1"
-                    name="_r_dk_-1"
+                    id="_r_fc_-1"
+                    name="_r_fc_-1"
                     type="checkbox"
                   />
                 </div>
@@ -1773,7 +1763,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 >
                   <label
                     class="font-medium text-gray-900 block cursor-pointer"
-                    for="_r_dk_-1"
+                    for="_r_fc_-1"
                   >
                     <span
                       class="block truncate"
@@ -1814,12 +1804,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_dr_"
+              aria-controls="headlessui-disclosure-panel-_r_fj_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_dq_"
+              id="headlessui-disclosure-button-_r_fi_"
               type="button"
             >
               <span
@@ -1875,16 +1865,16 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_dr_"
+          id="headlessui-disclosure-panel-_r_fj_"
         >
           <p
             class="text-xs text-gray-600"
-            id="_r_dp_-caption"
+            id="_r_fh_-caption"
           >
             Counts cover all transactions
           </p>
           <div
-            aria-describedby="_r_dp_-caption"
+            aria-describedby="_r_fh_-caption"
             aria-label="Status"
             class="space-y-2"
             role="group"
@@ -1894,7 +1884,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 class="group relative flex items-center pr-14"
               >
                 <button
-                  aria-controls="_r_dp_-0-codes"
+                  aria-controls="_r_fh_-0-codes"
                   aria-expanded="true"
                   aria-label="2xx codes"
                   class="-ms-1 me-1 flex h-6 w-4 shrink-0 cursor-pointer items-center justify-center text-gray-600 hover:text-gray-900"
@@ -1924,8 +1914,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                     <input
                       checked=""
                       class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                      id="_r_dp_-0"
-                      name="_r_dp_-0"
+                      id="_r_fh_-0"
+                      name="_r_fh_-0"
                       type="checkbox"
                     />
                   </div>
@@ -1934,7 +1924,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                   >
                     <label
                       class="font-medium text-gray-900 block cursor-pointer"
-                      for="_r_dp_-0"
+                      for="_r_fh_-0"
                     >
                       <span
                         class="block truncate"
@@ -1953,7 +1943,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
               <div
                 aria-label="2xx"
                 class="space-y-2 ps-11 pt-2"
-                id="_r_dp_-0-codes"
+                id="_r_fh_-0-codes"
                 role="group"
               >
                 <div
@@ -1968,8 +1958,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                       <input
                         checked=""
                         class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                        id="_r_dp_-0-0"
-                        name="_r_dp_-0-0"
+                        id="_r_fh_-0-0"
+                        name="_r_fh_-0-0"
                         type="checkbox"
                       />
                     </div>
@@ -1978,7 +1968,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                     >
                       <label
                         class="font-medium text-gray-900 block cursor-pointer"
-                        for="_r_dp_-0-0"
+                        for="_r_fh_-0-0"
                       >
                         <span
                           class="block truncate"
@@ -2011,7 +2001,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 class="group relative flex items-center pr-14"
               >
                 <button
-                  aria-controls="_r_dp_-1-codes"
+                  aria-controls="_r_fh_-1-codes"
                   aria-expanded="false"
                   aria-label="4xx codes"
                   class="-ms-1 me-1 flex h-6 w-4 shrink-0 cursor-pointer items-center justify-center text-gray-600 hover:text-gray-900"
@@ -2040,8 +2030,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                   >
                     <input
                       class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                      id="_r_dp_-1"
-                      name="_r_dp_-1"
+                      id="_r_fh_-1"
+                      name="_r_fh_-1"
                       type="checkbox"
                     />
                   </div>
@@ -2050,7 +2040,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                   >
                     <label
                       class="font-medium text-gray-900 block cursor-pointer"
-                      for="_r_dp_-1"
+                      for="_r_fh_-1"
                     >
                       <span
                         class="block truncate"
@@ -2080,7 +2070,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 aria-label="4xx"
                 class="space-y-2 ps-11 pt-2"
                 hidden=""
-                id="_r_dp_-1-codes"
+                id="_r_fh_-1-codes"
                 role="group"
               >
                 <div
@@ -2094,8 +2084,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                     >
                       <input
                         class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                        id="_r_dp_-1-0"
-                        name="_r_dp_-1-0"
+                        id="_r_fh_-1-0"
+                        name="_r_fh_-1-0"
                         type="checkbox"
                       />
                     </div>
@@ -2104,7 +2094,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                     >
                       <label
                         class="font-medium text-gray-900 block cursor-pointer"
-                        for="_r_dp_-1-0"
+                        for="_r_fh_-1-0"
                       >
                         <span
                           class="block truncate"
@@ -2147,12 +2137,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_e2_"
+              aria-controls="headlessui-disclosure-panel-_r_fq_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_e1_"
+              id="headlessui-disclosure-button-_r_fp_"
               type="button"
             >
               <span
@@ -2183,16 +2173,16 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_e2_"
+          id="headlessui-disclosure-panel-_r_fq_"
         >
           <p
             class="text-xs text-gray-600"
-            id="_r_e0_-caption"
+            id="_r_fo_-caption"
           >
             Counts cover all transactions
           </p>
           <div
-            aria-describedby="_r_e0_-caption"
+            aria-describedby="_r_fo_-caption"
             aria-label="Cache Status"
             class="space-y-2"
             role="group"
@@ -2208,8 +2198,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 >
                   <input
                     class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                    id="_r_e0_-0"
-                    name="_r_e0_-0"
+                    id="_r_fo_-0"
+                    name="_r_fo_-0"
                     type="checkbox"
                   />
                 </div>
@@ -2218,7 +2208,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 >
                   <label
                     class="font-medium text-gray-900 block cursor-pointer"
-                    for="_r_e0_-0"
+                    for="_r_fo_-0"
                   >
                     <span
                       class="block truncate"
@@ -2249,12 +2239,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_e6_"
+              aria-controls="headlessui-disclosure-panel-_r_fu_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_e5_"
+              id="headlessui-disclosure-button-_r_ft_"
               type="button"
             >
               <span
@@ -2310,16 +2300,16 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_e6_"
+          id="headlessui-disclosure-panel-_r_fu_"
         >
           <p
             class="text-xs text-gray-600"
-            id="_r_e4_-caption"
+            id="_r_fs_-caption"
           >
             Counts cover all transactions
           </p>
           <div
-            aria-describedby="_r_e4_-caption"
+            aria-describedby="_r_fs_-caption"
             aria-label="Flags"
             class="space-y-2"
             role="group"
@@ -2336,8 +2326,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                   <input
                     checked=""
                     class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                    id="_r_e4_-0"
-                    name="_r_e4_-0"
+                    id="_r_fs_-0"
+                    name="_r_fs_-0"
                     type="checkbox"
                   />
                 </div>
@@ -2346,7 +2336,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 >
                   <label
                     class="font-medium text-gray-900 block cursor-pointer"
-                    for="_r_e4_-0"
+                    for="_r_fs_-0"
                   >
                     <span
                       class="block truncate"
@@ -2377,12 +2367,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_ea_"
+              aria-controls="headlessui-disclosure-panel-_r_g2_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_e9_"
+              id="headlessui-disclosure-button-_r_g1_"
               type="button"
             >
               <span
@@ -2438,16 +2428,16 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_ea_"
+          id="headlessui-disclosure-panel-_r_g2_"
         >
           <p
             class="text-xs text-gray-600"
-            id="_r_e8_-caption"
+            id="_r_g0_-caption"
           >
             Counts cover all transactions
           </p>
           <div
-            aria-describedby="_r_e8_-caption"
+            aria-describedby="_r_g0_-caption"
             aria-label="Tags"
             class="space-y-2"
             role="group"
@@ -2463,8 +2453,8 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 >
                   <input
                     class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-                    id="_r_e8_-0"
-                    name="_r_e8_-0"
+                    id="_r_g0_-0"
+                    name="_r_g0_-0"
                     type="checkbox"
                   />
                 </div>
@@ -2473,7 +2463,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
                 >
                   <label
                     class="font-medium text-gray-900 block cursor-pointer"
-                    for="_r_e8_-0"
+                    for="_r_g0_-0"
                   >
                     <span
                       class="block truncate"
@@ -2514,12 +2504,12 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
             class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
           >
             <button
-              aria-controls="headlessui-disclosure-panel-_r_ed_"
+              aria-controls="headlessui-disclosure-panel-_r_g5_"
               aria-expanded="true"
               class="flex w-full items-start text-left cursor-pointer"
               data-headlessui-state="open"
               data-open=""
-              id="headlessui-disclosure-button-_r_ec_"
+              id="headlessui-disclosure-button-_r_g4_"
               type="button"
             >
               <span
@@ -2575,7 +2565,7 @@ exports[`TransactionsFiltersSidebar > matches snapshot with filters applied 1`] 
           class="mt-2 space-y-2"
           data-headlessui-state="open"
           data-open=""
-          id="headlessui-disclosure-panel-_r_ed_"
+          id="headlessui-disclosure-panel-_r_g5_"
         >
           <div
             class="range-slider relative flex items-center mt-4"

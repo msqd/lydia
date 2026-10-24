@@ -166,3 +166,12 @@ describe("DateRangeFacet in the document outline", () => {
     expect(screen.getByRole("heading", { level: 3, name: "Date Range" })).toBeInTheDocument();
   });
 });
+
+describe("DateRangeFacet error", () => {
+  it("shows the error when the start is after the end", () => {
+    const filters = { dateRange: { startDate: "2024-02-01", endDate: "2024-01-01" } } as Filters;
+    render(<DateRangeFacet {...defaultProps} filters={filters} />);
+
+    expect(screen.getByText("Start date cannot be after end date")).toBeInTheDocument();
+  });
+});

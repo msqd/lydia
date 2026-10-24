@@ -156,3 +156,24 @@ describe("SearchInput", () => {
     expect(button).toHaveTextContent("Enter");
   });
 });
+
+describe("SearchInput ids", () => {
+  it("gives two instances distinct ids, each label targeting its own input", () => {
+    render(
+      <>
+        <SearchInput label="Transactions" />
+        <SearchInput label="Services" />
+      </>,
+    );
+    const first = screen.getByLabelText("Transactions");
+    const second = screen.getByLabelText("Services");
+
+    expect(first).not.toBe(second);
+    expect(first.id).not.toBe(second.id);
+  });
+
+  it("uses the id it is given", () => {
+    render(<SearchInput label="Search" id="mine" />);
+    expect(screen.getByLabelText("Search")).toHaveAttribute("id", "mine");
+  });
+});

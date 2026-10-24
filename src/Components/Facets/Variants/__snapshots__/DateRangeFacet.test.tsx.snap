@@ -13,12 +13,12 @@ exports[`DateRangeFacet > matches snapshot 1`] = `
       class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
     >
       <button
-        aria-controls="headlessui-disclosure-panel-_r_j_"
+        aria-controls="headlessui-disclosure-panel-_r_1j_"
         aria-expanded="true"
         class="flex w-full items-start text-left cursor-pointer"
         data-headlessui-state="open"
         data-open=""
-        id="headlessui-disclosure-button-_r_i_"
+        id="headlessui-disclosure-button-_r_1i_"
         type="button"
       >
         <span
@@ -49,10 +49,11 @@ exports[`DateRangeFacet > matches snapshot 1`] = `
     class="mt-2 space-y-2"
     data-headlessui-state="open"
     data-open=""
-    id="headlessui-disclosure-panel-_r_j_"
+    id="headlessui-disclosure-panel-_r_1j_"
   >
     <div
       class="w-full"
+      role="group"
     >
       <div
         class="grid grid-cols-2 gap-2"
@@ -61,36 +62,33 @@ exports[`DateRangeFacet > matches snapshot 1`] = `
           class="w-full"
         >
           <div
-            class="mt-2"
+            class="mt-2 rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 items-center h-[38px] grid grid-cols-1 pl-0 relative"
           >
+            <input
+              aria-label="Start date"
+              class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
+              id="_r_1m_"
+              placeholder="Start date"
+              type="date"
+              value=""
+            />
             <div
-              class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+              class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
             >
-              <input
-                aria-label="Start date"
-                class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
-                placeholder="Start date"
-                type="date"
-                value=""
-              />
-              <div
-                class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+              <svg
+                class="size-5 sm:size-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <svg
-                  class="size-5 sm:size-4"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
+                <path
+                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </div>
           </div>
         </div>
@@ -98,36 +96,33 @@ exports[`DateRangeFacet > matches snapshot 1`] = `
           class="w-full"
         >
           <div
-            class="mt-2"
+            class="mt-2 rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 items-center h-[38px] grid grid-cols-1 pl-0 relative"
           >
+            <input
+              aria-label="End date"
+              class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
+              id="_r_1n_"
+              placeholder="End date"
+              type="date"
+              value=""
+            />
             <div
-              class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+              class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
             >
-              <input
-                aria-label="End date"
-                class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
-                placeholder="End date"
-                type="date"
-                value=""
-              />
-              <div
-                class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+              <svg
+                class="size-5 sm:size-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <svg
-                  class="size-5 sm:size-4"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
+                <path
+                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </div>
           </div>
         </div>
@@ -150,12 +145,12 @@ exports[`DateRangeFacet > matches snapshot with selected dates 1`] = `
       class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
     >
       <button
-        aria-controls="headlessui-disclosure-panel-_r_l_"
+        aria-controls="headlessui-disclosure-panel-_r_1p_"
         aria-expanded="true"
         class="flex w-full items-start text-left cursor-pointer"
         data-headlessui-state="open"
         data-open=""
-        id="headlessui-disclosure-button-_r_k_"
+        id="headlessui-disclosure-button-_r_1o_"
         type="button"
       >
         <span
@@ -211,10 +206,11 @@ exports[`DateRangeFacet > matches snapshot with selected dates 1`] = `
     class="mt-2 space-y-2"
     data-headlessui-state="open"
     data-open=""
-    id="headlessui-disclosure-panel-_r_l_"
+    id="headlessui-disclosure-panel-_r_1p_"
   >
     <div
       class="w-full"
+      role="group"
     >
       <div
         class="grid grid-cols-2 gap-2"
@@ -223,37 +219,34 @@ exports[`DateRangeFacet > matches snapshot with selected dates 1`] = `
           class="w-full"
         >
           <div
-            class="mt-2"
+            class="mt-2 rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 items-center h-[38px] grid grid-cols-1 pl-0 relative"
           >
+            <input
+              aria-label="Start date"
+              class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
+              id="_r_1s_"
+              max="2024-01-31"
+              placeholder="Start date"
+              type="date"
+              value="2024-01-01"
+            />
             <div
-              class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+              class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
             >
-              <input
-                aria-label="Start date"
-                class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
-                max="2024-01-31"
-                placeholder="Start date"
-                type="date"
-                value="2024-01-01"
-              />
-              <div
-                class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+              <svg
+                class="size-5 sm:size-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <svg
-                  class="size-5 sm:size-4"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
+                <path
+                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </div>
           </div>
         </div>
@@ -261,37 +254,34 @@ exports[`DateRangeFacet > matches snapshot with selected dates 1`] = `
           class="w-full"
         >
           <div
-            class="mt-2"
+            class="mt-2 rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 items-center h-[38px] grid grid-cols-1 pl-0 relative"
           >
+            <input
+              aria-label="End date"
+              class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
+              id="_r_1t_"
+              min="2024-01-01"
+              placeholder="End date"
+              type="date"
+              value="2024-01-31"
+            />
             <div
-              class="mt-2 items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600 grid grid-cols-1 pl-0 relative"
+              class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
             >
-              <input
-                aria-label="End date"
-                class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
-                min="2024-01-01"
-                placeholder="End date"
-                type="date"
-                value="2024-01-31"
-              />
-              <div
-                class="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400"
+              <svg
+                class="size-5 sm:size-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <svg
-                  class="size-5 sm:size-4"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
+                <path
+                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </div>
           </div>
         </div>

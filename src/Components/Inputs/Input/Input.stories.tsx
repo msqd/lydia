@@ -160,6 +160,23 @@ export const WithHelpText: Story = {
   },
 };
 
+export const WithGeneratedIds: Story = {
+  args: {
+    label: "Email",
+    type: "email",
+    helpText: "We'll only use this for spam.",
+    errorMessage: "Enter a valid email address.",
+    cornerHint: "Optional",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "No id is passed: the field generates them and links its help, hint and error to the input.",
+      },
+    },
+  },
+};
+
 export const WithError: Story = {
   args: {
     label: "Email",

@@ -1,15 +1,9 @@
 import { type ComponentProps, type ReactNode, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
+import { Field, fieldWrapperClassName, useField } from "../Field";
 
-// Constants for styling
-const baseClassName = "w-full";
-const defaultWrapperClassName =
-  "mt-2 flex rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600";
 const defaultTextareaClassName =
   "w-full border-0 px-1.5 py-1.5 text-gray-900 text-left placeholder:text-gray-400 focus:outline-none sm:text-sm/6";
-const defaultLabelClassName = "block text-sm/6 font-medium text-gray-900";
-const helpTextClassName = "mt-2 text-sm text-gray-500";
-const errorTextClassName = "mt-2 text-sm text-danger-600";
 
 // Textarea component props
 export interface TextareaProps extends ComponentProps<"textarea"> {
@@ -96,56 +90,64 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       variant = "default",
       hideContainer = false,
       isError = false,
+      id,
+      "aria-describedby": describedBy,
       ...props
     },
     ref,
   ) => {
-    // Determine if we're in an error state either from variant or isError prop
     const hasError = variant === "error" || isError;
+    const { ids, controlProps } = useField({
+      id,
+      helpTextId,
+      errorId,
+      cornerHintId,
+      helpText,
+      errorMessage,
+      cornerHint,
+      invalid: hasError,
+      describedBy,
+      framed: !hideContainer,
+    });
+
+    const textarea = (
+      <div
+        className={twMerge(
+          fieldWrapperClassName,
+          hasError && "outline-danger-500 focus-within:outline-danger-500",
+          props.disabled && "opacity-50 cursor-not-allowed",
+          wrapperClassName,
+        )}
+      >
+        <textarea
+          className={twMerge(defaultTextareaClassName, textareaClassName)}
+          ref={ref}
+          {...controlProps}
+          {...props}
+        />
+      </div>
+    );
+
+    if (hideContainer) {
+      return <div className={twMerge("w-full", className)}>{textarea}</div>;
+    }
 
     return (
-      <div className={twMerge(baseClassName, className)}>
-        {!hideContainer && (
-          <div className="flex justify-between items-baseline">
-            {label && (
-              <label htmlFor={props.id} className={twMerge(defaultLabelClassName, labelClassName)}>
-                {label} {props.required && <span className="text-danger-500">*</span>}
-              </label>
-            )}
-            {cornerHint && (
-              <span id={cornerHintId} className="text-sm text-gray-500">
-                {cornerHint}
-              </span>
-            )}
-          </div>
-        )}
-        <div
-          className={twMerge(
-            defaultWrapperClassName,
-            hasError && "outline-danger-500 focus-within:outline-danger-500",
-            props.disabled && "opacity-50 cursor-not-allowed",
-            wrapperClassName,
-          )}
-        >
-          <textarea
-            className={twMerge(defaultTextareaClassName, textareaClassName)}
-            ref={ref}
-            aria-invalid={hasError ? "true" : undefined}
-            aria-describedby={hasError ? errorId : helpTextId ? helpTextId : cornerHintId ? cornerHintId : undefined}
-            {...props}
-          />
-        </div>
-        {!hideContainer && helpText && !hasError && (
-          <p className={helpTextClassName} id={helpTextId}>
-            {helpText}
-          </p>
-        )}
-        {!hideContainer && hasError && errorMessage && (
-          <p className={errorTextClassName} id={errorId}>
-            {errorMessage}
-          </p>
-        )}
-      </div>
+      <Field
+        controlId={ids.control}
+        helpTextId={ids.help}
+        errorId={ids.error}
+        cornerHintId={ids.cornerHint}
+        label={label}
+        labelClassName={labelClassName}
+        required={props.required}
+        cornerHint={cornerHint}
+        helpText={helpText}
+        errorMessage={errorMessage}
+        className={className}
+      >
+        {textarea}
+      </Field>
     );
   },
 );
