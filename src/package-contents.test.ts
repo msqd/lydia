@@ -1,6 +1,6 @@
 import { execFileSync } from "child_process";
 import { existsSync, readFileSync, readdirSync, statSync } from "fs";
-import { basename, join, resolve } from "path";
+import { join, resolve } from "path";
 import { describe, expect, it } from "vitest";
 
 const root = resolve(__dirname, "..");
@@ -43,16 +43,7 @@ describe.skipIf(!existsSync(distPath))("Published package", () => {
     expect(paths.filter((path) => path.startsWith("src/"))).toEqual([]);
     expect(paths).toContain("dist/index.js");
 
-    // `Config/navigation` builds its demo routes from sample data, so those samples are part of the
-    // runtime. Any other sample file in the tarball is dead weight.
-    const runtime = paths
-      .filter((path) => path.endsWith(".js") && !SAMPLES.test(path))
-      .map((path) => readFileSync(join(root, path), "utf-8"))
-      .join("\n");
-    const unused = paths
-      .filter((path) => SAMPLES.test(path))
-      .filter((path) => !runtime.includes(basename(path).replace(/\.(js|d\.ts)$/, "")));
-    expect(unused).toEqual([]);
+    expect(paths.filter((path) => SAMPLES.test(path))).toEqual([]);
     expect(paths).toContain("dist/css/theme.css");
   });
 

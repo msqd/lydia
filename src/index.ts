@@ -11,7 +11,6 @@ export * from "./Components/Formatter";
 export * from "./Components/Inputs";
 export * from "./Components/Layouts";
 export * from "./Components/NavBar";
-export * from "./Components/Navigation";
 export * from "./Components/Tabs";
 export * from "./Components/Toast";
 export * from "./Components/Typography";
