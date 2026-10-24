@@ -9,9 +9,9 @@ import { sampleDetailedTransaction } from "./TransactionsDetailPage.samples";
 const TestWrapper = ({ children }: { children: React.ReactNode }) => <ToastProvider>{children}</ToastProvider>;
 
 // Design-system children render for real in this file. Mocking Badge, TpdexBadge or the Http
-// elements would make the snapshot record the page's skeleton against itself: #45 changed badge
+// elements would make the snapshot record the page's skeleton against itself: a change to badge
 // sizing on this page and moved no snapshot, because the badges were mocked away. Mock only what
-// this page hands no props to. See #56.
+// this page hands no props to. See Testing.mdx, What to mock.
 
 describe("TransactionsDetailPage", () => {
   it("renders the transaction details correctly", () => {

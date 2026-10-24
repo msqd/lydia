@@ -88,7 +88,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /**
- * Recette: press the button. The TPDEX badges, the TPDEX line, the Errors bars (danger) and the transaction bars
+ * Press the button. The TPDEX badges, the TPDEX line, the Errors bars (danger) and the transaction bars
  * (danger, success, transactions) all change colour together, with no reload. Press again to restore them.
  */
 export const RuntimeRetheme: Story = {

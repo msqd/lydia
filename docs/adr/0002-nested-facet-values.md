@@ -1,22 +1,20 @@
 # 2. Nested facet values: the whole class, some codes, or the class minus codes
 
-Date: 2026-10-12. Status: proposed; merges with #162.
+Date: 2026-10-12. Status: accepted (0.3.0).
 
 ## Context
 
-jaco filters status by class and by code, and keeps a local facet to do it
-([msqd/jaco#129](https://github.com/msqd/jaco/issues/129)). Before it can drop that facet, `MultipleChoiceFacet` has to
-nest codes under their class.
+A consumer filters status by class and by code, and keeps a local facet to do it. Before it can drop that facet,
+`MultipleChoiceFacet` has to nest codes under their class, and its values must travel in a URL query string as-is.
 
-Recette on #134 went five rounds. Two rulings shaped this ADR: a class and its own code are never both in the filter, and
-a class is an open set that never turns into a list of codes by itself. Round 5 added "4xx except 404", which #134 could
-not express. #159 settles the rest.
+Two rulings shaped this ADR: a class and its own code are never both in the filter, and a class is an open set that never
+turns into a list of codes by itself. "4xx except 404" has to be expressible.
 
 ## Decision
 
 ### Tokens
 
-Values are jaco's (`query-strings.json`, `status_tokens`):
+Values are status tokens:
 
 | Token | Means | Set |
 |---|---|---|
@@ -39,7 +37,7 @@ the next class; flat values after the classes. One view has one address.
 | Some codes | `"404"`, `"422"` | partial | the chosen ones ticked |
 | Class minus codes | `"4"`, `"-404"` | partial | ticked but the excluded ones |
 
-Counts stay unfiltered (#82): a class with exclusions shows its full count.
+Counts stay unfiltered, as in every facet: a class with exclusions shows its full count.
 
 ### Reading a filter
 
@@ -87,12 +85,12 @@ A value with no codes (`failure`) is a sibling after the classes: no nesting, no
 
 ### Interface
 
-Variant C of the mockup (#172), simplified after recette (#169) and UX research, implemented in #182. Stories:
+Variant C of the mockup, simplified after acceptance testing and UX research. Stories:
 `src/Components/Facets/Variants/MultipleChoiceFacet.stories.tsx`, `NestedValues` and `NestedWithSelection`.
 
 - Each class has one disclosure chevron (`aria-expanded`, `aria-controls`), the same in every state; it folds or unfolds
   its class on its own.
-- Fold rules, from the recette of #172:
+- Fold rules:
   - Classes start folded.
   - Checking a class unfolds it; unchecking folds it back.
   - On first render, a class with a selection (some codes, or class minus codes) starts unfolded.
@@ -107,7 +105,7 @@ never with a checkbox shade alone. The `except` line follows them.
 
 ## Consequences
 
-- jaco changes its own facet to these tokens, then drops it for `MultipleChoiceFacet` (msqd/jaco#129). jaco's
-  recorder parses `-404` too, beside its class.
-- lydia's `filtering.ts` matches `"4xx"` and `"failure"` only; learning codes is #163.
-- HARP sees no change until they pass nested options.
+- A consumer changes its own facet to these tokens, then drops it for `MultipleChoiceFacet`. Whatever records or
+  parses the filter reads `-404` too, beside its class.
+- lydia's `filtering.ts` matches `"4xx"` and `"failure"` only; matching codes is left to a later change.
+- HARP and other consumers see no change until they pass nested options.

@@ -3,48 +3,11 @@
 All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
-Lydia is published to npm as `@msqd/lydia`.
+
+Versions 0.1.0 to 0.4.0 were internal releases consumed from git as `lydia`, never published to npm. The unscoped
+`lydia` package on npm is unrelated. The first npm release is 0.6.0, as `@msqd/lydia`.
 
 <!-- towncrier release notes start -->
-
-## [0.5.0] - 2026-10-20
-
-### Breaking
-
-- `toEchartsColor` returns `string | undefined`: a colour it cannot convert (malformed `oklch()`, `color-mix()`, `lab()`, `lch()`, `oklab()`, `color()`) is now `undefined` instead of being passed through or producing `NaN`. (#209)
-- The package is renamed `@msqd/lydia`, published on npm. Every `lydia/...` import becomes `@msqd/lydia/...`, and `lydia/styles` becomes `@msqd/lydia/styles`. The package ships `dist` only, no `src`.
-
-  Consumers that read Lydia's sources must switch:
-
-  - `src/main.css` and the component CSS (`Input.css`, `RangeSliderStyles.css`, `prism.css`) become `@msqd/lydia/theme.css` and `@msqd/lydia/components.css`.
-  - Tailwind `@source` points at the package `dist`.
-  - Fonts move from `public/fonts` to `dist/fonts`.
-
-  (#213)
-
-### Added
-
-- `--color-chart-out-of-range` theme token, used for out-of-range values of the performance chart instead of a hex literal. (#206)
-- `@msqd/lydia/theme.css` (fonts and tokens, no Tailwind import) and `@msqd/lydia/components.css`, for a consumer's own Tailwind CSS 4 build. Point `@source` at `@msqd/lydia/dist` so Tailwind scans lydia's classes. `@msqd/lydia/styles` stays precompiled. (#213)
-- Releases are published to npm from CI when a `v*` tag is pushed, with no stored token. Provenance attestation requires a public repository and applies once it is public. (#214)
-- Integration guide (`docs/integration.md`) for applications consuming `@msqd/lydia`: install, the two CSS options, fonts, theme overrides, local development against a clone with one React, and known pitfalls. Replaces `CSS_USAGE.md`. (#215)
-
-### Changed
-
-- Transactions pane of the overview summary now draws with the `--color-chart-transactions` theme token instead of a hex literal. (#206)
-- Changelog entries are towncrier fragments in `changelog.d/<issue>.<type>.md`, one per PR, instead of edits to `CHANGELOG.md`. `pnpm changelog` writes them into the release section. (#211)
-- Relicensed under the Mozilla Public License 2.0; `LICENSE` now holds only the MPL text (the Lato font keeps its OFL in `public/fonts/OFL.txt` in the repository, `dist/fonts/OFL.txt` in the package), and `package.json` declares `MPL-2.0`. (#212)
-- The range slider's styles are plain CSS instead of `@apply`, and component CSS no longer carries a copy of Tailwind. `dist` no longer holds test declarations. (#213)
-- Harden npm publishing: the publish job (OIDC, `npm` environment) only publishes a tarball packed by a job without `id-token`, tags must sit on `main`, manual runs always dry-run, npm is pinned, workflows default to read-only permissions, `prepublishOnly` builds, and the unused `claude.yml` workflow is removed. (#225)
-- Harden the workflows: every action is pinned to a commit SHA, the Storybook deploy runs in its own job holding `pages: write` and `id-token: write` while the build gets read-only access, Pages deploys queue instead of running in parallel, and the publish job checks the tarball sha256 and package name before `npm publish`. (#233)
-
-### Fixed
-
-- `toEchartsColor` converts `oklch()` strictly: hue in `turn`, `rad` and `grad` is converted, lightness, chroma and alpha are clamped, and an unparseable value, `color-mix()`, `lab()`, `lch()`, `oklab()` or `color()` gives `undefined` (ECharts palette) instead of `NaN`. The theme observer re-resolves chart colours only when a stylesheet or a theme attribute changes, not on any `<head>` mutation. (#209)
-- The packed library no longer imports build-machine absolute paths (`date-fns`, `refractor`) nor the extensionless `echarts-for-react/lib/core`: every dependency and its subpaths stays an external import, and `@msqd/lydia` and `@msqd/lydia/Components/Charts` load under Node ESM and vitest. The consumer check now imports every JS export under Node and renders the root and a chart under vitest + jsdom. (#224)
-- The PrismJS theme carries its MIT notice, kept in `@msqd/lydia/styles`. CSS imports survive bundler tree shaking (`sideEffects`), `@msqd/lydia/package.json` is exported, and the integration guide, fonts README and ADR 3 match the package. (#226)
-- `toEchartsColor` rejects a long malformed `oklch()` number in linear time instead of stalling for seconds. (#227)
-- Charts render under Node ESM and vitest: the CommonJS `echarts-for-react` default import is unwrapped. Declarations no longer import `.css` files, so a consumer on `skipLibCheck: false` without `vite/client` types compiles. The README `ResponseStatusBadge` example uses `statusCode`, and the consumer check type-checks the README examples. (#232)
 
 ## 0.4.0 - 2026-10-15
 
@@ -226,5 +189,3 @@ First release.
   - The two paginators of TransactionsListPage are named apart, so a screen reader no longer lists one landmark twice.
 - Headings nest without skipping a level in facet cards, the filters sidebar, the transaction detail page and the
   system map.
-
-[0.5.0]: https://github.com/msqd/lydia/releases/tag/v0.5.0

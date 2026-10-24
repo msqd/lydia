@@ -1,0 +1,1 @@
+Charts render under Node ESM and vitest: the CommonJS `echarts-for-react` default import is unwrapped. Declarations no longer import `.css` files, so a consumer on `skipLibCheck: false` without `vite/client` types compiles. The README `ResponseStatusBadge` example uses `statusCode`, and the consumer check type-checks the README examples.

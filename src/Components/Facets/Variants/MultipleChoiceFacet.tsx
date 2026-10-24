@@ -191,7 +191,7 @@ export function MultipleChoiceFacet({
     setUnfolded((names) => [...names.filter((other) => other !== optionName), ...(unfold ? [optionName] : [])]);
 
   /**
-   * A tick narrows to a value, and nothing ticked is no filter (msqd/jaco#129).
+   * A tick narrows to a value, and nothing ticked is no filter (ADR 0001).
    *
    * Values are reported in the facet's order, never in click order, so one
    * view has one address. A chosen value the facet no longer offers keeps its

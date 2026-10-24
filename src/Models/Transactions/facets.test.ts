@@ -281,8 +281,8 @@ describe("the vocabulary and the filter agree", () => {
 
   it("exercises the unknown cache status, so the invariant above covers it", () => {
     // Guards the guard: if the fixture stopped containing a transaction that reported no cache
-    // information, the invariant would still pass and would no longer be checking the case #100
-    // was about.
+    // information, the invariant would still pass and would no longer be checking the case of a transaction
+    // with no cache information.
     expect(facets.cacheStatus?.map((option) => option.name)).toContain("unknown");
   });
 

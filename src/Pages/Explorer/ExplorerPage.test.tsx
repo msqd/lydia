@@ -6,11 +6,11 @@ import { ExplorerPage } from "./ExplorerPage";
 
 // Design-system children render for real in this file: only other *pages* are mocked, which keeps
 // the unit boundary without hiding how a shared component behaves here. Mocking Dialog made this
-// test assert on a drawer the mock invented. See #56.
+// test assert on a drawer the mock invented. See Testing.mdx, What to mock.
 //
 // Only the embedded page is mocked, so this test stays about the explorer. The client-side
 // fallback hook it drives that page with is the real one: mocking it would hide whether this page
-// wires it up at all. See #56 for the rule.
+// wires it up at all. See Testing.mdx, What to mock.
 vi.mock("@msqd/lydia/Pages/Transactions/List", async (importOriginal) => ({
   ...(await importOriginal<typeof import("@msqd/lydia/Pages/Transactions/List")>()),
   TransactionsListPage: ({
@@ -46,7 +46,7 @@ vi.mock("@msqd/lydia/Pages/Transactions/List", async (importOriginal) => ({
 }));
 
 // Another page is mocked, which keeps the unit boundary: this file is about the explorer, not
-// about the detail page's rendering. Design-system components render for real. See #56.
+// about the detail page's rendering. Design-system components render for real. See Testing.mdx, What to mock.
 vi.mock("@msqd/lydia/Pages/Transactions/Detail", () => ({
   TransactionsDetailPage: ({ transaction }: { transaction?: { id?: string } }) => (
     <div data-testid="transaction-detail">

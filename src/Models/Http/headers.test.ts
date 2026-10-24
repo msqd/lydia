@@ -53,7 +53,7 @@ function sourceFiles(dir: string, found: string[] = []): string[] {
 const HEADERS_AS_MAP = /\bheaders\??\s*:\s*(Record<\s*string|\{\s*\[\s*\w+\s*:\s*string\s*\])/;
 
 /**
- * The rule #50, #76 and #79 established, in one place so it cannot be reopened quietly.
+ * The headers rule, in one place so it cannot be reopened quietly.
  *
  * HTTP allows a header name to repeat, and `set-cookie` routinely does. A map collapses those
  * repeats and loses arrival order, so a type that models headers as a map cannot represent a real

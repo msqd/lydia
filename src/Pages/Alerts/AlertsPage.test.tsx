@@ -5,7 +5,7 @@ import { sampleAlerts } from "./AlertsPage.samples";
 
 // Only the embedded page is mocked, so this test stays about the alerts. The client-side fallback
 // hook it drives that page with is the real one: mocking it would hide whether this page wires it
-// up at all. See #56 for the rule.
+// up at all. See Testing.mdx, What to mock.
 vi.mock("@msqd/lydia/Pages/Transactions/List", async (importOriginal) => ({
   ...(await importOriginal<typeof import("@msqd/lydia/Pages/Transactions/List")>()),
   TransactionsListPage: ({

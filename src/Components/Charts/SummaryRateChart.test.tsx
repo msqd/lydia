@@ -5,7 +5,7 @@ import { restoreThemeTokens, stubThemeTokens } from "../Utilities/Testing";
 import SummaryRateChart from "./SummaryRateChart";
 
 // ECharts renders to a canvas, which jsdom does not provide. This is an environment boundary
-// rather than a design-system component, so it stays mocked. See #56.
+// rather than a design-system component, so it stays mocked. See Testing.mdx, What to mock.
 vi.mock("echarts-for-react/lib/core.js", () => ({
   default: vi.fn().mockImplementation(({ opts }) => (
     <div data-testid="mock-echarts" style={{ height: opts.height, width: opts.width }}>

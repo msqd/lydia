@@ -10,8 +10,8 @@ class ResizeObserverMock {
 }
 
 // NavBar renders for real here. Mocking a design-system child makes a snapshot record this
-// layout's skeleton against itself: #45 changed badge sizing on two pages and moved no snapshot,
-// because the badges were mocked away. Mock only what this component hands no props to. See #56.
+// layout's skeleton against itself: a change to badge sizing on two pages and moved no snapshot,
+// because the badges were mocked away. Mock only what this component hands no props to. See Testing.mdx, What to mock.
 
 describe("DefaultLayout", () => {
   // Setup mock before each test

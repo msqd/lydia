@@ -1,0 +1,1 @@
+Relicensed under the Mozilla Public License 2.0; `LICENSE` now holds only the MPL text (the Lato font keeps its OFL in `public/fonts/OFL.txt` in the repository, `dist/fonts/OFL.txt` in the package), and `package.json` declares `MPL-2.0`.

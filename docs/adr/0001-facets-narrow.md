@@ -12,8 +12,8 @@ On a list that grows, that stored list is a snapshot. A value that appears later
 anyone asking for it. Two links can also mean the same view, because values are stored in click
 order.
 
-jaco works over a live list and kept its own facet for that reason
-([msqd/jaco#129](https://github.com/msqd/jaco/issues/129)).
+A consumer that works over a live list needs the facet to narrow, and kept its own facet for that
+reason.
 
 ## Decision
 
@@ -29,8 +29,8 @@ filter.
 
 ## Consequences
 
-- HARP changes behaviour: their transaction facets open unticked, and a click narrows
+- HARP and other consumers change behaviour: their transaction facets open unticked, and a click narrows
   instead of excluding. This is a breaking change.
 - Lydia stores no filters. A list a consumer saved under the old behaviour filters as before, but
   it still leaves out values that appeared since; only the consumer can tell such lists apart.
-- jaco can drop its local facet once nested options land.
+- A consumer can drop its local facet once nested options land.

@@ -14,7 +14,7 @@ const sampleHistory = { timeRange: "7d", onTimeRangeChange: () => {}, ...sampleH
 
 // The charts are mocked because ECharts renders to a canvas jsdom does not provide, and its
 // instance ids make snapshots unstable. That is an environment boundary, not a design-system
-// component this page hands props to. Everything else here renders for real. See #56.
+// component this page hands props to. Everything else here renders for real. See Testing.mdx, What to mock.
 vi.mock("@msqd/lydia/Components/Charts", () => ({
   SummaryPerformancesChart: () => (
     <div data-testid="summary-performances-chart" data-chart-type="performances">

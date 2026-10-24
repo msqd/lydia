@@ -103,11 +103,10 @@ describe("ButtonGroup", () => {
     render(<ButtonGroup buttonProps={singleButtonProps} current="single" setCurrent={mockSetCurrent} />);
 
     const singleButton = screen.getByText("Single");
-    // Un bouton unique doit avoir des arrondis à la fois à gauche et à droite
-    expect(singleButton).toHaveClass("rounded-none"); // Commence avec cette classe
-    expect(singleButton).toHaveClass("rounded-l-sm"); // Arrondi à gauche car c'est le premier
-    expect(singleButton).toHaveClass("rounded-r-sm"); // Arrondi à droite car c'est aussi le dernier
-    expect(singleButton).not.toHaveClass("-ml-px"); // Pas de marge négative car c'est le premier
+    expect(singleButton).toHaveClass("rounded-none");
+    expect(singleButton).toHaveClass("rounded-l-sm");
+    expect(singleButton).toHaveClass("rounded-r-sm");
+    expect(singleButton).not.toHaveClass("-ml-px");
   });
 
   it("merges custom className with wrapper span styles", () => {

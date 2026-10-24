@@ -1,0 +1,1 @@
+`toEchartsColor` returns `string | undefined`: a colour it cannot convert (malformed `oklch()`, `color-mix()`, `lab()`, `lch()`, `oklab()`, `color()`) is now `undefined` instead of being passed through or producing `NaN`.
