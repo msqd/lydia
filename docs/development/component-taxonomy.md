@@ -67,9 +67,9 @@ the [presentation boundary](./presentation-boundary.md), not choosing a tier.
   along.
 - **Composition flows down only.** Page → Section → Element → Component. A Component never imports
   an Element; an Element never imports a Section or Page.
-- **Sample/mock data is not part of a tier.** It lives in a co-located `*.samples.ts` (excluded
-  from the build and the published exports), consumed by stories, tests and the demo — never baked
-  into the component. See `AlertsPage.samples.ts`.
+- **Sample/mock data is not part of a tier.** It lives in a co-located `*.samples.ts` (no module
+  is built from it and the package ships none, [ADR 3](../adr/0003-npm-distribution.md)), consumed
+  by stories and tests — never baked into the component. See `AlertsPage.samples.ts`.
 
 ## Known gaps (the target we are converging on)
 
