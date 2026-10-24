@@ -4,7 +4,12 @@ export { FacetLabel } from "./FacetLabel";
 export { FacetInnerLightButton } from "./FacetInnerLightButton";
 export { FacetResetLink } from "./FacetResetLink";
 export { FacetCount } from "./FacetCount";
-export { DEFAULT_COUNTS_CAPTION } from "./FacetCountsCaption";
+export {
+  DEFAULT_COUNTS_CAPTION,
+  FacetCountsCaption,
+  countsCaptionOf,
+  type FacetCountsCaptionProps,
+} from "./FacetCountsCaption";
 
 export type { FacetListProps } from "./FacetList";
 export type { FacetListCardProps } from "./FacetListCard";

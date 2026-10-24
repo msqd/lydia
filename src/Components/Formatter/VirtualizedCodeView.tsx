@@ -8,7 +8,7 @@ export const VIRTUALIZATION_THRESHOLD = 50;
 /** Height of a code line in pixels (`text-xs` with `leading-5`). */
 export const LINE_HEIGHT = 20;
 
-interface VirtualizedCodeViewProps {
+export interface VirtualizedCodeViewProps {
   /** The formatted content, one entry per line */
   lines: string[];
   /** Highlights one line; lines are drawn as plain text without it */

@@ -47,8 +47,8 @@ import { Button, Badge } from "@msqd/lydia";
 // Import specific component categories
 import { Button, ButtonGroup } from "@msqd/lydia/Components/Buttons";
 
-// Import individual components
-import { Button } from "@msqd/lydia/Components/Buttons/Button";
+// Import from any folder, down to a single component folder
+import { Input } from "@msqd/lydia/Components/Inputs/Input";
 ```
 
 ### CSS Styles
@@ -86,7 +86,7 @@ The [integration guide](docs/integration.md) covers fonts, theme overrides, loca
 
 ```jsx
 import { Button } from "@msqd/lydia";
-import { ResponseStatusBadge } from "@msqd/lydia/Elements/Http/ResponseStatusBadge";
+import { ResponseStatusBadge } from "@msqd/lydia/Elements/Http";
 import '@msqd/lydia/styles'; // Import styles
 
 function App() {
