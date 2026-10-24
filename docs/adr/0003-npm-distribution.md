@@ -31,15 +31,15 @@ Tailwind CSS 4 stays. Two ways to consume it:
 | Consumer | Import | Result |
 |---|---|---|
 | No Tailwind 4 build | `@msqd/lydia/styles` | Precompiled: Tailwind, theme, components, fonts |
-| Own Tailwind 4 build | `@msqd/lydia/theme.css`, `@msqd/lydia/components.css`, `@source` on `@msqd/lydia/dist` | Lydia's tokens and classes inside the consumer's single Tailwind |
+| Own Tailwind 4 build | `@msqd/lydia/theme.css`, `@msqd/lydia/components.css` | Lydia's tokens and classes inside the consumer's single Tailwind |
 
 - `theme.css` holds the fonts and `@theme static`, with no `@import "tailwindcss"`. `main.css`
   (Tailwind plus theme) only feeds the precompiled build and Storybook.
 - Component CSS is plain CSS on theme variables. It has no `@import` of Tailwind or `main.css`, and
   no `@apply`. `@reference` was tried first: referencing a file the consumer also imports turns its
   theme into reference-only, and the tokens are no longer emitted.
-- `@source` points at `dist`: the JS is minified, identifiers are mangled, but class literals survive, and Tailwind skips
-  `node_modules` unless told.
+- `components.css` carries its own `@source` on the compiled JS in `dist`, resolved from the file: the JS is minified, identifiers
+  are mangled, but class literals survive, and Tailwind skips `node_modules` unless told. The consumer writes none.
 - `dist/css` mirrors the layout of the CSS sources under `src`, so the relative imports hold.
 
 ### Peer range
@@ -51,5 +51,5 @@ Tailwind CSS 4 stays. Two ways to consume it:
 - A consumer needs Tailwind `^4.1` to use the sources; `styles` needs nothing.
 - CI packs the tarball and builds a fresh Vite, React 19 and Tailwind 4 app from it: type-check,
   render, one Tailwind in the output, one React.
-- Fonts are still referenced as `/fonts/...`, served by the consumer; `dist/fonts` holds the files.
+- Fonts are referenced by relative URL: `dist/css/fonts` beside `theme.css`, embedded in `styles`.
 - Publishing itself and the integration guide (`docs/integration.md`) follow this decision.

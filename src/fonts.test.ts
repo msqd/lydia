@@ -156,7 +156,7 @@ function readFace(path: string): Face {
   };
 }
 
-const fontsPath = resolve(__dirname, "../public/fonts");
+const fontsPath = resolve(__dirname, "./fonts");
 
 const expected = [
   { file: "Lato-Regular", weightClass: 400, isItalic: false, isBold: false },

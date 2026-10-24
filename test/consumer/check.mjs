@@ -108,7 +108,11 @@ try {
 
   const assets = join(app, "dist", "assets");
   const css = readFileSync(join(assets, readdirSync(assets).find((file) => file.endsWith(".css"))), "utf-8");
-  assert.match(css, /\.bg-success-50/, "lydia's classes are scanned from its dist");
+  assert.match(css, /\.bg-success-50/, "lydia's classes are scanned from its dist, with no @source in the app");
+  assert.doesNotMatch(readFileSync(join(app, "src", "index.css"), "utf-8"), /@source/, "the app writes no @source");
+  const urls = [...css.matchAll(/url\(\s*["']?([^"')]+)["']?\s*\)/g)].map(([, url]) => url).filter((url) => !url.startsWith("data:"));
+  assert.ok(urls.length >= 4, "lydia's fonts are emitted as files");
+  for (const url of urls) assert.ok(existsSync(url.startsWith("/") ? join(app, "dist", url) : resolve(assets, url)), `url(${url}) resolves to an emitted file`);
   assert.match(css, /--color-success-50:/, "lydia's theme is applied");
   assert.match(css, /\.range-slider-input/, "lydia's component styles are included");
   assert.equal(css.match(/tailwindcss v\d/g)?.length, 1, "one Tailwind in the output");

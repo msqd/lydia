@@ -6,7 +6,6 @@ import { beforeAll, describe, expect, it } from "vitest";
 describe.skipIf(!existsSync(resolve(__dirname, "../dist")))("CSS Export", () => {
   const distPath = resolve(__dirname, "../dist");
   const cssPath = resolve(distPath, "styles/styles.css");
-  const fontsPath = resolve(distPath, "fonts");
 
   // Cache CSS content to avoid repeated file system access
   let cssContent: string;
@@ -41,7 +40,7 @@ describe.skipIf(!existsSync(resolve(__dirname, "../dist")))("CSS Export", () => 
   it("should include component-specific styles", () => {
     // Check for Input component styles (minified)
     expect(cssContent).toContain("calendar-icon-right");
-    expect(cssContent).toContain("input[type=date]");
+    expect(cssContent).toContain(".calendar-icon-right");
 
     // Check for RangeSlider component styles
     expect(cssContent).toContain("range-slider-input");
@@ -51,21 +50,11 @@ describe.skipIf(!existsSync(resolve(__dirname, "../dist")))("CSS Export", () => 
     expect(cssContent).toContain("language-");
   });
 
-  it("should include font definitions", () => {
-    // Check for font-face definitions
+  it("should embed the fonts, so no consumer has to serve them", () => {
     expect(cssContent).toContain("@font-face");
     expect(cssContent).toContain("font-family:Lato");
-    expect(cssContent).toContain("Lato-Regular.woff2");
-    expect(cssContent).toContain("Lato-Bold.woff2");
-    expect(cssContent).toContain("Lato-Italic.woff2");
-    expect(cssContent).toContain("Lato-BoldItalic.woff2");
-  });
-
-  it("should copy font files to correct location", () => {
-    expect(existsSync(resolve(fontsPath, "Lato-Regular.woff2"))).toBe(true);
-    expect(existsSync(resolve(fontsPath, "Lato-Bold.woff2"))).toBe(true);
-    expect(existsSync(resolve(fontsPath, "Lato-Italic.woff2"))).toBe(true);
-    expect(existsSync(resolve(fontsPath, "Lato-BoldItalic.woff2"))).toBe(true);
+    expect(cssContent.match(/url\(data:font\/woff2;base64,/g)).toHaveLength(4);
+    expect(cssContent).not.toMatch(/url\(["']?\//);
   });
 
   it("should have predictable CSS file name (no hash)", () => {

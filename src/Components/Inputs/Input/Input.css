@@ -1,66 +1,73 @@
-/* Hide the default calendar picker indicator */
-.calendar-icon-right::-webkit-calendar-picker-indicator {
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  cursor: pointer;
-}
+/*
+ * Plain CSS in the components layer, scoped to Lydia's own inputs: `lydia-input` marks the inputs of
+ * Input, Checkbox, Radio, SearchInput and RangeSlider, `calendar-icon-right` the date input. Nothing here
+ * selects an element of the host application.
+ */
+@layer components {
+  /* Hide the default calendar picker indicator */
+  .calendar-icon-right::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+  }
 
-/* Setup date input styles */
-input[type="date"] {
-  color-scheme: light;
-  appearance: none;
-  -webkit-appearance: none;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
+  /* Setup date input styles */
+  .calendar-icon-right {
+    color-scheme: light;
+    appearance: none;
+    -webkit-appearance: none;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
 
-/* Hide the calendar picker in Firefox but keep it functional */
-input[type="date"]::-moz-calendar-picker-indicator {
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  cursor: pointer;
-}
+  /* Hide the calendar picker in Firefox but keep it functional */
+  .calendar-icon-right::-moz-calendar-picker-indicator {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+  }
 
-/* Ensure placeholder text for date inputs has the same color as other inputs */
-input[type="date"]::placeholder,
-input[type="date"]::-webkit-input-placeholder {
-  color: var(--color-gray-400, #9ca3af);
-}
+  /* Ensure placeholder text for date inputs has the same color as other inputs */
+  .calendar-icon-right::placeholder,
+  .calendar-icon-right::-webkit-input-placeholder {
+    color: var(--color-gray-400, #9ca3af);
+  }
 
-/* Style empty date inputs to look like placeholders */
-input[type="date"]:invalid {
-  color: var(--color-gray-400, #9ca3af);
-}
+  /* Style empty date inputs to look like placeholders */
+  .calendar-icon-right:invalid {
+    color: var(--color-gray-400, #9ca3af);
+  }
 
-/* Override for valid but empty date inputs in some browsers */
-input[type="date"]:not([value=""]):not(:focus):invalid {
-  color: var(--color-gray-400, #9ca3af);
-}
+  /* Override for valid but empty date inputs in some browsers */
+  .calendar-icon-right:not([value=""]):not(:focus):invalid {
+    color: var(--color-gray-400, #9ca3af);
+  }
 
-/* Custom disabled styles */
-input:disabled {
-  background-color: var(--color-gray-50, #f9fafb);
-  color: var(--color-gray-500, #6b7280);
-  cursor: not-allowed;
-}
+  /* Custom disabled styles */
+  .lydia-input:disabled {
+    background-color: var(--color-gray-50, #f9fafb);
+    color: var(--color-gray-500, #6b7280);
+    cursor: not-allowed;
+  }
 
-/* Input wrappers with disabled inputs */
-div:has(> input:disabled) {
-  background-color: var(--color-gray-50, #f9fafb);
-  border-color: var(--color-gray-200, #e5e7eb);
-  outline-color: var(--color-gray-200, #e5e7eb) !important; /* Ensure outline color overrides other states */
-  cursor: not-allowed;
+  /* Input wrappers with disabled inputs */
+  div:has(> .lydia-input:disabled) {
+    background-color: var(--color-gray-50, #f9fafb);
+    border-color: var(--color-gray-200, #e5e7eb);
+    outline-color: var(--color-gray-200, #e5e7eb);
+    cursor: not-allowed;
+  }
 }

@@ -748,8 +748,8 @@
     "react-dom": "^19.1.0"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.build.json && vite build -l silent && rm -rf dist/node_modules dist/_virtual && node scripts/copy-css-sources.mjs && node scripts/strip-css-imports-from-declarations.mjs && node scripts/relativize-declaration-imports.mjs && node scripts/generate-exports.mjs",
-    "build:verbose": "rm -rf dist && tsc -p tsconfig.build.json && vite build -l info && rm -rf dist/node_modules dist/_virtual && node scripts/copy-css-sources.mjs && node scripts/strip-css-imports-from-declarations.mjs && node scripts/relativize-declaration-imports.mjs && node scripts/generate-exports.mjs",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json && vite build -l silent && rm -rf dist/node_modules dist/_virtual && node scripts/copy-css-sources.mjs && node scripts/relativize-declaration-imports.mjs && node scripts/generate-exports.mjs",
+    "build:verbose": "rm -rf dist && tsc -p tsconfig.build.json && vite build -l info && rm -rf dist/node_modules dist/_virtual && node scripts/copy-css-sources.mjs && node scripts/relativize-declaration-imports.mjs && node scripts/generate-exports.mjs",
     "changelog": "node scripts/build-changelog.mjs",
     "check": "biome check src --write && pnpm types",
     "check-ci": "biome ci src",

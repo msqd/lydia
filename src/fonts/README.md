@@ -51,13 +51,14 @@ Lato applies wherever the `font-sans` family applies, which under Tailwind's pre
 document. A consumer importing `@msqd/lydia/styles` gets both the `@font-face` declarations and the token,
 so no further configuration is needed.
 
-The `@font-face` rules reference `/fonts/*.woff2`, so these files must be served from the site root,
-including with `@msqd/lydia/styles`. They ship as `dist/fonts` in the package: copy or serve that folder at `/fonts/`.
+The `@font-face` rules reference these files by relative URL (`./fonts/*.woff2` in `src/theme.css`), so the
+bundler of whoever imports `theme.css`, `components.css` or `styles` resolves and emits them: nothing to copy
+or serve. The package ships them in `dist/css/fonts` (with `OFL.txt`) for `theme.css`, and as hashed assets in
+`dist/assets` for the precompiled `styles`.
 
 ## Loading
 
 - `font-display: swap`, so text stays readable in a fallback face while Lato loads.
-- `Lato-Regular.woff2` and `Lato-Bold.woff2` are preloaded in `index.html`.
 - WOFF2 only, which every browser supporting CSS custom properties also supports.
 
 ## Fallback

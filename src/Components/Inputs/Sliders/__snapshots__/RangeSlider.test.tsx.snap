@@ -12,7 +12,7 @@ exports[`RangeSlider > renders with custom thumbSize 1`] = `
     >
       <input
         aria-label="Minimum"
-        class="range-slider-input"
+        class="range-slider-input lydia-input"
         max="10"
         min="0"
         step="1"
@@ -22,7 +22,7 @@ exports[`RangeSlider > renders with custom thumbSize 1`] = `
       />
       <input
         aria-label="Maximum"
-        class="range-slider-input"
+        class="range-slider-input lydia-input"
         max="10"
         min="0"
         step="1"
@@ -70,7 +70,7 @@ exports[`RangeSlider > renders with default props 1`] = `
     >
       <input
         aria-label="Minimum"
-        class="range-slider-input"
+        class="range-slider-input lydia-input"
         max="10"
         min="0"
         step="1"
@@ -80,7 +80,7 @@ exports[`RangeSlider > renders with default props 1`] = `
       />
       <input
         aria-label="Maximum"
-        class="range-slider-input"
+        class="range-slider-input lydia-input"
         max="10"
         min="0"
         step="1"
@@ -128,7 +128,7 @@ exports[`RangeSlider > renders with marks 1`] = `
     >
       <input
         aria-label="Minimum"
-        class="range-slider-input"
+        class="range-slider-input lydia-input"
         max="100"
         min="0"
         step="1"
@@ -138,7 +138,7 @@ exports[`RangeSlider > renders with marks 1`] = `
       />
       <input
         aria-label="Maximum"
-        class="range-slider-input"
+        class="range-slider-input lydia-input"
         max="100"
         min="0"
         step="1"
