@@ -57,6 +57,22 @@ export const WithInitialValue: Story = {
   },
 };
 
+export const WithError: Story = {
+  args: {
+    value: {
+      startDate: "2025-05-31",
+      endDate: "2025-05-01",
+    },
+  },
+};
+
+export const WithErrorWithoutLabel: Story = {
+  args: {
+    ...WithError.args,
+    label: undefined,
+  },
+};
+
 export const WithoutLabel: Story = {
   args: {
     label: undefined,

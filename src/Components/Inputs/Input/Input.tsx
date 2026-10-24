@@ -1,5 +1,6 @@
 import { type ComponentProps, type ReactNode, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
+import { Field, fieldWrapperClassName, useField } from "../Field";
 import { InputButton, type InputButtonProps } from "../InputButton";
 import { InputIcon } from "../InputIcon";
 import { KeyboardShortcut } from "../KeyboardShortcut";
@@ -97,14 +98,9 @@ export interface InputProps extends ComponentProps<"input"> {
   hideContainer?: boolean;
 }
 
-const baseClassName = "w-full";
-const defaultWrapperClassName =
-  "mt-2 flex items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600";
+const defaultWrapperClassName = twMerge(fieldWrapperClassName, "items-center h-[38px]");
 const defaultInputClassName =
   "lydia-input w-full border-0 px-1.5 text-gray-900 text-left placeholder:text-gray-400 focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px]";
-const defaultLabelClassName = "block text-sm/6 font-medium text-gray-900";
-const helpTextClassName = "mt-2 text-sm text-gray-500";
-const errorTextClassName = "mt-2 text-sm text-danger-600";
 
 /**
  * Input component with cleaner props interface
@@ -151,6 +147,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
       // Input props
       id,
+      "aria-describedby": describedBy,
       ...props
     },
     ref,
@@ -159,22 +156,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const resolvedError = variant === "error";
     const resolvedSuccess = variant === "success";
 
-    // Derive aria props based on helpText and errorMessage
-    const ariaProps: Record<string, string> = {};
-    if (helpText && helpTextId) {
-      ariaProps["aria-describedby"] = helpTextId;
-    }
-    if (errorMessage && errorId) {
-      ariaProps["aria-describedby"] = errorId;
-      ariaProps["aria-invalid"] = "true";
-    }
-
-    // Combine cornerHintId with ariaProps if it exists
-    if (cornerHint && cornerHintId) {
-      ariaProps["aria-describedby"] = ariaProps["aria-describedby"]
-        ? `${ariaProps["aria-describedby"]} ${cornerHintId}`
-        : cornerHintId;
-    }
+    const { ids, controlProps } = useField({
+      id,
+      helpTextId,
+      errorId,
+      cornerHintId,
+      helpText,
+      errorMessage,
+      cornerHint,
+      invalid: resolvedError,
+      describedBy,
+      framed: !hideContainer,
+    });
 
     // Determine state styles
     let stateWrapperClass = "";
@@ -260,7 +253,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           type={props.type || "text"}
-          id={id}
           className={twMerge(
             defaultInputClassName,
             stateInputClass,
@@ -272,7 +264,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             props.disabled ? "text-gray-500 placeholder:text-gray-400" : "",
             inputClassName,
           )}
-          {...ariaProps}
+          {...controlProps}
           {...props}
         />
         {props.type === "date" && <DatePickerIcon />}
@@ -285,43 +277,25 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       return inputElement;
     }
 
-    // Label component
-    const LabelComponent = () => {
-      if (!label && !cornerHint) return null;
-
-      return (
-        <div className={cornerHint ? "flex justify-between" : undefined}>
-          {label && (
-            <label htmlFor={id} className={twMerge(defaultLabelClassName, labelClassName)}>
-              {label}
-            </label>
-          )}
-          {cornerHint && (
-            <span id={cornerHintId} className="text-sm/6 text-gray-500">
-              {cornerHint}
-            </span>
-          )}
-        </div>
-      );
-    };
+    if (hideContainer) {
+      return inputElement;
+    }
 
     return (
-      <div className={twMerge(baseClassName, className)}>
-        <LabelComponent />
-        <div className="mt-2">{inputElement}</div>
-
-        {helpText && !errorMessage && (
-          <p id={helpTextId} className={helpTextClassName}>
-            {helpText}
-          </p>
-        )}
-
-        {errorMessage && (
-          <p id={errorId} className={errorTextClassName}>
-            {errorMessage}
-          </p>
-        )}
-      </div>
+      <Field
+        controlId={ids.control}
+        helpTextId={ids.help}
+        errorId={ids.error}
+        cornerHintId={ids.cornerHint}
+        label={label}
+        labelClassName={labelClassName}
+        cornerHint={cornerHint}
+        helpText={helpText}
+        errorMessage={errorMessage}
+        className={className}
+      >
+        {inputElement}
+      </Field>
     );
   },
 );

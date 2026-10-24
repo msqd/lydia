@@ -38,7 +38,7 @@ exports[`TransactionsListPage > renders the page title and description 1`] = `
               <input
                 autocomplete="off"
                 class="lydia-input overflow-ellipsis w-full border-0 p-0 focus:outline-none focus:ring-0 ml-1"
-                id="search"
+                id="_r_43_"
                 name="search"
                 placeholder="Search by endpoint, method, status..."
                 type="text"
