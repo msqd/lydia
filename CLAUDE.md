@@ -12,3 +12,6 @@ Always prefer scoped test runs/updates so that it does not conflict with other c
 
 When giving feedback to the user after a task is completed, always stay short and succint. A few lines bullet points is
 enough.
+
+Never include references to Claude, Anthropic or any AI assistant in commit messages, pull request titles or
+descriptions, code comments or documentation.
