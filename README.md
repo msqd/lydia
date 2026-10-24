@@ -104,7 +104,7 @@ function App() {
 
 ### Prerequisites
 
-- Node.js (latest LTS version recommended)
+- Node.js, at the version in [`.nvmrc`](.nvmrc)
 - pnpm
 - Playwright's Chromium, for the story tests (run once per machine):
   - `pnpm exec playwright install chromium`
@@ -133,15 +133,7 @@ function App() {
 
 Contributions are welcome! Feel free to open an issue or submit a pull request.
 
-### Contribution Guidelines
-
-1. Fork the repository
-2. Create a branch for your feature (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-A PR that changes `src/` adds a changelog fragment; see [RELEASING.md](RELEASING.md), which also covers cutting a release.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) first: prerequisites, commands, commit and pull request rules. Security vulnerabilities go through [SECURITY.md](SECURITY.md).
 
 ## 📄 License
 

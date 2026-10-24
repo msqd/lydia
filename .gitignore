@@ -21,3 +21,6 @@ storybook-static/
 yarn-debug.log*
 yarn-error.log*
 *.tgz
+*.iml
+.claude/
+.full-review/

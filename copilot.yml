@@ -1,9 +1,0 @@
-security:
-  trustedCommands:
-    - ls
-    - pnpm install
-    - pnpm run dev
-    - pnpm tsc
-    - pnpm test
-    - pnpm test:watch
-    - pnpm check
