@@ -74,7 +74,8 @@ const TransactionsChart = ({ data, timeRange }: TransactionsChartProps) => {
         ...defaultEchartOptions.tooltip,
         formatter: barConfig.useSplitBars
           ? ChartTooltipFormatter.formatSplitBarsTooltip
-          : (params: any[]) => ChartTooltipFormatter.formatUnifiedBarsTooltip(params, data),
+          : // Same ECharts params as the other tooltip formatters: a series list this code does not narrow.
+            (params: any[]) => ChartTooltipFormatter.formatUnifiedBarsTooltip(params, data),
       },
       series: createSeries(),
     };
