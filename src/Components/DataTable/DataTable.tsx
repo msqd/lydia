@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { isValidElement, useEffect, useRef } from "react";
 import type { ComponentProps, KeyboardEvent, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -118,8 +118,16 @@ function formatRowValue<TRow extends object, TComputed extends object>(
       return type.format(value);
     }
 
-    if (!value) {
+    if (value === undefined || value === null || value === "") {
       return "-";
+    }
+
+    if (typeof value === "boolean") {
+      return String(value);
+    }
+
+    if (typeof value === "object" && !isValidElement(value)) {
+      return JSON.stringify(value);
     }
 
     return value as ReactNode;
@@ -141,6 +149,16 @@ export function DataTable<TRow extends object, TComputed extends object = BaseRo
   ...table
 }: DataTableProps<TRow, TComputed>) {
   const body = useRef<HTMLTableSectionElement>(null);
+
+  const isKnown = (name: keyof (TRow & TComputed)) => types[String(name)] !== undefined;
+  const knownColumns = columns?.filter(isKnown);
+  // A string key, so the effect logs on a change of the missing set and not on every new `columns` array.
+  const missingKey = JSON.stringify(columns?.filter((name) => !isKnown(name)).map(String) ?? []);
+  useEffect(() => {
+    for (const name of JSON.parse(missingKey) as string[]) {
+      console.error(`DataTable: column "${name}" has no entry in \`types\`, it is skipped.`);
+    }
+  }, [missingKey]);
 
   const isSelected = (row: TRow) =>
     selected !== undefined &&
@@ -214,7 +232,7 @@ export function DataTable<TRow extends object, TComputed extends object = BaseRo
     <table {...table} className={twMerge(tableClasses, className)} role={onRowClick ? "grid" : undefined}>
       <thead>
         <tr>
-          {columns?.map((name) => {
+          {knownColumns?.map((name) => {
             const colName = String(name);
             const colType = types[colName];
             return (
@@ -259,7 +277,7 @@ export function DataTable<TRow extends object, TComputed extends object = BaseRo
                 .filter(Boolean)
                 .join(" ")}
             >
-              {columns?.map((name, index) => {
+              {knownColumns?.map((name, index) => {
                 const colName = String(name);
                 const colType = types[colName];
                 const colProps: { onClick?: () => unknown } = {};
