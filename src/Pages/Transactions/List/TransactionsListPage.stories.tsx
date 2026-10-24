@@ -1,6 +1,5 @@
 import { Drawer } from "@msqd/lydia/Components/Dialog";
 import { DefaultLayout } from "@msqd/lydia/Components/Layouts/DefaultLayout";
-import { ApilabLogotype, DefaultLogo } from "@msqd/lydia/Components/NavBar/NavBar";
 import { ToastProvider } from "@msqd/lydia/Components/Toast";
 import { deriveTransactionFacets } from "@msqd/lydia/Models/Transactions/facets";
 import { filterTransactions } from "@msqd/lydia/Models/Transactions/filtering";
@@ -16,8 +15,6 @@ const LayoutWrapper = (Story: React.ComponentType) => (
   <ToastProvider>
     <DefaultLayout
       navBarProps={{
-        logo: <DefaultLogo />,
-        brand: <ApilabLogotype />,
         navigation: [
           { name: "Overview", href: "#", current: false },
           { name: "Journal", href: "#", current: true },
@@ -300,7 +297,7 @@ const TransactionsListWithDrawer = () => {
         position="right"
         backdrop={false}
       >
-        <TransactionsDetailPage transaction={selectedTransaction} isDrawer={true} />
+        <TransactionsDetailPage transaction={selectedTransaction} />
       </Drawer>
     </>
   );

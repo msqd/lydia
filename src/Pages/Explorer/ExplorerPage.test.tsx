@@ -48,10 +48,9 @@ vi.mock("@msqd/lydia/Pages/Transactions/List", async (importOriginal) => ({
 // Another page is mocked, which keeps the unit boundary: this file is about the explorer, not
 // about the detail page's rendering. Design-system components render for real. See #56.
 vi.mock("@msqd/lydia/Pages/Transactions/Detail", () => ({
-  TransactionsDetailPage: ({ transaction, onBack }: { transaction?: { id?: string }; onBack?: () => void }) => (
+  TransactionsDetailPage: ({ transaction }: { transaction?: { id?: string } }) => (
     <div data-testid="transaction-detail">
       <div>Transaction ID: {transaction?.id}</div>
-      <button onClick={onBack}>Back</button>
     </div>
   ),
 }));

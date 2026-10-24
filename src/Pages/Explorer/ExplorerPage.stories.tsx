@@ -1,22 +1,20 @@
 import { DefaultLayout } from "@msqd/lydia/Components/Layouts";
-import { ApilabLogotype, DefaultLogo } from "@msqd/lydia/Components/NavBar/NavBar";
 import { ToastProvider } from "@msqd/lydia/Components/Toast";
 import type { DetailedTransaction, Transaction } from "@msqd/lydia/Models/Transactions/types";
 import { toDetailedTransaction } from "@msqd/lydia/Pages/Transactions/Detail/TransactionsDetailPage.samples";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ExplorerPage } from "./ExplorerPage";
 
+const navigation = ["Overview", "Journal", "Explorer", "Alerts"].map((name) => ({
+  name,
+  href: "#",
+  current: name === "Explorer",
+}));
+
 // Layout wrapper for consistent page presentation
 const LayoutWrapper = (Story: React.ComponentType) => (
   <ToastProvider>
-    <DefaultLayout
-      navBarProps={{
-        logo: <DefaultLogo />,
-        brand: <ApilabLogotype />,
-        // Using default navigation which includes System link
-        // Explorer is set as current by default, but we could customize if needed
-      }}
-    >
+    <DefaultLayout navBarProps={{ navigation }}>
       <Story />
     </DefaultLayout>
   </ToastProvider>

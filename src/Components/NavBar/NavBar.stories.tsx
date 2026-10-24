@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { fn } from "storybook/test";
 import { DefaultBrand, NavBar } from "./NavBar";
 import type { NavigationItem, User } from "./NavBar";
 
@@ -59,6 +60,38 @@ const customUser: User = {
   avatar: (
     <div className="size-8 rounded-full bg-emerald-500 flex items-center justify-center text-white font-medium">AJ</div>
   ),
+};
+
+/**
+ * No props: the "lydia" brand and nothing else. The bar draws only what the consumer passes.
+ */
+export const Empty: Story = {};
+
+/**
+ * A user without `userNavigation`: the avatar is drawn, the menu holds no entry.
+ */
+export const UserWithoutUserNavigation: Story = {
+  args: {
+    user: defaultUser,
+  },
+};
+
+/**
+ * Every item goes through `linkComponent` and receives its `onClick`, desktop and mobile.
+ * Clicks show in the Actions panel.
+ */
+export const WithOnClickItems: Story = {
+  args: {
+    navigation: [{ name: "Overview", href: "#", current: true, onClick: fn().mockName("navigate: Overview") }],
+    userNavigation: [
+      {
+        name: "Sign out",
+        href: "#",
+        onClick: fn((event: React.MouseEvent) => event.preventDefault()).mockName("sign out"),
+      },
+    ],
+    user: defaultUser,
+  },
 };
 
 export const Default: Story = {
@@ -184,16 +217,7 @@ export const WithCustomLogoComponent: Story = {
   },
 };
 
-export const WithDefaultComponents: Story = {
-  args: {
-    navigation: defaultNavigation,
-    userNavigation: defaultUserNavigation,
-    user: defaultUser,
-  },
-  name: "With DefaultLogo and DefaultBrand",
-};
-
-export const WithDefaultLogoCustomBrand: Story = {
+export const WithBrandText: Story = {
   args: {
     navigation: defaultNavigation,
     userNavigation: defaultUserNavigation,

@@ -20,10 +20,6 @@ describe("TransactionsDetailPage", () => {
       </TestWrapper>,
     );
 
-    // Check title and layout
-    expect(screen.getByText("Transaction details")).toBeInTheDocument();
-    // Nav title is not relevant for this test structure
-
     // Check some transaction metadata is displayed (now uses tx001 data)
     expect(screen.getByText("/api/users/123/profile")).toBeInTheDocument();
     expect(screen.getByTestId("method-badge-GET")).toBeInTheDocument();
@@ -35,6 +31,18 @@ describe("TransactionsDetailPage", () => {
 
     // Snapshot test
     expect(container).toMatchSnapshot();
+  });
+
+  it("draws no app chrome nor page title of its own", () => {
+    render(
+      <TestWrapper>
+        <TransactionsDetailPage transaction={sampleDetailedTransaction} />
+      </TestWrapper>,
+    );
+
+    expect(screen.queryByTestId("navbar")).not.toBeInTheDocument();
+    expect(screen.queryByRole("banner")).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { level: 1 })).not.toBeInTheDocument();
   });
 
   it("renders the request and response sections", () => {
@@ -101,7 +109,6 @@ describe("TransactionsDetailPage", () => {
 
     const detailPage = screen.getByTestId("transaction-detail");
     expect(detailPage).toHaveClass("custom-class");
-    expect(detailPage).toHaveClass("max-w-6xl");
   });
 
   it("copy button is not visible when metadata section is closed", () => {
