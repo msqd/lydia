@@ -24,6 +24,14 @@ export interface Alert {
 // Hoisted so the hook below sees a stable array: a fresh literal each render would defeat its memo.
 const noTransactions: Transaction[] = [];
 
+// An alert carries its own transactions, so there is no backend to filter them: this is a consumer
+// of the client-side fallback rather than of a server. Keyed by alert at the call site, so search,
+// filters and page start clean for each alert.
+function AlertTransactions({ transactions }: { transactions: Transaction[] }) {
+  const relatedTransactions = useClientSideTransactions(transactions);
+  return <TransactionsListPage {...relatedTransactions} className="h-full" />;
+}
+
 const statusColors: Record<Alert["status"], BadgeColor> = {
   firing: "danger",
   expired: "warning",
@@ -58,11 +66,6 @@ export function AlertsPage({ alerts, className, ...props }: AlertsPageProps) {
   const handleCloseDrawer = () => {
     setSelectedAlert(null);
   };
-
-  const alertTransactions = selectedAlert?.transactions ?? noTransactions;
-  // An alert carries its own transactions, so there is no backend to filter them: this page is a
-  // consumer of the client-side fallback rather than of a server.
-  const relatedTransactions = useClientSideTransactions(alertTransactions);
 
   return (
     <div className={twMerge("space-y-6", className)} {...props}>
@@ -120,11 +123,11 @@ export function AlertsPage({ alerts, className, ...props }: AlertsPageProps) {
                             {alert.affectedEndpoint}
                           </span>
                         )}
-                        {alert.transactionCount && (
+                        {alert.transactionCount ? (
                           <span>
                             <span className="font-medium">{alert.transactionCount}</span> tx
                           </span>
-                        )}
+                        ) : null}
                       </div>
                     </div>
 
@@ -144,7 +147,7 @@ export function AlertsPage({ alerts, className, ...props }: AlertsPageProps) {
         title={selectedAlert ? `Transactions for: ${selectedAlert.name}` : "Alert Transactions"}
         description={
           selectedAlert
-            ? `Showing ${selectedAlert.transactionCount || 0} transactions related to this alert from ${selectedAlert.affectedEndpoint || "various endpoints"}`
+            ? `Showing ${(selectedAlert.transactions ?? noTransactions).length} transactions related to this alert from ${selectedAlert.affectedEndpoint || "various endpoints"}`
             : "Related transaction details"
         }
         size="lg"
@@ -153,7 +156,7 @@ export function AlertsPage({ alerts, className, ...props }: AlertsPageProps) {
       >
         {selectedAlert && (
           <div className="h-full">
-            <TransactionsListPage {...relatedTransactions} className="h-full" />
+            <AlertTransactions key={selectedAlert.id} transactions={selectedAlert.transactions ?? noTransactions} />
           </div>
         )}
       </Drawer>

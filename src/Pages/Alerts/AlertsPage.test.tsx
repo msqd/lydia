@@ -11,13 +11,18 @@ vi.mock("@msqd/lydia/Pages/Transactions/List", async (importOriginal) => ({
   TransactionsListPage: ({
     transactions,
     total,
+    search,
+    onSearchChange,
     className,
   }: {
     transactions: any[];
     total?: number;
+    search?: string;
+    onSearchChange?: (search: string) => void;
     className?: string;
   }) => (
     <div data-testid="transactions-list" className={className}>
+      <input aria-label="Search" value={search} onChange={(event) => onSearchChange?.(event.target.value)} />
       <div>
         Transactions: {transactions.length} of {total}
       </div>
@@ -131,5 +136,33 @@ describe("AlertsPage", () => {
     expect(screen.getByText("2 minutes ago")).toBeInTheDocument();
     expect(screen.getByText("30 seconds ago")).toBeInTheDocument();
     expect(screen.getByText("3 hours ago")).toBeInTheDocument();
+  });
+
+  it("renders no count for an alert without transactions", () => {
+    const alert = { ...sampleAlerts[0], transactionCount: 0, transactions: [] };
+    render(<AlertsPage alerts={[alert]} />);
+    expect(screen.queryByText("0")).not.toBeInTheDocument();
+  });
+
+  it("counts the transactions the drawer lists, not the alert's declared count", () => {
+    const alert = {
+      ...sampleAlerts[0],
+      transactionCount: 999,
+      transactions: sampleAlerts[0].transactions?.slice(0, 5),
+    };
+    render(<AlertsPage alerts={[alert]} />);
+    fireEvent.click(screen.getByText(alert.name));
+    expect(screen.getByText(/Showing 5 transactions related to this alert/)).toBeInTheDocument();
+  });
+
+  it("starts each alert with a clean list state", () => {
+    render(<AlertsPage alerts={sampleAlerts} />);
+    fireEvent.click(screen.getByText(sampleAlerts[0].name));
+    fireEvent.change(screen.getByLabelText("Search"), { target: { value: "payments" } });
+    expect(screen.getByLabelText("Search")).toHaveValue("payments");
+
+    fireEvent.click(screen.getByLabelText("Close drawer"));
+    fireEvent.click(screen.getByText(sampleAlerts[1].name));
+    expect(screen.getByLabelText("Search")).toHaveValue("");
   });
 });
