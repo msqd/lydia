@@ -13,12 +13,12 @@ exports[`MultipleChoiceFacet > matches snapshot 1`] = `
       class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
     >
       <button
-        aria-controls="headlessui-disclosure-panel-_r_1o_"
+        aria-controls="headlessui-disclosure-panel-_r_36_"
         aria-expanded="true"
         class="flex w-full items-start text-left cursor-pointer"
         data-headlessui-state="open"
         data-open=""
-        id="headlessui-disclosure-button-_r_1n_"
+        id="headlessui-disclosure-button-_r_35_"
         type="button"
       >
         <span
@@ -49,16 +49,16 @@ exports[`MultipleChoiceFacet > matches snapshot 1`] = `
     class="mt-2 space-y-2"
     data-headlessui-state="open"
     data-open=""
-    id="headlessui-disclosure-panel-_r_1o_"
+    id="headlessui-disclosure-panel-_r_36_"
   >
     <p
       class="text-xs text-gray-600"
-      id="_r_1m_-caption"
+      id="_r_34_-caption"
     >
       Counts cover all transactions
     </p>
     <div
-      aria-describedby="_r_1m_-caption"
+      aria-describedby="_r_34_-caption"
       aria-label="Test Filter"
       class="space-y-2"
       role="group"
@@ -74,8 +74,8 @@ exports[`MultipleChoiceFacet > matches snapshot 1`] = `
           >
             <input
               class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-              id="_r_1m_-0"
-              name="_r_1m_-0"
+              id="_r_34_-0"
+              name="_r_34_-0"
               type="checkbox"
             />
           </div>
@@ -84,7 +84,7 @@ exports[`MultipleChoiceFacet > matches snapshot 1`] = `
           >
             <label
               class="font-medium text-gray-900 block cursor-pointer"
-              for="_r_1m_-0"
+              for="_r_34_-0"
             >
               <span
                 class="block truncate"
@@ -111,8 +111,8 @@ exports[`MultipleChoiceFacet > matches snapshot 1`] = `
           >
             <input
               class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-              id="_r_1m_-1"
-              name="_r_1m_-1"
+              id="_r_34_-1"
+              name="_r_34_-1"
               type="checkbox"
             />
           </div>
@@ -121,7 +121,7 @@ exports[`MultipleChoiceFacet > matches snapshot 1`] = `
           >
             <label
               class="font-medium text-gray-900 block cursor-pointer"
-              for="_r_1m_-1"
+              for="_r_34_-1"
             >
               <span
                 class="block truncate"
@@ -148,8 +148,8 @@ exports[`MultipleChoiceFacet > matches snapshot 1`] = `
           >
             <input
               class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-              id="_r_1m_-2"
-              name="_r_1m_-2"
+              id="_r_34_-2"
+              name="_r_34_-2"
               type="checkbox"
             />
           </div>
@@ -158,7 +158,7 @@ exports[`MultipleChoiceFacet > matches snapshot 1`] = `
           >
             <label
               class="font-medium text-gray-900 block cursor-pointer"
-              for="_r_1m_-2"
+              for="_r_34_-2"
             >
               <span
                 class="block truncate"
@@ -192,12 +192,12 @@ exports[`MultipleChoiceFacet > matches snapshot with filters applied 1`] = `
       class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
     >
       <button
-        aria-controls="headlessui-disclosure-panel-_r_1r_"
+        aria-controls="headlessui-disclosure-panel-_r_3c_"
         aria-expanded="true"
         class="flex w-full items-start text-left cursor-pointer"
         data-headlessui-state="open"
         data-open=""
-        id="headlessui-disclosure-button-_r_1q_"
+        id="headlessui-disclosure-button-_r_3b_"
         type="button"
       >
         <span
@@ -253,16 +253,16 @@ exports[`MultipleChoiceFacet > matches snapshot with filters applied 1`] = `
     class="mt-2 space-y-2"
     data-headlessui-state="open"
     data-open=""
-    id="headlessui-disclosure-panel-_r_1r_"
+    id="headlessui-disclosure-panel-_r_3c_"
   >
     <p
       class="text-xs text-gray-600"
-      id="_r_1p_-caption"
+      id="_r_3a_-caption"
     >
       Counts cover all transactions
     </p>
     <div
-      aria-describedby="_r_1p_-caption"
+      aria-describedby="_r_3a_-caption"
       aria-label="Test Filter"
       class="space-y-2"
       role="group"
@@ -279,8 +279,8 @@ exports[`MultipleChoiceFacet > matches snapshot with filters applied 1`] = `
             <input
               checked=""
               class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-              id="_r_1p_-0"
-              name="_r_1p_-0"
+              id="_r_3a_-0"
+              name="_r_3a_-0"
               type="checkbox"
             />
           </div>
@@ -289,7 +289,7 @@ exports[`MultipleChoiceFacet > matches snapshot with filters applied 1`] = `
           >
             <label
               class="font-medium text-gray-900 block cursor-pointer"
-              for="_r_1p_-0"
+              for="_r_3a_-0"
             >
               <span
                 class="block truncate"
@@ -327,8 +327,8 @@ exports[`MultipleChoiceFacet > matches snapshot with filters applied 1`] = `
             <input
               checked=""
               class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-              id="_r_1p_-1"
-              name="_r_1p_-1"
+              id="_r_3a_-1"
+              name="_r_3a_-1"
               type="checkbox"
             />
           </div>
@@ -337,7 +337,7 @@ exports[`MultipleChoiceFacet > matches snapshot with filters applied 1`] = `
           >
             <label
               class="font-medium text-gray-900 block cursor-pointer"
-              for="_r_1p_-1"
+              for="_r_3a_-1"
             >
               <span
                 class="block truncate"
@@ -374,8 +374,8 @@ exports[`MultipleChoiceFacet > matches snapshot with filters applied 1`] = `
           >
             <input
               class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-              id="_r_1p_-2"
-              name="_r_1p_-2"
+              id="_r_3a_-2"
+              name="_r_3a_-2"
               type="checkbox"
             />
           </div>
@@ -384,7 +384,7 @@ exports[`MultipleChoiceFacet > matches snapshot with filters applied 1`] = `
           >
             <label
               class="font-medium text-gray-900 block cursor-pointer"
-              for="_r_1p_-2"
+              for="_r_3a_-2"
             >
               <span
                 class="block truncate"

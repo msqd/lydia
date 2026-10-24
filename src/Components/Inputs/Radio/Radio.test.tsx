@@ -86,4 +86,29 @@ describe("Radio component", () => {
     const label = screen.getByText("test-radio");
     expect(label).toHaveAttribute("for", "custom-id");
   });
+
+  it("keeps hook order when id is passed then cleared", () => {
+    const { rerender } = render(<Radio name="r" id="custom" />);
+    expect(screen.getByRole("radio")).toHaveAttribute("id", "custom");
+
+    rerender(<Radio name="r" />);
+    const radio = screen.getByRole("radio");
+    expect(radio.id).not.toBe("");
+    expect(radio.id).not.toBe("custom");
+    expect(screen.getByText("r")).toHaveAttribute("for", radio.id);
+
+    rerender(<Radio name="r" id="again" />);
+    expect(screen.getByRole("radio")).toHaveAttribute("id", "again");
+  });
+
+  it("keeps hook order when id is passed after a generated one", () => {
+    const { rerender } = render(<Radio name="r" />);
+    const generated = screen.getByRole("radio").id;
+
+    rerender(<Radio name="r" id="custom" />);
+    expect(screen.getByRole("radio")).toHaveAttribute("id", "custom");
+
+    rerender(<Radio name="r" />);
+    expect(screen.getByRole("radio")).toHaveAttribute("id", generated);
+  });
 });

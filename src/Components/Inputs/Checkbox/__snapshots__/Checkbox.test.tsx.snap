@@ -10,7 +10,7 @@ exports[`Checkbox component > renders correctly with default props 1`] = `
     >
       <input
         class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
-        id="test-checkbox"
+        id="_r_0_"
         name="test-checkbox"
         type="checkbox"
       />
@@ -20,7 +20,7 @@ exports[`Checkbox component > renders correctly with default props 1`] = `
     >
       <label
         class="font-medium text-gray-900 block cursor-pointer"
-        for="test-checkbox"
+        for="_r_0_"
       >
         test-checkbox
       </label>
