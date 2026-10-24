@@ -1,4 +1,4 @@
-import { Disclosure } from "@headlessui/react";
+import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 import { H5 } from "@msqd/lydia/Components/Typography";
 import { HeadingLevel, useSubheadingLevel } from "@msqd/lydia/Components/Typography/HeadingLevel";
@@ -71,7 +71,7 @@ export function Foldable({
               go inside it.
             */}
             <H5 level={level} padding="pt-0" className="flex min-w-0 grow whitespace-nowrap font-normal">
-              <Disclosure.Button
+              <DisclosureButton
                 className={twMerge("flex w-full items-start text-left", children ? "cursor-pointer" : "cursor-default")}
                 disabled={!children}
               >
@@ -84,7 +84,7 @@ export function Foldable({
                   ) : (
                     <ChevronDownIcon className="h-4 w-4 min-w-4 text-gray-600" />
                   ))}
-              </Disclosure.Button>
+              </DisclosureButton>
             </H5>
 
             {/*
@@ -100,9 +100,9 @@ export function Foldable({
 
           {/* Foldable content */}
           {children && (
-            <Disclosure.Panel className="mt-2 space-y-2">
+            <DisclosurePanel className="mt-2 space-y-2">
               <HeadingLevel level={level}>{children}</HeadingLevel>
-            </Disclosure.Panel>
+            </DisclosurePanel>
           )}
         </div>
       )}

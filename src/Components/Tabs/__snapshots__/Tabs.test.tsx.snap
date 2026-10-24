@@ -10,9 +10,7 @@ exports[`Tabs > passes the onChange callback prop > tabs-with-on-change 1`] = `
         class="grid grid-cols-1 sm:hidden"
       >
         <div
-          aria-orientation="horizontal"
           class="relative"
-          role="tablist"
         >
           <select
             aria-label="Select a tab"
@@ -174,9 +172,7 @@ exports[`Tabs > renders tabs correctly 1`] = `
         class="grid grid-cols-1 sm:hidden"
       >
         <div
-          aria-orientation="horizontal"
           class="relative"
-          role="tablist"
         >
           <select
             aria-label="Select a tab"

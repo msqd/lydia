@@ -26,7 +26,7 @@ describe("Tabs", () => {
     const { container } = renderTabsComponent();
 
     // Check if all tabs are rendered - use getAllByRole to access the tab elements
-    const tabList = screen.getAllByRole("tablist")[1]; // Get the desktop tab list (second tablist)
+    const tabList = screen.getByRole("tablist");
     const tabs = within(tabList).getAllByRole("tab");
 
     expect(tabs[0]).toHaveTextContent("My Account");
@@ -51,7 +51,7 @@ describe("Tabs", () => {
     expect(firstTabPanel).toHaveTextContent("Account Content");
 
     // Verify that the correct tab is selected
-    const tabList = screen.getAllByRole("tablist")[1]; // Desktop tablist
+    const tabList = screen.getByRole("tablist");
     const tabs = within(tabList).getAllByRole("tab");
     expect(tabs[0]).toHaveAttribute("aria-selected", "true");
 
@@ -66,7 +66,7 @@ describe("Tabs", () => {
     expect(secondTabPanel).toHaveTextContent("Company Content");
 
     // Verify that the correct tab is selected
-    const tabList2 = screen.getAllByRole("tablist")[1]; // Desktop tablist
+    const tabList2 = screen.getByRole("tablist");
     const tabs2 = within(tabList2).getAllByRole("tab");
     expect(tabs2[1]).toHaveAttribute("aria-selected", "true");
   });
@@ -82,7 +82,7 @@ describe("Tabs", () => {
     expect(visiblePanel).toHaveTextContent("Team Content");
 
     // Check that the correct tab is selected in the UI
-    const tabList = screen.getAllByRole("tablist")[1]; // Desktop tablist
+    const tabList = screen.getByRole("tablist");
     const tabs = within(tabList).getAllByRole("tab");
     expect(tabs[2]).toHaveAttribute("aria-selected", "true");
   });
@@ -96,7 +96,7 @@ describe("Tabs", () => {
     // Testing the prop is correctly passed would normally involve clicking,
     // but that's unstable in the test environment with HeadlessUI.
     // Instead, we'll verify the component structure is correct.
-    const tabList = screen.getAllByRole("tablist")[1];
+    const tabList = screen.getByRole("tablist");
     const tabs = within(tabList).getAllByRole("tab");
 
     // Check that tabs are rendered correctly with the correct attributes
@@ -112,7 +112,7 @@ describe("Tabs", () => {
     renderTabsComponent();
 
     // Get the desktop tabs (skip mobile select)
-    const tabList = screen.getAllByRole("tablist")[1];
+    const tabList = screen.getByRole("tablist");
     const tabs = within(tabList).getAllByRole("tab");
 
     // Check that first three tabs are not disabled
@@ -136,7 +136,7 @@ describe("Tabs", () => {
     expect(tabPanels[0]).toHaveTextContent("Company Content");
 
     // Verify that the correct tab is selected
-    const tabList = screen.getAllByRole("tablist")[1]; // Desktop tablist
+    const tabList = screen.getByRole("tablist");
     const tabs = within(tabList).getAllByRole("tab");
     expect(tabs[1]).toHaveAttribute("aria-selected", "true");
 
@@ -155,7 +155,7 @@ describe("Tabs", () => {
     expect(updatedTabPanels[0]).toHaveTextContent("Team Content");
 
     // Verify that the correct tab is selected
-    const updatedTabList = screen.getAllByRole("tablist")[1]; // Desktop tablist
+    const updatedTabList = screen.getByRole("tablist");
     const updatedTabs = within(updatedTabList).getAllByRole("tab");
     expect(updatedTabs[2]).toHaveAttribute("aria-selected", "true");
   });
@@ -170,5 +170,44 @@ describe("Tabs", () => {
     fireEvent.change(select, { target: { value: "1" } });
 
     expect(onChangeMock).toHaveBeenCalledWith(1);
+  });
+});
+
+describe("Tabs small-screen select", () => {
+  it("shows the chosen panel and calls onChange when uncontrolled", () => {
+    const onChangeMock = vi.fn();
+    renderTabsComponent({ onChange: onChangeMock });
+
+    const select = screen.getByLabelText("Select a tab");
+    fireEvent.change(select, { target: { value: "2" } });
+
+    expect(onChangeMock).toHaveBeenCalledWith(2);
+    expect(select).toHaveValue("2");
+    expect(screen.getByRole("tabpanel")).toHaveTextContent("Team Content");
+    const tabs = within(screen.getByRole("tablist")).getAllByRole("tab");
+    expect(tabs[2]).toHaveAttribute("aria-selected", "true");
+  });
+
+  it("starts on defaultIndex", () => {
+    renderTabsComponent({ defaultIndex: 1 });
+
+    expect(screen.getByLabelText("Select a tab")).toHaveValue("1");
+  });
+
+  it("leaves the choice to the parent when controlled", () => {
+    renderTabsComponent({ selectedIndex: 0 });
+
+    const select = screen.getByLabelText("Select a tab");
+    fireEvent.change(select, { target: { value: "1" } });
+
+    expect(select).toHaveValue("0");
+    expect(screen.getByRole("tabpanel")).toHaveTextContent("Account Content");
+  });
+
+  it("keeps the select out of every tablist", () => {
+    renderTabsComponent();
+
+    const select = screen.getByLabelText("Select a tab");
+    expect(select.closest("[role=tablist]")).toBeNull();
   });
 });
