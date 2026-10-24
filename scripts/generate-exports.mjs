@@ -4,48 +4,16 @@
  * Run after build: node scripts/generate-exports.mjs
  */
 
-import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from "fs";
-import { basename, dirname, extname, join, relative } from "path";
+import { existsSync, readFileSync, writeFileSync } from "fs";
+import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
-const DIST = join(ROOT, "dist");
 const PACKAGE_JSON = join(ROOT, "package.json");
 
-// Folders to include in exports (relative to dist)
-const INCLUDE_FOLDERS = ["Components", "Elements", "Pages", "Models", "Services", "Config", "Hooks"];
-
-// Files/patterns to exclude from exports
-const EXCLUDE_PATTERNS = [
-  /\.stories\./,
-  /\.test\./,
-  /\.samples\./,
-  /Testing\./,
-  /__snapshots__/,
-  /\.css\.js$/,
-  /\.svg\.js$/,
-];
-
-function shouldExclude(filePath) {
-  return EXCLUDE_PATTERNS.some((pattern) => pattern.test(filePath));
-}
-
-function findJsFiles(dir, files = []) {
-  if (!existsSync(dir)) return files;
-
-  for (const entry of readdirSync(dir)) {
-    const fullPath = join(dir, entry);
-    const stat = statSync(fullPath);
-
-    if (stat.isDirectory()) {
-      findJsFiles(fullPath, files);
-    } else if (entry.endsWith(".js") && !shouldExclude(fullPath)) {
-      files.push(fullPath);
-    }
-  }
-  return files;
-}
+// The public surface: folder barrels and the root entry. Nothing else under dist/ is exported.
+const PUBLIC_EXPORTS = join(__dirname, "public-exports.json");
 
 function generateExports() {
   const exports = {
@@ -59,38 +27,12 @@ function generateExports() {
     "./package.json": "./package.json",
   };
 
-  // Find all JS files in included folders
-  const allJsFiles = [];
-  for (const folder of INCLUDE_FOLDERS) {
-    const folderPath = join(DIST, folder);
-    findJsFiles(folderPath, allJsFiles);
-  }
-
-  // Generate export entries
-  for (const jsFile of allJsFiles) {
-    const relativePath = relative(DIST, jsFile);
-    const withoutExt = relativePath.replace(/\.js$/, "");
-
-    // Check if corresponding .d.ts exists
-    const dtsPath = jsFile.replace(/\.js$/, ".d.ts");
-    if (!existsSync(dtsPath)) continue;
-
-    const exportEntry = {
-      types: `./dist/${withoutExt}.d.ts`,
-      import: `./dist/${withoutExt}.js`,
-    };
-
-    if (basename(jsFile) === "index.js") {
-      // For index.js files, only export the folder path (not folder/index)
-      const folderExport = `./${dirname(relativePath)}`;
-      if (folderExport !== "./") {
-        exports[folderExport] = exportEntry;
-      }
-    } else {
-      // For named files, export with full path
-      const exportPath = `./${withoutExt}`;
-      exports[exportPath] = exportEntry;
+  for (const barrel of JSON.parse(readFileSync(PUBLIC_EXPORTS, "utf-8")).barrels) {
+    const entry = `./dist/${barrel}/index`;
+    if (!existsSync(join(ROOT, `${entry}.js`)) || !existsSync(join(ROOT, `${entry}.d.ts`))) {
+      throw new Error(`${PUBLIC_EXPORTS} lists "${barrel}", which has no built index.js and index.d.ts`);
     }
+    exports[`./${barrel}`] = { types: `${entry}.d.ts`, import: `${entry}.js` };
   }
 
   return exports;

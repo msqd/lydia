@@ -7,7 +7,7 @@ export type SyntaxTree = ReturnType<typeof refractor.highlight>;
 /** A node of a syntax tree, at the root or beneath an element. */
 type SyntaxNode = SyntaxTree["children"][number];
 
-interface SyntaxHighlighterProps {
+export interface SyntaxHighlighterProps {
   /** The syntax tree to render */
   ast: SyntaxTree;
 }

@@ -17,10 +17,12 @@ export function countsCaptionOf(
 
 const hasCount = (option: FilterMeta) => option.count !== undefined;
 
+export type FacetCountsCaptionProps = ComponentProps<"p">;
+
 /**
  * Says what the counts of a facet are counts of. The facet's option group points at it with `aria-describedby`, so a
  * screen reader reads it on entering the group.
  */
-export function FacetCountsCaption({ className, ...props }: ComponentProps<"p">) {
+export function FacetCountsCaption({ className, ...props }: FacetCountsCaptionProps) {
   return <p className={["text-xs text-gray-600", className].filter(Boolean).join(" ")} {...props} />;
 }

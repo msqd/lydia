@@ -115,8 +115,8 @@ export function App() {
 }
 ```
 
-You can import from the root (`@msqd/lydia`), a directory (`@msqd/lydia/Components/Buttons`) or a single
-component (`@msqd/lydia/Components/Buttons/Button`). Props and variants are documented in
+You can import from the root (`@msqd/lydia`) or a folder (`@msqd/lydia/Components/Buttons`, `@msqd/lydia/Components/Inputs/Input`).
+There is no subpath for a single file. Props and variants are documented in
 [Storybook](https://msqd.github.io/lydia/); declarations ship with the package.
 
 `test/consumer/` in the repository is a complete, minimal app doing exactly this. CI builds it from the
@@ -263,7 +263,7 @@ vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockImplementation(() => con
 
 ```tsx
 // src/App.test.tsx
-import { JsonTreeView } from "@msqd/lydia/Components/Formatter/JsonTreeView";
+import { JsonTreeView } from "@msqd/lydia/Components/Formatter";
 import { render, screen } from "@testing-library/react";
 import { expect, test } from "vitest";
 

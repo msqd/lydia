@@ -11,7 +11,7 @@ export interface PerformanceMetricsData {
   visibleItemCount?: number;
 }
 
-interface PerformanceMetricsProps {
+export interface PerformanceMetricsProps {
   /** Performance data to display */
   data: PerformanceMetricsData;
   /** Whether to show detailed metrics */

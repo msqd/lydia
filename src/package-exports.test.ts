@@ -13,10 +13,16 @@ import {
 } from "fs";
 import { isBuiltin } from "module";
 import { tmpdir } from "os";
-import { join, relative, resolve } from "path";
+import { join, relative, resolve, sep } from "path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 const srcPath = resolve(__dirname, ".");
+
+/** The explicit list read by scripts/generate-exports.mjs. */
+const publicSurface: { barrels: string[]; internal: Record<string, string> } = JSON.parse(
+  readFileSync(resolve(__dirname, "../scripts/public-exports.json"), "utf-8"),
+);
+const CSS_ENTRIES = ["styles", "theme.css", "components.css"];
 
 /** Mirrors tsconfig.build.json's exclude list, plus the test helper the exports map drops. */
 const NOT_SHIPPED = /\.(stories|test|bench|samples)\.tsx?$|[/\\](Testing|App|main)\.tsx?$/;
@@ -96,21 +102,41 @@ describe("Source layout", () => {
     expect(collisions).toEqual([]);
   });
 
-  it("documents only import paths that exist", () => {
+  it("documents only import paths on the public list", () => {
     const docs = collectDocs(resolve(__dirname, ".."));
+    const published = new Set([...publicSurface.barrels, ...CSS_ENTRIES]);
     const broken: string[] = [];
 
     for (const doc of docs) {
       for (const [, path] of readFileSync(doc, "utf-8").matchAll(/from ["']@msqd\/lydia\/([^"']+)["']/g)) {
-        // `@msqd/lydia/styles` is a build artifact rather than a source module.
-        if (path === "styles") continue;
-        const target = resolve(srcPath, path);
-        const exists = [".ts", ".tsx", "/index.ts", "/index.tsx"].some((suffix) => existsSync(`${target}${suffix}`));
-        if (!exists) broken.push(`${relative(resolve(__dirname, ".."), doc)}: @msqd/lydia/${path}`);
+        if (!published.has(path)) broken.push(`${relative(resolve(__dirname, ".."), doc)}: @msqd/lydia/${path}`);
       }
     }
 
     expect(broken).toEqual([]);
+  });
+});
+
+/**
+ * Runs without a build. The list in scripts/public-exports.json is the whole public surface: a
+ * barrel added under src/ is neither exported nor hidden until someone files it on one side.
+ */
+describe("Public surface", () => {
+  const sourceBarrels = collectDirectories(srcPath)
+    .filter((dir) => existsSync(join(dir, "index.ts")) || existsSync(join(dir, "index.tsx")))
+    .map((dir) => relative(srcPath, dir).split(sep).join("/"));
+  const listed = [...publicSurface.barrels, ...Object.keys(publicSurface.internal)];
+
+  it("files every barrel under src/ as public or internal", () => {
+    expect(sourceBarrels.filter((barrel) => !listed.includes(barrel))).toEqual([]);
+  });
+
+  it("lists only barrels that exist", () => {
+    expect(listed.filter((barrel) => !sourceBarrels.includes(barrel))).toEqual([]);
+  });
+
+  it("lists no barrel as both public and internal", () => {
+    expect(publicSurface.barrels.filter((barrel) => barrel in publicSurface.internal)).toEqual([]);
   });
 });
 
@@ -217,6 +243,14 @@ describe.skipIf(!existsSync(resolve(__dirname, "../dist")))("Package Exports", (
     expect(existsSync(resolve(distPath, "index.d.ts"))).toBe(true);
   });
 
+  it("exports the public list and nothing else", () => {
+    const expected = [".", "./styles", "./theme.css", "./components.css", "./package.json"].concat(
+      publicSurface.barrels.map((barrel) => `./${barrel}`),
+    );
+
+    expect(Object.keys(packageJson.exports).sort()).toEqual(expected.sort());
+  });
+
   it("should include component category exports", () => {
     // Check a few key component exports exist
     expect(packageJson.exports).toHaveProperty("./Components/Badges");
@@ -296,7 +330,9 @@ describe.skipIf(!existsSync(resolve(__dirname, "../dist")))("Export generation",
     sandbox = mkdtempSync(join(tmpdir(), "lydia-exports-"));
     manifest = join(sandbox, "package.json");
     mkdirSync(join(sandbox, "scripts"));
-    copyFileSync(join(root, "scripts/generate-exports.mjs"), join(sandbox, "scripts/generate-exports.mjs"));
+    for (const file of ["generate-exports.mjs", "public-exports.json"]) {
+      copyFileSync(join(root, "scripts", file), join(sandbox, "scripts", file));
+    }
     copyFileSync(join(root, "package.json"), manifest);
     symlinkSync(join(root, "dist"), join(sandbox, "dist"), "junction");
     generate();
