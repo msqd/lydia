@@ -76,6 +76,4 @@ const types: Record<string, Column<Row, unknown>> = {
 export { types };
 
 /** A closed domain type, with no index signature, is a row like any other. */
-export const closedRows = (
-  <DataTable<Transaction> rows={[]} types={{ url: { label: "URL" } }} columns={["url"]} />
-);
+export const closedRows = <DataTable<Transaction> rows={[]} types={{ url: { label: "URL" } }} columns={["url"]} />;

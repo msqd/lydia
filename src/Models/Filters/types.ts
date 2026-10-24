@@ -21,14 +21,11 @@ export interface DateRangeFilter {
   endDate?: string;
 }
 
-/** Boolean flags filter */
-export interface BooleanFlagsFilter {
-  [key: string]: boolean;
-}
+/** The value one facet holds. Read it through `readArray`, `readRange`, `readDates` or `readSingle`. */
+export type FilterValue = ArrayFilter | MinMaxFilter | SingleFilter | DateRangeFilter;
 
 /** Generic filters container */
-export type Filters = Record<string, ArrayFilter | MinMaxFilter | SingleFilter | DateRangeFilter | BooleanFlagsFilter>;
-
+export type Filters = Record<string, FilterValue>;
 /** Filter metadata for display and validation */
 export interface FilterMeta {
   name: string;
@@ -62,14 +59,14 @@ export interface RangeFilterMeta {
 export interface FilterFacetConfig {
   name: string;
   title: string;
-  type: "checkboxes" | "radios" | "range" | "daterange" | "booleanflags";
+  type: "checkboxes" | "radios" | "range" | "daterange";
   defaultOpen?: boolean;
   meta?: FilterMeta[] | RangeFilterMeta;
   fallbackName?: string;
 }
 
 /** Unified filter state change handler */
-export type FilterChangeHandler<T = any> = (filterName: string, value: T) => void;
+export type FilterChangeHandler<T = FilterValue> = (filterName: string, value: T) => void;
 
 /** URL serialization utilities type */
 export interface FilterUrlParams {

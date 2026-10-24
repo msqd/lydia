@@ -1,6 +1,6 @@
 import { RangeSlider } from "@msqd/lydia/Components/Inputs";
 import { Foldable, type FoldableProps } from "@msqd/lydia/Components/Utilities/Foldable";
-import type { FilterChangeHandler, Filters, RangeFilterMeta } from "@msqd/lydia/Models/Filters";
+import { type FilterChangeHandler, type Filters, type RangeFilterMeta, readRange } from "@msqd/lydia/Models/Filters";
 import { tpdexScale } from "@msqd/lydia/Models/Tpdex";
 import { type ComponentProps } from "react";
 import { FacetResetLink } from "../FacetResetLink";
@@ -92,7 +92,7 @@ export function PerformanceFacet({
   className,
   ...props
 }: PerformanceFacetProps) {
-  const currentValue = (filters[name] as { min?: number; max?: number }) || {};
+  const currentValue = readRange(filters, name);
 
   const handleChange = (value: { min?: number; max?: number }) => {
     if (value && typeof value === "object" && "min" in value && "max" in value) {

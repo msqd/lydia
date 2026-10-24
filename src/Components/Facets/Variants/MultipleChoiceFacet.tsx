@@ -1,7 +1,7 @@
 import { ChevronDownIcon, ChevronRightIcon, XMarkIcon } from "@heroicons/react/16/solid";
 import { Checkbox } from "@msqd/lydia/Components/Inputs";
 import { Foldable, type FoldableProps } from "@msqd/lydia/Components/Utilities/Foldable";
-import type { FilterChangeHandler, FilterMeta, Filters } from "@msqd/lydia/Models/Filters";
+import { type FilterChangeHandler, type FilterMeta, type Filters, readArray } from "@msqd/lydia/Models/Filters";
 import { type ComponentProps, Fragment, type ReactNode, useId, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { FacetCount } from "../FacetCount";
@@ -171,7 +171,7 @@ export function MultipleChoiceFacet({
   className,
   ...props
 }: MultipleChoiceFacetProps) {
-  const currentValues = (filters[name] as string[]) || [];
+  const currentValues = readArray(filters, name);
   const selection = readSelection(currentValues, options);
   const hasNested = options.some(isNested);
 

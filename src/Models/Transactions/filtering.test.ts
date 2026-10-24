@@ -1,3 +1,4 @@
+import type { Filters } from "@msqd/lydia/Models/Filters";
 import { type MockInstance, afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { filterTransactions } from "./filtering";
 import type { Transaction } from "./types";
@@ -21,6 +22,18 @@ describe("filterTransactions", () => {
     const transactions = [transaction({ id: "a" }), transaction({ id: "b" })];
 
     expect(filterTransactions(transactions, {})).toEqual(transactions);
+  });
+
+  describe("a filter of the wrong shape does not filter", () => {
+    it.each([
+      ["a string for a choice facet", { method: "POST", endpoint: "/api/other" }],
+      ["a list for a range", { tpdex: ["a"], time: ["b"] }],
+      ["a number for a date range", { time: 3 }],
+    ])("%s", (_name, filters) => {
+      const transactions = [transaction({ id: "a", tpdex: 90 }), transaction({ id: "b", method: "POST" })];
+
+      expect(ids(filterTransactions(transactions, { filters: filters as unknown as Filters }))).toEqual(["a", "b"]);
+    });
   });
 
   describe("an inactive facet does not filter", () => {

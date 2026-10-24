@@ -371,4 +371,13 @@ describe("MultipleChoiceFacet's only button", () => {
       expect(screen.getByRole("checkbox", { name: /^Failure/ })).not.toHaveAttribute("aria-describedby");
     });
   });
+
+  it("shows nothing selected when the filter holds a string instead of a list", () => {
+    // What a URL parser hands over for `?testFilter=option1`
+    const filters = { testFilter: "option1" } as unknown as Filters;
+
+    render(<MultipleChoiceFacet {...defaultProps} filters={filters} />);
+
+    expect(screen.getByRole("checkbox", { name: /Option 1/ })).not.toBeChecked();
+  });
 });

@@ -2,7 +2,7 @@ import type { Filters } from "./types";
 
 /**
  * Number of individually selected filter values, counting each bound of a range and each
- * selected choice of a facet. An empty selection, an unset bound and a false flag are not
+ * selected choice of a facet. An empty selection and an unset bound are not
  * selections, so a facet the user has not touched contributes nothing.
  */
 export function countActiveFilters(filters: Filters | undefined): number {
@@ -17,9 +17,7 @@ export function countActiveFilters(filters: Filters | undefined): number {
 
     if (typeof value === "object" && value !== null) {
       return (
-        count +
-        Object.values(value).filter((bound) => bound !== undefined && bound !== null && bound !== false && bound !== "")
-          .length
+        count + Object.values(value).filter((bound) => bound !== undefined && bound !== null && bound !== "").length
       );
     }
 
