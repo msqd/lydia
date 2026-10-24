@@ -240,8 +240,25 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   plugins: [react()],
   resolve: { dedupe: ["react", "react-dom", "@headlessui/react", "echarts", "zrender"] },
-  test: { environment: "jsdom" },
+  test: { environment: "jsdom", setupFiles: ["./vitest.setup.ts"] },
 });
+```
+
+```ts
+// vitest.setup.ts
+import { vi } from "vitest";
+
+// jsdom has no canvas, and zrender paints on the next frame, after the test: without a context it throws
+// "Cannot set properties of null (setting 'dpr')". The context ignores drawing, measures text as empty, and
+// returns itself from any call so that gradients accept their colour stops.
+const context: object = new Proxy(
+  {},
+  {
+    get: (_target, property) => (property === "measureText" ? () => ({ width: 0 }) : () => context),
+    set: () => true,
+  },
+);
+vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockImplementation(() => context as unknown as CanvasRenderingContext2D);
 ```
 
 ```tsx
@@ -256,7 +273,7 @@ test("renders a Lydia component that uses hooks", () => {
 });
 ```
 
-Without the `dedupe` line this test fails with `Invalid hook call` against a linked clone.
+Without the `dedupe` line this test fails with `Invalid hook call` against a linked clone. Without the setup file, a test that renders a chart passes, then vitest exits 1 on uncaught `TypeError`s from zrender.
 
 #### Storybook
 
@@ -328,6 +345,7 @@ Report a vulnerability through [SECURITY.md](../SECURITY.md).
 | `@theme` rejected by the CSS build | Tailwind 3. | Upgrade to Tailwind 4, or use option B. |
 | Type or runtime break after `pnpm up` | A release with breaking changes. | Read the `### Breaking` sections of [CHANGELOG.md](../CHANGELOG.md) between your version and the new one before upgrading. |
 | Image or PDF body preview stays blank, or Lato does not load, with a CSP violation in the console | The Content-Security-Policy blocks `data:` in `img-src`, `frame-src` or (`@msqd/lydia/styles` only) `font-src`. | Add `img-src data:`, `frame-src data:` and, for `styles`, `font-src data:`, see [Security](#security). |
+| A test that renders a chart passes, but vitest exits 1 with `TypeError: Cannot set properties of null (setting 'dpr')` | jsdom has no canvas: zrender paints on the next frame, after the test, on a null context. | Add the `vitest.setup.ts` of [Vitest](#vitest) to `test.setupFiles`. |
 | Changes in the linked clone do not show | `dist` is stale. | `pnpm build` in the clone, then restart the dev server. |
 
 ## Upgrading
