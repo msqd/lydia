@@ -1,0 +1,1 @@
+`@msqd/lydia/theme.css` (fonts and tokens, no Tailwind import) and `@msqd/lydia/components.css`, for a consumer's own Tailwind CSS 4 build. Point `@source` at `@msqd/lydia/dist` so Tailwind scans lydia's classes. `@msqd/lydia/styles` stays precompiled.

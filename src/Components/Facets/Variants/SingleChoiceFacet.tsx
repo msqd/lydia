@@ -43,7 +43,6 @@ export interface SingleChoiceFacetProps extends ComponentProps<"div"> {
 /**
  * SingleChoiceFacet component for single-select filters using radio buttons.
  * Allows users to select only one option from a list.
- * Based on HARP's Facet implementation with type="radios".
  *
  * @example
  * ```tsx

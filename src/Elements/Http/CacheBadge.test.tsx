@@ -45,7 +45,7 @@ describe("CacheBadge", () => {
 
   // Each "returns null" case renders a hit alongside it: an assertion that something is absent
   // also passes when the component stopped rendering anything at all. Nothing reported is not a
-  // miss, and neither is drawn, so the two are told apart by the filter rather than here. See #100.
+  // miss, and neither is drawn, so the two are told apart by the filter rather than here.
   it("returns null when no cache information", () => {
     render(
       <>

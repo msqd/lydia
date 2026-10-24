@@ -4,7 +4,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { restoreThemeTokens, stubThemeTokens } from "../../../Components/Utilities/Testing";
 import { SummarySection } from "./SummarySection";
 
-// ECharts renders to a canvas, which jsdom does not provide. See #56.
+// ECharts renders to a canvas, which jsdom does not provide. See Testing.mdx, What to mock.
 vi.mock("echarts-for-react/lib/core.js", () => ({
   default: vi.fn().mockImplementation(() => <div data-testid="mock-echarts" />),
 }));

@@ -38,8 +38,8 @@ describe("MultipleChoiceFacet", () => {
   });
 
   /**
-   * A tick narrows to a value; it does not exclude one. Ruled on
-   * msqd/jaco#129: HARP's inversion, where nothing chosen drew every box
+   * A tick narrows to a value; it does not exclude one. Ruled in
+   * ADR 0001: HARP's inversion, where nothing chosen drew every box
    * ticked and a click stored every other value, is gone. Over a list that
    * grows, storing "every other value" silently excluded the next new one.
    */

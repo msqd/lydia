@@ -4,13 +4,13 @@ import { CacheIndicator } from "./CacheIndicator";
 
 // The icons render for real. Mocking them made these tests assert that a stand-in received the
 // size and colour classes, which says nothing about whether the real icon does. Mock only what
-// this component hands no props to. See #56.
+// this component hands no props to. See Testing.mdx, What to mock.
 
 const iconsOf = (indicator: HTMLElement) => Array.from(indicator.querySelectorAll("svg"));
 
 describe("CacheIndicator", () => {
   // Each "renders nothing" case renders a hit alongside it: an assertion that something is absent
-  // also passes when the component stopped rendering anything at all. See #100.
+  // also passes when the component stopped rendering anything at all.
   it("renders nothing when no cache information is provided", () => {
     render(
       <>

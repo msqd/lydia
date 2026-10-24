@@ -12,7 +12,6 @@ export interface FacetLabelProps {
 
 /**
  * FacetLabel component that displays a filter option with its name, count, and optional action buttons.
- * Based on HARP's FacetLabel implementation with hover behavior for action buttons.
  */
 export function FacetLabel({ name, count, children }: FacetLabelProps) {
   return (

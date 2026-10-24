@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ResponseStatusBadge } from "./ResponseStatusBadge";
 
 // A third-party lookup table, mocked so the test states the phrases it expects rather than
-// depending on the package's wording. See #56.
+// depending on the package's wording. See Testing.mdx, What to mock.
 vi.mock("http-status-codes", async () => {
   const actual = await vi.importActual("http-status-codes");
   return {

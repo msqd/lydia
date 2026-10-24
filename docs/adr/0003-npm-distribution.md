@@ -4,7 +4,7 @@ Date: 2026-10-19. Status: accepted.
 
 ## Context
 
-jaco consumed lydia from git: a private submodule plus `link:`. That costs a CI deploy key, no CI on
+A consumer used lydia from git: a private submodule plus `link:`. That costs a CI deploy key, no CI on
 fork PRs and workarounds for a duplicated React. harp is the next consumer.
 
 ## Decision
@@ -53,4 +53,4 @@ Tailwind CSS 4 stays. Two ways to consume it:
 - CI packs the tarball and builds a fresh Vite, React 19 and Tailwind 4 app from it: type-check,
   render, one Tailwind in the output, one React.
 - Fonts are still referenced as `/fonts/...`, served by the consumer; `dist/fonts` holds the files.
-- Publishing itself is #214; the integration guide is #215.
+- Publishing itself and the integration guide (`docs/integration.md`) follow this decision.

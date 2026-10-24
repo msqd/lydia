@@ -1,7 +1,7 @@
 ## Overview
 
 The Lydia  Project is a component library built with React, TypeScript, and Vite. It is designed to be used by multiple
-API observability projects: HARP Proxy, ApiLab, ... as the frontend base.
+API observability projects: HARP Proxy, ... as the frontend base.
 
 
 ## Project Structure

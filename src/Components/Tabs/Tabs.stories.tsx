@@ -160,19 +160,15 @@ export const WithDefaultIndex: Story = {
   ),
 };
 
-// Exemple avec le mode contrôlé
 export const ControlledMode: Story = {
   args: { tabs: exampleTabs },
   render: () => {
-    // Utilisation du useState pour gérer l'index sélectionné
     const [selectedTab, setSelectedTab] = useState(0);
 
-    // Gestion du changement d'onglet
     const handleTabChange = (index: number) => {
       setSelectedTab(index);
     };
 
-    // Boutons pour changer d'onglet programmatiquement
     const changeTab = (index: number) => {
       setSelectedTab(index);
     };

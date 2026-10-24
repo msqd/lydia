@@ -72,7 +72,6 @@ describe("TransactionsFiltersSidebar", () => {
     const successOption = screen.getByText("2xx").closest("div")?.querySelector("input");
     if (successOption) {
       fireEvent.click(successOption);
-      // The HARP logic inverts selection - unchecking from "all" means selecting others
       expect(defaultProps.onFiltersChange).toHaveBeenCalled();
     }
   });

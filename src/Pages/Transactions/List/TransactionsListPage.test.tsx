@@ -5,9 +5,9 @@ import { describe, expect, it, vi } from "vitest";
 import { TransactionsListPage } from "./TransactionsListPage";
 
 // Design-system children render for real in this file. Mocking Badge, TpdexBadge or the Http
-// elements would make the snapshot record the page's skeleton against itself: #45 changed badge
+// elements would make the snapshot record the page's skeleton against itself: a change to badge
 // sizing on this page and moved no snapshot, because the badges were mocked away. Mock only what
-// this page hands no props to. See #56.
+// this page hands no props to. See Testing.mdx, What to mock.
 
 const facets = {
   endpoint: [
@@ -141,7 +141,7 @@ describe("TransactionsListPage", () => {
       render(<TransactionsListPage {...driven} onFiltersChange={onFiltersChange} transactions={sampleTransactions} />);
 
       fireEvent.click(screen.getByText("filters"));
-      // A tick narrows to the value it chooses (msqd/jaco#129).
+      // A tick narrows to the value it chooses (ADR 0001).
       fireEvent.click(screen.getByRole("checkbox", { name: /\/api\/orders/ }));
 
       expect(onFiltersChange).toHaveBeenCalledWith("endpoint", ["/api/orders"]);

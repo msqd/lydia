@@ -74,14 +74,12 @@ describe("Checkbox component", () => {
   it("has appropriate click handlers", () => {
     customRender(<Checkbox name="test-checkbox" />);
 
-    // Vérifions que le label est un élément dans le DOM
     const label = screen.getByText("test-checkbox");
     expectComponentDefaults({
       element: label,
       tagName: "LABEL",
     });
 
-    // Vérifions que le container a un comportement de clic
     const container = label.closest("div")?.parentElement;
     expect(container).toHaveClass("cursor-pointer");
   });
@@ -102,7 +100,6 @@ describe("Checkbox component", () => {
       />,
     );
 
-    // Sélectionnons autrement que par data-testid
     const container = screen.getByText("test-checkbox").closest("div")?.parentElement;
     expectComponentDefaults({
       element: container as HTMLElement,
