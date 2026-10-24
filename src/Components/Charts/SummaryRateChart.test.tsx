@@ -250,6 +250,22 @@ describe("SummaryRateChart", () => {
     });
   });
 
+  describe("Tooltip", () => {
+    it("escapes the name and the value", () => {
+      render(<SummaryRateChart data={createMockData(3)} />);
+      const calls = vi.mocked(ReactEChartsCore).mock.calls;
+      const { tooltip } = calls[calls.length - 1][0].option as {
+        tooltip: { formatter: (params: unknown[]) => string };
+      };
+      const hostile = "<img src=x onerror=alert(1)>";
+
+      const html = tooltip.formatter([{ name: hostile, value: hostile }]);
+
+      expect(html).toContain("&lt;img");
+      expect(html).not.toContain("<img");
+    });
+  });
+
   describe("Integration with ResizeObserver", () => {
     it("sets up resize observation for responsive behavior", () => {
       const mockData = createMockData(10);

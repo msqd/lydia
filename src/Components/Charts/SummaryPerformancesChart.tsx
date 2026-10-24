@@ -11,6 +11,7 @@ import { CanvasRenderer } from "echarts/renderers";
 import { useMemo } from "react";
 import { ReactEChartsCore } from "./Utils/ReactEChartsCore";
 import { TimeFormatter } from "./Utils/TimeFormatter";
+import { escapeTooltipHtml } from "./Utils/escapeTooltipHtml";
 
 import { getTpdexRating, tpdexScale } from "@msqd/lydia/Models/Tpdex";
 import { defaultEchartOptions } from "../../Settings";
@@ -35,9 +36,9 @@ interface SummaryPerformancesChartProps {
 
 const tooltipFormatter = (params: any[]) => {
   const tpdexSerie = params[0];
-  let tooltipContent = `<strong>${tpdexSerie.name}</strong><br/>`;
+  let tooltipContent = `<strong>${escapeTooltipHtml(tpdexSerie.name)}</strong><br/>`;
   const rating = getTpdexRating(tpdexSerie.value);
-  tooltipContent += `<small>Average TPDEX: ${tpdexSerie.value} (${rating.label})</small>`;
+  tooltipContent += `<small>Average TPDEX: ${escapeTooltipHtml(tpdexSerie.value)} (${rating.label})</small>`;
   return tooltipContent;
 };
 

@@ -180,3 +180,22 @@ describe("TransactionMetadata", () => {
     expect(container.firstChild).toHaveClass("custom-class");
   });
 });
+
+describe("TransactionMetadata with a hostile request target", () => {
+  it.each(["//[x", "http://[::1", "//a b/", "/static/../../etc/passwd", "http://other-host/x?y=1"])(
+    "renders %j as received",
+    (url) => {
+      const { container } = customRender(
+        <ToastProvider>
+          <TransactionMetadata transaction={{ ...mockTransaction, url }} />
+        </ToastProvider>,
+      );
+
+      const shown = Array.from(container.querySelectorAll("[title]"))
+        .filter((element) => element.getAttribute("title") === url)
+        .map((element) => element.textContent)
+        .join("");
+      expect(shown).toBe(url);
+    },
+  );
+});

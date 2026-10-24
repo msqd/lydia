@@ -428,3 +428,20 @@ describe("pagination landmarks of a named page", () => {
     expect(screen.getAllByRole("navigation", { name: /^Slow requests, / })).toHaveLength(2);
   });
 });
+
+describe("TransactionsListPage with a hostile request target", () => {
+  it.each(["//[x", "http://[::1", "//a b/", "/static/../../etc/passwd", "http://other-host/x?y=1"])(
+    "renders the row of %j as received",
+    (url) => {
+      const transactions = [{ ...sampleTransactions[0], url }, ...sampleTransactions.slice(1)];
+
+      const { container } = render(<TransactionsListPage {...driven} transactions={transactions} />);
+
+      const shown = Array.from(container.querySelectorAll("[title]"))
+        .filter((element) => element.getAttribute("title") === url)
+        .map((element) => element.textContent)
+        .join("");
+      expect(shown).toBe(url);
+    },
+  );
+});

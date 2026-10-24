@@ -6,6 +6,7 @@ import { useSuccessToast } from "@msqd/lydia/Components/Toast";
 import { Foldable } from "@msqd/lydia/Components/Utilities/Foldable";
 import { CacheBadge, CacheIndicator, RequestMethodBadge, ResponseStatusBadge } from "@msqd/lydia/Elements/Http";
 import { TpdexBadge } from "@msqd/lydia/Elements/Tpdex/TpdexBadge";
+import { splitRequestTarget } from "@msqd/lydia/Models/Http/requestTarget";
 import type { DetailedTransaction } from "@msqd/lydia/Models/Transactions/types";
 import { type ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
@@ -51,9 +52,7 @@ export function TransactionMetadata({
 
   // Request summary component
   const RequestSummary = () => {
-    const url = new URL(transaction.url, "http://example.com"); // Parse URL for path and query
-    const path = url.pathname;
-    const queryString = url.search;
+    const { path, query: queryString } = splitRequestTarget(transaction.url);
 
     return (
       <span className="font-normal">
