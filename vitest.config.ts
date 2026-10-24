@@ -1,4 +1,5 @@
-import { resolve } from "path";
+import { resolve } from "node:path";
+import { playwright } from "@vitest/browser-playwright";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
@@ -8,10 +9,10 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      "@": resolve(__dirname, "./src"),
+      "@": resolve(import.meta.dirname, "./src"),
       // Self-referencing: @msqd/lydia/* resolves to src/* so tests run against source without a
       // prior `pnpm build` (mirrors the alias in vite.config.ts).
-      "@msqd/lydia": resolve(__dirname, "./src"),
+      "@msqd/lydia": resolve(import.meta.dirname, "./src"),
       // Use ESM versions for browser compatibility
       "echarts-for-react/lib/core": "echarts-for-react/esm/core",
       "fast-deep-equal": "fast-deep-equal/es6",
@@ -37,7 +38,7 @@ export default defineConfig({
           name: "storybook",
           browser: {
             enabled: true,
-            provider: "playwright",
+            provider: playwright(),
             headless: true,
             instances: [{ browser: "chromium" }],
           },
