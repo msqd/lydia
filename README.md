@@ -129,6 +129,18 @@ function App() {
 - **Lint and format code**: `pnpm check`
 - **Run full QA check** (types, lint, `pnpm test:all`, Storybook and library builds): `make qa`
 
+## Security
+
+Lydia renders captured HTTP traffic. Every transaction field it shows (URL, headers, bodies, tags, names) is untrusted: whoever sent the traffic chose it. Treat it that way in your application.
+
+- React-rendered text is escaped by React. Lydia uses no `dangerouslySetInnerHTML`.
+- The exports that return HTML are the three `ChartTooltipFormatter` methods: `formatSplitBarsTooltip`, `formatUnifiedBarsTooltip` and `formatTooltipFromData`. ECharts writes their result with `innerHTML`, so each escapes every value it interpolates. Do not concatenate your own captured data into a tooltip string without escaping it.
+- No exported helper returns a URL. The only URLs Lydia renders from captured data are the `data:` image and PDF previews of the transaction detail (`ContentRenderer`). Links in `NavBar`, `Tabs` and `SummarySection` come from the props you pass.
+- Headers and the copied `method + url` are shown as captured: credentials in `Authorization`, `Cookie`, `Set-Cookie` or `X-Api-Key`, or tokens in a query string, appear in clear. Masking them is your job, before you hand the data to Lydia.
+- Your Content-Security-Policy must allow `img-src data:` and `frame-src data:` for the previews, and `font-src data:` if you import `@msqd/lydia/styles`, which embeds its fonts.
+
+The [integration guide](docs/integration.md#security) has the details. Report vulnerabilities through [SECURITY.md](SECURITY.md).
+
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to open an issue or submit a pull request.
