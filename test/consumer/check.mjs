@@ -160,6 +160,9 @@ try {
     });
   assert.deepEqual(unresolved, [], "declarations import each other by relative .js specifiers that exist in dist");
 
+  const guideSetup = readFileSync(join(root, "docs", "integration.md"), "utf-8").match(/^```ts\n\/\/ vitest\.setup\.ts\n([\s\S]*?)^```/m)?.[1];
+  assert.equal(guideSetup, readFileSync(join(fixture, "vitest.setup.ts"), "utf-8"), "the guide's vitest.setup.ts is the fixture's");
+
   writeReadmeExamples(join(app, "src", "readme"));
   run("pnpm", ["exec", "vitest", "run"], app);
   run("pnpm", ["exec", "tsc"], app);
