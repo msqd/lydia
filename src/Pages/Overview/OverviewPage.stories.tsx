@@ -1,6 +1,8 @@
 import { DefaultLayout } from "@msqd/lydia/Components/Layouts/DefaultLayout";
+import type { LinkComponentType } from "@msqd/lydia/Components/NavBar";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
+import { expect, fn } from "storybook/test";
 import { OverviewPage } from "./OverviewPage";
 import { sampleHistoryData } from "./Sections/HistorySection.samples";
 import { sampleSummary } from "./Sections/SummarySection.samples";
@@ -49,4 +51,44 @@ export const Default: Story = {
     history: { timeRange: "7d", onTimeRangeChange: () => {}, ...sampleHistoryData("7d") },
   },
   render: () => <OverviewPageDemo />,
+};
+
+const onRoute = fn();
+
+// Stands in for the consumer's router link: it takes over the navigation instead of the browser.
+const RoutedLink: LinkComponentType = ({ href, onClick, ...props }) => (
+  <a
+    href={href}
+    onClick={(event) => {
+      event.preventDefault();
+      onClick?.(event);
+      onRoute(href);
+    }}
+    {...props}
+  />
+);
+
+export const RoutedLinks: Story = {
+  args: {
+    summary: {
+      ...sampleSummary,
+      links: { performance: "/transactions", transactions: "/transactions", errors: "/transactions?status=failure" },
+      linkComponent: RoutedLink,
+      windowLabel: "24h",
+    },
+    history: { timeRange: "7d", onTimeRangeChange: () => {}, ...sampleHistoryData("7d") },
+  },
+  play: async ({ canvas, userEvent }) => {
+    const links = await canvas.findAllByRole("link", { name: /details/ });
+    await userEvent.click(links[2]);
+    await expect(onRoute).toHaveBeenCalledWith("/transactions?status=failure");
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "The consumer owns the links and the window label: `links` gives each pane's target, `linkComponent` renders them through its router, `windowLabel` names the period the data covers. Without `links`, no link renders.",
+      },
+    },
+  },
 };
