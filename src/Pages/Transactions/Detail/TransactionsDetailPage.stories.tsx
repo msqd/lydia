@@ -19,19 +19,13 @@ const meta = {
     docs: {
       description: {
         component:
-          "TransactionsDetailPage provides a detailed view of HTTP transaction data using a pane-based layout similar to the filter sidebar. Features include transaction metadata with HTTP-specific fields, request/response details with content type-aware formatting, performance metrics, and copy-to-clipboard functionality. Can be used both as a full page or as a drawer component.",
+          "TransactionsDetailPage provides a detailed view of HTTP transaction data using a pane-based layout similar to the filter sidebar. Features include transaction metadata with HTTP-specific fields, request/response details with content type-aware formatting, performance metrics, and copy-to-clipboard functionality. It draws its sections only: the caller provides the layout, the title and the heading level.",
       },
     },
   },
   decorators: [ToastWrapper],
   args: {
     transaction: sampleDetailedTransaction,
-  },
-  argTypes: {
-    isDrawer: {
-      description: "Whether to render as a drawer component or full page",
-      control: "boolean",
-    },
   },
 } satisfies Meta<typeof TransactionsDetailPage>;
 
@@ -44,22 +38,18 @@ export const DefaultView: Story = {
     docs: {
       description: {
         story:
-          "Default full-page view of an HTTP transaction detail showing metadata, request and response information with headers and body content formatted according to content type.",
+          "View of an HTTP transaction detail showing metadata, request and response information with headers and body content formatted according to content type.",
       },
     },
   },
 };
 
 export const DrawerView: Story = {
-  args: {
-    isDrawer: true,
-  },
   parameters: {
     layout: "centered",
     docs: {
       description: {
-        story:
-          "Transaction detail displayed as a drawer component, suitable for use in a sidebar or overlay. Removes the page title and layout wrapper.",
+        story: "Transaction detail inside a narrow container, as in a sidebar or overlay.",
       },
     },
   },

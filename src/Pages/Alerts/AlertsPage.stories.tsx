@@ -1,21 +1,20 @@
 import { DefaultLayout } from "@msqd/lydia/Components/Layouts";
-import { LydiaLogotype, DefaultLogo } from "@msqd/lydia/Components/NavBar/NavBar";
 import { ToastProvider } from "@msqd/lydia/Components/Toast";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { AlertsPage } from "./AlertsPage";
 import { sampleAlerts } from "./AlertsPage.samples";
 
+const navigation = ["Overview", "Journal", "Explorer", "Alerts"].map((name) => ({
+  name,
+  href: "#",
+  current: name === "Alerts",
+}));
+
 // Define a layout wrapper for consistent layout in all stories
 const LayoutWrapper = (Story: React.ComponentType) => (
   <ToastProvider>
-    <DefaultLayout
-      navBarProps={{
-        logo: <DefaultLogo />,
-        brand: <LydiaLogotype />,
-        // Using default navigation which includes System link
-      }}
-    >
+    <DefaultLayout navBarProps={{ navigation }}>
       <Story />
     </DefaultLayout>
   </ToastProvider>

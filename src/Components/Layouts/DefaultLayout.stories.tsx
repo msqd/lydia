@@ -1,6 +1,5 @@
 import { Badge } from "@msqd/lydia/Components/Badges";
 import { Button } from "@msqd/lydia/Components/Buttons";
-import { LydiaLogotype, DefaultLogo } from "@msqd/lydia/Components/NavBar/NavBar";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
 import { DefaultLayout } from "./DefaultLayout";
@@ -35,10 +34,6 @@ export const Default: Story = {
         </p>
       </div>
     ),
-    navBarProps: {
-      logo: <DefaultLogo />,
-      brand: <LydiaLogotype />,
-    },
   },
 };
 
@@ -54,10 +49,6 @@ export const SignedOut: Story = {
         <p className="text-gray-700">No user is signed in, so the navbar shows no identity.</p>
       </div>
     ),
-    navBarProps: {
-      logo: <DefaultLogo />,
-      brand: <LydiaLogotype />,
-    },
   },
 };
 
@@ -73,8 +64,6 @@ export const SignedIn: Story = {
       </div>
     ),
     navBarProps: {
-      logo: <DefaultLogo />,
-      brand: <LydiaLogotype />,
       user: { name: "Ada Lovelace", email: "ada@example.com" },
     },
   },
@@ -89,8 +78,7 @@ export const WithCustomNavBar: Story = {
       </div>
     ),
     navBarProps: {
-      logo: <DefaultLogo />,
-      brand: "lydia custom",
+      brand: "Custom brand",
       navigation: [
         { name: "Overview", href: "#", current: true },
         { name: "Journal", href: "#", current: false },
@@ -116,10 +104,6 @@ export const WithCustomPadding: Story = {
         </p>
       </div>
     ),
-    navBarProps: {
-      logo: <DefaultLogo />,
-      brand: <LydiaLogotype />,
-    },
     contentClassName: "p-8 bg-gray-100",
   },
 };
@@ -159,7 +143,6 @@ export const WithAPageHeader: Story = {
     toolbar,
     contentClassName: "bg-gray-50",
     children: <p className="p-4 text-sm text-gray-700">The page's content, below its header.</p>,
-    navBarProps: { logo: <DefaultLogo />, brand: <LydiaLogotype /> },
   },
 };
 

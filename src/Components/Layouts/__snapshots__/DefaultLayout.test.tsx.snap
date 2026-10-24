@@ -24,16 +24,6 @@ exports[`DefaultLayout > renders the NavBar and content 1`] = `
               href="/"
             >
               <span
-                aria-hidden="true"
-                class="contents"
-              >
-                <img
-                  alt="lydia"
-                  class="h-8 w-auto"
-                  src="data:image/svg+xml,%3csvg%20width='692'%20height='506'%20viewBox='0%200%20692%20506'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M71.5215%20325.742C110.745%20325.742%20142.543%20293.882%20142.543%20254.578C142.543%20215.274%20110.744%20183.414%2071.5215%20183.414C32.2979%20183.414%200.500488%20215.274%200.500488%20254.578C0.500488%20293.882%2032.2991%20325.742%2071.5215%20325.742ZM322.428%20436.387C321.605%20474.973%20290.131%20506%20251.424%20506C212.201%20506%20180.403%20474.139%20180.403%20434.836C180.403%20395.535%20212.202%20363.675%20251.424%20363.675C251.521%20363.675%20251.62%20363.672%20251.721%20363.667C252.146%20363.672%20252.57%20363.675%20252.995%20363.675C313.325%20363.675%20362.362%20315.214%20363.441%20255.025C363.454%20254.87%20363.459%20254.722%20363.459%20254.58C363.459%20254.485%20363.458%20254.388%20363.453%20254.287C363.458%20253.856%20363.459%20253.424%20363.459%20252.991C363.459%20191.862%20314.001%20142.308%20252.992%20142.308C252.36%20142.308%20251.731%20142.313%20251.102%20142.325C212.025%20142.152%20180.401%20110.357%20180.401%2071.1644C180.401%2031.8623%20212.2%200%20251.422%200C290.541%200%20322.27%2031.6873%20322.443%2070.8397C322.433%2071.4706%20322.427%2072.1014%20322.427%2072.7339C322.427%20133.863%20371.885%20183.417%20432.894%20183.417C433.317%20183.417%20433.74%20183.415%20434.162%20183.41C434.27%20183.415%20434.376%20183.417%20434.479%20183.417C473.705%20183.417%20505.5%20215.277%20505.5%20254.581C505.5%20293.779%20473.868%20325.577%20434.787%20325.741C434.156%20325.731%20433.526%20325.726%20432.893%20325.726C371.893%20325.726%20322.439%20375.268%20322.427%20436.388L322.428%20436.387Z'%20fill='white'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M258.381%20325.742C297.527%20325.742%20329.261%20293.882%20329.261%20254.578C329.261%20215.274%20297.526%20183.414%20258.381%20183.414C219.235%20183.414%20187.5%20215.274%20187.5%20254.578C187.5%20293.882%20219.236%20325.742%20258.381%20325.742ZM508.791%20436.387C507.969%20474.973%20476.558%20506%20437.927%20506C398.781%20506%20367.047%20474.139%20367.047%20434.836C367.047%20395.535%20398.783%20363.675%20437.927%20363.675C438.024%20363.675%20438.123%20363.672%20438.223%20363.667C438.647%20363.672%20439.071%20363.675%20439.495%20363.675C499.706%20363.675%20548.645%20315.214%20549.722%20255.025C549.736%20254.87%20549.74%20254.722%20549.74%20254.58C549.74%20254.485%20549.739%20254.388%20549.734%20254.287C549.739%20253.856%20549.74%20253.424%20549.74%20252.991C549.74%20191.862%20500.38%20142.308%20439.492%20142.308C438.861%20142.308%20438.233%20142.313%20437.606%20142.325C398.606%20142.152%20367.045%20110.357%20367.045%2071.1644C367.045%2031.8623%20398.781%200%20437.925%200C476.966%200%20508.633%2031.6873%20508.806%2070.8397C508.796%2071.4706%20508.789%2072.1014%20508.789%2072.7339C508.789%20133.863%20558.149%20183.417%20619.037%20183.417C619.46%20183.417%20619.882%20183.415%20620.303%20183.41C620.411%20183.415%20620.517%20183.417%20620.62%20183.417C659.768%20183.417%20691.5%20215.277%20691.5%20254.581C691.5%20293.779%20659.931%20325.577%20620.927%20325.741C620.298%20325.731%20619.668%20325.726%20619.037%20325.726C558.158%20325.726%20508.802%20375.268%20508.789%20436.388L508.791%20436.387Z'%20fill='white'/%3e%3c/svg%3e"
-                />
-              </span>
-              <span
                 class="ml-2 text-white text-xl font-semibold"
               >
                 lydia
@@ -44,45 +34,7 @@ exports[`DefaultLayout > renders the NavBar and content 1`] = `
             >
               <div
                 class="ml-10 flex items-baseline space-x-4"
-              >
-                <a
-                  aria-current="page"
-                  class="bg-primary-500 text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-                  href="#"
-                >
-                  Overview
-                </a>
-                <a
-                  class="text-white hover:bg-primary-500/75 rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-                  href="#"
-                >
-                  Journal
-                </a>
-                <a
-                  class="text-white hover:bg-primary-500/75 rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-                  href="#"
-                >
-                  Explorer
-                </a>
-                <a
-                  class="text-white hover:bg-primary-500/75 rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-                  href="#"
-                >
-                  Editor
-                </a>
-                <a
-                  class="text-white hover:bg-primary-500/75 rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-                  href="#"
-                >
-                  Alerts
-                </a>
-                <a
-                  class="text-white hover:bg-primary-500/75 rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-                  href="#"
-                >
-                  System
-                </a>
-              </div>
+              />
             </div>
           </div>
           <div
@@ -91,58 +43,6 @@ exports[`DefaultLayout > renders the NavBar and content 1`] = `
             <div
               class="ml-4 flex items-center md:ml-6"
             />
-          </div>
-          <div
-            class="-mr-2 flex md:hidden"
-          >
-            <button
-              aria-expanded="false"
-              class="group relative inline-flex items-center justify-center rounded-md bg-primary-500 p-2 text-primary-200 hover:bg-primary-500/75 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-500 focus:outline-hidden"
-              data-headlessui-state=""
-              id="headlessui-disclosure-button-_r_0_"
-              type="button"
-            >
-              <span
-                class="absolute -inset-0.5"
-              />
-              <span
-                class="sr-only"
-              >
-                Open main menu
-              </span>
-              <svg
-                aria-hidden="true"
-                class="block size-6 group-data-open:hidden"
-                data-slot="icon"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              <svg
-                aria-hidden="true"
-                class="hidden size-6 group-data-open:block"
-                data-slot="icon"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6 18 18 6M6 6l12 12"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
           </div>
         </div>
       </div>
