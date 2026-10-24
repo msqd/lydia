@@ -1,5 +1,6 @@
 import { ToastProvider } from "@msqd/lydia/Components/Toast";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { TransactionsDetailPage } from "./TransactionsDetailPage";
 import { sampleDetailedTransaction } from "./TransactionsDetailPage.samples";
@@ -127,5 +128,24 @@ describe("TransactionsDetailPage", () => {
 
     // Copy button should not be visible when metadata section is closed by default
     expect(screen.queryByText("Copy")).not.toBeInTheDocument();
+  });
+
+  it("shows the tags of the transaction it is given, not the first one rendered", async () => {
+    const withTags = (tags: Record<string, string>) => ({ ...sampleDetailedTransaction, tags });
+    const { rerender } = render(
+      <TestWrapper>
+        <TransactionsDetailPage transaction={withTags({ env: "alpha" })} />
+      </TestWrapper>,
+    );
+    rerender(
+      <TestWrapper>
+        <TransactionsDetailPage transaction={withTags({ env: "beta" })} />
+      </TestWrapper>,
+    );
+
+    await userEvent.click(screen.getByTestId("method-badge-GET"));
+
+    expect(screen.getByText("env=beta")).toBeInTheDocument();
+    expect(screen.queryByText("env=alpha")).not.toBeInTheDocument();
   });
 });
