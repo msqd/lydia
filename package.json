@@ -473,10 +473,6 @@
       "types": "./dist/Components/Utilities/useGlobalClickOutside.d.ts",
       "import": "./dist/Components/Utilities/useGlobalClickOutside.js"
     },
-    "./Components/Utilities/useScrollLock": {
-      "types": "./dist/Components/Utilities/useScrollLock.d.ts",
-      "import": "./dist/Components/Utilities/useScrollLock.js"
-    },
     "./Config/navigation": {
       "types": "./dist/Config/navigation.d.ts",
       "import": "./dist/Config/navigation.js"
