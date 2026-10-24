@@ -1,7 +1,7 @@
 import type { Filters } from "@msqd/lydia/Models/Filters";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { PerformanceFacet } from "./PerformanceFacet";
+import { PerformanceFacet, filterToSlider, sliderToFilter } from "./PerformanceFacet";
 
 const defaultProps = {
   name: "tpdex",
@@ -157,5 +157,65 @@ describe("PerformanceFacet in the document outline", () => {
 
     expect(screen.getByRole("slider", { name: "Performance Index, minimum" })).toBeInTheDocument();
     expect(screen.getByRole("slider", { name: "Performance Index, maximum" })).toBeInTheDocument();
+  });
+});
+
+describe("tpdex slider mapping", () => {
+  // Slider marks follow tpdexScale, best rating first: A++ 0, A+ 10, ... G 80.
+  it.each([
+    [{ min: 0, max: 80 }, {}],
+    [{ min: 10, max: 80 }, { max: 95 }],
+    [{ min: 0, max: 70 }, { min: 17 }],
+    [
+      { min: 30, max: 50 },
+      { min: 49, max: 82 },
+    ],
+  ])("maps slider %j to filter %j", (slider, filter) => {
+    expect(sliderToFilter(slider)).toEqual(filter);
+  });
+
+  it.each([
+    [{}, { min: 0, max: 80 }],
+    [
+      { min: 83, max: 96 },
+      { min: 10, max: 30 },
+    ],
+    [{ min: 49 }, { min: 0, max: 50 }],
+    [{ max: 92 }, { min: 20, max: 80 }],
+    [{ min: 0 }, { min: 0, max: 80 }],
+    [{ max: 100 }, { min: 0, max: 80 }],
+    // Between two marks: the next mark at or below the threshold.
+    [{ min: 50 }, { min: 0, max: 50 }],
+    [{ min: 90 }, { min: 0, max: 30 }],
+    [{ max: 90 }, { min: 30, max: 80 }],
+  ])("maps filter %j to slider %j", (filter, slider) => {
+    expect(filterToSlider(filter)).toEqual(slider);
+  });
+});
+
+describe("PerformanceFacet reset", () => {
+  it.each([
+    ["a threshold between two marks", { min: 50 }],
+    ["a zero bound", { min: 0 }],
+    ["a zero max", { max: 0 }],
+    ["a bound at the slider default", { max: 100 }],
+  ])("shows its reset link for %s", (_, tpdex) => {
+    render(<PerformanceFacet {...defaultProps} filters={{ tpdex }} />);
+
+    expect(screen.getByRole("link", { name: /reset/i })).toBeInTheDocument();
+  });
+
+  it("shows no reset link without a filter", () => {
+    render(<PerformanceFacet {...defaultProps} />);
+
+    expect(screen.queryByRole("link", { name: /reset/i })).not.toBeInTheDocument();
+  });
+
+  it("clears the filter on reset", () => {
+    render(<PerformanceFacet {...defaultProps} filters={{ tpdex: { min: 50 } }} />);
+
+    fireEvent.click(screen.getByRole("link", { name: /reset/i }));
+
+    expect(defaultProps.onFiltersChange).toHaveBeenCalledWith("tpdex", undefined);
   });
 });

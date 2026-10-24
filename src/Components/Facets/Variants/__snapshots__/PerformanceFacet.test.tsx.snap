@@ -308,7 +308,7 @@ exports[`PerformanceFacet > matches snapshot with range selected 1`] = `
           step="10"
           style="--thumb-size: 16px;"
           type="range"
-          value="0"
+          value="10"
         />
         <input
           aria-label="Performance Index, maximum"
@@ -330,13 +330,13 @@ exports[`PerformanceFacet > matches snapshot with range selected 1`] = `
         >
           <div
             class="absolute h-full left-0 top-0 bg-primary-200 opacity-50"
-            style="left: 0%; width: 37.5%; transition: left 0.02s ease-out, width 0.02s ease-out;"
+            style="left: 12.5%; width: 25%; transition: left 0.02s ease-out, width 0.02s ease-out;"
           />
           <div
             style="position: absolute; left: 0%; top: 50%;"
           >
             <div
-              class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-primary-200"
+              class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-[6px] h-[6px] rounded-full ring-1 ring-white bg-tpdex-a-plus-plus"
             />
             <div
               class="absolute top-full -translate-x-1/2 mt-[8px] text-[10px] font-medium whitespace-nowrap select-none"
@@ -444,7 +444,7 @@ exports[`PerformanceFacet > matches snapshot with range selected 1`] = `
         <div
           class="absolute rounded-full bg-primary-900 top-1/2 -translate-x-1/2 -translate-y-1/2 ring-1 ring-white cursor-grab z-[2]"
           data-thumb="min"
-          style="width: 16px; height: 16px; transition: left 0.02s ease-out; left: 0%;"
+          style="width: 16px; height: 16px; transition: left 0.02s ease-out; left: 12.5%;"
         />
         <div
           class="absolute rounded-full bg-primary-900 top-1/2 -translate-x-1/2 -translate-y-1/2 ring-1 ring-white cursor-grab z-[2]"
