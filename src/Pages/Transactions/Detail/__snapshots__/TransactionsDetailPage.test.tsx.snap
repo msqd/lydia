@@ -341,71 +341,78 @@ exports[`TransactionsDetailPage > renders the transaction details correctly 1`] 
                       style="height: 400px;"
                       tabindex="0"
                     >
-                      <div
-                        class="font-mono text-xs leading-5"
-                      >
-                        <span
-                          class="token punctuation"
-                          style="color: rgb(36, 41, 46);"
-                        >
-                          {
-                        </span>
-                        
-  
-                        <span
-                          class="token property"
-                          style="color: rgb(0, 92, 197);"
-                        >
-                          "request"
-                        </span>
-                        <span
-                          class="token operator"
-                          style="color: rgb(215, 58, 73);"
-                        >
-                          :
-                        </span>
-                         
-                        <span
-                          class="token string"
-                          style="color: rgb(3, 47, 98);"
-                        >
-                          "sample request body"
-                        </span>
-                        <span
-                          class="token punctuation"
-                          style="color: rgb(36, 41, 46);"
-                        >
-                          ,
-                        </span>
-                        
-  
-                        <span
-                          class="token property"
-                          style="color: rgb(0, 92, 197);"
-                        >
-                          "transactionId"
-                        </span>
-                        <span
-                          class="token operator"
-                          style="color: rgb(215, 58, 73);"
-                        >
-                          :
-                        </span>
-                         
-                        <span
-                          class="token string"
-                          style="color: rgb(3, 47, 98);"
-                        >
-                          "tx001"
-                        </span>
-                        
-
-                        <span
-                          class="token punctuation"
-                          style="color: rgb(36, 41, 46);"
-                        >
-                          }
-                        </span>
+                      <div>
+                        <div>
+                          <div
+                            class="font-mono text-xs leading-5 whitespace-pre"
+                            style="height: 20px;"
+                          >
+                            <span
+                              class="token punctuation"
+                            >
+                              {
+                            </span>
+                          </div>
+                          <div
+                            class="font-mono text-xs leading-5 whitespace-pre"
+                            style="height: 20px;"
+                          >
+                              
+                            <span
+                              class="token property"
+                            >
+                              "request"
+                            </span>
+                            <span
+                              class="token operator"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              class="token string"
+                            >
+                              "sample request body"
+                            </span>
+                            <span
+                              class="token punctuation"
+                            >
+                              ,
+                            </span>
+                          </div>
+                          <div
+                            class="font-mono text-xs leading-5 whitespace-pre"
+                            style="height: 20px;"
+                          >
+                              
+                            <span
+                              class="token property"
+                            >
+                              "transactionId"
+                            </span>
+                            <span
+                              class="token operator"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              class="token string"
+                            >
+                              "tx001"
+                            </span>
+                          </div>
+                          <div
+                            class="font-mono text-xs leading-5 whitespace-pre"
+                            style="height: 20px;"
+                          >
+                            <span
+                              class="token punctuation"
+                            >
+                              }
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -605,152 +612,159 @@ exports[`TransactionsDetailPage > renders the transaction details correctly 1`] 
                       style="height: 400px;"
                       tabindex="0"
                     >
-                      <div
-                        class="font-mono text-xs leading-5"
-                      >
-                        <span
-                          class="token punctuation"
-                          style="color: rgb(36, 41, 46);"
-                        >
-                          {
-                        </span>
-                        
-  
-                        <span
-                          class="token property"
-                          style="color: rgb(0, 92, 197);"
-                        >
-                          "id"
-                        </span>
-                        <span
-                          class="token operator"
-                          style="color: rgb(215, 58, 73);"
-                        >
-                          :
-                        </span>
-                         
-                        <span
-                          class="token string"
-                          style="color: rgb(3, 47, 98);"
-                        >
-                          "tx001"
-                        </span>
-                        <span
-                          class="token punctuation"
-                          style="color: rgb(36, 41, 46);"
-                        >
-                          ,
-                        </span>
-                        
-  
-                        <span
-                          class="token property"
-                          style="color: rgb(0, 92, 197);"
-                        >
-                          "status"
-                        </span>
-                        <span
-                          class="token operator"
-                          style="color: rgb(215, 58, 73);"
-                        >
-                          :
-                        </span>
-                         
-                        <span
-                          class="token string"
-                          style="color: rgb(3, 47, 98);"
-                        >
-                          "Successful"
-                        </span>
-                        <span
-                          class="token punctuation"
-                          style="color: rgb(36, 41, 46);"
-                        >
-                          ,
-                        </span>
-                        
-  
-                        <span
-                          class="token property"
-                          style="color: rgb(0, 92, 197);"
-                        >
-                          "method"
-                        </span>
-                        <span
-                          class="token operator"
-                          style="color: rgb(215, 58, 73);"
-                        >
-                          :
-                        </span>
-                         
-                        <span
-                          class="token string"
-                          style="color: rgb(3, 47, 98);"
-                        >
-                          "GET"
-                        </span>
-                        <span
-                          class="token punctuation"
-                          style="color: rgb(36, 41, 46);"
-                        >
-                          ,
-                        </span>
-                        
-  
-                        <span
-                          class="token property"
-                          style="color: rgb(0, 92, 197);"
-                        >
-                          "url"
-                        </span>
-                        <span
-                          class="token operator"
-                          style="color: rgb(215, 58, 73);"
-                        >
-                          :
-                        </span>
-                         
-                        <span
-                          class="token string"
-                          style="color: rgb(3, 47, 98);"
-                        >
-                          "/api/users/123/profile"
-                        </span>
-                        <span
-                          class="token punctuation"
-                          style="color: rgb(36, 41, 46);"
-                        >
-                          ,
-                        </span>
-                        
-  
-                        <span
-                          class="token property"
-                          style="color: rgb(0, 92, 197);"
-                        >
-                          "timestamp"
-                        </span>
-                        <span
-                          class="token operator"
-                          style="color: rgb(215, 58, 73);"
-                        >
-                          :
-                        </span>
-                         
-                        <span
-                          class="token string"
-                          style="color: rgb(3, 47, 98);"
-                        >
-                          "2025-05-20T10:30:00"
-                        </span>
-                        
-
-                        <span
-                          class="token punctuation"
-                          style="color: rgb(36, 41, 46);"
-                        >
-                          }
-                        </span>
+                      <div>
+                        <div>
+                          <div
+                            class="font-mono text-xs leading-5 whitespace-pre"
+                            style="height: 20px;"
+                          >
+                            <span
+                              class="token punctuation"
+                            >
+                              {
+                            </span>
+                          </div>
+                          <div
+                            class="font-mono text-xs leading-5 whitespace-pre"
+                            style="height: 20px;"
+                          >
+                              
+                            <span
+                              class="token property"
+                            >
+                              "id"
+                            </span>
+                            <span
+                              class="token operator"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              class="token string"
+                            >
+                              "tx001"
+                            </span>
+                            <span
+                              class="token punctuation"
+                            >
+                              ,
+                            </span>
+                          </div>
+                          <div
+                            class="font-mono text-xs leading-5 whitespace-pre"
+                            style="height: 20px;"
+                          >
+                              
+                            <span
+                              class="token property"
+                            >
+                              "status"
+                            </span>
+                            <span
+                              class="token operator"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              class="token string"
+                            >
+                              "Successful"
+                            </span>
+                            <span
+                              class="token punctuation"
+                            >
+                              ,
+                            </span>
+                          </div>
+                          <div
+                            class="font-mono text-xs leading-5 whitespace-pre"
+                            style="height: 20px;"
+                          >
+                              
+                            <span
+                              class="token property"
+                            >
+                              "method"
+                            </span>
+                            <span
+                              class="token operator"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              class="token string"
+                            >
+                              "GET"
+                            </span>
+                            <span
+                              class="token punctuation"
+                            >
+                              ,
+                            </span>
+                          </div>
+                          <div
+                            class="font-mono text-xs leading-5 whitespace-pre"
+                            style="height: 20px;"
+                          >
+                              
+                            <span
+                              class="token property"
+                            >
+                              "url"
+                            </span>
+                            <span
+                              class="token operator"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              class="token string"
+                            >
+                              "/api/users/123/profile"
+                            </span>
+                            <span
+                              class="token punctuation"
+                            >
+                              ,
+                            </span>
+                          </div>
+                          <div
+                            class="font-mono text-xs leading-5 whitespace-pre"
+                            style="height: 20px;"
+                          >
+                              
+                            <span
+                              class="token property"
+                            >
+                              "timestamp"
+                            </span>
+                            <span
+                              class="token operator"
+                            >
+                              :
+                            </span>
+                             
+                            <span
+                              class="token string"
+                            >
+                              "2025-05-20T10:30:00"
+                            </span>
+                          </div>
+                          <div
+                            class="font-mono text-xs leading-5 whitespace-pre"
+                            style="height: 20px;"
+                          >
+                            <span
+                              class="token punctuation"
+                            >
+                              }
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

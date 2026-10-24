@@ -47,7 +47,7 @@ describe.skipIf(!existsSync(resolve(__dirname, "../dist")))("CSS Export", () => 
 
     // Check for Prism syntax highlighting styles
     expect(cssContent).toContain("token.comment");
-    expect(cssContent).toContain("language-");
+    expect(cssContent).not.toContain("language-");
   });
 
   it("should embed the fonts, so no consumer has to serve them", () => {
