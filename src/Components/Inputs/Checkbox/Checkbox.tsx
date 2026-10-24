@@ -1,15 +1,9 @@
-import { useEffect, useRef } from "react";
-import type { ReactNode } from "react";
-import type { ComponentProps } from "react";
+import { useCallback, useEffect, useRef } from "react";
+import type { Ref } from "react";
 import { twMerge } from "tailwind-merge";
+import { type ChoiceInputProps, useChoiceInputId } from "../choiceInput";
 
-export interface CheckboxProps extends ComponentProps<"input"> {
-  name: string;
-  label?: string | ReactNode;
-  checked?: boolean;
-  containerProps?: ComponentProps<"div">;
-  labelProps?: ComponentProps<"label">;
-  disabled?: boolean;
+export interface CheckboxProps extends ChoiceInputProps {
   /** Draws a partial tick: some, not all, of what the box stands for. Not an HTML attribute, so set on the DOM node. */
   indeterminate?: boolean;
 }
@@ -22,9 +16,19 @@ export function Checkbox({
   labelProps = {},
   disabled = false,
   indeterminate = false,
+  ref: consumerRef,
   ...inputProps
 }: CheckboxProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const id = useChoiceInputId(inputProps.id);
+
+  const setInputRef = useCallback(
+    (node: HTMLInputElement | null) => {
+      inputRef.current = node;
+      return assignRef(consumerRef, node);
+    },
+    [consumerRef],
+  );
 
   useEffect(() => {
     if (inputRef.current) inputRef.current.indeterminate = indeterminate;
@@ -51,12 +55,12 @@ export function Checkbox({
     >
       <div className="flex h-6 items-center">
         <input
-          id={inputProps.id ?? name}
           name={name}
-          ref={inputRef}
           type="checkbox"
           checked={checked}
           {...inputProps}
+          id={id}
+          ref={setInputRef}
           className={twMerge(
             "h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer",
             inputProps.className,
@@ -66,7 +70,7 @@ export function Checkbox({
       </div>
       <div className="text-sm leading-6 flex-1 min-w-0">
         <label
-          htmlFor={inputRef.current?.id ?? name}
+          htmlFor={id}
           {...labelProps}
           className={twMerge("font-medium text-gray-900 block", labelProps.className, disabled ? "" : "cursor-pointer")}
           onClick={(e) => {
@@ -79,4 +83,10 @@ export function Checkbox({
       </div>
     </div>
   );
+}
+
+/** Sets an object or callback ref, and returns the cleanup of a callback ref when it has one. */
+function assignRef<T>(ref: Ref<T> | undefined, node: T | null): (() => void) | void {
+  if (typeof ref === "function") return ref(node);
+  if (ref) ref.current = node;
 }

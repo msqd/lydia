@@ -301,6 +301,10 @@
       "types": "./dist/Components/Inputs/Checkbox/Checkbox.d.ts",
       "import": "./dist/Components/Inputs/Checkbox/Checkbox.js"
     },
+    "./Components/Inputs/choiceInput": {
+      "types": "./dist/Components/Inputs/choiceInput.d.ts",
+      "import": "./dist/Components/Inputs/choiceInput.js"
+    },
     "./Components/Inputs/DateRangeSelector": {
       "types": "./dist/Components/Inputs/DateRangeSelector/index.d.ts",
       "import": "./dist/Components/Inputs/DateRangeSelector/index.js"

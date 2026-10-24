@@ -1,5 +1,6 @@
 import { fireEvent } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { createRef } from "react";
+import { describe, expect, it, vi } from "vitest";
 import { customRender, expectComponentDefaults, screen } from "../../../Components/Utilities/Testing";
 import { Checkbox } from "./Checkbox";
 
@@ -134,5 +135,63 @@ describe("Checkbox indeterminate", () => {
 
     rerender(<Checkbox name="partial" />);
     expect(screen.getByRole("checkbox")).not.toBePartiallyChecked();
+  });
+});
+
+describe("Checkbox ids and refs", () => {
+  it("labels its own input on first render when id differs from name", () => {
+    customRender(<Checkbox name="field" id="custom" label="Field" />);
+
+    const checkbox = screen.getByRole("checkbox", { name: "Field" });
+    expect(checkbox).toHaveAttribute("id", "custom");
+    expect(screen.getByText("Field")).toHaveAttribute("for", "custom");
+  });
+
+  it("generates distinct ids for checkboxes sharing a name", () => {
+    customRender(
+      <>
+        <Checkbox name="tag" label="One" />
+        <Checkbox name="tag" label="Two" />
+      </>,
+    );
+
+    const [one, two] = screen.getAllByRole("checkbox");
+    expect(one.id).not.toBe("");
+    expect(one.id).not.toBe(two.id);
+    expect(screen.getByText("One")).toHaveAttribute("for", one.id);
+    expect(screen.getByText("Two")).toHaveAttribute("for", two.id);
+  });
+
+  it("survives id being passed then cleared", () => {
+    const { rerender } = customRender(<Checkbox name="field" id="custom" />);
+
+    rerender(<Checkbox name="field" />);
+    expect(screen.getByRole("checkbox").id).not.toBe("custom");
+    rerender(<Checkbox name="field" id="again" />);
+    expect(screen.getByRole("checkbox")).toHaveAttribute("id", "again");
+  });
+
+  it("hands the input to an object ref and keeps its behaviour", () => {
+    const ref = createRef<HTMLInputElement>();
+    customRender(<Checkbox name="field" ref={ref} indeterminate />);
+
+    const checkbox = screen.getByRole("checkbox");
+    expect(ref.current).toBe(checkbox);
+    expect(checkbox).toBePartiallyChecked();
+
+    fireEvent.click(screen.getByText("field"));
+    expect(checkbox).toBeChecked();
+  });
+
+  it("hands the input to a callback ref and keeps its behaviour", () => {
+    const ref = vi.fn();
+    customRender(<Checkbox name="field" ref={ref} indeterminate />);
+
+    const checkbox = screen.getByRole("checkbox");
+    expect(ref).toHaveBeenCalledWith(checkbox);
+    expect(checkbox).toBePartiallyChecked();
+
+    fireEvent.click(screen.getByText("field"));
+    expect(checkbox).toBeChecked();
   });
 });
