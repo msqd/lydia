@@ -57,11 +57,12 @@ export function ContentRenderer({ content, contentType, headers, maxHeight = 384
     [contentDisposition],
   );
 
+  const stringContent = useMemo(() => (content === undefined ? "" : stringifyBody(content)), [content]);
+
   if (content === undefined || content === "") {
     return <p className="text-sm text-gray-500">Empty body</p>;
   }
 
-  const stringContent = stringifyBody(content);
   const contentTypeHeader = findHeader(headers, "Content-Type");
   const contentLength = findHeader(headers, "Content-Length");
 

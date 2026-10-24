@@ -1,8 +1,11 @@
-import { type ComponentProps, useMemo, useState } from "react";
+import { type ComponentProps, useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 import { type PerformanceData, PerformanceMetrics } from "./PerformanceMetrics";
-import { VIRTUALIZATION_THRESHOLD, VirtualizedCodeView } from "./VirtualizedCodeView";
+import { LINE_HEIGHT, VIRTUALIZATION_THRESHOLD, VirtualizedCodeView } from "./VirtualizedCodeView";
 import { type CodeLanguage, useCodeHighlighting } from "./useCodeHighlighting";
+
+/** Vertical padding of the code box (`p-3`) in pixels. */
+const PADDING = 24;
 
 export interface CodeFormatterProps extends Omit<ComponentProps<"div">, "onChange"> {
   /**
@@ -69,62 +72,38 @@ export function CodeFormatter({
 }: CodeFormatterProps) {
   const showPerformance = performance !== "none";
   const showDetailedPerformance = performance === "detailed";
-  const [performanceStartTime] = useState(Date.now);
 
-  // Only a virtualized view short enough not to virtualize draws the highlighted tree.
-  const { formattedContent, highlightedAST, isHighlighted } = useCodeHighlighting(code, language, {
-    enabled: virtualized,
-    maxLines: VIRTUALIZATION_THRESHOLD,
-  });
+  const { formattedContent, lines, highlightLine } = useCodeHighlighting(code, language);
 
-  // Calculate performance metrics
-  const performanceData = useMemo((): PerformanceData => {
-    const lines = formattedContent.split("\n");
-    const processingTime = Date.now() - performanceStartTime;
-
-    return {
+  const performanceData = useMemo(
+    (): PerformanceData => ({
       lineCount: lines.length,
       characterCount: formattedContent.length,
-      highlightingTime: isHighlighted ? processingTime : undefined,
-      formattingTime: language === "json" ? processingTime : undefined,
       isVirtualized: virtualized && lines.length > VIRTUALIZATION_THRESHOLD,
-      visibleItemCount: virtualized ? Math.min(Math.floor(height / 20), lines.length) : undefined,
-    };
-  }, [formattedContent, language, isHighlighted, virtualized, height, performanceStartTime]);
+      visibleItemCount: virtualized ? Math.min(Math.floor(height / LINE_HEIGHT), lines.length) : undefined,
+    }),
+    [formattedContent, lines, virtualized, height],
+  );
 
-  // Determine container height
-  const containerHeight = useMemo(() => {
-    if (virtualized) return height;
-
-    const lineCount = formattedContent.split("\n").length;
-    const calculatedHeight = lineCount * 20; // 20px per line
-    return Math.min(calculatedHeight, maxHeight);
-  }, [formattedContent, virtualized, height, maxHeight]);
+  const containerHeight = virtualized ? height : Math.min(lines.length * LINE_HEIGHT + PADDING, maxHeight);
 
   return (
     <div className={twMerge("border border-gray-200 rounded-md overflow-hidden bg-white", className)} {...props}>
-      {/* Header with performance metrics */}
       {showPerformance && (
         <div className="px-3 py-2 bg-gray-50 border-b border-gray-200">
           <PerformanceMetrics data={performanceData} showDetails={showDetailedPerformance} />
         </div>
       )}
 
-      {/* Code content */}
       <div className="relative">
-        {virtualized ? (
-          <VirtualizedCodeView
-            content={formattedContent}
-            highlightedAST={highlightedAST}
-            containerHeight={containerHeight}
-            showLineNumbers={showLineNumbers}
-            className="p-3"
-          />
-        ) : (
-          <div className="p-3 overflow-auto" style={{ maxHeight: containerHeight }}>
-            <div className="font-mono text-xs leading-5 whitespace-pre">{formattedContent}</div>
-          </div>
-        )}
+        <VirtualizedCodeView
+          lines={lines}
+          highlightLine={highlightLine}
+          containerHeight={containerHeight}
+          showLineNumbers={showLineNumbers}
+          virtualized={virtualized}
+          className="p-3"
+        />
       </div>
     </div>
   );

@@ -1,44 +1,41 @@
 import { render, screen } from "@testing-library/react";
-import { refractor } from "refractor/core";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { CodeFormatter } from "./CodeFormatter";
 
-/**
- * Highlighting is the expensive step (seconds on a 10 MB body) and its result
- * is drawn in one case only: a virtualized view short enough not to virtualize.
- * Every other path draws plain text, so highlighting there is work thrown away.
- */
 describe("CodeFormatter highlighting", () => {
-  afterEach(() => vi.restoreAllMocks());
-
   const lines = (count: number) => JSON.stringify(Array.from({ length: count - 2 }, (_, i) => i));
 
-  it("highlights a short body, which is drawn highlighted", () => {
-    const highlight = vi.spyOn(refractor, "highlight");
+  it("highlights a short body", () => {
     const { container } = render(<CodeFormatter code={lines(10)} language="json" />);
 
-    expect(highlight).toHaveBeenCalledTimes(1);
     expect(container.querySelector(".token")).toBeInTheDocument();
   });
 
-  it("does not highlight a body long enough to virtualize, which is drawn as plain text", () => {
-    const highlight = vi.spyOn(refractor, "highlight");
-    render(<CodeFormatter code={lines(60)} language="json" />);
+  it("highlights a body long enough to virtualize", () => {
+    const { container } = render(<CodeFormatter code={lines(5000)} language="json" />);
 
-    expect(highlight).not.toHaveBeenCalled();
+    expect(container.querySelector(".token.number")).toBeInTheDocument();
+    expect(container.querySelectorAll(".token.number").length).toBeLessThan(100);
   });
 
-  it("does not highlight when virtualization is off, which draws plain text", () => {
-    const highlight = vi.spyOn(refractor, "highlight");
-    render(<CodeFormatter code={lines(10)} language="json" virtualized={false} />);
+  it("highlights when virtualization is off", () => {
+    const { container } = render(<CodeFormatter code={lines(10)} language="json" virtualized={false} />);
 
-    expect(highlight).not.toHaveBeenCalled();
+    expect(container.querySelector(".token")).toBeInTheDocument();
   });
 
-  it("does not report a highlighting time for highlighting it did not do", () => {
+  it("draws one code box, virtualized or not", () => {
+    const { rerender } = render(<CodeFormatter code={lines(10)} language="json" />);
+    expect(screen.getAllByRole("group", { name: "Code" })).toHaveLength(1);
+
+    rerender(<CodeFormatter code={lines(10)} language="json" virtualized={false} />);
+    expect(screen.getAllByRole("group", { name: "Code" })).toHaveLength(1);
+  });
+
+  it("reports no timing", () => {
     render(<CodeFormatter code={lines(60)} language="json" performance="detailed" />);
 
-    expect(screen.queryByText(/Highlight:/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Highlight:|Format:|Processed in/)).not.toBeInTheDocument();
   });
 });
 
@@ -67,7 +64,7 @@ describe("CodeFormatter Component", () => {
     render(<CodeFormatter code={code} language="json" />);
 
     // Check that the JSON is formatted (should contain proper spacing)
-    const container = screen.getByText(/John/).closest("div");
+    const container = screen.getByRole("group", { name: "Code" });
     expect(container?.textContent).toContain("name");
     expect(container?.textContent).toContain("John");
     expect(container?.textContent).toContain("30");
