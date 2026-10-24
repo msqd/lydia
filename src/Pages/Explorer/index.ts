@@ -1,1 +1,1 @@
-export { ExplorerPage, default } from "./ExplorerPage";
+export * from "./ExplorerPage";

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import SummaryRateChart from "./SummaryRateChart";
+import { SummaryRateChart } from "./SummaryRateChart";
 
 const meta: Meta<typeof SummaryRateChart> = {
   title: "Components/Charts/SummaryRateChart",

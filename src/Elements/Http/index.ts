@@ -1,4 +1,4 @@
-export { RequestMethodBadge } from "./RequestMethodBadge";
-export { ResponseStatusBadge } from "./ResponseStatusBadge";
-export { CacheBadge } from "./CacheBadge";
-export { CacheIndicator } from "./CacheIndicator";
+export { RequestMethodBadge, type RequestMethodBadgeProps } from "./RequestMethodBadge";
+export { ResponseStatusBadge, type ResponseStatusBadgeProps } from "./ResponseStatusBadge";
+export { CacheBadge, type CacheBadgeProps } from "./CacheBadge";
+export { CacheIndicator, type CacheIndicatorProps } from "./CacheIndicator";

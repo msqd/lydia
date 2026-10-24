@@ -47,7 +47,7 @@ export function FacetList({ hasDividers = true, className, children, ...props }:
 
 /**
  * Hook to help manage filter state in components using FacetList
- * Provides common filter operations and URL serialization helpers
+ * Returns the filters and the handlers to change, remove and reset them
  */
 export function useFacetState(initialFilters: Filters = {}) {
   const [filters, setFilters] = useState<Filters>(initialFilters);
@@ -63,10 +63,6 @@ export function useFacetState(initialFilters: Filters = {}) {
     setFilters({});
   };
 
-  const updateFilter = (filterName: string, value: FilterValue) => {
-    handleFilterChange(filterName, value);
-  };
-
   const removeFilter = (filterName: string) => {
     setFilters((prev) => {
       const { [filterName]: removed, ...rest } = prev;
@@ -79,7 +75,6 @@ export function useFacetState(initialFilters: Filters = {}) {
     setFilters,
     handleFilterChange,
     resetFilters,
-    updateFilter,
     removeFilter,
   };
 }

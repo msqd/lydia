@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { OverviewTransaction } from "../../Models";
-import TransactionsChart from "./TransactionsChart";
+import { TransactionsChart } from "./TransactionsChart";
 
 const meta: Meta<typeof TransactionsChart> = {
   title: "Components/Charts/TransactionsChart",

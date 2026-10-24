@@ -3,7 +3,7 @@ import { act, render, screen, waitFor } from "@testing-library/react";
 import ReactEChartsCore from "echarts-for-react/lib/core.js";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { restoreThemeTokens, stubThemeTokens } from "../Utilities/Testing";
-import SummaryPerformancesChart from "./SummaryPerformancesChart";
+import { SummaryPerformancesChart } from "./SummaryPerformancesChart";
 
 // ECharts renders to a canvas, which jsdom does not provide. This is an environment boundary
 // rather than a design-system component, so it stays mocked. See Testing.mdx, What to mock.

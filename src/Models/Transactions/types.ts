@@ -61,27 +61,3 @@ export interface DetailedTransaction extends Transaction {
   request: HttpMessage;
   response: HttpMessage;
 }
-
-/**
- * Client types for filtering
- */
-export type ClientType = "Mobile App" | "Website" | "Admin Dashboard" | "External API" | "Backend Service";
-
-/**
- * Filter options for transactions
- */
-export interface TransactionFilters {
-  status?: "Successful" | "Pending" | "Failed" | "All";
-  method?: string;
-  client?: string;
-  dateRange?: {
-    startDate: string;
-    endDate: string;
-  };
-  datePeriod?: {
-    today: boolean;
-    thisWeek: boolean;
-    thisMonth: boolean;
-  };
-  search?: string;
-}

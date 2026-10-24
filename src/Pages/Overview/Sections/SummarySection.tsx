@@ -1,5 +1,5 @@
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/outline";
-import { Cards } from "@msqd/lydia/Components/Cards";
+import { Card } from "@msqd/lydia/Components/Cards";
 import { SummaryPerformancesChart, SummaryRateChart } from "@msqd/lydia/Components/Charts";
 import type { LinkComponentType } from "@msqd/lydia/Components/NavBar";
 import { H2, H3 } from "@msqd/lydia/Components/Typography/Titles";
@@ -78,9 +78,9 @@ interface PaneProps extends ComponentProps<"div"> {
 const Pane = Object.assign(
   ({ className, children, ...props }: PaneProps) => {
     return (
-      <Cards.Card className={twMerge("overflow-hidden relative h-60", className)} {...props}>
+      <Card className={twMerge("overflow-hidden relative h-60", className)} {...props}>
         {children}
-      </Cards.Card>
+      </Card>
     );
   },
   {

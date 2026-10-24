@@ -1,7 +1,7 @@
 import { type ComponentProps, useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 import { BodyNotice } from "./BodyNotice";
-import { type PerformanceData, PerformanceMetrics } from "./PerformanceMetrics";
+import { PerformanceMetrics, type PerformanceMetricsData } from "./PerformanceMetrics";
 import { LINE_HEIGHT, VIRTUALIZATION_THRESHOLD, VirtualizedCodeView } from "./VirtualizedCodeView";
 import { type CodeLanguage, useCodeHighlighting } from "./useCodeHighlighting";
 
@@ -77,7 +77,7 @@ export function CodeFormatter({
   const { formattedContent, lines, highlightLine, tooLargeToHighlight } = useCodeHighlighting(code, language);
 
   const performanceData = useMemo(
-    (): PerformanceData => ({
+    (): PerformanceMetricsData => ({
       lineCount: lines.length,
       characterCount: formattedContent.length,
       isVirtualized: virtualized && lines.length > VIRTUALIZATION_THRESHOLD,
@@ -111,5 +111,3 @@ export function CodeFormatter({
     </div>
   );
 }
-
-export default CodeFormatter;

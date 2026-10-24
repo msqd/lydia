@@ -1,4 +1,4 @@
-import type { CircuitBreakerStatus as CircuitBreakerStatusType } from "@msqd/lydia/Models/System";
+import type { CircuitBreakerState } from "@msqd/lydia/Models/System";
 import { CircuitBreakerStatus } from "./CircuitBreakerStatus";
 
 export interface NetworkEdgesProps {
@@ -7,7 +7,7 @@ export interface NetworkEdgesProps {
     to: string;
     type: "entrypoint-proxy" | "proxy-endpoint";
     circuitBreaker?: {
-      status: CircuitBreakerStatusType;
+      status: CircuitBreakerState;
       failureRate: number;
     };
   }>;
@@ -16,7 +16,7 @@ export interface NetworkEdgesProps {
     proxies: Array<{ id: string; x: number; y: number; width: number; height: number }>;
     endpoints: Array<{ id: string; x: number; y: number; width: number; height: number }>;
   };
-  onCircuitBreakerChange?: (from: string, to: string, status: CircuitBreakerStatusType) => void;
+  onCircuitBreakerChange?: (from: string, to: string, status: CircuitBreakerState) => void;
 }
 
 export function NetworkEdges({ connections, positions, onCircuitBreakerChange }: NetworkEdgesProps) {

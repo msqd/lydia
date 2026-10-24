@@ -15,7 +15,7 @@ import { useThemeColor } from "./Hooks/useThemeColors";
 // Register the required components
 echarts.use([BarChart, CanvasRenderer, GridComponent, TooltipComponent]);
 
-interface SummaryRateChartProps {
+export interface SummaryRateChartProps {
   data: { value: number; datetime: string }[];
   /** A CSS colour, or a theme token such as `--color-danger-200`, which follows theme changes. */
   color?: string;
@@ -31,7 +31,7 @@ const tooltipFormatter = (params: any[]) => {
 
 const chartPadding = { left: 20, right: 20 };
 
-const SummaryRateChart = ({ data, color }: SummaryRateChartProps) => {
+export const SummaryRateChart = ({ data, color }: SummaryRateChartProps) => {
   const seriesColor = useThemeColor(color);
   const { containerRef, dimensions } = useChartDimensions({ defaultWidth: 300, padding: chartPadding });
 
@@ -97,5 +97,3 @@ const SummaryRateChart = ({ data, color }: SummaryRateChartProps) => {
     </div>
   );
 };
-
-export default SummaryRateChart;

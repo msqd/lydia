@@ -19,7 +19,7 @@ import { TimeFormatter } from "./Utils/TimeFormatter";
 // Register the required components
 echarts.use([BarChart, CanvasRenderer, GridComponent, TooltipComponent]);
 
-interface TransactionsChartProps {
+export interface TransactionsChartProps {
   data: Array<OverviewTransaction>;
   timeRange?: string;
 }
@@ -34,7 +34,7 @@ const labelOption = {
   },
 };
 
-const TransactionsChart = ({ data, timeRange }: TransactionsChartProps) => {
+export const TransactionsChart = ({ data, timeRange }: TransactionsChartProps) => {
   const { containerRef, dimensions } = useChartDimensions({
     defaultWidth: 600,
     defaultHeight: 300,
@@ -93,5 +93,3 @@ const TransactionsChart = ({ data, timeRange }: TransactionsChartProps) => {
     </div>
   );
 };
-
-export default TransactionsChart;

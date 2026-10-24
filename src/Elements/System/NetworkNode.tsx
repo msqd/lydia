@@ -43,7 +43,9 @@ export function NetworkNode({ tone, title, action, children, className, ...props
 }
 
 /** A node's secondary line: a URL or a path, monospaced and truncated. */
-export function NetworkNodeDetail({ className, children, ...props }: ComponentProps<"div">) {
+export type NetworkNodeDetailProps = ComponentProps<"div">;
+
+export function NetworkNodeDetail({ className, children, ...props }: NetworkNodeDetailProps) {
   return (
     <div className={twMerge("text-xs text-gray-600 font-mono truncate", className)} {...props}>
       {children}
