@@ -493,3 +493,57 @@ describe("Input in a grid", () => {
     });
   });
 });
+
+describe("Input field ids", () => {
+  it("links its label, help text and error without any id passed", () => {
+    customRender(<Input label="Email" helpText="We never share it" errorMessage="Invalid email" />);
+    const input = screen.getByLabelText("Email");
+    const error = screen.getByText("Invalid email");
+
+    expect(input.id).not.toBe("");
+    expect(input).toHaveAttribute("aria-describedby", error.id);
+    expect(input).toHaveAttribute("aria-invalid", "true");
+  });
+
+  it("describes the control by its help text and corner hint together", () => {
+    customRender(<Input label="Email" helpText="We never share it" cornerHint="Optional" />);
+    const ids = screen.getByLabelText("Email").getAttribute("aria-describedby")?.split(" ");
+
+    expect(ids).toEqual([screen.getByText("We never share it").id, screen.getByText("Optional").id]);
+  });
+
+  it("keeps the error and the help text it hides apart in the description", () => {
+    customRender(<Input label="Email" errorMessage="Invalid email" cornerHint="Optional" />);
+    const ids = screen.getByLabelText("Email").getAttribute("aria-describedby")?.split(" ");
+
+    expect(ids).toEqual([screen.getByText("Invalid email").id, screen.getByText("Optional").id]);
+  });
+
+  it("appends the consumer's aria-describedby", () => {
+    customRender(<Input label="Email" errorMessage="Invalid email" aria-describedby="external" />);
+    const ids = screen.getByLabelText("Email").getAttribute("aria-describedby")?.split(" ");
+
+    expect(ids).toEqual([screen.getByText("Invalid email").id, "external"]);
+  });
+
+  it("is invalid when the variant is error, without a message", () => {
+    customRender(<Input label="Email" variant="error" />);
+    expect(screen.getByLabelText("Email")).toHaveAttribute("aria-invalid", "true");
+  });
+
+  it("gives two fields distinct ids", () => {
+    customRender(
+      <>
+        <Input label="First" />
+        <Input label="Second" />
+      </>,
+    );
+    expect(screen.getByLabelText("First").id).not.toBe(screen.getByLabelText("Second").id);
+  });
+
+  it("uses the ids it is given", () => {
+    customRender(<Input label="Email" id="mail" helpText="Help" helpTextId="mail-help" />);
+    expect(screen.getByLabelText("Email")).toHaveAttribute("id", "mail");
+    expect(screen.getByLabelText("Email")).toHaveAttribute("aria-describedby", "mail-help");
+  });
+});

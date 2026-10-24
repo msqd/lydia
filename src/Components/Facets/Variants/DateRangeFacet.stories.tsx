@@ -41,6 +41,18 @@ export const WithPreselectedDates: Story = {
   },
 };
 
+export const StartAfterEnd: Story = {
+  args: {
+    ...defaultArgs,
+    filters: {
+      dateRange: {
+        startDate: "2024-02-01",
+        endDate: "2024-01-01",
+      },
+    },
+  },
+};
+
 export const Closed: Story = {
   args: {
     ...defaultArgs,

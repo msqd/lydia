@@ -1,5 +1,5 @@
 import { KeyboardShortcut } from "@msqd/lydia/Components/Inputs/KeyboardShortcut";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import type { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -18,7 +18,17 @@ const inputClassName = "lydia-input overflow-ellipsis w-full border-0 p-0 focus:
 const enterBtnClassName = "inset-y-0 right-0 flex hover:cursor-pointer";
 const labelClassName = "block text-sm font-medium leading-6 text-gray-900";
 
-export const SearchInput = ({ label, setSearch, className, placeHolder, search, ...moreProps }: SearchInputProps) => {
+export const SearchInput = ({
+  label,
+  setSearch,
+  className,
+  placeHolder,
+  search,
+  id,
+  ...moreProps
+}: SearchInputProps) => {
+  const generatedId = useId();
+  const inputId = id ?? generatedId;
   const inputRef = useRef<HTMLInputElement>(null);
   // The term is committed on Enter rather than on every keystroke, so the field holds a draft of
   // its own. It still follows `search` when the caller changes it, which is what makes resetting
@@ -44,7 +54,7 @@ export const SearchInput = ({ label, setSearch, className, placeHolder, search, 
   return (
     <div className={twMerge(baseClassName, className)}>
       {label && (
-        <label htmlFor="search" className={labelClassName}>
+        <label htmlFor={inputId} className={labelClassName}>
           {label}
         </label>
       )}
@@ -54,7 +64,7 @@ export const SearchInput = ({ label, setSearch, className, placeHolder, search, 
           type="text"
           autoComplete="off"
           name="search"
-          id="search"
+          id={inputId}
           placeholder={placeHolder}
           onKeyDown={handleKeyPress}
           value={draft}

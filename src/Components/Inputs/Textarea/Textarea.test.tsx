@@ -83,3 +83,42 @@ describe("Textarea Component", () => {
     expect(textarea).toBeDisabled();
   });
 });
+
+describe("Textarea field ids", () => {
+  it("links its label, help text and error without any id passed", () => {
+    render(<Textarea label="Notes" helpText="Be brief" errorMessage="Too long" />);
+    const textarea = screen.getByLabelText("Notes");
+
+    expect(textarea).toHaveAttribute("aria-describedby", screen.getByText("Too long").id);
+    expect(textarea).toHaveAttribute("aria-invalid", "true");
+  });
+
+  it("describes the control by its help text and corner hint together", () => {
+    render(<Textarea label="Notes" helpText="Be brief" cornerHint="Optional" />);
+    const ids = screen.getByLabelText("Notes").getAttribute("aria-describedby")?.split(" ");
+
+    expect(ids).toEqual([screen.getByText("Be brief").id, screen.getByText("Optional").id]);
+  });
+
+  it("appends the consumer's aria-describedby", () => {
+    render(<Textarea label="Notes" errorMessage="Too long" aria-describedby="external" />);
+    const ids = screen.getByLabelText("Notes").getAttribute("aria-describedby")?.split(" ");
+
+    expect(ids).toEqual([screen.getByText("Too long").id, "external"]);
+  });
+
+  it("is invalid when the variant is error, without a message", () => {
+    render(<Textarea label="Notes" variant="error" />);
+    expect(screen.getByLabelText("Notes")).toHaveAttribute("aria-invalid", "true");
+  });
+
+  it("gives two fields distinct ids", () => {
+    render(
+      <>
+        <Textarea label="First" />
+        <Textarea label="Second" />
+      </>,
+    );
+    expect(screen.getByLabelText("First").id).not.toBe(screen.getByLabelText("Second").id);
+  });
+});

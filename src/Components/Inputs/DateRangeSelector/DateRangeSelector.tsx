@@ -1,5 +1,5 @@
 import { localToday } from "@msqd/lydia/Models/Filters";
-import { type ComponentProps } from "react";
+import { type ComponentProps, useId } from "react";
 import { twMerge } from "tailwind-merge";
 import { Input } from "../Input/Input";
 
@@ -64,6 +64,8 @@ export function DateRangeSelector({
   disableFutureDates = false,
   ...props
 }: DateRangeSelectorProps) {
+  const labelId = useId();
+  const errorId = useId();
   // Derived during render rather than mirrored into state. An effect would leave the first paint
   // showing no error and offering past dates, and would freeze "today" at the moment it last ran.
   const today = localToday();
@@ -96,11 +98,19 @@ export function DateRangeSelector({
   };
 
   return (
-    <div className={twMerge("w-full", className)} {...props}>
-      {label && (
+    <div role="group" aria-labelledby={label ? labelId : undefined} className={twMerge("w-full", className)} {...props}>
+      {(label || error) && (
         <div className="flex justify-between items-center mb-1">
-          <label className="block text-sm font-medium leading-6 text-gray-900">{label}</label>
-          {error && <span className="text-xs text-danger-500">{error}</span>}
+          {label && (
+            <span id={labelId} className="block text-sm font-medium leading-6 text-gray-900">
+              {label}
+            </span>
+          )}
+          {error && (
+            <span id={errorId} className="text-xs text-danger-600">
+              {error}
+            </span>
+          )}
         </div>
       )}
       <div className="grid grid-cols-2 gap-2">
@@ -111,6 +121,7 @@ export function DateRangeSelector({
           placeholder={startDatePlaceholder}
           aria-label={startDatePlaceholder}
           variant={error ? "error" : "default"}
+          aria-describedby={error ? errorId : undefined}
           {...(effectiveMinDate ? { min: effectiveMinDate } : {})}
           {...(value.endDate && value.endDate.trim()
             ? { max: value.endDate }
@@ -125,6 +136,7 @@ export function DateRangeSelector({
           placeholder={endDatePlaceholder}
           aria-label={endDatePlaceholder}
           variant={error ? "error" : "default"}
+          aria-describedby={error ? errorId : undefined}
           {...(value.startDate && value.startDate.trim()
             ? { min: value.startDate }
             : effectiveMinDate
