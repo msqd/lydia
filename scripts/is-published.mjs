@@ -3,6 +3,11 @@ import { execFileSync } from 'node:child_process'
 // Exit 0 if `<name>@<version>` is on the npm registry, 1 if it is not, 2 if the registry could not tell.
 const [name, version] = process.argv.slice(2)
 
+if (!name || !version) {
+  console.error('Usage: node scripts/is-published.mjs <name> <version>')
+  process.exit(2)
+}
+
 try {
   const found = execFileSync('npm', ['view', `${name}@${version}`, 'version'], {
     encoding: 'utf8',
