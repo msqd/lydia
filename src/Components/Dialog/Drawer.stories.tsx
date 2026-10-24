@@ -1,7 +1,8 @@
 import { Button } from "@msqd/lydia/Components/Buttons";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Fragment, useState } from "react";
-import { expect, fn, userEvent, within } from "storybook/test";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
+import { Dialog } from "./Dialog";
 import { Drawer } from "./Drawer";
 
 const meta: Meta<typeof Drawer> = {
@@ -388,5 +389,53 @@ export const InteractiveExample: Story = {
     // Don't test the drawer opening in the play test as HeadlessUI Dialog
     // doesn't work well in the storybook test environment
     // The component functionality is tested in unit tests instead
+  },
+};
+
+export const DialogOverDrawer: Story = {
+  args: defaultArgs,
+  parameters: { layout: "padded" },
+  render: (args) => {
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [dialogOpen, setDialogOpen] = useState(false);
+
+    return (
+      <>
+        <div className="h-[3000px]">
+          <Button className="fixed top-2 left-2 z-0" onClick={() => setDrawerOpen(true)}>
+            Open Drawer
+          </Button>
+          <p>A long page, to scroll before opening anything.</p>
+        </div>
+        <Drawer {...args} isOpen={drawerOpen} onClose={() => setDrawerOpen(false)}>
+          <Button onClick={() => setDialogOpen(true)}>Open Dialog</Button>
+          <Dialog isOpen={dialogOpen} onClose={() => setDialogOpen(false)} title="Dialog Title">
+            Dialog content
+          </Dialog>
+        </Drawer>
+      </>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(canvasElement.ownerDocument.body);
+    const root = canvasElement.ownerDocument.documentElement;
+
+    window.scrollTo(0, 120);
+    await waitFor(() => expect(window.scrollY).toBe(120));
+
+    await userEvent.click(canvas.getByText("Open Drawer"));
+    await waitFor(() => expect(root.style.overflow).toBe("hidden"));
+
+    await userEvent.click(await body.findByText("Open Dialog"));
+    await userEvent.click(await body.findByLabelText("Close dialog"));
+    await waitFor(() => expect(body.queryByText("Dialog Title")).not.toBeInTheDocument());
+    expect(root.style.overflow).toBe("hidden");
+
+    await userEvent.click(body.getByLabelText("Close drawer"));
+    await waitFor(() => expect(body.queryByText("Drawer Title")).not.toBeInTheDocument());
+
+    expect(root.style.overflow).not.toBe("hidden");
+    expect(window.scrollY).toBe(120);
   },
 };

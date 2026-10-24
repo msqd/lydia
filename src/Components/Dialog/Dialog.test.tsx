@@ -1,25 +1,48 @@
-// Note: Testing Headless UI Dialog components presents challenges due to the complex interaction
-// between Dialog's subcomponents and the need for them to be used within a Dialog context.
-// In a real-world scenario, end-to-end or integration tests would be more appropriate
-// for fully testing these components.
-
-// This file contains minimal placeholder tests to maintain code coverage requirements.
-// For comprehensive testing, we recommend using Storybook's testing capabilities
-// or end-to-end testing tools like Cypress.
-
-import { describe, expect, it } from "vitest";
-import * as dialogModule from "./Dialog";
+import { render } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import { Dialog } from "./Dialog";
+import { Drawer } from "./Drawer";
 
 describe("Dialog Component", () => {
-  it("should be properly defined", () => {
-    // Import verification
-    expect(dialogModule.Dialog).toBeDefined();
-    expect(dialogModule.DialogTitle).toBeDefined();
-    expect(dialogModule.DialogDescription).toBeDefined();
+  it("locks page scroll while open and gives it back, in place, on close", () => {
+    Object.defineProperty(window, "scrollY", { value: 100, writable: true });
+    const scrollTo = vi.fn();
+    Object.defineProperty(window, "scrollTo", { value: scrollTo, writable: true });
 
-    // Type verification
-    expect(typeof dialogModule.Dialog).toBe("function");
-    expect(typeof dialogModule.DialogTitle).toBe("function");
-    expect(typeof dialogModule.DialogDescription).toBe("function");
+    const { rerender } = render(
+      <Dialog isOpen={true} onClose={vi.fn()} title="Test">
+        Content
+      </Dialog>,
+    );
+    expect(document.documentElement.style.overflow).toBe("hidden");
+
+    rerender(
+      <Dialog isOpen={false} onClose={vi.fn()} title="Test">
+        Content
+      </Dialog>,
+    );
+
+    expect(document.documentElement.style.overflow).toBe("");
+    expect(window.scrollY).toBe(100);
+    expect(scrollTo).not.toHaveBeenCalledWith(0, 0);
+  });
+
+  it("keeps the page locked until a Dialog opened over a Drawer and the Drawer are both closed", () => {
+    const renderStack = (drawerOpen: boolean, dialogOpen: boolean) => (
+      <Drawer isOpen={drawerOpen} onClose={vi.fn()} title="Drawer">
+        <Dialog isOpen={dialogOpen} onClose={vi.fn()} title="Dialog">
+          Content
+        </Dialog>
+      </Drawer>
+    );
+
+    const { rerender } = render(renderStack(true, true));
+    expect(document.documentElement.style.overflow).toBe("hidden");
+
+    rerender(renderStack(true, false));
+    expect(document.documentElement.style.overflow).toBe("hidden");
+
+    rerender(renderStack(false, false));
+    expect(document.documentElement.style.overflow).toBe("");
   });
 });

@@ -196,72 +196,37 @@ describe("Drawer", () => {
     expect(backdrop).not.toBeInTheDocument();
   });
 
-  it("handles scroll blocking when backdrop is enabled", () => {
-    const mockScrollY = 100;
-    Object.defineProperty(window, "scrollY", { value: mockScrollY, writable: true });
+  it("locks page scroll while open and gives it back, in place, on close", () => {
+    Object.defineProperty(window, "scrollY", { value: 100, writable: true });
+    const scrollTo = vi.fn();
+    Object.defineProperty(window, "scrollTo", { value: scrollTo, writable: true });
 
     const { rerender } = render(
+      <Drawer {...defaultProps} isOpen={true} backdrop={true} title="Test">
+        <div>Content</div>
+      </Drawer>,
+    );
+    expect(document.documentElement.style.overflow).toBe("hidden");
+
+    rerender(
       <Drawer {...defaultProps} isOpen={false} backdrop={true} title="Test">
         <div>Content</div>
       </Drawer>,
     );
 
-    // Open drawer
-    rerender(
-      <Drawer {...defaultProps} isOpen={true} backdrop={true} title="Test">
-        <div>Content</div>
-      </Drawer>,
-    );
-
-    // Check that body styles are applied
-    expect(document.body.style.position).toBe("fixed");
-    expect(document.body.style.top).toBe(`-${mockScrollY}px`);
-    expect(document.body.style.width).toBe("100%");
+    expect(document.documentElement.style.overflow).toBe("");
+    expect(window.scrollY).toBe(100);
+    expect(scrollTo).not.toHaveBeenCalledWith(0, 0);
   });
 
-  it("does not block scroll when backdrop is false", () => {
-    const { rerender } = render(
-      <Drawer {...defaultProps} isOpen={false} backdrop={false} title="Test">
-        <div>Content</div>
-      </Drawer>,
-    );
-
-    // Open drawer
-    rerender(
+  it("does not lock page scroll when backdrop is false", () => {
+    render(
       <Drawer {...defaultProps} isOpen={true} backdrop={false} title="Test">
         <div>Content</div>
       </Drawer>,
     );
 
-    // Check that body styles are not applied
-    expect(document.body.style.position).toBe("");
-    expect(document.body.style.top).toBe("");
-    expect(document.body.style.width).toBe("");
-  });
-
-  it("restores scroll position when drawer closes", () => {
-    const mockScrollY = 100;
-    Object.defineProperty(window, "scrollY", { value: mockScrollY, writable: true });
-    const mockScrollTo = vi.fn();
-    Object.defineProperty(window, "scrollTo", { value: mockScrollTo, writable: true });
-
-    const { rerender } = render(
-      <Drawer {...defaultProps} isOpen={true} backdrop={true} title="Test">
-        <div>Content</div>
-      </Drawer>,
-    );
-
-    // Close drawer
-    rerender(
-      <Drawer {...defaultProps} isOpen={false} backdrop={true} title="Test">
-        <div>Content</div>
-      </Drawer>,
-    );
-
-    // Check that body styles are reset and scroll is restored
-    expect(document.body.style.position).toBe("");
-    expect(document.body.style.top).toBe("");
-    expect(document.body.style.width).toBe("");
+    expect(document.documentElement.style.overflow).toBe("");
   });
 
   it("heads the panel with a plain h3 and p without backdrop", () => {

@@ -1,6 +1,5 @@
-import { Dialog as HeadlessDialog } from "@headlessui/react";
+import { DialogDescription, DialogPanel, DialogTitle, Dialog as HeadlessDialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { useScrollLock } from "@msqd/lydia/Components/Utilities/useScrollLock";
 import type { ComponentProps, ElementType } from "react";
 import { twMerge } from "tailwind-merge";
 import { type BaseModalProps, type DrawerPosition, type ModalSize, modalSizeClasses } from "./modal.types";
@@ -68,8 +67,6 @@ export function Drawer({
   const positionConfig = positionClasses[position];
   const panelClassName = twMerge(positionConfig.panel, modalSizeClasses[size], contentClassName);
 
-  useScrollLock(isOpen, backdrop);
-
   if (!backdrop) {
     // When backdrop is false, render without HeadlessDialog to avoid focus trapping and interaction blocking
     return isOpen ? (
@@ -114,10 +111,10 @@ export function Drawer({
       <div className="fixed inset-0 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className={twMerge("pointer-events-none fixed flex max-w-full", positionConfig.container)}>
-            <HeadlessDialog.Panel transition className={panelClassName}>
+            <DialogPanel transition className={panelClassName}>
               <DrawerPanelBody
-                Title={HeadlessDialog.Title}
-                Description={HeadlessDialog.Description}
+                Title={DialogTitle}
+                Description={DialogDescription}
                 title={title}
                 description={description}
                 titleClassName={titleClassName}
@@ -127,7 +124,7 @@ export function Drawer({
               >
                 {children}
               </DrawerPanelBody>
-            </HeadlessDialog.Panel>
+            </DialogPanel>
           </div>
         </div>
       </div>
@@ -202,14 +199,14 @@ function DrawerPanelBody({
  * Drawer.Title component for creating accessible drawer titles.
  * Use this when you need more customization than the basic title prop.
  */
-export function DrawerTitle({ className, ...props }: ComponentProps<typeof HeadlessDialog.Title>) {
-  return <HeadlessDialog.Title className={twMerge("text-base font-semibold text-gray-900", className)} {...props} />;
+export function DrawerTitle({ className, ...props }: ComponentProps<typeof DialogTitle>) {
+  return <DialogTitle className={twMerge("text-base font-semibold text-gray-900", className)} {...props} />;
 }
 
 /**
  * Drawer.Description component for creating accessible drawer descriptions.
  * Use this when you need more customization than the basic description prop.
  */
-export function DrawerDescription({ className, ...props }: ComponentProps<typeof HeadlessDialog.Description>) {
-  return <HeadlessDialog.Description className={twMerge("mt-1 text-sm text-gray-500", className)} {...props} />;
+export function DrawerDescription({ className, ...props }: ComponentProps<typeof DialogDescription>) {
+  return <DialogDescription className={twMerge("mt-1 text-sm text-gray-500", className)} {...props} />;
 }

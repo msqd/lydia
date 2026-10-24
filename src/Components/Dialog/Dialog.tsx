@@ -1,7 +1,11 @@
-import { Dialog as HeadlessDialog, Transition } from "@headlessui/react";
+import {
+  DialogBackdrop,
+  DialogPanel,
+  Dialog as HeadlessDialog,
+  DialogDescription as HeadlessDialogDescription,
+  DialogTitle as HeadlessDialogTitle,
+} from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { useScrollLock } from "@msqd/lydia/Components/Utilities/useScrollLock";
-import { Fragment } from "react";
 import type { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
 import { type BaseModalProps, type ModalSize, modalSizeClasses } from "./modal.types";
@@ -57,92 +61,69 @@ export function Dialog({
   backdrop = true,
   ...props
 }: DialogProps) {
-  useScrollLock(isOpen, backdrop);
-
   const handleClose = backdrop ? onClose : () => {};
 
   return (
-    <Transition appear show={isOpen} as={Fragment}>
-      <HeadlessDialog
-        as="div"
-        className={twMerge("relative z-10", className)}
-        onClose={handleClose}
-        initialFocus={typeof initialFocus === "boolean" ? undefined : initialFocus}
-        {...props}
-      >
-        {/* Background overlay - only show when backdrop is enabled */}
-        {backdrop && (
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-100"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
+    <HeadlessDialog
+      transition
+      as="div"
+      open={isOpen}
+      className={twMerge("relative z-10 transition duration-100 data-[closed]:opacity-0", className)}
+      onClose={handleClose}
+      initialFocus={typeof initialFocus === "boolean" ? undefined : initialFocus}
+      {...props}
+    >
+      {/* Background overlay - only show when backdrop is enabled */}
+      {backdrop && <DialogBackdrop className="fixed inset-0 bg-black/25 backdrop-blur-sm" />}
+
+      {/* Dialog position wrapper */}
+      <div className="fixed inset-0 overflow-y-auto">
+        <div className="flex min-h-full items-center justify-center p-4 text-center">
+          <DialogPanel
+            transition
+            className={twMerge(
+              "w-full transform overflow-hidden rounded-lg bg-white p-6 shadow-xl transition-all duration-100 ease-out data-[closed]:scale-95 data-[closed]:opacity-0",
+              modalSizeClasses[size],
+              contentClassName,
+            )}
           >
-            <div className="fixed inset-0 bg-black/25 backdrop-blur-sm" aria-hidden="true" />
-          </Transition.Child>
-        )}
+            {/* Close button */}
+            {showCloseButton && (
+              <div className="absolute top-4 right-4">
+                <button
+                  type="button"
+                  className="rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer"
+                  onClick={onClose}
+                  aria-label="Close dialog"
+                >
+                  <XMarkIcon className="h-5 w-5" aria-hidden="true" />
+                </button>
+              </div>
+            )}
 
-        {/* Dialog position wrapper */}
-        <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4 text-center">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-100"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
-              leave="ease-in duration-100"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95"
-            >
-              <HeadlessDialog.Panel
-                className={twMerge(
-                  "w-full transform overflow-hidden rounded-lg bg-white p-6 shadow-xl transition-all",
-                  modalSizeClasses[size],
-                  contentClassName,
-                )}
+            {/* Dialog Title */}
+            {title && (
+              <HeadlessDialogTitle
+                as="h3"
+                className={twMerge("text-lg font-semibold leading-6 text-gray-900", titleClassName)}
               >
-                {/* Close button */}
-                {showCloseButton && (
-                  <div className="absolute top-4 right-4">
-                    <button
-                      type="button"
-                      className="rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer"
-                      onClick={onClose}
-                      aria-label="Close dialog"
-                    >
-                      <XMarkIcon className="h-5 w-5" aria-hidden="true" />
-                    </button>
-                  </div>
-                )}
+                {title}
+              </HeadlessDialogTitle>
+            )}
 
-                {/* Dialog Title */}
-                {title && (
-                  <HeadlessDialog.Title
-                    as="h3"
-                    className={twMerge("text-lg font-semibold leading-6 text-gray-900", titleClassName)}
-                  >
-                    {title}
-                  </HeadlessDialog.Title>
-                )}
+            {/* Dialog Description */}
+            {description && (
+              <HeadlessDialogDescription className={twMerge("mt-2 text-sm text-gray-500", descriptionClassName)}>
+                {description}
+              </HeadlessDialogDescription>
+            )}
 
-                {/* Dialog Description */}
-                {description && (
-                  <HeadlessDialog.Description className={twMerge("mt-2 text-sm text-gray-500", descriptionClassName)}>
-                    {description}
-                  </HeadlessDialog.Description>
-                )}
-
-                {/* Dialog Content */}
-                {children}
-              </HeadlessDialog.Panel>
-            </Transition.Child>
-          </div>
+            {/* Dialog Content */}
+            {children}
+          </DialogPanel>
         </div>
-      </HeadlessDialog>
-    </Transition>
+      </div>
+    </HeadlessDialog>
   );
 }
 
@@ -150,9 +131,9 @@ export function Dialog({
  * Dialog.Title component for creating accessible dialog titles.
  * Use this when you need more customization than the basic title prop.
  */
-export function DialogTitle({ className, ...props }: ComponentProps<typeof HeadlessDialog.Title>) {
+export function DialogTitle({ className, ...props }: ComponentProps<typeof HeadlessDialogTitle>) {
   return (
-    <HeadlessDialog.Title className={twMerge("text-lg font-semibold leading-6 text-gray-900", className)} {...props} />
+    <HeadlessDialogTitle className={twMerge("text-lg font-semibold leading-6 text-gray-900", className)} {...props} />
   );
 }
 
@@ -160,6 +141,6 @@ export function DialogTitle({ className, ...props }: ComponentProps<typeof Headl
  * Dialog.Description component for creating accessible dialog descriptions.
  * Use this when you need more customization than the basic description prop.
  */
-export function DialogDescription({ className, ...props }: ComponentProps<typeof HeadlessDialog.Description>) {
-  return <HeadlessDialog.Description className={twMerge("mt-2 text-sm text-gray-500", className)} {...props} />;
+export function DialogDescription({ className, ...props }: ComponentProps<typeof HeadlessDialogDescription>) {
+  return <HeadlessDialogDescription className={twMerge("mt-2 text-sm text-gray-500", className)} {...props} />;
 }
