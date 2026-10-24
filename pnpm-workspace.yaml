@@ -1,3 +1,8 @@
+# Dependency build scripts: run only what is needed, ignore the rest explicitly
+allowBuilds:
+  esbuild: true
+  "@biomejs/biome": false
+
 # Transitive fixes pinned until the parents ship them; drop each once the parent's own range allows it.
 overrides:
   # postcss <=8.5.22 (several GHSA, via vite and @tailwindcss/vite)
