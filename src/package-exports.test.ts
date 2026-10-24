@@ -11,6 +11,7 @@ import {
   symlinkSync,
   writeFileSync,
 } from "fs";
+import { isBuiltin } from "module";
 import { tmpdir } from "os";
 import { join, relative, resolve } from "path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
@@ -177,10 +178,12 @@ describe("Runtime dependencies", () => {
    */
   it("declares no @types package for something it does not import", () => {
     const imported = importedPackages(true);
+    // @types/node describes the built-ins (`fs`, `node:path`), which no package is named "node" for.
+    const usesNodeBuiltin = [...imported.keys()].some((specifier) => isBuiltin(specifier));
     const orphaned = Object.keys(packageJson.devDependencies ?? {})
       .filter((pkg) => pkg.startsWith("@types/"))
       .map((pkg) => ({ types: pkg, describes: pkg.replace("@types/", "").replace("__", "/") }))
-      .filter(({ describes }) => !imported.has(describes))
+      .filter(({ describes }) => !imported.has(describes) && !(describes === "node" && usesNodeBuiltin))
       .map(({ types }) => types);
 
     expect(orphaned).toEqual([]);

@@ -8,6 +8,7 @@ const tokens = { danger: "--color-danger-200" } as const;
 describe("useThemeColors", () => {
   afterEach(() => {
     vi.restoreAllMocks();
+    vi.unstubAllGlobals();
     document.documentElement.removeAttribute("style");
     document.documentElement.removeAttribute("data-theme");
   });
@@ -99,7 +100,9 @@ describe("useThemeColors", () => {
 
   it("follows the system colour scheme", async () => {
     const listeners: Array<() => void> = [];
-    vi.spyOn(window, "matchMedia").mockImplementation(
+    // jsdom does not implement matchMedia, so there is nothing to spy on.
+    vi.stubGlobal(
+      "matchMedia",
       () =>
         ({
           addEventListener: (_: string, listener: () => void) => listeners.push(listener),
