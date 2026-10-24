@@ -15,8 +15,10 @@ Published on npm as `@msqd/lydia`, public. The scope is free and the `msqd` org 
 from `lydia` is breaking: every `lydia/...` import becomes `@msqd/lydia/...`.
 
 The internal alias follows the name, `@msqd/lydia` and `@msqd/lydia/*` to `src/`. tsc keeps path
-aliases in the emitted `.d.ts`, so the declarations only resolve for a consumer if the alias is the
-package name.
+aliases in the emitted `.d.ts` and leaves relative imports extensionless, so
+`scripts/relativize-declaration-imports.mjs` rewrites every specifier in `dist/**/*.d.ts` to a relative
+path ending in `.js`. The declarations then resolve under `bundler` and `nodenext` without depending on
+`package.json#exports`.
 
 The tarball holds `dist` and nothing else. The build emits no declaration for `*.test.ts` and no
 module for `*.test-d.*`; `src` is not shipped. `Config/navigation` builds its demo routes from

@@ -11,7 +11,7 @@ to bottom and you get a styled component on screen. The decisions behind it are 
 | `react`, `react-dom` | `^19.1.0` | Peer dependencies. React 18 is not supported: upgrade first. |
 | Node, `pnpm` | current LTS | Lydia is documented with `pnpm`. |
 | Tailwind CSS | `^4.1` | Only for the source path below. Tailwind 3 is not supported. The precompiled path needs no Tailwind. |
-| TypeScript | `moduleResolution: "bundler"` | The `.d.ts` files use extensionless relative imports: `nodenext` reports TS2834. |
+| TypeScript | `moduleResolution: "bundler"` or `"nodenext"` | The `.d.ts` files import each other by relative `.js` specifiers, so both resolve them. |
 | A bundler | Vite 6+ | Examples use Vite and `@tailwindcss/vite`. Any bundler that handles CSS imports works. |
 
 ## 1. Install

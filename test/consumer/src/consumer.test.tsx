@@ -1,7 +1,7 @@
 import { Badge } from "@msqd/lydia";
 import { render, screen } from "@testing-library/react";
 import { expect, it } from "vitest";
-import { charts } from "./charts";
+import { charts } from "./charts.js";
 
 globalThis.ResizeObserver = class {
   observe() {}
