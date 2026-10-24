@@ -3,7 +3,6 @@ import { twMerge } from "tailwind-merge";
 import { InputButton, type InputButtonProps } from "../InputButton";
 import { InputIcon } from "../InputIcon";
 import { KeyboardShortcut } from "../KeyboardShortcut";
-import "./Input.css";
 
 export interface InputProps extends ComponentProps<"input"> {
   // Basic props
@@ -102,7 +101,7 @@ const baseClassName = "w-full";
 const defaultWrapperClassName =
   "mt-2 flex items-center h-[38px] rounded-sm bg-white outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600";
 const defaultInputClassName =
-  "w-full border-0 px-1.5 text-gray-900 text-left placeholder:text-gray-400 focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px]";
+  "lydia-input w-full border-0 px-1.5 text-gray-900 text-left placeholder:text-gray-400 focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px]";
 const defaultLabelClassName = "block text-sm/6 font-medium text-gray-900";
 const helpTextClassName = "mt-2 text-sm text-gray-500";
 const errorTextClassName = "mt-2 text-sm text-danger-600";

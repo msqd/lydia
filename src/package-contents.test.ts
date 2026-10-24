@@ -147,6 +147,24 @@ describe.skipIf(!existsSync(distPath))("Published package", () => {
       expect(css("theme.css")).toContain("@theme");
     });
 
+    it("loads the fonts from the package, with their licence", () => {
+      const urls = [...css("theme.css").matchAll(/url\(["']([^"']+)["']\)/g)].map(([, url]) => url);
+
+      expect(urls).toHaveLength(4);
+      for (const url of urls) {
+        expect(url, url).toMatch(/^\.\.?\//);
+        expect(existsSync(join(distPath, "css", url)), url).toBe(true);
+      }
+      expect(existsSync(join(distPath, "css", "fonts", "OFL.txt"))).toBe(true);
+    });
+
+    it("makes Tailwind scan the compiled components without a consumer-side path", () => {
+      const sources = [...css("components.css").matchAll(/@source\s+["']([^"']+)["']/g)].map(([, path]) => path);
+
+      expect(sources).toEqual(["../**/*.js"]);
+      expect(existsSync(join(distPath, "Components", "Badges", "Badge.js"))).toBe(true);
+    });
+
     it("needs no Tailwind to compile component styles, so no second copy is pulled in", () => {
       const sources = collect(join(distPath, "css")).filter((file) => file.endsWith(".css"));
 

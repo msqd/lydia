@@ -78,7 +78,6 @@ With your own Tailwind CSS 4 build, import the sources instead, so there is a si
 @import "tailwindcss";
 @import "@msqd/lydia/theme.css";
 @import "@msqd/lydia/components.css";
-@source "../node_modules/@msqd/lydia/dist";
 ```
 
 The [integration guide](docs/integration.md) covers fonts, theme overrides, local development against a clone and known pitfalls.
@@ -146,4 +145,4 @@ A PR that changes `src/` adds a changelog fragment; see [RELEASING.md](RELEASING
 
 ## 📄 License
 
-Lydia is licensed under the [Mozilla Public License 2.0](LICENSE). The Lato font it bundles is licensed under the SIL Open Font License 1.1, see [`public/fonts/OFL.txt`](public/fonts/OFL.txt). The Prism syntax theme it vendors ([`prism.css`](src/Components/Formatter/prism.css)) is MIT licensed, © 2012 Lea Verou, see the [PrismJS licence](https://github.com/PrismJS/prism/blob/master/LICENSE).
+Lydia is licensed under the [Mozilla Public License 2.0](LICENSE). The Lato font it bundles is licensed under the SIL Open Font License 1.1, see [`src/fonts/OFL.txt`](src/fonts/OFL.txt). The Prism syntax theme it vendors ([`prism.css`](src/Components/Formatter/prism.css)) is MIT licensed, © 2012 Lea Verou, see the [PrismJS licence](https://github.com/PrismJS/prism/blob/master/LICENSE).

@@ -10,7 +10,7 @@ to bottom and you get a styled component on screen. The decisions behind it are 
 | --- | --- | --- |
 | `react`, `react-dom` | `^19.1.0` | Peer dependencies. React 18 is not supported: upgrade first. |
 | Node, `pnpm` | current LTS | Lydia is documented with `pnpm`. |
-| Tailwind CSS | `^4.1` | Only for the source path below. Tailwind 3 is not supported. The precompiled path needs no Tailwind. |
+| Tailwind CSS | `^4.1` | Only for option A. Tailwind 3 is not supported. The precompiled path needs no Tailwind. |
 | TypeScript | `moduleResolution: "bundler"` or `"nodenext"` | The `.d.ts` files import each other by relative `.js` specifiers, so both resolve them. |
 | A bundler | Vite 6+ | Examples use Vite and `@tailwindcss/vite`. Any bundler that handles CSS imports works. |
 
@@ -57,7 +57,6 @@ Replace the contents of `src/index.css` with:
 @import "tailwindcss";
 @import "@msqd/lydia/theme.css";
 @import "@msqd/lydia/components.css";
-@source "../node_modules/@msqd/lydia/dist";
 ```
 
 ```ts
@@ -68,9 +67,9 @@ import "./index.css";
 - `theme.css` holds the fonts and the theme tokens (`@theme static`). It does not import Tailwind.
 - `components.css` is plain CSS for the few components that need it (date input, range slider, syntax
   highlighting), written on the theme variables.
-- `@source` makes Tailwind scan Lydia's compiled components for class names. Tailwind skips `node_modules`
-  unless told otherwise. The path is relative to the CSS file: adjust the `../` to where your `node_modules`
-  sits. In a monorepo, point it at the hoisted location.
+- `components.css` also tells Tailwind to scan Lydia's compiled components for class names (an `@source`
+  relative to the file itself), so you write no `@source` and no path to `node_modules`, in a monorepo too.
+- The fonts are loaded from the package by relative URLs: your bundler emits them with your assets.
 
 ### Option B: precompiled stylesheet
 
@@ -84,37 +83,25 @@ import "@msqd/lydia/styles";
 or `@import "@msqd/lydia/styles";` at the top of your CSS. The stylesheet only contains the classes Lydia
 itself uses: your own Tailwind classes are not generated. Use option A if you want Tailwind in your own code.
 
-## 3. Serve the fonts
+## 3. Fonts
 
-Lydia's CSS references Lato as root-absolute URLs (`/fonts/Lato-Regular.woff2`, ...). The files ship in the
-package under `dist/fonts/`, with the SIL OFL licence (`OFL.txt`), but your app must serve them at `/fonts/`.
-Either:
+Nothing to do: both options load Lato from the package. Option A resolves the relative `url()` of
+`theme.css` through your bundler, which emits the files with your assets; Option B embeds them in the
+stylesheet. The licence (SIL OFL) ships in `node_modules/@msqd/lydia/dist/css/fonts/OFL.txt`.
 
-- **Copy them into your public directory** so they are served at `/fonts/`:
+To serve the same family from elsewhere (a CDN, your own file), declare `@font-face` after Lydia's CSS:
 
-  ```bash
-  mkdir -p public/fonts
-  cp node_modules/@msqd/lydia/dist/fonts/*.woff2 node_modules/@msqd/lydia/dist/fonts/OFL.txt public/fonts/
-  ```
+```css
+@font-face {
+  font-family: "Lato";
+  src: url("https://cdn.example.com/lato/Lato-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+```
 
-  Commit them, or copy them in a build step. Keep `OFL.txt` next to the fonts.
-
-- **Or override `@font-face`** after Lydia's CSS, to serve the same family from where you want (another path,
-  a CDN, your own font):
-
-  ```css
-  @font-face {
-    font-family: "Lato";
-    src: url("https://cdn.example.com/lato/Lato-Regular.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  ```
-
-  Repeat for weight 700 and the italics. To use another family altogether, redefine `--font-sans`.
-
-Without either, the app still renders, with the system font, and the browser reports 404s on `/fonts/...`.
+Repeat for weight 700 and the italics. To use another family altogether, redefine `--font-sans`.
 
 ## 4. Render a component
 
@@ -143,7 +130,6 @@ Option A, with Tailwind:
 @import "tailwindcss";
 @import "@msqd/lydia/theme.css";
 @import "@msqd/lydia/components.css";
-@source "../node_modules/@msqd/lydia/dist";
 
 @theme {
   --color-primary-500: #0f766e;
@@ -217,7 +203,7 @@ The application consumes `dist`, so rebuild Lydia after a change:
 pnpm build
 ```
 
-Then reload or rebuild the application. The `@source` path goes through the symlink and still works. A full
+Then reload or rebuild the application. A full
 `pnpm build` wipes and regenerates `dist`; a running dev server picks the change up on the next request or
 after a restart.
 
@@ -298,11 +284,10 @@ grep -ohE '19\.[0-9]+\.[0-9]+' dist/assets/*.js | sort -u
 | Symptom | Cause | Fix |
 | --- | --- | --- |
 | `Invalid hook call`, or `Cannot read properties of null (reading 'useState')` / `'useContext'` | Two copies of React: Lydia's and the application's (typical with a linked clone, or a monorepo with mixed versions). | `resolve.dedupe: ["react", "react-dom"]` in the Vite, vitest and Storybook configs. Check `pnpm why react` shows one version. |
-| Components render unstyled or partly styled, with missing colours, spacing or rings (option A) | `@source` is absent or its path is wrong, so Tailwind never saw Lydia's class names. | Add `@source "../node_modules/@msqd/lydia/dist";`, relative to the CSS file. Rebuild. |
+| Components render unstyled or partly styled, with missing colours, spacing or rings (option A) | `components.css` is not imported, so Tailwind never saw Lydia's class names. | Import `@msqd/lydia/components.css` after `tailwindcss` and `theme.css`. Rebuild. |
 | Tokens are missing (`var(--color-primary-500)` undefined) | `theme.css` is not imported, or imported without Tailwind in the same stylesheet. | Import `tailwindcss`, `theme.css` and `components.css` in one CSS entry. |
 | Two Tailwinds in the output, resets applied twice | `@msqd/lydia/styles` imported next to your own Tailwind. | Use only one option. |
-| Browser 404 on `/fonts/Lato-*.woff2`, system font shown | Fonts not served at `/fonts/`. | See [Serve the fonts](#3-serve-the-fonts). |
-| `@theme` or `@source` rejected by the CSS build | Tailwind 3. | Upgrade to Tailwind 4, or use option B. |
+| `@theme` rejected by the CSS build | Tailwind 3. | Upgrade to Tailwind 4, or use option B. |
 | Type or runtime break after `pnpm up` | A release with breaking changes. | Read the `### Breaking` sections of [CHANGELOG.md](../CHANGELOG.md) between your version and the new one before upgrading. |
 | Changes in the linked clone do not show | `dist` is stale. | `pnpm build` in the clone, then restart the dev server. |
 

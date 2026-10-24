@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { ComponentProps, FC } from "react";
 import { twMerge } from "tailwind-merge";
-import "./RangeSliderStyles.css";
 
 export type Mark = number | { value: number; label: string; className?: string };
 
@@ -72,7 +71,7 @@ interface InputProps extends Omit<ComponentProps<"input">, "onChange" | "onPoint
 }
 const Input: FC<InputProps & { thumbSize?: string }> = ({ className, thumbSize = "16px", ...props }) => (
   <input
-    className={twMerge("range-slider-input", className)}
+    className={twMerge("range-slider-input lydia-input", className)}
     style={{ "--thumb-size": thumbSize } as React.CSSProperties}
     type="range"
     {...props}

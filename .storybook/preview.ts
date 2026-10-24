@@ -1,6 +1,6 @@
 import type { Preview } from "@storybook/react-vite";
 import "../src/main.css";
-import "../src/Components/Formatter/prism.css"; // Import PrismJS styles
+import "../src/components.css";
 import { knownViolations } from "./a11y-known";
 
 const preview: Preview = {

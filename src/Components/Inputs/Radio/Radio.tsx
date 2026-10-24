@@ -31,7 +31,7 @@ export function Radio({
         {...inputProps}
         id={id}
         className={twMerge(
-          "h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600",
+          "lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600",
           disabled ? "opacity-60" : "cursor-pointer",
           inputProps.className,
         )}

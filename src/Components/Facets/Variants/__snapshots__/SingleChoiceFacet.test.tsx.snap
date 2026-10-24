@@ -67,7 +67,7 @@ exports[`SingleChoiceFacet > matches snapshot 1`] = `
         class="flex items-center gap-x-3 w-full cursor-pointer"
       >
         <input
-          class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+          class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
           id="testFilter-option1"
           name="testFilter"
           type="radio"
@@ -104,7 +104,7 @@ exports[`SingleChoiceFacet > matches snapshot 1`] = `
         class="flex items-center gap-x-3 w-full cursor-pointer"
       >
         <input
-          class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+          class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
           id="testFilter-option2"
           name="testFilter"
           type="radio"
@@ -141,7 +141,7 @@ exports[`SingleChoiceFacet > matches snapshot 1`] = `
         class="flex items-center gap-x-3 w-full cursor-pointer"
       >
         <input
-          class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+          class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
           id="testFilter-option3"
           name="testFilter"
           type="radio"
@@ -246,7 +246,7 @@ exports[`SingleChoiceFacet > matches snapshot with selection 1`] = `
         class="flex items-center gap-x-3 w-full cursor-pointer"
       >
         <input
-          class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+          class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
           id="testFilter-option1"
           name="testFilter"
           type="radio"
@@ -284,7 +284,7 @@ exports[`SingleChoiceFacet > matches snapshot with selection 1`] = `
       >
         <input
           checked=""
-          class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+          class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
           id="testFilter-option2"
           name="testFilter"
           type="radio"
@@ -321,7 +321,7 @@ exports[`SingleChoiceFacet > matches snapshot with selection 1`] = `
         class="flex items-center gap-x-3 w-full cursor-pointer"
       >
         <input
-          class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+          class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
           id="testFilter-option3"
           name="testFilter"
           type="radio"

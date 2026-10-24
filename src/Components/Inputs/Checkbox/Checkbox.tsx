@@ -62,7 +62,7 @@ export function Checkbox({
           id={id}
           ref={setInputRef}
           className={twMerge(
-            "h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer",
+            "lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer",
             inputProps.className,
           )}
           disabled={disabled}

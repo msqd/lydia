@@ -73,7 +73,7 @@ exports[`MultipleChoiceFacet > matches snapshot 1`] = `
             class="flex h-6 items-center"
           >
             <input
-              class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+              class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
               id="_r_34_-0"
               name="_r_34_-0"
               type="checkbox"
@@ -110,7 +110,7 @@ exports[`MultipleChoiceFacet > matches snapshot 1`] = `
             class="flex h-6 items-center"
           >
             <input
-              class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+              class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
               id="_r_34_-1"
               name="_r_34_-1"
               type="checkbox"
@@ -147,7 +147,7 @@ exports[`MultipleChoiceFacet > matches snapshot 1`] = `
             class="flex h-6 items-center"
           >
             <input
-              class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+              class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
               id="_r_34_-2"
               name="_r_34_-2"
               type="checkbox"
@@ -278,7 +278,7 @@ exports[`MultipleChoiceFacet > matches snapshot with filters applied 1`] = `
           >
             <input
               checked=""
-              class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+              class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
               id="_r_3a_-0"
               name="_r_3a_-0"
               type="checkbox"
@@ -326,7 +326,7 @@ exports[`MultipleChoiceFacet > matches snapshot with filters applied 1`] = `
           >
             <input
               checked=""
-              class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+              class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
               id="_r_3a_-1"
               name="_r_3a_-1"
               type="checkbox"
@@ -373,7 +373,7 @@ exports[`MultipleChoiceFacet > matches snapshot with filters applied 1`] = `
             class="flex h-6 items-center"
           >
             <input
-              class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
+              class="lydia-input h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600 cursor-pointer"
               id="_r_3a_-2"
               name="_r_3a_-2"
               type="checkbox"

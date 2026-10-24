@@ -68,7 +68,7 @@ exports[`DateRangeFacet > matches snapshot 1`] = `
             >
               <input
                 aria-label="Start date"
-                class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
+                class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
                 placeholder="Start date"
                 type="date"
                 value=""
@@ -105,7 +105,7 @@ exports[`DateRangeFacet > matches snapshot 1`] = `
             >
               <input
                 aria-label="End date"
-                class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
+                class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-400 placeholder:text-gray-400 calendar-icon-right"
                 placeholder="End date"
                 type="date"
                 value=""
@@ -230,7 +230,7 @@ exports[`DateRangeFacet > matches snapshot with selected dates 1`] = `
             >
               <input
                 aria-label="Start date"
-                class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
+                class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
                 max="2024-01-31"
                 placeholder="Start date"
                 type="date"
@@ -268,7 +268,7 @@ exports[`DateRangeFacet > matches snapshot with selected dates 1`] = `
             >
               <input
                 aria-label="End date"
-                class="w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
+                class="lydia-input w-full border-0 px-1.5 text-left focus:outline-none sm:text-sm/6 h-full flex items-center leading-[38px] col-start-1 row-start-1 pr-8 text-gray-900 placeholder:text-gray-400 calendar-icon-right"
                 min="2024-01-01"
                 placeholder="End date"
                 type="date"
