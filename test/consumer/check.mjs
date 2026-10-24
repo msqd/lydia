@@ -65,7 +65,12 @@ try {
     .map(([key, entry]) => [key, entry.import])
     .filter(([, target]) => target?.endsWith(".js"))
     .map(([key]) => join("@msqd/lydia", key));
-  assert.ok(exportTargets.length > 100, "the package exports its JS entries");
+  const { barrels } = JSON.parse(readFileSync(join(root, "scripts", "public-exports.json"), "utf-8"));
+  assert.deepEqual(
+    exportTargets.sort(),
+    ["@msqd/lydia", ...barrels.map((barrel) => `@msqd/lydia/${barrel}`)].sort(),
+    "the package exports its root and the listed barrels, nothing else",
+  );
 
   // A build-machine path still resolves on this machine, so it has to be caught by what it looks like.
   const absoluteImports = readdirSync(join(installed, "dist"), { recursive: true })
