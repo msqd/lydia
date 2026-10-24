@@ -15,7 +15,11 @@ import { DefaultAvatar } from "./Assets/defaultAvatar";
 /**
  * Default component for the brand
  */
-export const DefaultBrand = ({ text = "lydia" }: { text?: string }) => (
+export interface DefaultBrandProps {
+  text?: string;
+}
+
+export const DefaultBrand = ({ text = "lydia" }: DefaultBrandProps) => (
   <span className="ml-2 text-white text-xl font-semibold">{text}</span>
 );
 

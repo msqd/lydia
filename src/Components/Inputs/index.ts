@@ -5,7 +5,7 @@ export * from "./DateRangeSelector";
 export * from "./Textarea";
 export * from "./SearchInput";
 
-export { Input } from "./Input";
+export { Input, type InputProps } from "./Input";
 
 // Modern standalone components
 export * from "./KeyboardShortcut";

@@ -1,5 +1,6 @@
 export { NetworkMap } from "./NetworkMap";
 export type {
+  NetworkMapProps,
   NetworkTopology,
   NetworkEntrypoint,
   NetworkProxy,
@@ -7,9 +8,9 @@ export type {
   NetworkConnection,
 } from "./NetworkMap";
 export { NetworkNode, NetworkNodeDetail } from "./NetworkNode";
-export type { NetworkNodeProps } from "./NetworkNode";
-export { EntrypointNode } from "./EntrypointNode";
-export { ProxyNode } from "./ProxyNode";
-export { EndpointNode } from "./EndpointNode";
-export { CircuitBreakerStatus } from "./CircuitBreakerStatus";
-export { NetworkEdges } from "./NetworkEdges";
+export type { NetworkNodeProps, NetworkNodeDetailProps } from "./NetworkNode";
+export { EntrypointNode, type EntrypointNodeProps } from "./EntrypointNode";
+export { ProxyNode, type ProxyNodeProps } from "./ProxyNode";
+export { EndpointNode, type EndpointNodeProps } from "./EndpointNode";
+export { CircuitBreakerStatus, type CircuitBreakerStatusProps } from "./CircuitBreakerStatus";
+export { NetworkEdges, type NetworkEdgesProps } from "./NetworkEdges";

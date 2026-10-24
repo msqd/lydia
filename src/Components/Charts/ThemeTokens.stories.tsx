@@ -4,9 +4,9 @@ import { expect, userEvent, within } from "storybook/test";
 import { TpdexBadge } from "../../Elements/Tpdex/TpdexBadge";
 import type { OverviewTransaction } from "../../Models";
 import { tpdexScale } from "../../Models/Tpdex";
-import SummaryPerformancesChart from "./SummaryPerformancesChart";
-import SummaryRateChart from "./SummaryRateChart";
-import TransactionsChart from "./TransactionsChart";
+import { SummaryPerformancesChart } from "./SummaryPerformancesChart";
+import { SummaryRateChart } from "./SummaryRateChart";
+import { TransactionsChart } from "./TransactionsChart";
 
 /** Hand-picked so that a retheme is unmistakable: every overridden token turns violet or orange. */
 const RETHEME: Record<string, string> = {

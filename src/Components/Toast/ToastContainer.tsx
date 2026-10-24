@@ -55,5 +55,3 @@ export function ToastContainer({ position = "top-right", className, children }: 
     </div>
   );
 }
-
-export default ToastContainer;

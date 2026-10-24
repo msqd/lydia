@@ -33,7 +33,7 @@ const positionStyles: Record<ToastPosition, string> = {
   "bottom-center": "bottom-0 left-1/2 -translate-x-1/2",
 };
 
-interface ToastProviderProps {
+export interface ToastProviderProps {
   children: ReactNode;
   defaultDuration?: number;
   maxToasts?: number;

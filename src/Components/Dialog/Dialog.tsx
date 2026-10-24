@@ -131,7 +131,9 @@ export function Dialog({
  * Dialog.Title component for creating accessible dialog titles.
  * Use this when you need more customization than the basic title prop.
  */
-export function DialogTitle({ className, ...props }: ComponentProps<typeof HeadlessDialogTitle>) {
+export type DialogTitleProps = ComponentProps<typeof HeadlessDialogTitle>;
+
+export function DialogTitle({ className, ...props }: DialogTitleProps) {
   return (
     <HeadlessDialogTitle className={twMerge("text-lg font-semibold leading-6 text-gray-900", className)} {...props} />
   );
@@ -141,6 +143,8 @@ export function DialogTitle({ className, ...props }: ComponentProps<typeof Headl
  * Dialog.Description component for creating accessible dialog descriptions.
  * Use this when you need more customization than the basic description prop.
  */
-export function DialogDescription({ className, ...props }: ComponentProps<typeof HeadlessDialogDescription>) {
+export type DialogDescriptionProps = ComponentProps<typeof HeadlessDialogDescription>;
+
+export function DialogDescription({ className, ...props }: DialogDescriptionProps) {
   return <HeadlessDialogDescription className={twMerge("mt-2 text-sm text-gray-500", className)} {...props} />;
 }

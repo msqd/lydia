@@ -1,4 +1,4 @@
-import type { CircuitBreakerStatus, HealthStatus } from "@msqd/lydia/Models/System";
+import type { CircuitBreakerState, HealthStatus } from "@msqd/lydia/Models/System";
 import type { NetworkTopology } from "./NetworkMap";
 
 /**
@@ -34,25 +34,25 @@ export const sampleTopology: NetworkTopology = {
       from: "proxy-api",
       to: "svc-payments",
       type: "proxy-endpoint",
-      circuitBreaker: { status: "closed" as CircuitBreakerStatus, failureRate: 1.2 },
+      circuitBreaker: { status: "closed" as CircuitBreakerState, failureRate: 1.2 },
     },
     {
       from: "proxy-api",
       to: "svc-users",
       type: "proxy-endpoint",
-      circuitBreaker: { status: "closed" as CircuitBreakerStatus, failureRate: 0.8 },
+      circuitBreaker: { status: "closed" as CircuitBreakerState, failureRate: 0.8 },
     },
     {
       from: "proxy-api",
       to: "svc-orders",
       type: "proxy-endpoint",
-      circuitBreaker: { status: "open" as CircuitBreakerStatus, failureRate: 15.3 },
+      circuitBreaker: { status: "open" as CircuitBreakerState, failureRate: 15.3 },
     },
     {
       from: "proxy-admin",
       to: "svc-admin",
       type: "proxy-endpoint",
-      circuitBreaker: { status: "closed" as CircuitBreakerStatus, failureRate: 2.1 },
+      circuitBreaker: { status: "closed" as CircuitBreakerState, failureRate: 2.1 },
     },
   ],
 };

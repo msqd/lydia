@@ -17,7 +17,7 @@ export interface OverviewPageProps {
   history: HistorySectionProps;
 }
 
-const OverviewPage = ({ summary, history }: OverviewPageProps) => {
+export const OverviewPage = ({ summary, history }: OverviewPageProps) => {
   return (
     <div className="space-y-8">
       <SummarySection {...summary} />
@@ -25,6 +25,3 @@ const OverviewPage = ({ summary, history }: OverviewPageProps) => {
     </div>
   );
 };
-
-export default OverviewPage;
-export { OverviewPage };
