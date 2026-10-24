@@ -251,6 +251,26 @@ describe.skipIf(!existsSync(resolve(__dirname, "../dist")))("Package Exports", (
     expect(Object.keys(packageJson.exports).sort()).toEqual(expected.sort());
   });
 
+  it("gives every JS entry types, then import, then default", () => {
+    const entries = Object.entries(packageJson.exports as Record<string, unknown>).filter(
+      ([, entry]) => typeof entry === "object",
+    );
+
+    expect(entries.length).toBeGreaterThan(0);
+    for (const [, entry] of entries) {
+      const conditions = entry as Record<string, string>;
+      expect(Object.keys(conditions)).toEqual(["types", "import", "default"]);
+      expect(conditions.default).toBe(conditions.import);
+    }
+  });
+
+  it("describes the package for the registry", () => {
+    expect(packageJson.description).toEqual(expect.any(String));
+    expect(packageJson.keywords).toEqual(expect.arrayContaining([expect.any(String)]));
+    expect(packageJson.author).toBe("Romain Dorgueil <romain@makersquad.fr>");
+    expect(packageJson.engines).toEqual({ node: ">=24" });
+  });
+
   it("should include component category exports", () => {
     // Check a few key component exports exist
     expect(packageJson.exports).toHaveProperty("./Components/Badges");

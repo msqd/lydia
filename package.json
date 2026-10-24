@@ -41,212 +41,279 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./styles": "./dist/styles/styles.css",
     "./Components": {
       "types": "./dist/Components/index.d.ts",
-      "import": "./dist/Components/index.js"
+      "import": "./dist/Components/index.js",
+      "default": "./dist/Components/index.js"
     },
     "./components.css": "./dist/css/components.css",
     "./Components/Badges": {
       "types": "./dist/Components/Badges/index.d.ts",
-      "import": "./dist/Components/Badges/index.js"
+      "import": "./dist/Components/Badges/index.js",
+      "default": "./dist/Components/Badges/index.js"
     },
     "./Components/Buttons": {
       "types": "./dist/Components/Buttons/index.d.ts",
-      "import": "./dist/Components/Buttons/index.js"
+      "import": "./dist/Components/Buttons/index.js",
+      "default": "./dist/Components/Buttons/index.js"
     },
     "./Components/Cards": {
       "types": "./dist/Components/Cards/index.d.ts",
-      "import": "./dist/Components/Cards/index.js"
+      "import": "./dist/Components/Cards/index.js",
+      "default": "./dist/Components/Cards/index.js"
     },
     "./Components/Charts": {
       "types": "./dist/Components/Charts/index.d.ts",
-      "import": "./dist/Components/Charts/index.js"
+      "import": "./dist/Components/Charts/index.js",
+      "default": "./dist/Components/Charts/index.js"
     },
     "./Components/Colors": {
       "types": "./dist/Components/Colors/index.d.ts",
-      "import": "./dist/Components/Colors/index.js"
+      "import": "./dist/Components/Colors/index.js",
+      "default": "./dist/Components/Colors/index.js"
     },
     "./Components/DataTable": {
       "types": "./dist/Components/DataTable/index.d.ts",
-      "import": "./dist/Components/DataTable/index.js"
+      "import": "./dist/Components/DataTable/index.js",
+      "default": "./dist/Components/DataTable/index.js"
     },
     "./Components/Dialog": {
       "types": "./dist/Components/Dialog/index.d.ts",
-      "import": "./dist/Components/Dialog/index.js"
+      "import": "./dist/Components/Dialog/index.js",
+      "default": "./dist/Components/Dialog/index.js"
     },
     "./Components/Facets": {
       "types": "./dist/Components/Facets/index.d.ts",
-      "import": "./dist/Components/Facets/index.js"
+      "import": "./dist/Components/Facets/index.js",
+      "default": "./dist/Components/Facets/index.js"
     },
     "./Components/Facets/Variants": {
       "types": "./dist/Components/Facets/Variants/index.d.ts",
-      "import": "./dist/Components/Facets/Variants/index.js"
+      "import": "./dist/Components/Facets/Variants/index.js",
+      "default": "./dist/Components/Facets/Variants/index.js"
     },
     "./Components/Formatter": {
       "types": "./dist/Components/Formatter/index.d.ts",
-      "import": "./dist/Components/Formatter/index.js"
+      "import": "./dist/Components/Formatter/index.js",
+      "default": "./dist/Components/Formatter/index.js"
     },
     "./Components/Inputs": {
       "types": "./dist/Components/Inputs/index.d.ts",
-      "import": "./dist/Components/Inputs/index.js"
+      "import": "./dist/Components/Inputs/index.js",
+      "default": "./dist/Components/Inputs/index.js"
     },
     "./Components/Inputs/Checkbox": {
       "types": "./dist/Components/Inputs/Checkbox/index.d.ts",
-      "import": "./dist/Components/Inputs/Checkbox/index.js"
+      "import": "./dist/Components/Inputs/Checkbox/index.js",
+      "default": "./dist/Components/Inputs/Checkbox/index.js"
     },
     "./Components/Inputs/DateRangeSelector": {
       "types": "./dist/Components/Inputs/DateRangeSelector/index.d.ts",
-      "import": "./dist/Components/Inputs/DateRangeSelector/index.js"
+      "import": "./dist/Components/Inputs/DateRangeSelector/index.js",
+      "default": "./dist/Components/Inputs/DateRangeSelector/index.js"
     },
     "./Components/Inputs/Field": {
       "types": "./dist/Components/Inputs/Field/index.d.ts",
-      "import": "./dist/Components/Inputs/Field/index.js"
+      "import": "./dist/Components/Inputs/Field/index.js",
+      "default": "./dist/Components/Inputs/Field/index.js"
     },
     "./Components/Inputs/Input": {
       "types": "./dist/Components/Inputs/Input/index.d.ts",
-      "import": "./dist/Components/Inputs/Input/index.js"
+      "import": "./dist/Components/Inputs/Input/index.js",
+      "default": "./dist/Components/Inputs/Input/index.js"
     },
     "./Components/Inputs/InputAddon": {
       "types": "./dist/Components/Inputs/InputAddon/index.d.ts",
-      "import": "./dist/Components/Inputs/InputAddon/index.js"
+      "import": "./dist/Components/Inputs/InputAddon/index.js",
+      "default": "./dist/Components/Inputs/InputAddon/index.js"
     },
     "./Components/Inputs/InputButton": {
       "types": "./dist/Components/Inputs/InputButton/index.d.ts",
-      "import": "./dist/Components/Inputs/InputButton/index.js"
+      "import": "./dist/Components/Inputs/InputButton/index.js",
+      "default": "./dist/Components/Inputs/InputButton/index.js"
     },
     "./Components/Inputs/InputIcon": {
       "types": "./dist/Components/Inputs/InputIcon/index.d.ts",
-      "import": "./dist/Components/Inputs/InputIcon/index.js"
+      "import": "./dist/Components/Inputs/InputIcon/index.js",
+      "default": "./dist/Components/Inputs/InputIcon/index.js"
     },
     "./Components/Inputs/KeyboardShortcut": {
       "types": "./dist/Components/Inputs/KeyboardShortcut/index.d.ts",
-      "import": "./dist/Components/Inputs/KeyboardShortcut/index.js"
+      "import": "./dist/Components/Inputs/KeyboardShortcut/index.js",
+      "default": "./dist/Components/Inputs/KeyboardShortcut/index.js"
     },
     "./Components/Inputs/Radio": {
       "types": "./dist/Components/Inputs/Radio/index.d.ts",
-      "import": "./dist/Components/Inputs/Radio/index.js"
+      "import": "./dist/Components/Inputs/Radio/index.js",
+      "default": "./dist/Components/Inputs/Radio/index.js"
     },
     "./Components/Inputs/SearchInput": {
       "types": "./dist/Components/Inputs/SearchInput/index.d.ts",
-      "import": "./dist/Components/Inputs/SearchInput/index.js"
+      "import": "./dist/Components/Inputs/SearchInput/index.js",
+      "default": "./dist/Components/Inputs/SearchInput/index.js"
     },
     "./Components/Inputs/Sliders": {
       "types": "./dist/Components/Inputs/Sliders/index.d.ts",
-      "import": "./dist/Components/Inputs/Sliders/index.js"
+      "import": "./dist/Components/Inputs/Sliders/index.js",
+      "default": "./dist/Components/Inputs/Sliders/index.js"
     },
     "./Components/Inputs/Textarea": {
       "types": "./dist/Components/Inputs/Textarea/index.d.ts",
-      "import": "./dist/Components/Inputs/Textarea/index.js"
+      "import": "./dist/Components/Inputs/Textarea/index.js",
+      "default": "./dist/Components/Inputs/Textarea/index.js"
     },
     "./Components/Layouts": {
       "types": "./dist/Components/Layouts/index.d.ts",
-      "import": "./dist/Components/Layouts/index.js"
+      "import": "./dist/Components/Layouts/index.js",
+      "default": "./dist/Components/Layouts/index.js"
     },
     "./Components/NavBar": {
       "types": "./dist/Components/NavBar/index.d.ts",
-      "import": "./dist/Components/NavBar/index.js"
+      "import": "./dist/Components/NavBar/index.js",
+      "default": "./dist/Components/NavBar/index.js"
     },
     "./Components/NavBar/Assets": {
       "types": "./dist/Components/NavBar/Assets/index.d.ts",
-      "import": "./dist/Components/NavBar/Assets/index.js"
+      "import": "./dist/Components/NavBar/Assets/index.js",
+      "default": "./dist/Components/NavBar/Assets/index.js"
     },
     "./Components/Tabs": {
       "types": "./dist/Components/Tabs/index.d.ts",
-      "import": "./dist/Components/Tabs/index.js"
+      "import": "./dist/Components/Tabs/index.js",
+      "default": "./dist/Components/Tabs/index.js"
     },
     "./Components/Toast": {
       "types": "./dist/Components/Toast/index.d.ts",
-      "import": "./dist/Components/Toast/index.js"
+      "import": "./dist/Components/Toast/index.js",
+      "default": "./dist/Components/Toast/index.js"
     },
     "./Components/Typography": {
       "types": "./dist/Components/Typography/index.d.ts",
-      "import": "./dist/Components/Typography/index.js"
+      "import": "./dist/Components/Typography/index.js",
+      "default": "./dist/Components/Typography/index.js"
     },
     "./Components/Utilities": {
       "types": "./dist/Components/Utilities/index.d.ts",
-      "import": "./dist/Components/Utilities/index.js"
+      "import": "./dist/Components/Utilities/index.js",
+      "default": "./dist/Components/Utilities/index.js"
     },
     "./Elements": {
       "types": "./dist/Elements/index.d.ts",
-      "import": "./dist/Elements/index.js"
+      "import": "./dist/Elements/index.js",
+      "default": "./dist/Elements/index.js"
     },
     "./Elements/Http": {
       "types": "./dist/Elements/Http/index.d.ts",
-      "import": "./dist/Elements/Http/index.js"
+      "import": "./dist/Elements/Http/index.js",
+      "default": "./dist/Elements/Http/index.js"
     },
     "./Elements/System": {
       "types": "./dist/Elements/System/index.d.ts",
-      "import": "./dist/Elements/System/index.js"
+      "import": "./dist/Elements/System/index.js",
+      "default": "./dist/Elements/System/index.js"
     },
     "./Elements/Tpdex": {
       "types": "./dist/Elements/Tpdex/index.d.ts",
-      "import": "./dist/Elements/Tpdex/index.js"
+      "import": "./dist/Elements/Tpdex/index.js",
+      "default": "./dist/Elements/Tpdex/index.js"
     },
     "./Elements/Transactions": {
       "types": "./dist/Elements/Transactions/index.d.ts",
-      "import": "./dist/Elements/Transactions/index.js"
+      "import": "./dist/Elements/Transactions/index.js",
+      "default": "./dist/Elements/Transactions/index.js"
     },
     "./Models": {
       "types": "./dist/Models/index.d.ts",
-      "import": "./dist/Models/index.js"
+      "import": "./dist/Models/index.js",
+      "default": "./dist/Models/index.js"
     },
     "./Models/Filters": {
       "types": "./dist/Models/Filters/index.d.ts",
-      "import": "./dist/Models/Filters/index.js"
+      "import": "./dist/Models/Filters/index.js",
+      "default": "./dist/Models/Filters/index.js"
     },
     "./Models/Http": {
       "types": "./dist/Models/Http/index.d.ts",
-      "import": "./dist/Models/Http/index.js"
+      "import": "./dist/Models/Http/index.js",
+      "default": "./dist/Models/Http/index.js"
     },
     "./Models/System": {
       "types": "./dist/Models/System/index.d.ts",
-      "import": "./dist/Models/System/index.js"
+      "import": "./dist/Models/System/index.js",
+      "default": "./dist/Models/System/index.js"
     },
     "./package.json": "./package.json",
     "./Pages": {
       "types": "./dist/Pages/index.d.ts",
-      "import": "./dist/Pages/index.js"
+      "import": "./dist/Pages/index.js",
+      "default": "./dist/Pages/index.js"
     },
     "./Pages/Alerts": {
       "types": "./dist/Pages/Alerts/index.d.ts",
-      "import": "./dist/Pages/Alerts/index.js"
+      "import": "./dist/Pages/Alerts/index.js",
+      "default": "./dist/Pages/Alerts/index.js"
     },
     "./Pages/Explorer": {
       "types": "./dist/Pages/Explorer/index.d.ts",
-      "import": "./dist/Pages/Explorer/index.js"
+      "import": "./dist/Pages/Explorer/index.js",
+      "default": "./dist/Pages/Explorer/index.js"
     },
     "./Pages/Overview": {
       "types": "./dist/Pages/Overview/index.d.ts",
-      "import": "./dist/Pages/Overview/index.js"
+      "import": "./dist/Pages/Overview/index.js",
+      "default": "./dist/Pages/Overview/index.js"
     },
     "./Pages/Overview/Sections/Components": {
       "types": "./dist/Pages/Overview/Sections/Components/index.d.ts",
-      "import": "./dist/Pages/Overview/Sections/Components/index.js"
+      "import": "./dist/Pages/Overview/Sections/Components/index.js",
+      "default": "./dist/Pages/Overview/Sections/Components/index.js"
     },
     "./Pages/SystemPage": {
       "types": "./dist/Pages/SystemPage/index.d.ts",
-      "import": "./dist/Pages/SystemPage/index.js"
+      "import": "./dist/Pages/SystemPage/index.js",
+      "default": "./dist/Pages/SystemPage/index.js"
     },
     "./Pages/Transactions": {
       "types": "./dist/Pages/Transactions/index.d.ts",
-      "import": "./dist/Pages/Transactions/index.js"
+      "import": "./dist/Pages/Transactions/index.js",
+      "default": "./dist/Pages/Transactions/index.js"
     },
     "./Pages/Transactions/Detail": {
       "types": "./dist/Pages/Transactions/Detail/index.d.ts",
-      "import": "./dist/Pages/Transactions/Detail/index.js"
+      "import": "./dist/Pages/Transactions/Detail/index.js",
+      "default": "./dist/Pages/Transactions/Detail/index.js"
     },
     "./Pages/Transactions/Detail/Components": {
       "types": "./dist/Pages/Transactions/Detail/Components/index.d.ts",
-      "import": "./dist/Pages/Transactions/Detail/Components/index.js"
+      "import": "./dist/Pages/Transactions/Detail/Components/index.js",
+      "default": "./dist/Pages/Transactions/Detail/Components/index.js"
     },
     "./Pages/Transactions/List": {
       "types": "./dist/Pages/Transactions/List/index.d.ts",
-      "import": "./dist/Pages/Transactions/List/index.js"
+      "import": "./dist/Pages/Transactions/List/index.js",
+      "default": "./dist/Pages/Transactions/List/index.js"
     },
     "./theme.css": "./dist/css/theme.css"
+  },
+  "description": "React component library for observing and interacting with HTTP APIs: badges, data tables, charts, forms and transaction pages, built with TypeScript and Tailwind CSS 4.",
+  "keywords": [
+    "react",
+    "component-library",
+    "ui",
+    "typescript",
+    "tailwindcss",
+    "storybook",
+    "http",
+    "api",
+    "observability"
+  ],
+  "author": "Romain Dorgueil <romain@makersquad.fr>",
+  "engines": {
+    "node": ">=24"
   },
   "files": [
     "dist"

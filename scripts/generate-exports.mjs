@@ -15,12 +15,12 @@ const PACKAGE_JSON = join(ROOT, "package.json");
 // The public surface: folder barrels and the root entry. Nothing else under dist/ is exported.
 const PUBLIC_EXPORTS = join(__dirname, "public-exports.json");
 
+// `default` repeats `import`: tools that resolve through it (require.resolve, older bundlers) find nothing otherwise.
+const jsEntry = (base) => ({ types: `${base}.d.ts`, import: `${base}.js`, default: `${base}.js` });
+
 function generateExports() {
   const exports = {
-    ".": {
-      types: "./dist/index.d.ts",
-      import: "./dist/index.js",
-    },
+    ".": jsEntry("./dist/index"),
     "./styles": "./dist/styles/styles.css",
     "./theme.css": "./dist/css/theme.css",
     "./components.css": "./dist/css/components.css",
@@ -32,7 +32,7 @@ function generateExports() {
     if (!existsSync(join(ROOT, `${entry}.js`)) || !existsSync(join(ROOT, `${entry}.d.ts`))) {
       throw new Error(`${PUBLIC_EXPORTS} lists "${barrel}", which has no built index.js and index.d.ts`);
     }
-    exports[`./${barrel}`] = { types: `${entry}.d.ts`, import: `${entry}.js` };
+    exports[`./${barrel}`] = jsEntry(entry);
   }
 
   return exports;

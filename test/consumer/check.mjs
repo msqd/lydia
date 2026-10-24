@@ -21,6 +21,7 @@
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { copyFileSync, cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { createRequire } from "node:module";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -139,6 +140,12 @@ try {
     ],
     app,
   );
+
+  // require.resolve matches `default`, never `import`: it fails on an entry without that condition.
+  const requireFromApp = createRequire(join(app, "package.json"));
+  for (const entry of ["@msqd/lydia", "@msqd/lydia/Components/Badges"]) {
+    assert.ok(requireFromApp.resolve(entry).endsWith(".js"), `${entry} resolves through the default condition`);
+  }
 
   const dist = join(installed, "dist");
   const unresolved = readdirSync(dist, { recursive: true })
