@@ -73,7 +73,7 @@ describe("TransactionsExplorerSidebar", () => {
     render(<TransactionsExplorerSidebar transactions={mockTransactions} onSelect={onSelect} />);
 
     fireEvent.click(screen.getByText("users-api"));
-    expect(onSelect).toHaveBeenCalledWith("users-api", "api");
+    expect(onSelect).toHaveBeenCalledWith({ type: "api", apiName: "users-api", segments: [] });
   });
 
   it("calls onToggleExpand when API is clicked", () => {
@@ -115,11 +115,71 @@ describe("TransactionsExplorerSidebar", () => {
   });
 
   it("highlights selected path", () => {
-    render(<TransactionsExplorerSidebar transactions={mockTransactions} selectedPath="users-api" />);
+    render(
+      <TransactionsExplorerSidebar
+        transactions={mockTransactions}
+        selected={{ type: "api", apiName: "users-api", segments: [] }}
+      />,
+    );
 
     // Find the clickable container div that has the background color
     const selectedNode = screen.getByText("users-api").closest(".cursor-pointer");
     expect(selectedNode).toHaveClass("bg-blue-50");
+  });
+
+  it("reports the structured selection of a nested node", () => {
+    const onSelect = vi.fn();
+    render(
+      <TransactionsExplorerSidebar
+        transactions={mockTransactions}
+        expandedNodes={new Set(["users-api", "users-api/api", "users-api/api/users"])}
+        onSelect={onSelect}
+      />,
+    );
+
+    fireEvent.click(screen.getByText("profile"));
+    expect(onSelect).toHaveBeenCalledWith({
+      type: "endpoint",
+      apiName: "users-api",
+      segments: ["api", "users", "profile"],
+    });
+  });
+
+  describe("expansion", () => {
+    it("expands and collapses on its own when expandedNodes is not given", () => {
+      render(<TransactionsExplorerSidebar transactions={mockTransactions} />);
+      expect(screen.queryByText("api")).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByRole("button", { name: "users-api" }));
+      expect(screen.getByText("api")).toBeInTheDocument();
+
+      fireEvent.click(screen.getByRole("button", { name: "users-api" }));
+      expect(screen.queryByText("api")).not.toBeInTheDocument();
+    });
+
+    it("reports changes of its own expansion through onToggleExpand", () => {
+      const onToggleExpand = vi.fn();
+      render(<TransactionsExplorerSidebar transactions={mockTransactions} onToggleExpand={onToggleExpand} />);
+
+      fireEvent.click(screen.getByRole("button", { name: "users-api" }));
+      expect(onToggleExpand).toHaveBeenCalledWith("users-api");
+      expect(screen.getByText("api")).toBeInTheDocument();
+    });
+
+    it("leaves expansion to the caller when expandedNodes is given", () => {
+      const onToggleExpand = vi.fn();
+      render(
+        <TransactionsExplorerSidebar
+          transactions={mockTransactions}
+          expandedNodes={new Set()}
+          onToggleExpand={onToggleExpand}
+        />,
+      );
+
+      fireEvent.click(screen.getByRole("button", { name: "users-api" }));
+      expect(onToggleExpand).toHaveBeenCalledWith("users-api");
+      expect(screen.queryByText("api")).not.toBeInTheDocument();
+    });
   });
 
   it("supports custom title", () => {
@@ -165,6 +225,51 @@ describe("TransactionsExplorerSidebar", () => {
 });
 
 describe("buildApiTree", () => {
+  const countsOf = (transactions: Transaction[]) =>
+    Object.fromEntries(
+      buildApiTree(transactions).flatMap(function flatten(node): [string, number | undefined][] {
+        return [[node.id, node.transactionCount], ...(node.children ?? []).flatMap(flatten)];
+      }),
+    );
+
+  it.each([
+    [
+      "a transaction without apiName under the unknown-API node",
+      [{ url: "/api/a", apiName: undefined }],
+      { "unknown-api": 1, "unknown-api/api": 1, "unknown-api/api/a": 1 },
+    ],
+    [
+      "a query string dropped from the node",
+      [{ url: "/api/analytics/report?period=daily" }],
+      { "users-api": 1, "users-api/api": 1, "users-api/api/analytics": 1, "users-api/api/analytics/report": 1 },
+    ],
+    [
+      "a full URL without host node",
+      [{ url: "https://host/api/x" }],
+      { "users-api": 1, "users-api/api": 1, "users-api/api/x": 1 },
+    ],
+    [
+      "a name that is only a prefix of another not counted",
+      [{ url: "/api/user" }, { url: "/api/users/1" }],
+      {
+        "users-api": 2,
+        "users-api/api": 2,
+        "users-api/api/user": 1,
+        "users-api/api/users": 1,
+        "users-api/api/users/1": 1,
+      },
+    ],
+  ])("%s", (_label, overrides, expected) => {
+    const transactions = overrides.map((o, i) => ({ ...mockTransactions[0], id: `t${i}`, ...o }));
+    expect(countsOf(transactions)).toEqual(expected);
+  });
+
+  it("carries the selection each node reports", () => {
+    const [products] = buildApiTree(mockTransactions);
+    expect(products.apiName).toBe("products-api");
+    expect(products.children?.[0].segments).toEqual(["api"]);
+  });
+
   it("builds correct tree structure", () => {
     const tree = buildApiTree(mockTransactions);
 

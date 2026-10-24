@@ -2,6 +2,7 @@ import { FolderIcon } from "@heroicons/react/24/outline";
 import { H2, P, Section } from "@msqd/lydia/Components";
 import { Drawer } from "@msqd/lydia/Components/Dialog";
 import { TransactionsExplorerSidebar } from "@msqd/lydia/Elements/Transactions";
+import { type Selection, isUnder } from "@msqd/lydia/Models/Transactions/endpoints";
 import type { DetailedTransaction, Transaction } from "@msqd/lydia/Models/Transactions/types";
 import { TransactionsDetailPage } from "@msqd/lydia/Pages/Transactions/Detail";
 import { TransactionsListPage, useClientSideTransactions } from "@msqd/lydia/Pages/Transactions/List";
@@ -14,54 +15,20 @@ interface ExplorerPageProps {
 }
 
 export function ExplorerPage({ transactions, className }: ExplorerPageProps) {
-  const [selectedPath, setSelectedPath] = useState<string | null>(null);
-  const [selectedType, setSelectedType] = useState<string | null>(null);
-  const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
+  const [selected, setSelected] = useState<Selection | null>(null);
   const [selectedTransaction, setSelectedTransaction] = useState<DetailedTransaction | null>(null);
   const isDrawerOpen = selectedTransaction !== null;
 
-  // No need to build tree - handled by TransactionsExplorerSidebar
-
-  // Filter transactions based on selection
   const filteredTransactions = useMemo(() => {
-    if (!selectedPath) return [];
-
-    if (selectedType === "api") {
-      // Show all transactions for the selected API
-      return transactions
-        .filter((t) => t.apiName === selectedPath)
-        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-    } else {
-      // Show transactions that start with the selected path
-      const [apiName, ...pathParts] = selectedPath.split("/");
-      const pathPrefix = `/${pathParts.join("/")}`;
-
-      return transactions
-        .filter((t) => t.apiName === apiName && t.url.startsWith(pathPrefix))
-        .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
-    }
-  }, [selectedPath, selectedType, transactions]);
+    if (!selected) return [];
+    return transactions
+      .filter((t) => isUnder(t, selected))
+      .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+  }, [selected, transactions]);
 
   // The tree selection is the only filtering here, and it happens above: the embedded list still
   // paginates, so it is driven by the client-side fallback.
   const listedTransactions = useClientSideTransactions(filteredTransactions);
-
-  const handleNodeSelect = (path: string, type: string) => {
-    setSelectedPath(path);
-    setSelectedType(type);
-  };
-
-  const handleToggleExpand = (nodeId: string) => {
-    setExpandedNodes((prev) => {
-      const next = new Set(prev);
-      if (next.has(nodeId)) {
-        next.delete(nodeId);
-      } else {
-        next.add(nodeId);
-      }
-      return next;
-    });
-  };
 
   const handleTransactionSelect = (transaction: Transaction | null) => {
     // Resolve the full detailed transaction from the data we were given.
@@ -87,15 +54,13 @@ export function ExplorerPage({ transactions, className }: ExplorerPageProps) {
         <TransactionsExplorerSidebar
           className="w-80"
           transactions={transactions}
-          selectedPath={selectedPath}
-          expandedNodes={expandedNodes}
-          onSelect={handleNodeSelect}
-          onToggleExpand={handleToggleExpand}
+          selected={selected}
+          onSelect={setSelected}
         />
 
         {/* Right panel - Transaction list */}
         <div className="flex-1 bg-white rounded-lg shadow overflow-hidden">
-          {selectedPath ? (
+          {selected ? (
             <TransactionsListPage
               {...listedTransactions}
               variant="embedded"

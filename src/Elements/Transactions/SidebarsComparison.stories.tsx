@@ -5,7 +5,7 @@ import type { Transaction } from "@msqd/lydia/Models/Transactions/types";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { fn } from "storybook/test";
-import { TransactionsExplorerSidebar } from "./TransactionsExplorerSidebar";
+import { type Selection, TransactionsExplorerSidebar } from "./TransactionsExplorerSidebar";
 import { TransactionsFiltersSidebar } from "./TransactionsFiltersSidebar";
 
 const meta: Meta = {
@@ -80,6 +80,7 @@ const generateSampleTransactions = (): Transaction[] => {
 };
 
 const sampleTransactions = generateSampleTransactions();
+const usersApi: Selection = { type: "api", apiName: "users-api", segments: [] };
 
 // Sample filters for the filters sidebar
 const sampleFilters: Filters = {
@@ -101,24 +102,7 @@ export const SideBySide: Story = {
     const { filters, handleFilterChange, resetFilters } = useFacetState(sampleFilters);
 
     // State for explorer sidebar
-    const [selectedPath, setSelectedPath] = useState<string | null>("users-api");
-    const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set(["users-api", "orders-api"]));
-
-    const handleSelect = (path: string) => {
-      setSelectedPath(path);
-    };
-
-    const handleToggleExpand = (nodeId: string) => {
-      setExpandedNodes((prev) => {
-        const next = new Set(prev);
-        if (next.has(nodeId)) {
-          next.delete(nodeId);
-        } else {
-          next.add(nodeId);
-        }
-        return next;
-      });
-    };
+    const [selected, setSelected] = useState<Selection | null>(usersApi);
 
     return (
       <div className="p-6 bg-gray-50 min-h-screen">
@@ -152,10 +136,8 @@ export const SideBySide: Story = {
             <div className="w-80">
               <TransactionsExplorerSidebar
                 transactions={sampleTransactions}
-                selectedPath={selectedPath}
-                expandedNodes={expandedNodes}
-                onSelect={handleSelect}
-                onToggleExpand={handleToggleExpand}
+                selected={selected}
+                onSelect={setSelected}
                 title="API Endpoints"
               />
             </div>
@@ -257,7 +239,7 @@ export const HeaderStyling: Story = {
             <div className="w-80">
               <TransactionsExplorerSidebar
                 transactions={sampleTransactions.slice(0, 15)}
-                selectedPath="users-api"
+                selected={usersApi}
                 expandedNodes={new Set(["users-api"])}
                 onSelect={fn()}
                 onToggleExpand={fn()}

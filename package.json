@@ -605,6 +605,10 @@
       "types": "./dist/Models/Transactions/encoding.d.ts",
       "import": "./dist/Models/Transactions/encoding.js"
     },
+    "./Models/Transactions/endpoints": {
+      "types": "./dist/Models/Transactions/endpoints.d.ts",
+      "import": "./dist/Models/Transactions/endpoints.js"
+    },
     "./Models/Transactions/facets": {
       "types": "./dist/Models/Transactions/facets.d.ts",
       "import": "./dist/Models/Transactions/facets.js"
