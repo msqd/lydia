@@ -24,6 +24,7 @@ totals, take the callbacks, fetch again.
 | `pageCount` | | Number of pages. Derived from `total` and `itemsPerPage` when omitted. |
 | `facets` | | Values each facet can offer, with counts. Displayed as given. |
 | `isLoading` | | True while you are fetching. |
+| `selectedId` | `onTransactionSelect(transaction)` | Id of the highlighted row, `null` for none. Controlled, the page never clears it: clear it from the `onClose` of the drawer that shows the transaction. Left out, the page keeps its own, changed only by a row click. |
 | `favorites` | `onFavoriteChange(id, favorite)` | Ids of the favourite transactions, and a star toggle. Favourites are yours: the page keeps none, and shows the star column only when `onFavoriteChange` is given. |
 
 Every one of them is optional, and **a control renders only when it can lead somewhere**: no

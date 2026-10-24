@@ -24,7 +24,7 @@ export function CircuitBreakerStatus({
   onChange,
 }: CircuitBreakerStatusProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useClickOutside<HTMLDivElement>(() => setIsOpen(false));
+  const dropdownRef = useClickOutside<HTMLDivElement>({ onClickOutside: () => setIsOpen(false), enabled: isOpen });
   const config = circuitBreakerStatusMap[circuitBreaker.status];
 
   const handleStatusChange = (newStatus: CircuitBreakerStatusType) => {

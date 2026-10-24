@@ -465,10 +465,6 @@
       "types": "./dist/Components/Utilities/useClickOutside.d.ts",
       "import": "./dist/Components/Utilities/useClickOutside.js"
     },
-    "./Components/Utilities/useGlobalClickOutside": {
-      "types": "./dist/Components/Utilities/useGlobalClickOutside.d.ts",
-      "import": "./dist/Components/Utilities/useGlobalClickOutside.js"
-    },
     "./Elements": {
       "types": "./dist/Elements/index.d.ts",
       "import": "./dist/Elements/index.js"

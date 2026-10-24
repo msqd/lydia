@@ -5,12 +5,11 @@ import { SearchInput } from "@msqd/lydia/Components/Inputs/SearchInput";
 import { P } from "@msqd/lydia/Components/Typography/Paragraphs";
 import { Section } from "@msqd/lydia/Components/Typography/Section";
 import { H2 } from "@msqd/lydia/Components/Typography/Titles";
-import { useGlobalClickOutside } from "@msqd/lydia/Components/Utilities/useGlobalClickOutside";
 import { CacheIndicator, RequestMethodBadge, ResponseStatusBadge } from "@msqd/lydia/Elements/Http";
 import { TpdexBadge } from "@msqd/lydia/Elements/Tpdex/TpdexBadge";
 import { TransactionsFiltersSidebar } from "@msqd/lydia/Elements/Transactions";
 import { formatDistanceToNow } from "date-fns";
-import { type ComponentProps, useCallback, useState } from "react";
+import { type ComponentProps, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { type FilterChangeHandler, type Filters, hasActiveFilters } from "@msqd/lydia/Models/Filters";
@@ -21,7 +20,14 @@ import type { Transaction } from "@msqd/lydia/Models/Transactions/types";
 interface TransactionsListPageBaseProps extends ComponentProps<"div"> {
   className?: string;
   onRowClick?: (id: string) => void;
-  onTransactionSelect?: (transaction: Transaction | null) => void;
+  /** Called when the user chooses a row. */
+  onTransactionSelect?: (transaction: Transaction) => void;
+  /**
+   * Id of the highlighted row, `null` for none. The page then holds no selection of its own and
+   * never clears one: whoever shows the selected transaction (a drawer, say) clears it when it
+   * closes. Leave it out and the page keeps its own, which nothing but another row click changes.
+   */
+  selectedId?: string | null;
   isDrawerOpen?: boolean;
   /**
    * The transactions to render, exactly as given. This page does not filter, search or paginate
@@ -251,6 +257,7 @@ export function TransactionsListPage({
   className,
   onRowClick,
   onTransactionSelect,
+  selectedId,
   isDrawerOpen = false,
   filtersOpen: filtersOpenProp,
   onFiltersOpenChange,
@@ -276,7 +283,9 @@ export function TransactionsListPage({
   const showSearch = !isEmbedded && Boolean(onSearchChange);
   const showFilters = !isEmbedded && !isDrawerOpen && Boolean(onFiltersChange);
 
-  const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
+  const [ownSelectedId, setOwnSelectedId] = useState<string | null>(null);
+  const currentSelectedId = selectedId === undefined ? ownSelectedId : selectedId;
+  const selectedTransaction = transactions.find((transaction) => transaction.id === currentSelectedId);
 
   const [ownFiltersOpen, setOwnFiltersOpen] = useState(false);
   const filtersOpen = filtersOpenProp ?? ownFiltersOpen;
@@ -288,30 +297,6 @@ export function TransactionsListPage({
   const totalTransactions = total ?? transactions.length;
   const pages = pageCount ?? Math.max(1, Math.ceil(totalTransactions / itemsPerPage));
   const isNarrowed = hasActiveFilters(filters, search);
-
-  // Handler for clicking outside to deselect
-  const handleClickOutside = useCallback(() => {
-    setSelectedTransaction(null);
-    if (onTransactionSelect) {
-      onTransactionSelect(null);
-    }
-  }, [onTransactionSelect]);
-
-  // Use global click-outside hook to detect clicks anywhere in the app
-  useGlobalClickOutside(handleClickOutside, !!selectedTransaction, [
-    // Don't trigger when clicking on table rows or interactive elements within the table
-    "tr",
-    // Don't trigger when clicking drawer content
-    "[data-drawer-content]",
-    // Don't trigger when clicking other interactive elements
-    'button[aria-label="Close drawer"]',
-    "input",
-    "select",
-    "textarea",
-    // Don't trigger on menu items
-    '[role="menu"]',
-    '[role="menuitem"]',
-  ]);
 
   const tableArea = () => {
     if (isLoading) {
@@ -347,16 +332,11 @@ export function TransactionsListPage({
         columns={onFavoriteChange ? ["flags", ...columns] : columns}
         rows={transactions}
         onRowClick={(row) => {
-          const transaction = row;
-          setSelectedTransaction(transaction);
-          if (onTransactionSelect) {
-            onTransactionSelect(transaction);
-          }
-          if (onRowClick && transaction) {
-            onRowClick(transaction.id);
-          }
+          setOwnSelectedId(row.id);
+          onTransactionSelect?.(row);
+          onRowClick?.(row.id);
         }}
-        selected={selectedTransaction ?? undefined}
+        selected={selectedTransaction}
         rowKey="id"
       />
     );
