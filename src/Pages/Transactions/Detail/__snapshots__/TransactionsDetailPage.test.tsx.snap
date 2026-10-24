@@ -3,215 +3,116 @@
 exports[`TransactionsDetailPage > renders the transaction details correctly 1`] = `
 <div>
   <div
-    class="flex flex-col min-h-screen"
+    class="h-full"
+    data-testid="transaction-detail"
   >
-    <nav
-      class="bg-primary-900 shadow"
-      data-headlessui-state=""
-      data-testid="navbar"
+    <div
+      class="h-full divide-y divide-gray-100 overflow-hidden"
     >
       <div
-        class="mx-auto px-4 sm:px-6 lg:px-8"
+        class="px-4 py-5 sm:p-6"
       >
         <div
-          class="flex h-16 items-center justify-between"
+          class="px-4 py-3 relative"
+          data-headlessui-state=""
         >
           <div
-            class="flex items-center"
+            class="flex w-full items-start"
           >
-            <a
-              class="flex items-center shrink-0 cursor-pointer"
-              href="/"
+            <h5
+              class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
             >
-              <span
-                aria-hidden="true"
-                class="contents"
+              <button
+                aria-expanded="false"
+                class="flex w-full items-start text-left cursor-pointer"
+                data-headlessui-state=""
+                id="headlessui-disclosure-button-_r_0_"
+                type="button"
               >
-                <img
-                  alt="APILab"
-                  class="h-8 w-auto"
-                  src="data:image/svg+xml,%3csvg%20width='692'%20height='506'%20viewBox='0%200%20692%20506'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M71.5215%20325.742C110.745%20325.742%20142.543%20293.882%20142.543%20254.578C142.543%20215.274%20110.744%20183.414%2071.5215%20183.414C32.2979%20183.414%200.500488%20215.274%200.500488%20254.578C0.500488%20293.882%2032.2991%20325.742%2071.5215%20325.742ZM322.428%20436.387C321.605%20474.973%20290.131%20506%20251.424%20506C212.201%20506%20180.403%20474.139%20180.403%20434.836C180.403%20395.535%20212.202%20363.675%20251.424%20363.675C251.521%20363.675%20251.62%20363.672%20251.721%20363.667C252.146%20363.672%20252.57%20363.675%20252.995%20363.675C313.325%20363.675%20362.362%20315.214%20363.441%20255.025C363.454%20254.87%20363.459%20254.722%20363.459%20254.58C363.459%20254.485%20363.458%20254.388%20363.453%20254.287C363.458%20253.856%20363.459%20253.424%20363.459%20252.991C363.459%20191.862%20314.001%20142.308%20252.992%20142.308C252.36%20142.308%20251.731%20142.313%20251.102%20142.325C212.025%20142.152%20180.401%20110.357%20180.401%2071.1644C180.401%2031.8623%20212.2%200%20251.422%200C290.541%200%20322.27%2031.6873%20322.443%2070.8397C322.433%2071.4706%20322.427%2072.1014%20322.427%2072.7339C322.427%20133.863%20371.885%20183.417%20432.894%20183.417C433.317%20183.417%20433.74%20183.415%20434.162%20183.41C434.27%20183.415%20434.376%20183.417%20434.479%20183.417C473.705%20183.417%20505.5%20215.277%20505.5%20254.581C505.5%20293.779%20473.868%20325.577%20434.787%20325.741C434.156%20325.731%20433.526%20325.726%20432.893%20325.726C371.893%20325.726%20322.439%20375.268%20322.427%20436.388L322.428%20436.387Z'%20fill='white'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M258.381%20325.742C297.527%20325.742%20329.261%20293.882%20329.261%20254.578C329.261%20215.274%20297.526%20183.414%20258.381%20183.414C219.235%20183.414%20187.5%20215.274%20187.5%20254.578C187.5%20293.882%20219.236%20325.742%20258.381%20325.742ZM508.791%20436.387C507.969%20474.973%20476.558%20506%20437.927%20506C398.781%20506%20367.047%20474.139%20367.047%20434.836C367.047%20395.535%20398.783%20363.675%20437.927%20363.675C438.024%20363.675%20438.123%20363.672%20438.223%20363.667C438.647%20363.672%20439.071%20363.675%20439.495%20363.675C499.706%20363.675%20548.645%20315.214%20549.722%20255.025C549.736%20254.87%20549.74%20254.722%20549.74%20254.58C549.74%20254.485%20549.739%20254.388%20549.734%20254.287C549.739%20253.856%20549.74%20253.424%20549.74%20252.991C549.74%20191.862%20500.38%20142.308%20439.492%20142.308C438.861%20142.308%20438.233%20142.313%20437.606%20142.325C398.606%20142.152%20367.045%20110.357%20367.045%2071.1644C367.045%2031.8623%20398.781%200%20437.925%200C476.966%200%20508.633%2031.6873%20508.806%2070.8397C508.796%2071.4706%20508.789%2072.1014%20508.789%2072.7339C508.789%20133.863%20558.149%20183.417%20619.037%20183.417C619.46%20183.417%20619.882%20183.415%20620.303%20183.41C620.411%20183.415%20620.517%20183.417%20620.62%20183.417C659.768%20183.417%20691.5%20215.277%20691.5%20254.581C691.5%20293.779%20659.931%20325.577%20620.927%20325.741C620.298%20325.731%20619.668%20325.726%20619.037%20325.726C558.158%20325.726%20508.802%20375.268%20508.789%20436.388L508.791%20436.387Z'%20fill='white'/%3e%3c/svg%3e"
-                />
-              </span>
-              <span
-                class="ml-2 text-white text-xl font-semibold"
-              >
-                apilab
-              </span>
-            </a>
-            <div
-              class="hidden md:block"
-            >
-              <div
-                class="ml-10 flex items-baseline space-x-4"
-              >
-                <a
-                  aria-current="page"
-                  class="bg-primary-500 text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-                  href="#"
+                <span
+                  class="grow truncate font-semibold"
                 >
-                  Overview
-                </a>
-                <a
-                  class="text-white hover:bg-primary-500/75 rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-                  href="#"
-                >
-                  Journal
-                </a>
-                <a
-                  class="text-white hover:bg-primary-500/75 rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-                  href="#"
-                >
-                  Explorer
-                </a>
-                <a
-                  class="text-white hover:bg-primary-500/75 rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-                  href="#"
-                >
-                  Editor
-                </a>
-                <a
-                  class="text-white hover:bg-primary-500/75 rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-                  href="#"
-                >
-                  Alerts
-                </a>
-                <a
-                  class="text-white hover:bg-primary-500/75 rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
-                  href="#"
-                >
-                  System
-                </a>
-              </div>
-            </div>
-          </div>
-          <div
-            class="hidden md:block"
-          >
-            <div
-              class="ml-4 flex items-center md:ml-6"
-            />
-          </div>
-          <div
-            class="-mr-2 flex md:hidden"
-          >
-            <button
-              aria-expanded="false"
-              class="group relative inline-flex items-center justify-center rounded-md bg-primary-500 p-2 text-primary-200 hover:bg-primary-500/75 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-500 focus:outline-hidden"
-              data-headlessui-state=""
-              id="headlessui-disclosure-button-_r_0_"
-              type="button"
-            >
-              <span
-                class="absolute -inset-0.5"
-              />
-              <span
-                class="sr-only"
-              >
-                Open main menu
-              </span>
-              <svg
-                aria-hidden="true"
-                class="block size-6 group-data-open:hidden"
-                data-slot="icon"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              <svg
-                aria-hidden="true"
-                class="hidden size-6 group-data-open:block"
-                data-slot="icon"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6 18 18 6M6 6l12 12"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <main
-      class="flex-grow space-y-4"
-    >
-      <div
-        class="h-full max-w-6xl mx-auto"
-        data-testid="transaction-detail"
-      >
-        <h1
-          class="pb-6 text-2xl font-semibold text-gray-900 mb-6"
-        >
-          Transaction details
-        </h1>
-        <div
-          class="divide-y divide-gray-100"
-        >
-          <div
-            class="px-4 py-5 sm:p-6"
-          >
-            <div
-              class="px-4 py-3 relative"
-              data-headlessui-state=""
-            >
-              <div
-                class="flex w-full items-start"
-              >
-                <h2
-                  class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
-                >
-                  <button
-                    aria-expanded="false"
-                    class="flex w-full items-start text-left cursor-pointer"
-                    data-headlessui-state=""
-                    id="headlessui-disclosure-button-_r_2_"
-                    type="button"
+                  <div
+                    class="flex gap-x-1 items-center"
                   >
                     <span
-                      class="grow truncate font-semibold"
+                      class="font-normal"
                     >
-                      <div
-                        class="flex gap-x-1 items-center"
+                      <span
+                        class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-green-50 text-green-700 ring-green-600/20 px-2 py-1 text-xs"
+                        data-testid="method-badge-GET"
                       >
-                        <span
-                          class="font-normal"
-                        >
-                          <span
-                            class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-green-50 text-green-700 ring-green-600/20 px-2 py-1 text-xs"
-                            data-testid="method-badge-GET"
-                          >
-                            GET
-                          </span>
-                          <span
-                            class="inline-flex items-center bg-gray-50 px-1 ml-2 py-0.5 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-600/20"
-                          >
-                            users-api
-                          </span>
-                          <span
-                            class="text-gray-500 font-mono text-xs ml-1"
-                            title="/api/users/123/profile"
-                          >
-                            /api/users/123/profile
-                          </span>
-                        </span>
+                        GET
+                      </span>
+                      <span
+                        class="inline-flex items-center bg-gray-50 px-1 ml-2 py-0.5 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-600/20"
+                      >
+                        users-api
+                      </span>
+                      <span
+                        class="text-gray-500 font-mono text-xs ml-1"
+                        title="/api/users/123/profile"
+                      >
+                        /api/users/123/profile
+                      </span>
+                    </span>
+                    <svg
+                      aria-hidden="true"
+                      class="h-4 w-4 text-gray-400 mx-1"
+                      data-slot="icon"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <span
+                      class="font-normal"
+                    >
+                      <span
+                        class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-success-50 text-success-700 ring-success-600/20 px-2 py-1 text-xs"
+                        data-testid="status-badge-200"
+                      >
+                        200
+                         
+                        OK
+                      </span>
+                    </span>
+                    <div
+                      class="flex-1"
+                    />
+                    <div
+                      class="flex gap-x-1 items-center font-normal"
+                    >
+                      <span
+                        aria-label="TPDEX A++, 98 out of 100"
+                        class="inline-flex items-center rounded font-medium px-2 py-0.5 text-xs bg-tpdex-a-plus-plus text-gray-950"
+                        role="img"
+                        title="TPDEX Score: 98/100 (A++)"
+                      >
+                        A++
+                      </span>
+                      <span
+                        class="text-sm"
+                      >
+                        15
+                        ms
+                      </span>
+                      <span
+                        aria-label="Cache HIT - Response served from cache"
+                        class="inline-flex items-center cursor-help relative"
+                        role="img"
+                        title="Cache HIT - Response served from cache"
+                      >
                         <svg
                           aria-hidden="true"
-                          class="h-4 w-4 text-gray-400 mx-1"
+                          class="h-3.5 w-3.5 text-success-600"
                           data-slot="icon"
                           fill="none"
                           stroke="currentColor"
@@ -220,692 +121,291 @@ exports[`TransactionsDetailPage > renders the transaction details correctly 1`] 
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                            d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
                             stroke-linecap="round"
                             stroke-linejoin="round"
                           />
                         </svg>
-                        <span
-                          class="font-normal"
-                        >
-                          <span
-                            class="inline-flex items-center font-medium rounded-md ring-1 ring-inset bg-success-50 text-success-700 ring-success-600/20 px-2 py-1 text-xs"
-                            data-testid="status-badge-200"
-                          >
-                            200
-                             
-                            OK
-                          </span>
-                        </span>
-                        <div
-                          class="flex-1"
-                        />
-                        <div
-                          class="flex gap-x-1 items-center font-normal"
-                        >
-                          <span
-                            aria-label="TPDEX A++, 98 out of 100"
-                            class="inline-flex items-center rounded font-medium px-2 py-0.5 text-xs bg-tpdex-a-plus-plus text-gray-950"
-                            role="img"
-                            title="TPDEX Score: 98/100 (A++)"
-                          >
-                            A++
-                          </span>
-                          <span
-                            class="text-sm"
-                          >
-                            15
-                            ms
-                          </span>
-                          <span
-                            aria-label="Cache HIT - Response served from cache"
-                            class="inline-flex items-center cursor-help relative"
-                            role="img"
-                            title="Cache HIT - Response served from cache"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              class="h-3.5 w-3.5 text-success-600"
-                              data-slot="icon"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="1.5"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                              />
-                            </svg>
-                          </span>
-                        </div>
-                      </div>
-                    </span>
-                    <svg
-                      aria-hidden="true"
-                      class="h-4 w-4 min-w-4 text-gray-600"
-                      data-slot="icon"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="m19.5 8.25-7.5 7.5-7.5-7.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </h2>
-              </div>
-            </div>
-          </div>
-          <div
-            class="px-4 py-5 sm:p-6"
-          >
-            <div
-              class="px-4 py-3 relative"
-              data-headlessui-state="open"
-              data-open=""
-            >
-              <div
-                class="flex w-full items-start"
-              >
-                <h2
-                  class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
-                >
-                  <button
-                    aria-controls="headlessui-disclosure-panel-_r_5_"
-                    aria-expanded="true"
-                    class="flex w-full items-start text-left cursor-pointer"
-                    data-headlessui-state="open"
-                    data-open=""
-                    id="headlessui-disclosure-button-_r_4_"
-                    type="button"
-                  >
-                    <span
-                      class="grow truncate font-semibold"
-                    >
-                      Request
-                    </span>
-                    <svg
-                      aria-hidden="true"
-                      class="h-4 w-4 min-w-4 text-gray-600"
-                      data-slot="icon"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="m4.5 15.75 7.5-7.5 7.5 7.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </h2>
-              </div>
-              <div
-                class="mt-2 space-y-2"
-                data-headlessui-state="open"
-                data-open=""
-                id="headlessui-disclosure-panel-_r_5_"
-              >
-                <div
-                  class="space-y-4"
-                >
-                  <div>
-                    <h3
-                      class="text-sm font-medium text-gray-900 mb-2"
-                    >
-                      Headers
-                    </h3>
-                    <div
-                      class="max-h-64 overflow-auto"
-                    >
-                      <div
-                        class="font-mono text-xs"
-                      >
-                        <div
-                          class="flex"
-                        >
-                          <span
-                            class="text-gray-600 mr-2"
-                          >
-                            Content-Type
-                            :
-                          </span>
-                          <span
-                            class="text-gray-900 break-all"
-                          >
-                            application/json
-                          </span>
-                        </div>
-                        <div
-                          class="flex"
-                        >
-                          <span
-                            class="text-gray-600 mr-2"
-                          >
-                            Authorization
-                            :
-                          </span>
-                          <span
-                            class="text-gray-900 break-all"
-                          >
-                            Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-                          </span>
-                        </div>
-                        <div
-                          class="flex"
-                        >
-                          <span
-                            class="text-gray-600 mr-2"
-                          >
-                            User-Agent
-                            :
-                          </span>
-                          <span
-                            class="text-gray-900 break-all"
-                          >
-                            MyApp/2.5.0 (iOS)
-                          </span>
-                        </div>
-                        <div
-                          class="flex"
-                        >
-                          <span
-                            class="text-gray-600 mr-2"
-                          >
-                            X-Request-ID
-                            :
-                          </span>
-                          <span
-                            class="text-gray-900 break-all"
-                          >
-                            req-tx001
-                          </span>
-                        </div>
-                        <div
-                          class="flex"
-                        >
-                          <span
-                            class="text-gray-600 mr-2"
-                          >
-                            Accept
-                            :
-                          </span>
-                          <span
-                            class="text-gray-900 break-all"
-                          >
-                            application/json
-                          </span>
-                        </div>
-                        <div
-                          class="flex"
-                        >
-                          <span
-                            class="text-gray-600 mr-2"
-                          >
-                            X-Forwarded-For
-                            :
-                          </span>
-                          <span
-                            class="text-gray-900 break-all"
-                          >
-                            192.168.1.100
-                          </span>
-                        </div>
-                      </div>
+                      </span>
                     </div>
                   </div>
-                  <div>
+                </span>
+                <svg
+                  aria-hidden="true"
+                  class="h-4 w-4 min-w-4 text-gray-600"
+                  data-slot="icon"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div
+        class="px-4 py-5 sm:p-6"
+      >
+        <div
+          class="px-4 py-3 relative"
+          data-headlessui-state="open"
+          data-open=""
+        >
+          <div
+            class="flex w-full items-start"
+          >
+            <h5
+              class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+            >
+              <button
+                aria-controls="headlessui-disclosure-panel-_r_3_"
+                aria-expanded="true"
+                class="flex w-full items-start text-left cursor-pointer"
+                data-headlessui-state="open"
+                data-open=""
+                id="headlessui-disclosure-button-_r_2_"
+                type="button"
+              >
+                <span
+                  class="grow truncate font-semibold"
+                >
+                  Request
+                </span>
+                <svg
+                  aria-hidden="true"
+                  class="h-4 w-4 min-w-4 text-gray-600"
+                  data-slot="icon"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </h5>
+          </div>
+          <div
+            class="mt-2 space-y-2"
+            data-headlessui-state="open"
+            data-open=""
+            id="headlessui-disclosure-panel-_r_3_"
+          >
+            <div
+              class="space-y-4"
+            >
+              <div>
+                <h6
+                  class="text-sm font-medium text-gray-900 mb-2"
+                >
+                  Headers
+                </h6>
+                <div
+                  class="max-h-64 overflow-auto"
+                >
+                  <div
+                    class="font-mono text-xs"
+                  >
                     <div
-                      class="flex items-center justify-between mb-2"
+                      class="flex"
                     >
-                      <h3
-                        class="text-sm font-medium text-gray-900"
-                      >
-                        Body
-                      </h3>
                       <span
-                        class="text-xs text-gray-500"
+                        class="text-gray-600 mr-2"
                       >
-                        156
-                         bytes
+                        Content-Type
+                        :
+                      </span>
+                      <span
+                        class="text-gray-900 break-all"
+                      >
+                        application/json
                       </span>
                     </div>
                     <div
-                      class="border border-gray-200 rounded-md overflow-hidden bg-white"
+                      class="flex"
                     >
-                      <div
-                        class="relative"
+                      <span
+                        class="text-gray-600 mr-2"
                       >
-                        <div
-                          aria-label="Code"
-                          class="overflow-auto p-3"
-                          role="group"
-                          style="height: 400px;"
-                          tabindex="0"
-                        >
-                          <div
-                            class="font-mono text-xs leading-5"
-                          >
-                            <span
-                              class="token punctuation"
-                              style="color: rgb(36, 41, 46);"
-                            >
-                              {
-                            </span>
-                            
-  
-                            <span
-                              class="token property"
-                              style="color: rgb(0, 92, 197);"
-                            >
-                              "request"
-                            </span>
-                            <span
-                              class="token operator"
-                              style="color: rgb(215, 58, 73);"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              class="token string"
-                              style="color: rgb(3, 47, 98);"
-                            >
-                              "sample request body"
-                            </span>
-                            <span
-                              class="token punctuation"
-                              style="color: rgb(36, 41, 46);"
-                            >
-                              ,
-                            </span>
-                            
-  
-                            <span
-                              class="token property"
-                              style="color: rgb(0, 92, 197);"
-                            >
-                              "transactionId"
-                            </span>
-                            <span
-                              class="token operator"
-                              style="color: rgb(215, 58, 73);"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              class="token string"
-                              style="color: rgb(3, 47, 98);"
-                            >
-                              "tx001"
-                            </span>
-                            
-
-                            <span
-                              class="token punctuation"
-                              style="color: rgb(36, 41, 46);"
-                            >
-                              }
-                            </span>
-                          </div>
-                        </div>
-                      </div>
+                        Authorization
+                        :
+                      </span>
+                      <span
+                        class="text-gray-900 break-all"
+                      >
+                        Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                      </span>
+                    </div>
+                    <div
+                      class="flex"
+                    >
+                      <span
+                        class="text-gray-600 mr-2"
+                      >
+                        User-Agent
+                        :
+                      </span>
+                      <span
+                        class="text-gray-900 break-all"
+                      >
+                        MyApp/2.5.0 (iOS)
+                      </span>
+                    </div>
+                    <div
+                      class="flex"
+                    >
+                      <span
+                        class="text-gray-600 mr-2"
+                      >
+                        X-Request-ID
+                        :
+                      </span>
+                      <span
+                        class="text-gray-900 break-all"
+                      >
+                        req-tx001
+                      </span>
+                    </div>
+                    <div
+                      class="flex"
+                    >
+                      <span
+                        class="text-gray-600 mr-2"
+                      >
+                        Accept
+                        :
+                      </span>
+                      <span
+                        class="text-gray-900 break-all"
+                      >
+                        application/json
+                      </span>
+                    </div>
+                    <div
+                      class="flex"
+                    >
+                      <span
+                        class="text-gray-600 mr-2"
+                      >
+                        X-Forwarded-For
+                        :
+                      </span>
+                      <span
+                        class="text-gray-900 break-all"
+                      >
+                        192.168.1.100
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div
-            class="px-4 py-5 sm:p-6"
-          >
-            <div
-              class="px-4 py-3 relative"
-              data-headlessui-state="open"
-              data-open=""
-            >
-              <div
-                class="flex w-full items-start"
-              >
-                <h2
-                  class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
-                >
-                  <button
-                    aria-controls="headlessui-disclosure-panel-_r_7_"
-                    aria-expanded="true"
-                    class="flex w-full items-start text-left cursor-pointer"
-                    data-headlessui-state="open"
-                    data-open=""
-                    id="headlessui-disclosure-button-_r_6_"
-                    type="button"
-                  >
-                    <span
-                      class="grow truncate font-semibold"
-                    >
-                      Response
-                    </span>
-                    <svg
-                      aria-hidden="true"
-                      class="h-4 w-4 min-w-4 text-gray-600"
-                      data-slot="icon"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="m4.5 15.75 7.5-7.5 7.5 7.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </h2>
-              </div>
-              <div
-                class="mt-2 space-y-2"
-                data-headlessui-state="open"
-                data-open=""
-                id="headlessui-disclosure-panel-_r_7_"
-              >
+              <div>
                 <div
-                  class="space-y-4"
+                  class="flex items-center justify-between mb-2"
                 >
-                  <div>
-                    <h3
-                      class="text-sm font-medium text-gray-900 mb-2"
-                    >
-                      Headers
-                    </h3>
+                  <h6
+                    class="text-sm font-medium text-gray-900"
+                  >
+                    Body
+                  </h6>
+                  <span
+                    class="text-xs text-gray-500"
+                  >
+                    156
+                     bytes
+                  </span>
+                </div>
+                <div
+                  class="border border-gray-200 rounded-md overflow-hidden bg-white"
+                >
+                  <div
+                    class="relative"
+                  >
                     <div
-                      class="max-h-64 overflow-auto"
+                      aria-label="Code"
+                      class="overflow-auto p-3"
+                      role="group"
+                      style="height: 400px;"
+                      tabindex="0"
                     >
                       <div
-                        class="font-mono text-xs"
+                        class="font-mono text-xs leading-5"
                       >
-                        <div
-                          class="flex"
+                        <span
+                          class="token punctuation"
+                          style="color: rgb(36, 41, 46);"
                         >
-                          <span
-                            class="text-gray-600 mr-2"
-                          >
-                            Content-Type
-                            :
-                          </span>
-                          <span
-                            class="text-gray-900 break-all"
-                          >
-                            application/json
-                          </span>
-                        </div>
-                        <div
-                          class="flex"
-                        >
-                          <span
-                            class="text-gray-600 mr-2"
-                          >
-                            Server
-                            :
-                          </span>
-                          <span
-                            class="text-gray-900 break-all"
-                          >
-                            nginx/1.20.1
-                          </span>
-                        </div>
-                        <div
-                          class="flex"
-                        >
-                          <span
-                            class="text-gray-600 mr-2"
-                          >
-                            X-Response-Time
-                            :
-                          </span>
-                          <span
-                            class="text-gray-900 break-all"
-                          >
-                            15ms
-                          </span>
-                        </div>
-                        <div
-                          class="flex"
-                        >
-                          <span
-                            class="text-gray-600 mr-2"
-                          >
-                            Cache-Control
-                            :
-                          </span>
-                          <span
-                            class="text-gray-900 break-all"
-                          >
-                            no-cache
-                          </span>
-                        </div>
-                        <div
-                          class="flex"
-                        >
-                          <span
-                            class="text-gray-600 mr-2"
-                          >
-                            Date
-                            :
-                          </span>
-                          <span
-                            class="text-gray-900 break-all"
-                          >
-                            Tue, 20 May 2025 10:30:00 GMT
-                          </span>
-                        </div>
-                        <div
-                          class="flex"
-                        >
-                          <span
-                            class="text-gray-600 mr-2"
-                          >
-                            X-Request-ID
-                            :
-                          </span>
-                          <span
-                            class="text-gray-900 break-all"
-                          >
-                            req-tx001
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div
-                      class="flex items-center justify-between mb-2"
-                    >
-                      <h3
-                        class="text-sm font-medium text-gray-900"
-                      >
-                        Body
-                      </h3>
-                      <span
-                        class="text-xs text-gray-500"
-                      >
-                        245
-                         bytes
-                      </span>
-                    </div>
-                    <div
-                      class="border border-gray-200 rounded-md overflow-hidden bg-white"
-                    >
-                      <div
-                        class="relative"
-                      >
-                        <div
-                          aria-label="Code"
-                          class="overflow-auto p-3"
-                          role="group"
-                          style="height: 400px;"
-                          tabindex="0"
-                        >
-                          <div
-                            class="font-mono text-xs leading-5"
-                          >
-                            <span
-                              class="token punctuation"
-                              style="color: rgb(36, 41, 46);"
-                            >
-                              {
-                            </span>
-                            
+                          {
+                        </span>
+                        
   
-                            <span
-                              class="token property"
-                              style="color: rgb(0, 92, 197);"
-                            >
-                              "id"
-                            </span>
-                            <span
-                              class="token operator"
-                              style="color: rgb(215, 58, 73);"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              class="token string"
-                              style="color: rgb(3, 47, 98);"
-                            >
-                              "tx001"
-                            </span>
-                            <span
-                              class="token punctuation"
-                              style="color: rgb(36, 41, 46);"
-                            >
-                              ,
-                            </span>
-                            
+                        <span
+                          class="token property"
+                          style="color: rgb(0, 92, 197);"
+                        >
+                          "request"
+                        </span>
+                        <span
+                          class="token operator"
+                          style="color: rgb(215, 58, 73);"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          class="token string"
+                          style="color: rgb(3, 47, 98);"
+                        >
+                          "sample request body"
+                        </span>
+                        <span
+                          class="token punctuation"
+                          style="color: rgb(36, 41, 46);"
+                        >
+                          ,
+                        </span>
+                        
   
-                            <span
-                              class="token property"
-                              style="color: rgb(0, 92, 197);"
-                            >
-                              "status"
-                            </span>
-                            <span
-                              class="token operator"
-                              style="color: rgb(215, 58, 73);"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              class="token string"
-                              style="color: rgb(3, 47, 98);"
-                            >
-                              "Successful"
-                            </span>
-                            <span
-                              class="token punctuation"
-                              style="color: rgb(36, 41, 46);"
-                            >
-                              ,
-                            </span>
-                            
-  
-                            <span
-                              class="token property"
-                              style="color: rgb(0, 92, 197);"
-                            >
-                              "method"
-                            </span>
-                            <span
-                              class="token operator"
-                              style="color: rgb(215, 58, 73);"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              class="token string"
-                              style="color: rgb(3, 47, 98);"
-                            >
-                              "GET"
-                            </span>
-                            <span
-                              class="token punctuation"
-                              style="color: rgb(36, 41, 46);"
-                            >
-                              ,
-                            </span>
-                            
-  
-                            <span
-                              class="token property"
-                              style="color: rgb(0, 92, 197);"
-                            >
-                              "url"
-                            </span>
-                            <span
-                              class="token operator"
-                              style="color: rgb(215, 58, 73);"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              class="token string"
-                              style="color: rgb(3, 47, 98);"
-                            >
-                              "/api/users/123/profile"
-                            </span>
-                            <span
-                              class="token punctuation"
-                              style="color: rgb(36, 41, 46);"
-                            >
-                              ,
-                            </span>
-                            
-  
-                            <span
-                              class="token property"
-                              style="color: rgb(0, 92, 197);"
-                            >
-                              "timestamp"
-                            </span>
-                            <span
-                              class="token operator"
-                              style="color: rgb(215, 58, 73);"
-                            >
-                              :
-                            </span>
-                             
-                            <span
-                              class="token string"
-                              style="color: rgb(3, 47, 98);"
-                            >
-                              "2025-05-20T10:30:00"
-                            </span>
-                            
+                        <span
+                          class="token property"
+                          style="color: rgb(0, 92, 197);"
+                        >
+                          "transactionId"
+                        </span>
+                        <span
+                          class="token operator"
+                          style="color: rgb(215, 58, 73);"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          class="token string"
+                          style="color: rgb(3, 47, 98);"
+                        >
+                          "tx001"
+                        </span>
+                        
 
-                            <span
-                              class="token punctuation"
-                              style="color: rgb(36, 41, 46);"
-                            >
-                              }
-                            </span>
-                          </div>
-                        </div>
+                        <span
+                          class="token punctuation"
+                          style="color: rgb(36, 41, 46);"
+                        >
+                          }
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -915,7 +415,352 @@ exports[`TransactionsDetailPage > renders the transaction details correctly 1`] 
           </div>
         </div>
       </div>
-    </main>
+      <div
+        class="px-4 py-5 sm:p-6"
+      >
+        <div
+          class="px-4 py-3 relative"
+          data-headlessui-state="open"
+          data-open=""
+        >
+          <div
+            class="flex w-full items-start"
+          >
+            <h5
+              class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
+            >
+              <button
+                aria-controls="headlessui-disclosure-panel-_r_5_"
+                aria-expanded="true"
+                class="flex w-full items-start text-left cursor-pointer"
+                data-headlessui-state="open"
+                data-open=""
+                id="headlessui-disclosure-button-_r_4_"
+                type="button"
+              >
+                <span
+                  class="grow truncate font-semibold"
+                >
+                  Response
+                </span>
+                <svg
+                  aria-hidden="true"
+                  class="h-4 w-4 min-w-4 text-gray-600"
+                  data-slot="icon"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </h5>
+          </div>
+          <div
+            class="mt-2 space-y-2"
+            data-headlessui-state="open"
+            data-open=""
+            id="headlessui-disclosure-panel-_r_5_"
+          >
+            <div
+              class="space-y-4"
+            >
+              <div>
+                <h6
+                  class="text-sm font-medium text-gray-900 mb-2"
+                >
+                  Headers
+                </h6>
+                <div
+                  class="max-h-64 overflow-auto"
+                >
+                  <div
+                    class="font-mono text-xs"
+                  >
+                    <div
+                      class="flex"
+                    >
+                      <span
+                        class="text-gray-600 mr-2"
+                      >
+                        Content-Type
+                        :
+                      </span>
+                      <span
+                        class="text-gray-900 break-all"
+                      >
+                        application/json
+                      </span>
+                    </div>
+                    <div
+                      class="flex"
+                    >
+                      <span
+                        class="text-gray-600 mr-2"
+                      >
+                        Server
+                        :
+                      </span>
+                      <span
+                        class="text-gray-900 break-all"
+                      >
+                        nginx/1.20.1
+                      </span>
+                    </div>
+                    <div
+                      class="flex"
+                    >
+                      <span
+                        class="text-gray-600 mr-2"
+                      >
+                        X-Response-Time
+                        :
+                      </span>
+                      <span
+                        class="text-gray-900 break-all"
+                      >
+                        15ms
+                      </span>
+                    </div>
+                    <div
+                      class="flex"
+                    >
+                      <span
+                        class="text-gray-600 mr-2"
+                      >
+                        Cache-Control
+                        :
+                      </span>
+                      <span
+                        class="text-gray-900 break-all"
+                      >
+                        no-cache
+                      </span>
+                    </div>
+                    <div
+                      class="flex"
+                    >
+                      <span
+                        class="text-gray-600 mr-2"
+                      >
+                        Date
+                        :
+                      </span>
+                      <span
+                        class="text-gray-900 break-all"
+                      >
+                        Tue, 20 May 2025 10:30:00 GMT
+                      </span>
+                    </div>
+                    <div
+                      class="flex"
+                    >
+                      <span
+                        class="text-gray-600 mr-2"
+                      >
+                        X-Request-ID
+                        :
+                      </span>
+                      <span
+                        class="text-gray-900 break-all"
+                      >
+                        req-tx001
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div
+                  class="flex items-center justify-between mb-2"
+                >
+                  <h6
+                    class="text-sm font-medium text-gray-900"
+                  >
+                    Body
+                  </h6>
+                  <span
+                    class="text-xs text-gray-500"
+                  >
+                    245
+                     bytes
+                  </span>
+                </div>
+                <div
+                  class="border border-gray-200 rounded-md overflow-hidden bg-white"
+                >
+                  <div
+                    class="relative"
+                  >
+                    <div
+                      aria-label="Code"
+                      class="overflow-auto p-3"
+                      role="group"
+                      style="height: 400px;"
+                      tabindex="0"
+                    >
+                      <div
+                        class="font-mono text-xs leading-5"
+                      >
+                        <span
+                          class="token punctuation"
+                          style="color: rgb(36, 41, 46);"
+                        >
+                          {
+                        </span>
+                        
+  
+                        <span
+                          class="token property"
+                          style="color: rgb(0, 92, 197);"
+                        >
+                          "id"
+                        </span>
+                        <span
+                          class="token operator"
+                          style="color: rgb(215, 58, 73);"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          class="token string"
+                          style="color: rgb(3, 47, 98);"
+                        >
+                          "tx001"
+                        </span>
+                        <span
+                          class="token punctuation"
+                          style="color: rgb(36, 41, 46);"
+                        >
+                          ,
+                        </span>
+                        
+  
+                        <span
+                          class="token property"
+                          style="color: rgb(0, 92, 197);"
+                        >
+                          "status"
+                        </span>
+                        <span
+                          class="token operator"
+                          style="color: rgb(215, 58, 73);"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          class="token string"
+                          style="color: rgb(3, 47, 98);"
+                        >
+                          "Successful"
+                        </span>
+                        <span
+                          class="token punctuation"
+                          style="color: rgb(36, 41, 46);"
+                        >
+                          ,
+                        </span>
+                        
+  
+                        <span
+                          class="token property"
+                          style="color: rgb(0, 92, 197);"
+                        >
+                          "method"
+                        </span>
+                        <span
+                          class="token operator"
+                          style="color: rgb(215, 58, 73);"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          class="token string"
+                          style="color: rgb(3, 47, 98);"
+                        >
+                          "GET"
+                        </span>
+                        <span
+                          class="token punctuation"
+                          style="color: rgb(36, 41, 46);"
+                        >
+                          ,
+                        </span>
+                        
+  
+                        <span
+                          class="token property"
+                          style="color: rgb(0, 92, 197);"
+                        >
+                          "url"
+                        </span>
+                        <span
+                          class="token operator"
+                          style="color: rgb(215, 58, 73);"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          class="token string"
+                          style="color: rgb(3, 47, 98);"
+                        >
+                          "/api/users/123/profile"
+                        </span>
+                        <span
+                          class="token punctuation"
+                          style="color: rgb(36, 41, 46);"
+                        >
+                          ,
+                        </span>
+                        
+  
+                        <span
+                          class="token property"
+                          style="color: rgb(0, 92, 197);"
+                        >
+                          "timestamp"
+                        </span>
+                        <span
+                          class="token operator"
+                          style="color: rgb(215, 58, 73);"
+                        >
+                          :
+                        </span>
+                         
+                        <span
+                          class="token string"
+                          style="color: rgb(3, 47, 98);"
+                        >
+                          "2025-05-20T10:30:00"
+                        </span>
+                        
+
+                        <span
+                          class="token punctuation"
+                          style="color: rgb(36, 41, 46);"
+                        >
+                          }
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div
     aria-live="polite"

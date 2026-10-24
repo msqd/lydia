@@ -1,8 +1,7 @@
 export {
   NavBar,
-  DefaultLogo,
-  ApilabLogotype,
   DefaultBrand,
+  type LinkComponentType,
   type NavBarProps,
   type User,
   type NavigationItem,

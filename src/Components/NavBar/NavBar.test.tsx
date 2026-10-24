@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
-import { ApilabLogotype, NavBar } from "./NavBar";
+import { type LinkComponentType, NavBar } from "./NavBar";
 
 // Mock ResizeObserver which is not available in the jsdom test environment
 class ResizeObserverMock {
@@ -14,14 +14,13 @@ describe("NavBar", () => {
   beforeEach(() => {
     window.ResizeObserver = ResizeObserverMock;
   });
-  it("renders the logo and default brand name", () => {
+  it("draws only the lydia brand when given nothing", () => {
     render(<NavBar />);
 
-    const logo = screen.getByAltText("APILab");
-    expect(logo).toBeInTheDocument();
-
-    const brandName = screen.getByText("apilab");
-    expect(brandName).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "lydia" })).toHaveAttribute("href", "/");
+    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+    expect(screen.getByTestId("navbar").querySelectorAll("a")).toHaveLength(1);
+    expect(screen.queryByRole("button")).not.toBeInTheDocument();
   });
 
   it("renders custom brand as string", () => {
@@ -31,20 +30,13 @@ describe("NavBar", () => {
     expect(brandName).toBeInTheDocument();
   });
 
-  it("renders custom logo alt text", () => {
-    render(<NavBar logo="Custom Alt" />);
-
-    const logo = screen.getByAltText("Custom Alt");
-    expect(logo).toBeInTheDocument();
-  });
-
   it("renders custom brand component", () => {
     const CustomBrand = () => <div data-testid="custom-brand">Custom Brand Component</div>;
     render(<NavBar brand={<CustomBrand />} />);
 
     const customBrand = screen.getByTestId("custom-brand");
     expect(customBrand).toBeInTheDocument();
-    expect(screen.queryByText("Lydia")).not.toBeInTheDocument();
+    expect(screen.queryByText("lydia")).not.toBeInTheDocument();
   });
 
   it("renders navigation items", () => {
@@ -78,7 +70,6 @@ describe("NavBar", () => {
 
     const customLogo = screen.getByTestId("custom-logo");
     expect(customLogo).toBeInTheDocument();
-    expect(screen.queryByAltText("APILab")).not.toBeInTheDocument();
   });
 
   it("renders user avatar and settings button when signed in", () => {
@@ -133,7 +124,7 @@ describe("NavBar", () => {
   });
 
   it("keeps the bar usable when signed out", () => {
-    render(<NavBar onSettings={vi.fn()} />);
+    render(<NavBar navigation={[{ name: "Overview", href: "/" }]} onSettings={vi.fn()} />);
 
     // The bar is a navbar with its navigation and settings, not a truncated one. Being signed
     // out costs it an identity and nothing else -- the settings are the consumer's, not the
@@ -144,21 +135,83 @@ describe("NavBar", () => {
   });
 
   it("offers no user menu entries when signed out", () => {
-    render(<NavBar />);
+    render(
+      <NavBar
+        navigation={[{ name: "Overview", href: "/" }]}
+        userNavigation={[{ name: "Sign out", href: "/logout" }]}
+      />,
+    );
     openMobileMenu();
 
     // The navigation itself is still there, so this is not asserting an empty panel.
     expect(screen.getAllByText("Overview").length).toBeGreaterThan(0);
     expect(screen.queryByText("Sign out")).not.toBeInTheDocument();
-    expect(screen.queryByText("Your Profile")).not.toBeInTheDocument();
   });
 
-  it("shows user menu entries when signed in", () => {
+  it("invents no user menu entries for a signed-in user", () => {
     render(<NavBar user={{ name: "Ada Lovelace", email: "ada@example.com" }} />);
     openMobileMenu();
 
-    expect(screen.getByText("Sign out")).toBeInTheDocument();
-    expect(screen.getByText("Your Profile")).toBeInTheDocument();
+    expect(screen.queryByText("Sign out")).not.toBeInTheDocument();
+    expect(screen.queryByText("Your Profile")).not.toBeInTheDocument();
+  });
+
+  describe("items", () => {
+    const user = { name: "Ada Lovelace", email: "ada@example.com" };
+    const RoutedLink: LinkComponentType = ({ href, ...props }) => <a data-routed="" href={href} {...props} />;
+
+    it("routes a user item through linkComponent and runs its onClick, in the desktop menu", () => {
+      const onClick = vi.fn((event: React.MouseEvent) => event.preventDefault());
+      render(
+        <NavBar
+          user={user}
+          userNavigation={[{ name: "Sign out", href: "/logout", onClick }]}
+          linkComponent={RoutedLink}
+        />,
+      );
+
+      fireEvent.click(screen.getByRole("button", { name: "Open user menu" }));
+      const item = screen.getByRole("menuitem", { name: "Sign out" });
+      expect(item).toHaveAttribute("data-routed");
+      fireEvent.click(item);
+
+      expect(onClick).toHaveBeenCalledOnce();
+    });
+
+    it("routes a user item through linkComponent and runs its onClick, in the mobile menu", () => {
+      const onClick = vi.fn((event: React.MouseEvent) => event.preventDefault());
+      render(
+        <NavBar
+          user={user}
+          userNavigation={[{ name: "Sign out", href: "/logout", onClick }]}
+          linkComponent={RoutedLink}
+        />,
+      );
+
+      openMobileMenu();
+      const item = screen.getByRole("link", { name: "Sign out" });
+      expect(item).toHaveAttribute("data-routed");
+      expect(item).toHaveAttribute("href", "/logout");
+      fireEvent.click(item);
+
+      expect(onClick).toHaveBeenCalledOnce();
+    });
+
+    it("routes navigation items through linkComponent and runs their onClick, desktop and mobile", () => {
+      const onClick = vi.fn((event: React.MouseEvent) => event.preventDefault());
+      render(<NavBar navigation={[{ name: "Overview", href: "/", onClick }]} linkComponent={RoutedLink} />);
+
+      const [desktop] = screen.getAllByRole("link", { name: "Overview" });
+      expect(desktop).toHaveAttribute("data-routed");
+      fireEvent.click(desktop);
+      expect(onClick).toHaveBeenCalledTimes(1);
+
+      openMobileMenu();
+      const mobile = screen.getAllByRole("link", { name: "Overview" })[1];
+      expect(mobile).toHaveAttribute("data-routed");
+      fireEvent.click(mobile);
+      expect(onClick).toHaveBeenCalledTimes(2);
+    });
   });
 });
 
@@ -209,27 +262,21 @@ describe("NavBar with nothing in its menu", () => {
 
   /**
    * The home link is named by the brand it shows, not by a label nobody sees:
-   * "Go to homepage" over a visible "apilab" left a speech user with no words
+   * "Go to homepage" over a visible brand left a speech user with no words
    * to reach it by (WCAG 2.5.3, axe `label-content-name-mismatch`).
    */
   it("names the home link by the brand it shows", () => {
-    render(<NavBar brand="jaco" />);
+    render(<NavBar brand="Acme" />);
 
-    expect(screen.getByRole("link", { name: /jaco/ })).toHaveAttribute("href", "/");
+    expect(screen.getByRole("link", { name: /Acme/ })).toHaveAttribute("href", "/");
   });
 
   /**
-   * The logo mark beside the brand says the brand again: "APILab apilab" read
-   * twice, and with the logotype brand "APILab APILab" (axe
-   * `image-redundant-alt`). The brand names the link; the mark is decoration.
+   * The logo mark beside the brand says the brand again when it carries an alt
+   * (axe `image-redundant-alt`). The brand names the link; the mark is decoration.
    */
   it("names the home link once, by its brand", () => {
-    render(<NavBar brand="jaco" />);
-    expect(screen.getByRole("link", { name: "jaco" })).toBeInTheDocument();
-  });
-
-  it("names it by a logotype brand once too", () => {
-    render(<NavBar brand={<ApilabLogotype />} />);
-    expect(screen.getByRole("link", { name: "APILab" })).toBeInTheDocument();
+    render(<NavBar brand="Acme" logo={<img src="logo.svg" alt="Acme" />} />);
+    expect(screen.getByRole("link", { name: "Acme" })).toBeInTheDocument();
   });
 });

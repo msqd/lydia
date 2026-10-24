@@ -116,9 +116,7 @@ export function ExplorerPage({ transactions, className }: ExplorerPageProps) {
 
       {/* Transaction Detail Drawer */}
       <Drawer isOpen={isDrawerOpen} onClose={handleCloseDrawer} title="Transaction Details">
-        {selectedTransaction && (
-          <TransactionsDetailPage transaction={selectedTransaction} onBack={handleCloseDrawer} isDrawer />
-        )}
+        {selectedTransaction && <TransactionsDetailPage transaction={selectedTransaction} />}
       </Drawer>
     </div>
   );
