@@ -1,6 +1,6 @@
 import { renderToString } from "react-dom/server";
-import { App } from "./App";
-import { charts } from "./charts";
+import { App } from "./App.js";
+import { charts } from "./charts.js";
 
 export const html = renderToString(<App />);
 export const chartHtml = Object.fromEntries(

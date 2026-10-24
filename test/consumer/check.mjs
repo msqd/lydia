@@ -5,7 +5,8 @@
  * land in the CSS, the install holds a single React, every JS export imports under plain Node ESM
  * (the build tree's own node_modules is not reachable from the temporary directory), and the root
  * entry and every chart render under vitest + jsdom and under Node ESM (SSR), and the README examples
- * compile against the declarations with `skipLibCheck` off.
+ * compile against the declarations with `skipLibCheck` off, under `bundler` and `nodenext` resolution.
+ * The declarations import each other by relative `.js` specifiers that resolve inside dist.
  *
  * Needs a built dist/. Run from the repository root: node test/consumer/check.mjs
  */
@@ -13,7 +14,7 @@
 import { execFileSync } from "node:child_process";
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import assert from "node:assert/strict";
 
@@ -78,9 +79,23 @@ try {
     app,
   );
 
+  const dist = join(installed, "dist");
+  const unresolved = readdirSync(dist, { recursive: true })
+    .filter((file) => file.endsWith(".d.ts"))
+    .flatMap((file) => {
+      const source = readFileSync(join(dist, file), "utf-8");
+      return [...source.matchAll(/(?:\bfrom\s*|\bimport\s*\(?\s*)(["'])([^"']+)\1/g)]
+        .map(([, , specifier]) => specifier)
+        .filter((specifier) => /^(?:@msqd\/lydia|@\/|\.)/.test(specifier))
+        .filter((specifier) => !/^\.\.?\/.*\.js$/.test(specifier) || !existsSync(resolve(dist, dirname(file), specifier.replace(/\.js$/, ".d.ts"))))
+        .map((specifier) => `${file}: ${specifier}`);
+    });
+  assert.deepEqual(unresolved, [], "declarations import each other by relative .js specifiers that exist in dist");
+
   writeReadmeExamples(join(app, "src", "readme"));
   run("pnpm", ["exec", "vitest", "run"], app);
   run("pnpm", ["exec", "tsc"], app);
+  run("pnpm", ["exec", "tsc", "-p", "tsconfig.nodenext.json"], app);
   run("pnpm", ["exec", "vite", "build"], app);
   run("pnpm", ["exec", "vite", "build", "--ssr", "src/ssr.tsx", "--outDir", "dist-ssr"], app);
 
