@@ -1,10 +1,8 @@
 {
   "dependencies": {
     "@bramus/pagination-sequence": "^1.2.1",
-    "@headlessui/react": "^2.2.4",
     "@heroicons/react": "^2.2.0",
     "date-fns": "^4.1.0",
-    "echarts": "^6.1.0",
     "echarts-for-react": "^3.0.2",
     "http-status-codes": "^2.3.0",
     "refractor": "^5.0.0",
@@ -12,6 +10,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@headlessui/react": "^2.2.4",
     "@playwright/test": "^1.52.0",
     "@storybook/addon-a11y": "^10.6.3",
     "@storybook/addon-docs": "^10.6.3",
@@ -29,6 +28,7 @@
     "@vitejs/plugin-react": "^5.2.0",
     "@vitest/browser": "^4.1.12",
     "@vitest/browser-playwright": "^4.1.12",
+    "echarts": "^6.1.0",
     "jsdom": "^26.1.0",
     "playwright": "^1.52.0",
     "remark-gfm": "^4.0.1",
@@ -537,6 +537,10 @@
       "types": "./dist/Elements/Transactions/index.d.ts",
       "import": "./dist/Elements/Transactions/index.js"
     },
+    "./Elements/Transactions/TransactionFiltersCard": {
+      "types": "./dist/Elements/Transactions/TransactionFiltersCard.d.ts",
+      "import": "./dist/Elements/Transactions/TransactionFiltersCard.js"
+    },
     "./Elements/Transactions/TransactionsExplorerSidebar": {
       "types": "./dist/Elements/Transactions/TransactionsExplorerSidebar.d.ts",
       "import": "./dist/Elements/Transactions/TransactionsExplorerSidebar.js"
@@ -730,10 +734,6 @@
       "types": "./dist/Pages/Transactions/List/useClientSideTransactions.d.ts",
       "import": "./dist/Pages/Transactions/List/useClientSideTransactions.js"
     },
-    "./Pages/Transactions/TransactionFiltersCard": {
-      "types": "./dist/Pages/Transactions/TransactionFiltersCard.d.ts",
-      "import": "./dist/Pages/Transactions/TransactionFiltersCard.js"
-    },
     "./theme.css": "./dist/css/theme.css"
   },
   "files": [
@@ -744,6 +744,8 @@
   "license": "MPL-2.0",
   "name": "@msqd/lydia",
   "peerDependencies": {
+    "@headlessui/react": "^2.2.4",
+    "echarts": "^6.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

@@ -1,9 +1,9 @@
 import { FacetResetLink } from "@msqd/lydia/Components/Facets";
 import { HeadingLevel } from "@msqd/lydia/Components/Typography/HeadingLevel";
 import { type FilterChangeHandler, type Filters, countActiveFilters } from "@msqd/lydia/Models/Filters";
-import { TransactionFiltersCard } from "@msqd/lydia/Pages/Transactions/TransactionFiltersCard";
 import { type ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
+import { TransactionFiltersCard } from "./TransactionFiltersCard";
 
 export interface TransactionsFiltersSidebarProps
   extends Omit<ComponentProps<typeof TransactionFiltersCard>, "filters" | "onFiltersChange" | "onResetFilters"> {

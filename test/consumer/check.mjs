@@ -2,7 +2,7 @@
 /**
  * Installs the packed tarball into a fresh Vite + React 19 + Tailwind 4 app and checks what a
  * consumer gets: the declarations type-check, a lydia component renders, its classes and theme
- * land in the CSS, the install holds a single React, every JS export imports under plain Node ESM
+ * land in the CSS, the install holds a single React, Headless UI and ECharts, every JS export imports under plain Node ESM
  * (the build tree's own node_modules is not reachable from the temporary directory), and the root
  * entry and every chart render under vitest + jsdom and under Node ESM (SSR), and the README examples
  * compile against the declarations with `skipLibCheck` off, under `bundler` and `nodenext` resolution.
@@ -117,8 +117,11 @@ try {
   assert.match(css, /\.range-slider-input/, "lydia's component styles are included");
   assert.equal(css.match(/tailwindcss v\d/g)?.length, 1, "one Tailwind in the output");
 
-  const reactCopies = readdirSync(join(app, "node_modules", ".pnpm")).filter((dir) => /^react@/.test(dir));
-  assert.equal(reactCopies.length, 1, `one React copy, found ${reactCopies}`);
+  const stored = readdirSync(join(app, "node_modules", ".pnpm"));
+  for (const [name, pattern] of [["React", /^react@/], ["Headless UI", /^@headlessui\+react@/], ["ECharts", /^echarts@/]]) {
+    const copies = stored.filter((dir) => pattern.test(dir));
+    assert.equal(copies.length, 1, `one ${name} copy, found ${copies}`);
+  }
 
   const precompiled = join(app, "node_modules", "@msqd", "lydia", "dist", "styles", "styles.css");
   assert.ok(existsSync(precompiled), "the precompiled stylesheet is packed");

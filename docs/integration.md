@@ -9,6 +9,8 @@ to bottom and you get a styled component on screen. The decisions behind it are 
 | Need | Version | Notes |
 | --- | --- | --- |
 | `react`, `react-dom` | `^19.1.0` | Peer dependencies. React 18 is not supported: upgrade first. |
+| `@headlessui/react` | `^2.2.4` | Peer dependency. One copy shared with your own dialogs, so focus and portals agree. |
+| `echarts` | `^6.1.0` | Peer dependency. One copy, not a second ~100 KB gzipped. |
 | Node, `pnpm` | current LTS | Lydia is documented with `pnpm`. |
 | Tailwind CSS | `^4.1` | Only for option A. Tailwind 3 is not supported. The precompiled path needs no Tailwind. |
 | TypeScript | `moduleResolution: "bundler"` or `"nodenext"` | The `.d.ts` files import each other by relative `.js` specifiers, so both resolve them. |
@@ -17,13 +19,13 @@ to bottom and you get a styled component on screen. The decisions behind it are 
 ## 1. Install
 
 ```bash
-pnpm add @msqd/lydia
+pnpm add @msqd/lydia @headlessui/react echarts
 ```
 
 A new `react-ts` Vite app already ships React: check that `react` and `react-dom` are `^19.1.0` or newer in
 your `package.json`, and upgrade them if not (`pnpm add react@^19.1.0 react-dom@^19.1.0`).
 
-Everything else Lydia needs at runtime (`tailwind-merge`, ECharts, Headless UI, ...) comes with the package.
+Everything else Lydia needs at runtime (`tailwind-merge`, ...) comes with the package.
 
 ## 2. Load the styles
 
@@ -46,7 +48,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  resolve: { dedupe: ["react", "react-dom"] },
+  resolve: { dedupe: ["react", "react-dom", "@headlessui/react", "echarts", "zrender"] },
 });
 ```
 
@@ -207,19 +209,21 @@ Then reload or rebuild the application. A full
 `pnpm build` wipes and regenerates `dist`; a running dev server picks the change up on the next request or
 after a restart.
 
-### One React
+### One copy of each UI runtime
 
 The clone has its own `node_modules/react`, and a linked package does not resolve its peers from your
 `node_modules` (pnpm warns about it on `pnpm link`: that warning is expected, and is exactly why dedupe is
 needed). Lydia's code must use the application's React, never its own: two copies make hooks fail.
 
-`resolve.dedupe: ["react", "react-dom"]` is **required whenever Lydia is linked**, in every Vite-based
+`@headlessui/react` and `echarts` are peers for the same reason: a second copy splits focus-trap and portal state, or ships ECharts twice.
+
+`resolve.dedupe: ["react", "react-dom", "@headlessui/react", "echarts", "zrender"]` is **required whenever Lydia is linked**, in every Vite-based
 config the application runs: Vite, vitest and Storybook. Do not count on `@vitejs/plugin-react` to set it:
 recent versions do not, and a linked clone then fails with `Invalid hook call`.
 
 ```ts
 // vite.config.ts
-resolve: { dedupe: ["react", "react-dom"] },
+resolve: { dedupe: ["react", "react-dom", "@headlessui/react", "echarts", "zrender"] },
 ```
 
 #### Vitest
@@ -235,7 +239,7 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   plugins: [react()],
-  resolve: { dedupe: ["react", "react-dom"] },
+  resolve: { dedupe: ["react", "react-dom", "@headlessui/react", "echarts", "zrender"] },
   test: { environment: "jsdom" },
 });
 ```
@@ -264,7 +268,7 @@ import { mergeConfig } from "vite";
 const config: StorybookConfig = {
   // ...
   viteFinal: (viteConfig) =>
-    mergeConfig(viteConfig, { resolve: { dedupe: ["react", "react-dom"] } }),
+    mergeConfig(viteConfig, { resolve: { dedupe: ["react", "react-dom", "@headlessui/react", "echarts", "zrender"] } }),
 };
 ```
 

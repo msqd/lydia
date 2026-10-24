@@ -23,10 +23,10 @@ Explore our [Storybook](https://msqd.github.io/lydia/) to see all available comp
 pnpm add @msqd/lydia
 ```
 
-Lydia declares `react` and `react-dom` as peer dependencies, so your project supplies them:
+Lydia declares `react`, `react-dom`, `@headlessui/react` and `echarts` as peer dependencies, so your project supplies them:
 
 ```bash
-pnpm add react@^19.1.0 react-dom@^19.1.0
+pnpm add react@^19.1.0 react-dom@^19.1.0 @headlessui/react echarts
 ```
 
 Everything else Lydia needs at runtime, including `tailwind-merge`, comes with the package. You do
