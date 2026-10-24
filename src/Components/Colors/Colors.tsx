@@ -1,73 +1,46 @@
 import type { ComponentProps, FunctionComponent } from "react";
 import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { useSuccessToast } from "../Toast";
+import { toEchartsColor } from "../Charts/Utils/ThemeColor";
 
-export interface ColorItemProps extends ComponentProps<"td"> {
+export interface ColorItemProps extends Omit<ComponentProps<"td">, "onCopy"> {
   name: string;
   bgClass: string;
+  onCopy?: (hex: string) => void;
 }
 
-const ColorCell: FunctionComponent<ColorItemProps> = ({ name, bgClass, className, ...moreProps }) => {
-  const success = useSuccessToast();
+const toHexByte = (channel: number): string => channel.toString(16).padStart(2, "0");
+
+const rgbToHex = (r: number, g: number, b: number): string => `#${toHexByte(r)}${toHexByte(g)}${toHexByte(b)}`;
+
+const canvasToHex = (color: string): string | undefined => {
+  const ctx = document.createElement("canvas").getContext("2d");
+  if (!ctx) return undefined;
+  ctx.fillStyle = color;
+  ctx.fillRect(0, 0, 1, 1);
+  const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+  return rgbToHex(r, g, b);
+};
+
+/** Falls back to the computed value itself when the colour cannot be converted. */
+const convertToHex = (color: string): string => {
+  const rgb = toEchartsColor(color) ?? color;
+  const channels = rgb.startsWith("rgb") ? rgb.match(/\d+/g) : null;
+  if (channels && channels.length >= 3) {
+    return rgbToHex(Number(channels[0]), Number(channels[1]), Number(channels[2]));
+  }
+  return canvasToHex(color) ?? color;
+};
+
+const ColorCell: FunctionComponent<ColorItemProps> = ({ name, bgClass, onCopy, className, ...moreProps }) => {
   const colorRef = useRef<HTMLDivElement>(null);
   const [hex, setHex] = useState<string>("");
 
   useEffect(() => {
     if (colorRef.current) {
-      const computedStyle = window.getComputedStyle(colorRef.current);
-      const backgroundColor = computedStyle.backgroundColor;
-
-      // Convert any color format to hex by creating a temporary element
-      const convertToHex = (color: string): string => {
-        // If it's already rgb format, convert directly
-        if (color.startsWith("rgb")) {
-          const rgbMatch = color.match(/\d+/g);
-          if (rgbMatch && rgbMatch.length >= 3) {
-            const r = parseInt(rgbMatch[0], 10);
-            const g = parseInt(rgbMatch[1], 10);
-            const b = parseInt(rgbMatch[2], 10);
-            return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
-          }
-        }
-
-        // For other formats (oklch, hsl, etc.), use a canvas to get RGB values
-        // Skip canvas conversion in test environments to avoid JSDOM errors
-        if (typeof window !== "undefined" && typeof (globalThis as { process?: unknown }).process === "undefined") {
-          try {
-            const canvas = document.createElement("canvas");
-            canvas.width = 1;
-            canvas.height = 1;
-            const ctx = canvas.getContext("2d");
-            if (ctx) {
-              ctx.fillStyle = color;
-              ctx.fillRect(0, 0, 1, 1);
-              const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
-              return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
-            }
-          } catch (error) {
-            // Fallback: return the original color if conversion fails
-          }
-        }
-
-        return color;
-      };
-
-      setHex(convertToHex(backgroundColor));
+      setHex(convertToHex(window.getComputedStyle(colorRef.current).backgroundColor));
     }
   }, [bgClass]);
-
-  const handleCopyColor = async () => {
-    try {
-      await navigator.clipboard.writeText(hex);
-      success("Color copied", `${hex} copied to clipboard`);
-    } catch (error) {
-      // In browsers or environments where clipboard API is not available
-      // Just show the success message without trying the execCommand fallback
-      // This prevents DOM errors in test environments
-      success("Color code", `${hex}`);
-    }
-  };
 
   return (
     <td className={twMerge("p-2 text-center border border-gray-200", className)} {...moreProps}>
@@ -78,7 +51,7 @@ const ColorCell: FunctionComponent<ColorItemProps> = ({ name, bgClass, className
       */}
       <button
         type="button"
-        onClick={handleCopyColor}
+        onClick={() => onCopy?.(hex)}
         className="flex w-full flex-col items-center gap-1 cursor-pointer transition-all hover:bg-gray-50 rounded"
       >
         <div
@@ -107,8 +80,10 @@ export interface ColorPalette {
   }>;
 }
 
-export interface ColorsProps extends ComponentProps<"table"> {
+export interface ColorsProps extends Omit<ComponentProps<"table">, "onCopy"> {
   palettes?: ColorPalette[];
+  /** Called with the swatch's hex when it is clicked; copying and feedback are the consumer's. */
+  onCopy?: (hex: string) => void;
 }
 
 /**
@@ -179,7 +154,12 @@ const defaultPalettes: ColorPalette[] = [
   },
 ];
 
-export const Colors: FunctionComponent<ColorsProps> = ({ palettes = defaultPalettes, className, ...moreProps }) => {
+export const Colors: FunctionComponent<ColorsProps> = ({
+  palettes = defaultPalettes,
+  onCopy,
+  className,
+  ...moreProps
+}) => {
   const shades = palettes[0]?.variants.map((v) => v.shade) || [];
 
   return (
@@ -210,7 +190,12 @@ export const Colors: FunctionComponent<ColorsProps> = ({ palettes = defaultPalet
                 {palette.name}
               </td>
               {palette.variants.map((variant) => (
-                <ColorCell key={variant.bgClass} name={`${palette.name} ${variant.shade}`} bgClass={variant.bgClass} />
+                <ColorCell
+                  key={variant.bgClass}
+                  name={`${palette.name} ${variant.shade}`}
+                  bgClass={variant.bgClass}
+                  onCopy={onCopy}
+                />
               ))}
             </tr>
           ))}

@@ -1,15 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { ToastProvider } from "../Toast";
 import { Colors } from "./Colors";
-
-// Mock clipboard API
-const mockWriteText = vi.fn();
-Object.assign(navigator, {
-  clipboard: {
-    writeText: mockWriteText,
-  },
-});
 
 // Mock getComputedStyle
 const mockGetComputedStyle = vi.fn();
@@ -17,31 +8,11 @@ Object.assign(window, {
   getComputedStyle: mockGetComputedStyle,
 });
 
-// Mock canvas context for color conversion
-const mockFillRect = vi.fn();
-const mockGetImageData = vi.fn();
-
-// Mock HTMLCanvasElement.prototype.getContext
-const originalGetContext = HTMLCanvasElement.prototype.getContext;
-HTMLCanvasElement.prototype.getContext = vi.fn().mockImplementation(() => {
-  return {
-    fillStyle: "",
-    fillRect: mockFillRect,
-    getImageData: mockGetImageData.mockReturnValue({
-      data: [128, 128, 128, 255], // Default gray color
-    }),
-  };
-});
-
-const ColorsWithProvider = ({ ...props }) => (
-  <ToastProvider>
-    <Colors {...props} />
-  </ToastProvider>
-);
-
 describe("Colors", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    // jsdom has no canvas: colours must convert without one
+    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue(null);
     // Mock getComputedStyle to return different colors based on the element's className
     mockGetComputedStyle.mockImplementation((element) => {
       const className = element.className || "";
@@ -64,22 +35,14 @@ describe("Colors", () => {
       // Default fallback
       return { backgroundColor: "rgb(128, 128, 128)" }; // #808080
     });
-
-    // Mock canvas context to return specific colors based on input
-    mockGetImageData.mockImplementation(() => {
-      return {
-        data: [196, 205, 226, 255], // Default to primary-100 equivalent
-      };
-    });
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
-    HTMLCanvasElement.prototype.getContext = originalGetContext;
   });
 
   it("renders default color palettes in table format", () => {
-    render(<ColorsWithProvider />);
+    render(<Colors />);
 
     // Check for table structure
     expect(screen.getByRole("table")).toBeInTheDocument();
@@ -113,7 +76,7 @@ describe("Colors", () => {
       },
     ];
 
-    render(<ColorsWithProvider palettes={customPalettes} />);
+    render(<Colors palettes={customPalettes} />);
 
     expect(screen.getByText("Custom")).toBeInTheDocument();
     expect(screen.getByText("500")).toBeInTheDocument();
@@ -124,20 +87,40 @@ describe("Colors", () => {
     expect(screen.queryByText("Success")).not.toBeInTheDocument();
   });
 
-  it("copies color to clipboard when clicked", async () => {
-    mockWriteText.mockResolvedValue(undefined);
+  it("reports the swatch's hex through onCopy and leaves the clipboard alone", () => {
+    const writeText = vi.fn();
+    Object.assign(navigator, { clipboard: { writeText } });
+    const onCopy = vi.fn();
 
-    render(<ColorsWithProvider />);
+    render(<Colors onCopy={onCopy} />);
+    fireEvent.click(screen.getAllByRole("button")[0]);
 
-    // Find a color cell and click it
-    const colorButtons = screen.getAllByRole("button");
-    fireEvent.click(colorButtons[0]);
+    // First swatch is primary-900, an oklch() value converted without a canvas
+    expect(onCopy).toHaveBeenCalledTimes(1);
+    expect(onCopy).toHaveBeenCalledWith("#0d284f");
+    expect(writeText).not.toHaveBeenCalled();
+  });
 
-    expect(mockWriteText).toHaveBeenCalled();
+  it("does not throw on click without onCopy", () => {
+    render(<Colors />);
+    expect(() => fireEvent.click(screen.getAllByRole("button")[0])).not.toThrow();
+  });
+
+  it("converts oklch() colors without a canvas context", () => {
+    render(<Colors palettes={[{ name: "Custom", variants: [{ shade: "100", bgClass: "bg-primary-100" }] }]} />);
+
+    expect(screen.getByRole("button")).toHaveTextContent(/^#[0-9a-f]{6}, copy Custom 100$/);
+  });
+
+  it("falls back to the computed value when it cannot be converted", () => {
+    mockGetComputedStyle.mockReturnValue({ backgroundColor: "color-mix(in srgb, red, blue)" });
+    render(<Colors palettes={[{ name: "Custom", variants: [{ shade: "100", bgClass: "bg-primary-100" }] }]} />);
+
+    expect(screen.getByRole("button")).toHaveTextContent("color-mix(in srgb, red, blue), copy Custom 100");
   });
 
   it("applies custom className", () => {
-    render(<ColorsWithProvider className="custom-class" />);
+    render(<Colors className="custom-class" />);
 
     const container = screen.getByRole("table");
     expect(container).toHaveClass("custom-class");
@@ -151,7 +134,7 @@ describe("Colors", () => {
    * button, so the table keeps its cells.
    */
   it("names each swatch's button by the hex it shows, then by what it copies", () => {
-    render(<ColorsWithProvider />);
+    render(<Colors />);
 
     const buttons = screen.getAllByRole("button");
     for (const button of buttons) {
