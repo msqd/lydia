@@ -13,12 +13,12 @@ exports[`SingleChoiceFacet > matches snapshot 1`] = `
       class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
     >
       <button
-        aria-controls="headlessui-disclosure-panel-_r_16_"
+        aria-controls="headlessui-disclosure-panel-_r_20_"
         aria-expanded="true"
         class="flex w-full items-start text-left cursor-pointer"
         data-headlessui-state="open"
         data-open=""
-        id="headlessui-disclosure-button-_r_15_"
+        id="headlessui-disclosure-button-_r_1v_"
         type="button"
       >
         <span
@@ -49,16 +49,16 @@ exports[`SingleChoiceFacet > matches snapshot 1`] = `
     class="mt-2 space-y-2"
     data-headlessui-state="open"
     data-open=""
-    id="headlessui-disclosure-panel-_r_16_"
+    id="headlessui-disclosure-panel-_r_20_"
   >
     <p
       class="text-xs text-gray-600"
-      id="_r_14_"
+      id="_r_1u_"
     >
       Counts cover all transactions
     </p>
     <div
-      aria-describedby="_r_14_"
+      aria-describedby="_r_1u_"
       aria-label="Test Filter"
       class="space-y-2"
       role="radiogroup"
@@ -192,12 +192,12 @@ exports[`SingleChoiceFacet > matches snapshot with selection 1`] = `
       class="pt-0 text-sm text-gray-900 flex min-w-0 grow whitespace-nowrap font-normal"
     >
       <button
-        aria-controls="headlessui-disclosure-panel-_r_19_"
+        aria-controls="headlessui-disclosure-panel-_r_26_"
         aria-expanded="true"
         class="flex w-full items-start text-left cursor-pointer"
         data-headlessui-state="open"
         data-open=""
-        id="headlessui-disclosure-button-_r_18_"
+        id="headlessui-disclosure-button-_r_25_"
         type="button"
       >
         <span
@@ -228,16 +228,16 @@ exports[`SingleChoiceFacet > matches snapshot with selection 1`] = `
     class="mt-2 space-y-2"
     data-headlessui-state="open"
     data-open=""
-    id="headlessui-disclosure-panel-_r_19_"
+    id="headlessui-disclosure-panel-_r_26_"
   >
     <p
       class="text-xs text-gray-600"
-      id="_r_17_"
+      id="_r_24_"
     >
       Counts cover all transactions
     </p>
     <div
-      aria-describedby="_r_17_"
+      aria-describedby="_r_24_"
       aria-label="Test Filter"
       class="space-y-2"
       role="radiogroup"

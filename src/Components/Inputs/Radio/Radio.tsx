@@ -1,16 +1,7 @@
-import { useId } from "react";
-import type { ReactNode } from "react";
-import type { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
+import { type ChoiceInputProps, useChoiceInputId } from "../choiceInput";
 
-export interface RadioProps extends ComponentProps<"input"> {
-  name: string;
-  label?: string | ReactNode;
-  checked?: boolean;
-  containerProps?: ComponentProps<"div">;
-  labelProps?: ComponentProps<"label">;
-  disabled?: boolean;
-}
+export type RadioProps = ChoiceInputProps;
 
 export function Radio({
   name,
@@ -21,7 +12,7 @@ export function Radio({
   disabled = false,
   ...inputProps
 }: RadioProps) {
-  const id = inputProps.id ?? useId();
+  const id = useChoiceInputId(inputProps.id);
 
   return (
     <div
@@ -33,12 +24,12 @@ export function Radio({
       )}
     >
       <input
-        id={id}
         name={name}
         type="radio"
         checked={checked}
         disabled={disabled}
         {...inputProps}
+        id={id}
         className={twMerge(
           "h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600",
           disabled ? "opacity-60" : "cursor-pointer",
