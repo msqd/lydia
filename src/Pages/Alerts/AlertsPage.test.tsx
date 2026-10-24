@@ -161,7 +161,7 @@ describe("AlertsPage", () => {
     fireEvent.change(screen.getByLabelText("Search"), { target: { value: "payments" } });
     expect(screen.getByLabelText("Search")).toHaveValue("payments");
 
-    fireEvent.click(screen.getByLabelText("Close drawer"));
+    // Selected while the drawer is still open, so the list stays mounted across the switch.
     fireEvent.click(screen.getByText(sampleAlerts[1].name));
     expect(screen.getByLabelText("Search")).toHaveValue("");
   });
