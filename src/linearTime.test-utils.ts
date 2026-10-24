@@ -1,16 +1,19 @@
 /** Largest `growthRatio` accepted as linear: linear work gives about 1, quadratic work about 10. */
 export const LINEAR_GROWTH_LIMIT = 3;
 
-function timeOf(run: () => void): number {
-  const start = performance.now();
+/** CPU time of the process spent in `run`. */
+function cpuTimeOf(run: () => void): number {
+  const start = process.cpuUsage();
   run();
-  return performance.now() - start;
+  const { user, system } = process.cpuUsage(start);
+  return user + system;
 }
 
 /**
  * Run time of `run(large)` against `large / small` runs of `run(small)`, which take as long when the
  * work is linear and `large / small` times less when it is quadratic. The sizes are timed alternately
- * so a loaded machine slows both alike, and the fastest sample of each discards what noise is left.
+ * and the fastest sample of each discards what noise is left. Samples are CPU time, so a loaded machine
+ * that preempts the process does not inflate them.
  * `large` must be a multiple of `small`.
  */
 export function growthRatio(run: (size: number) => void, small: number, large: number, samples = 15): number {
@@ -21,10 +24,10 @@ export function growthRatio(run: (size: number) => void, small: number, large: n
   let fastestSmall = Number.POSITIVE_INFINITY;
   let fastestLarge = Number.POSITIVE_INFINITY;
   for (let i = 0; i < samples; i++) {
-    fastestSmall = Math.min(fastestSmall, timeOf(runSmallRepeatedly));
+    fastestSmall = Math.min(fastestSmall, cpuTimeOf(runSmallRepeatedly));
     fastestLarge = Math.min(
       fastestLarge,
-      timeOf(() => run(large)),
+      cpuTimeOf(() => run(large)),
     );
   }
   return fastestLarge / fastestSmall;
