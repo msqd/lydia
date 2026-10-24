@@ -1,5 +1,5 @@
 import { BarChart } from "echarts/charts";
-import { DatasetComponent, GridComponent, TitleComponent, TooltipComponent } from "echarts/components";
+import { GridComponent, TooltipComponent } from "echarts/components";
 import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { useMemo } from "react";
@@ -13,7 +13,7 @@ import { useChartDimensions } from "./Hooks/useChartDimensions";
 import { useThemeColor } from "./Hooks/useThemeColors";
 
 // Register the required components
-echarts.use([BarChart, CanvasRenderer, GridComponent, TooltipComponent, TitleComponent, DatasetComponent]);
+echarts.use([BarChart, CanvasRenderer, GridComponent, TooltipComponent]);
 
 interface SummaryRateChartProps {
   data: { value: number; datetime: string }[];

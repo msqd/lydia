@@ -1,5 +1,5 @@
 import { BarChart } from "echarts/charts";
-import { DatasetComponent, GridComponent, TitleComponent, TooltipComponent } from "echarts/components";
+import { GridComponent, TooltipComponent } from "echarts/components";
 import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { useMemo } from "react";
@@ -17,7 +17,7 @@ import { ChartTooltipFormatter } from "./Utils/ChartTooltipFormatter";
 import { TimeFormatter } from "./Utils/TimeFormatter";
 
 // Register the required components
-echarts.use([BarChart, CanvasRenderer, GridComponent, TooltipComponent, TitleComponent, DatasetComponent]);
+echarts.use([BarChart, CanvasRenderer, GridComponent, TooltipComponent]);
 
 interface TransactionsChartProps {
   data: Array<OverviewTransaction>;

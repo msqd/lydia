@@ -6,6 +6,9 @@
  * UI components with transaction-specific business logic.
  */
 
+export { TransactionFiltersCard } from "./TransactionFiltersCard";
+export type { TransactionFiltersCardProps } from "./TransactionFiltersCard";
+
 export { TransactionsFiltersSidebar } from "./TransactionsFiltersSidebar";
 export type { TransactionsFiltersSidebarProps } from "./TransactionsFiltersSidebar";
 

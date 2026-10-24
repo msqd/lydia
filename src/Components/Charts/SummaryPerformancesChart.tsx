@@ -1,11 +1,5 @@
 import { LineChart } from "echarts/charts";
-import {
-  DatasetComponent,
-  GridComponent,
-  TitleComponent,
-  TooltipComponent,
-  VisualMapComponent,
-} from "echarts/components";
+import { GridComponent, TooltipComponent, VisualMapComponent } from "echarts/components";
 import * as echarts from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { useMemo } from "react";
@@ -18,15 +12,7 @@ import { defaultEchartOptions } from "../../Settings";
 import { useThemeColor, useThemeColors } from "./Hooks/useThemeColors";
 
 // Register the required components
-echarts.use([
-  LineChart,
-  CanvasRenderer,
-  GridComponent,
-  TooltipComponent,
-  TitleComponent,
-  DatasetComponent,
-  VisualMapComponent,
-]);
+echarts.use([LineChart, CanvasRenderer, GridComponent, TooltipComponent, VisualMapComponent]);
 
 const tpdexTokens = Object.fromEntries(tpdexScale.map(({ label, token }) => [label, token]));
 
