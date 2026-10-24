@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@msqd/lydia": "file:./lydia.tgz",
     "@headlessui/react": "^2.2.4",
     "echarts": "^6.1.0",
     "react": "^19.1.0",
