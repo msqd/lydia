@@ -86,57 +86,39 @@ describe("documentation links", () => {
 });
 
 /**
- * The reStructuredText tree under `docs/` is built by Sphinx, which resolves a `toctree` entry to a
- * file path rather than to a title. It drifted from the source for long enough to document an HTTP
- * service this library forbids, so it gets the same guard in the shape its own format needs.
+ * The Markdown under `docs/` and the root README are read on GitHub, which resolves a relative link
+ * to a file path. They drifted from the source for long enough to document a build that could not
+ * run, so a relative link that resolves to no file fails here.
  */
-const toctreeCandidates = (dir: string, entry: string) => [
-  join(dir, `${entry}.rst`),
-  join(dir, `${entry}.md`),
-  join(dir, entry, "index.rst"),
-  join(dir, entry, "index.md"),
-];
+const repoRoot = resolve(__dirname, "..");
 
-function toctreeEntries(): Array<{ file: string; entry: string; candidates: string[] }> {
-  const out: Array<{ file: string; entry: string; candidates: string[] }> = [];
-
-  for (const file of filesUnder(docsRoot, (name) => name.endsWith(".rst"))) {
-    const lines = readFileSync(file, "utf8").split("\n");
-    let inToctree = false;
-
-    for (const line of lines) {
-      if (line.trim().startsWith(".. toctree::")) {
-        inToctree = true;
-        continue;
-      }
-      if (!inToctree) {
-        continue;
-      }
-      if (line.trim() === "" || line.trim().startsWith(":")) {
-        continue;
-      }
-      if (!line.startsWith(" ")) {
-        inToctree = false;
-        continue;
-      }
-
-      const entry = line.trim();
-      out.push({ file: relative(docsRoot, file), entry, candidates: toctreeCandidates(dirname(file), entry) });
-    }
-  }
-
-  return out;
+function markdownFiles(): string[] {
+  return [...filesUnder(docsRoot, (name) => name.endsWith(".md")), join(repoRoot, "README.md")];
 }
 
-describe("sphinx toctrees", () => {
-  it("finds the entries it is meant to check", () => {
-    expect(toctreeEntries().length).toBeGreaterThan(0);
+function relativeLinks(): Array<{ file: string; target: string; path: string }> {
+  return markdownFiles().flatMap((file) => {
+    const content = readFileSync(file, "utf8").replace(/```[\s\S]*?```/g, "");
+    return [...content.matchAll(/\]\(([^)\s]+)\)/g)]
+      .map((match) => match[1])
+      .filter((target) => !/^([a-z][a-z0-9+.-]*:|#|\/)/i.test(target))
+      .map((target) => ({
+        file: relative(repoRoot, file),
+        target,
+        path: resolve(dirname(file), decodeURIComponent(target.split("#")[0])),
+      }));
+  });
+}
+
+describe("markdown links", () => {
+  it("finds the links it is meant to check", () => {
+    expect(relativeLinks().length).toBeGreaterThan(5);
   });
 
-  it("resolves every toctree entry to a document that exists", () => {
-    const dead = toctreeEntries()
-      .filter(({ candidates }) => !candidates.some(existsSync))
-      .map(({ file, entry }) => `${file} lists "${entry}" in a toctree, and no such document exists`);
+  it("resolves every relative link to a file that exists", () => {
+    const dead = relativeLinks()
+      .filter(({ path }) => !existsSync(path))
+      .map(({ file, target }) => `${file} links to ${target}, which does not exist`);
 
     expect(dead).toEqual([]);
   });
