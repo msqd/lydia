@@ -30,10 +30,9 @@ export function ExplorerPage({ transactions, className }: ExplorerPageProps) {
   // paginates, so it is driven by the client-side fallback.
   const listedTransactions = useClientSideTransactions(filteredTransactions);
 
-  const handleTransactionSelect = (transaction: Transaction | null) => {
+  const handleTransactionSelect = (transaction: Transaction) => {
     // Resolve the full detailed transaction from the data we were given.
-    const detailed = transaction ? (transactions.find((t) => t.id === transaction.id) ?? null) : null;
-    setSelectedTransaction(detailed);
+    setSelectedTransaction(transactions.find((t) => t.id === transaction.id) ?? null);
   };
 
   const handleCloseDrawer = () => {
@@ -65,6 +64,7 @@ export function ExplorerPage({ transactions, className }: ExplorerPageProps) {
               {...listedTransactions}
               variant="embedded"
               onTransactionSelect={handleTransactionSelect}
+              selectedId={selectedTransaction?.id ?? null}
               isDrawerOpen={isDrawerOpen}
               className="h-full"
             />
