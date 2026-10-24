@@ -1,4 +1,4 @@
-import type { FilterChangeHandler, Filters } from "@msqd/lydia/Models/Filters";
+import type { FilterChangeHandler, FilterValue, Filters } from "@msqd/lydia/Models/Filters";
 import { type ComponentProps, type ReactNode, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -52,7 +52,7 @@ export function FacetList({ hasDividers = true, className, children, ...props }:
 export function useFacetState(initialFilters: Filters = {}) {
   const [filters, setFilters] = useState<Filters>(initialFilters);
 
-  const handleFilterChange: FilterChangeHandler = (filterName: string, value: any) => {
+  const handleFilterChange: FilterChangeHandler = (filterName: string, value: FilterValue) => {
     setFilters((prev) => ({
       ...prev,
       [filterName]: value,
@@ -63,7 +63,7 @@ export function useFacetState(initialFilters: Filters = {}) {
     setFilters({});
   };
 
-  const updateFilter = (filterName: string, value: any) => {
+  const updateFilter = (filterName: string, value: FilterValue) => {
     handleFilterChange(filterName, value);
   };
 

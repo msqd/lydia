@@ -1,6 +1,6 @@
 import { Radio } from "@msqd/lydia/Components/Inputs";
 import { Foldable, type FoldableProps } from "@msqd/lydia/Components/Utilities/Foldable";
-import type { FilterChangeHandler, FilterMeta, Filters } from "@msqd/lydia/Models/Filters";
+import { type FilterChangeHandler, type FilterMeta, type Filters, readSingle } from "@msqd/lydia/Models/Filters";
 import { type ComponentProps, useId } from "react";
 import { DEFAULT_COUNTS_CAPTION, FacetCountsCaption, countsCaptionOf } from "../FacetCountsCaption";
 import { FacetLabel } from "../FacetLabel";
@@ -71,7 +71,7 @@ export function SingleChoiceFacet({
   className,
   ...props
 }: SingleChoiceFacetProps) {
-  const currentValue = filters[name] as string | undefined;
+  const currentValue = readSingle(filters, name);
   const captionId = useId();
   const caption = countsCaptionOf(options, countsCaption);
 

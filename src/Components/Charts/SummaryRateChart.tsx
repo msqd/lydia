@@ -21,6 +21,7 @@ interface SummaryRateChartProps {
   color?: string;
 }
 
+// ECharts types the params of an axis tooltip formatter as a union this code does not narrow; the series shape is ours.
 const tooltipFormatter = (params: any[]) => {
   const serie = params[0];
   let tooltipContent = `<strong>${escapeTooltipHtml(serie.name)}</strong><br/>`;

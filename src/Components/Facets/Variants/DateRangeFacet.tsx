@@ -1,7 +1,7 @@
 import { DateRangeSelector } from "@msqd/lydia/Components/Inputs";
 import type { DateRange } from "@msqd/lydia/Components/Inputs/DateRangeSelector";
 import { Foldable, type FoldableProps } from "@msqd/lydia/Components/Utilities/Foldable";
-import type { FilterChangeHandler, Filters } from "@msqd/lydia/Models/Filters";
+import { type FilterChangeHandler, type Filters, readDates } from "@msqd/lydia/Models/Filters";
 import { type ComponentProps } from "react";
 import { FacetResetLink } from "../FacetResetLink";
 
@@ -79,7 +79,7 @@ export function DateRangeFacet({
   };
 
   // Get current date range value
-  const dateRangeValue = (filters?.[name] as { startDate?: string; endDate?: string }) || {};
+  const dateRangeValue = readDates(filters, name);
   const dateRange: DateRange = {
     startDate: dateRangeValue.startDate || "",
     endDate: dateRangeValue.endDate || "",

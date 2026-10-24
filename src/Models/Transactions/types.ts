@@ -1,4 +1,4 @@
-import type { BaseRow } from "@msqd/lydia/Components/DataTable";
+import type { HttpBody } from "@msqd/lydia/Models/Http/body";
 import type { HttpHeader } from "@msqd/lydia/Models/Http/headers";
 
 /**
@@ -9,7 +9,7 @@ export type ContentType = "json" | "xml" | "text" | "html" | "image" | "binary";
 /**
  * Base transaction model representing an HTTP API transaction
  */
-export interface Transaction extends BaseRow {
+export interface Transaction {
   id: string;
   url: string;
   method: string;
@@ -49,7 +49,7 @@ export interface Transaction extends BaseRow {
  */
 export interface HttpMessage {
   headers: HttpHeader[];
-  body?: any;
+  body?: HttpBody;
   contentType?: ContentType;
   size?: number;
 }

@@ -4,7 +4,8 @@ import { twMerge } from "tailwind-merge";
 
 export interface Column<TRow = unknown, TValue = unknown> {
   label: string;
-  format?: (value: TValue) => ReactNode;
+  /** Method syntax on purpose: its parameter is then checked bivariantly, so `Column<TRow, number>` fits `Column<TRow, unknown>`. */
+  format?(value: TValue): ReactNode;
   get?: (row: TRow) => TValue;
   onClick?: (row: TRow) => unknown;
   className?: string;
@@ -26,19 +27,19 @@ export interface Column<TRow = unknown, TValue = unknown> {
 // Helper type for columns that automatically infer correct TValue based on get function
 export interface TypedColumn<TRow, TValue> extends Column<TRow, TValue> {
   get: (row: TRow) => TValue;
-  format?: (value: TValue) => ReactNode;
+  format?(value: TValue): ReactNode;
 }
 
 // Helper type for simple columns that use row properties directly
 export interface SimpleColumn<TRow, K extends keyof TRow> extends Column<TRow, TRow[K]> {
   get?: never;
-  format?: (value: TRow[K]) => ReactNode;
+  format?(value: TRow[K]): ReactNode;
 }
 
 /**
  * Columns for one row type, with `format` seeing exactly what `get` returned.
  *
- * `types` is keyed by string and typed `Column<TRow, any>`, because a table's
+ * `types` is keyed by string and typed `Column<TRow, unknown>`, because a table's
  * columns hold different kinds of value and one map has to carry them all.
  * Written directly, that `any` reaches `format`: a column reading a number and
  * formatting it as a string type-checks, and the mistake arrives as
@@ -51,7 +52,7 @@ export interface SimpleColumn<TRow, K extends keyof TRow> extends Column<TRow, T
  * ```tsx
  * const column = columnsFor<Transaction>();
  *
- * const types: Record<string, Column<Transaction, any>> = {
+ * const types: Record<string, Column<Transaction, unknown>> = {
  *   status: column({
  *     label: "Status",
  *     get: (row) => row.statusCode,          // row is Transaction
@@ -85,10 +86,10 @@ export type BaseRow = Record<string, unknown>;
  * here could only be dropped or fight them. `role` is accepted by the type and
  * then overruled — see the comment on the element itself.
  */
-interface DataTableProps<TRow extends BaseRow, TComputed extends BaseRow = BaseRow>
+interface DataTableProps<TRow extends object, TComputed extends object = BaseRow>
   extends Omit<ComponentProps<"table">, "children"> {
   rows: TRow[];
-  types: Record<string, Column<TRow, any>>;
+  types: Record<string, Column<TRow, unknown>>;
   columns?: Array<keyof (TRow & TComputed)>;
   onRowClick?: (row: TRow) => unknown;
   selected?: TRow;
@@ -99,18 +100,18 @@ const tableClasses = "min-w-full divide-y divide-gray-300 text-left";
 const thClasses = "whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900";
 const tdClasses = "whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900";
 
-function formatRowValue<TRow extends BaseRow, TComputed extends BaseRow>(
-  type: Column<TRow, any>,
+function formatRowValue<TRow extends object, TComputed extends object>(
+  type: Column<TRow, unknown>,
   row: TRow,
   name: keyof (TRow & TComputed),
 ): ReactNode {
   try {
-    let value: any;
+    let value: unknown;
     if (type.get) {
       value = type.get(row);
     } else {
       // Use string key to access row property
-      value = row[String(name)];
+      value = (row as Record<string, unknown>)[String(name)];
     }
 
     if (type.format) {
@@ -129,13 +130,13 @@ function formatRowValue<TRow extends BaseRow, TComputed extends BaseRow>(
   }
 }
 
-export function DataTable<TRow extends BaseRow, TComputed extends BaseRow = BaseRow>({
+export function DataTable<TRow extends object, TComputed extends object = BaseRow>({
   columns,
   onRowClick,
   rows,
   types,
   selected = undefined,
-  rowKey = "id",
+  rowKey = "id" as keyof TRow, // rows without an `id` must pass `rowKey`
   className,
   ...table
 }: DataTableProps<TRow, TComputed>) {

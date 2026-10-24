@@ -1,4 +1,11 @@
-import type { ArrayFilter, DateRangeFilter, Filters, MinMaxFilter } from "@msqd/lydia/Models/Filters";
+import {
+  type DateRangeFilter,
+  type Filters,
+  type MinMaxFilter,
+  readArray,
+  readDates,
+  readRange,
+} from "@msqd/lydia/Models/Filters";
 import { effectiveCacheStatus, parseStatusSelection, statusClassOf, tagPairsOf } from "./encoding";
 import type { Transaction } from "./types";
 
@@ -20,11 +27,6 @@ const searchableValues = (transaction: Transaction) => [
   String(transaction.statusCode),
   transaction.apiName ?? "",
 ];
-
-const selection = (value: Filters[string] | undefined): string[] => {
-  const values = value as ArrayFilter;
-  return Array.isArray(values) ? values : [];
-};
 
 /**
  * Values outside the status vocabulary are reported and ignored. A selection that names no class,
@@ -103,13 +105,13 @@ export function filterTransactions(transactions: Transaction[], criteria: Transa
   const { filters = {}, search = "" } = criteria;
   const term = search.trim().toLowerCase();
 
-  const endpoints = selection(filters.endpoint);
-  const methods = selection(filters.method);
-  const matchesStatus = statusMatcher(selection(filters.status));
-  const cacheStatuses = selection(filters.cacheStatus);
-  const tags = selection(filters.tags);
-  const time = (filters.time ?? {}) as DateRangeFilter;
-  const tpdex = (filters.tpdex ?? {}) as MinMaxFilter;
+  const endpoints = readArray(filters, "endpoint");
+  const methods = readArray(filters, "method");
+  const matchesStatus = statusMatcher(readArray(filters, "status"));
+  const cacheStatuses = readArray(filters, "cacheStatus");
+  const tags = readArray(filters, "tags");
+  const time = readDates(filters, "time");
+  const tpdex = readRange(filters, "tpdex");
   const boundedTpdex = tpdex.min !== undefined || tpdex.max !== undefined;
   const boundedTime = Boolean(time.startDate || time.endDate);
 

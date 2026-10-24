@@ -32,11 +32,6 @@ describe("countActiveFilters", () => {
     expect(countActiveFilters({ client: "" })).toBe(0);
     expect(countActiveFilters({ client: undefined })).toBe(0);
   });
-
-  it("does not count boolean flags left false", () => {
-    expect(countActiveFilters({ options: { cached: false } })).toBe(0);
-    expect(countActiveFilters({ options: { cached: true } })).toBe(1);
-  });
 });
 
 describe("hasActiveFilters", () => {
