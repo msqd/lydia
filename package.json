@@ -136,6 +136,10 @@
       "types": "./dist/Components/Charts/Utils/ChartTooltipFormatter.d.ts",
       "import": "./dist/Components/Charts/Utils/ChartTooltipFormatter.js"
     },
+    "./Components/Charts/Utils/escapeTooltipHtml": {
+      "types": "./dist/Components/Charts/Utils/escapeTooltipHtml.d.ts",
+      "import": "./dist/Components/Charts/Utils/escapeTooltipHtml.js"
+    },
     "./Components/Charts/Utils/ReactEChartsCore": {
       "types": "./dist/Components/Charts/Utils/ReactEChartsCore.d.ts",
       "import": "./dist/Components/Charts/Utils/ReactEChartsCore.js"
@@ -572,9 +576,17 @@
       "types": "./dist/Models/Filters/types.d.ts",
       "import": "./dist/Models/Filters/types.js"
     },
+    "./Models/Http": {
+      "types": "./dist/Models/Http/index.d.ts",
+      "import": "./dist/Models/Http/index.js"
+    },
     "./Models/Http/headers": {
       "types": "./dist/Models/Http/headers.d.ts",
       "import": "./dist/Models/Http/headers.js"
+    },
+    "./Models/Http/requestTarget": {
+      "types": "./dist/Models/Http/requestTarget.d.ts",
+      "import": "./dist/Models/Http/requestTarget.js"
     },
     "./Models/System": {
       "types": "./dist/Models/System/index.d.ts",

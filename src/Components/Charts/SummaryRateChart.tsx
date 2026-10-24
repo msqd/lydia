@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import { ChartBarCalculator } from "./Utils/ChartBarCalculator";
 import { ReactEChartsCore } from "./Utils/ReactEChartsCore";
 import { TimeFormatter } from "./Utils/TimeFormatter";
+import { escapeTooltipHtml } from "./Utils/escapeTooltipHtml";
 
 import { defaultEchartOptions } from "../../Settings";
 import { useChartDimensions } from "./Hooks/useChartDimensions";
@@ -22,8 +23,8 @@ interface SummaryRateChartProps {
 
 const tooltipFormatter = (params: any[]) => {
   const serie = params[0];
-  let tooltipContent = `<strong>${serie.name}</strong><br/>`;
-  tooltipContent += `<small>${serie.value}</small>`;
+  let tooltipContent = `<strong>${escapeTooltipHtml(serie.name)}</strong><br/>`;
+  tooltipContent += `<small>${escapeTooltipHtml(serie.value)}</small>`;
   return tooltipContent;
 };
 
