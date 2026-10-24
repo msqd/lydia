@@ -1,3 +1,4 @@
+import { localToday } from "@msqd/lydia/Models/Filters";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { afterEach, describe, expect, it, vi } from "vitest";
@@ -119,7 +120,7 @@ describe("DateRangeSelector", () => {
     });
 
     it("already forbids past dates when asked to", () => {
-      const today = new Date().toISOString().split("T")[0];
+      const today = localToday();
 
       const html = renderToStaticMarkup(<DateRangeSelector disablePastDates />);
 
@@ -127,7 +128,7 @@ describe("DateRangeSelector", () => {
     });
 
     it("already forbids future dates when asked to", () => {
-      const today = new Date().toISOString().split("T")[0];
+      const today = localToday();
 
       const html = renderToStaticMarkup(<DateRangeSelector disableFutureDates />);
 
@@ -161,11 +162,27 @@ describe("DateRangeSelector", () => {
     afterEach(() => vi.useRealTimers());
 
     it("keeps a tighter explicit minDate rather than loosening it to today", () => {
-      const tomorrow = new Date(Date.now() + 86_400_000).toISOString().split("T")[0];
+      const tomorrow = localToday(new Date(Date.now() + 86_400_000));
 
       render(<DateRangeSelector disablePastDates minDate={tomorrow} />);
 
       expect(screen.getByLabelText("Start date")).toHaveAttribute("min", tomorrow);
+    });
+
+    it("uses the local day near midnight, not the UTC one", () => {
+      const originalTimeZone = process.env.TZ;
+      process.env.TZ = "America/New_York";
+      vi.useFakeTimers();
+      vi.setSystemTime(new Date("2026-08-16T02:00:00Z"));
+
+      try {
+        render(<DateRangeSelector disablePastDates disableFutureDates />);
+
+        expect(screen.getByLabelText("Start date")).toHaveAttribute("min", "2026-08-15");
+        expect(screen.getByLabelText("Start date")).toHaveAttribute("max", "2026-08-15");
+      } finally {
+        process.env.TZ = originalTimeZone;
+      }
     });
 
     it("follows the clock rather than freezing today at mount", () => {

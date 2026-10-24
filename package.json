@@ -561,6 +561,10 @@
       "types": "./dist/Models/Filters/active.d.ts",
       "import": "./dist/Models/Filters/active.js"
     },
+    "./Models/Filters/dates": {
+      "types": "./dist/Models/Filters/dates.d.ts",
+      "import": "./dist/Models/Filters/dates.js"
+    },
     "./Models/Filters/read": {
       "types": "./dist/Models/Filters/read.d.ts",
       "import": "./dist/Models/Filters/read.js"

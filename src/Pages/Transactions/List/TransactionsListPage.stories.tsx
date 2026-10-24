@@ -7,6 +7,7 @@ import type { Transaction } from "@msqd/lydia/Models/Transactions/types";
 import { TransactionsDetailPage } from "@msqd/lydia/Pages/Transactions/Detail";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useEffect, useState } from "react";
+import { expect } from "storybook/test";
 import { TransactionsListPage, type TransactionsListPageProps } from "./TransactionsListPage";
 import { useClientSideTransactions } from "./useClientSideTransactions";
 
@@ -952,6 +953,40 @@ const ControlledSidebar = ({ transactions }: { transactions: Transaction[] }) =>
       <Driven transactions={transactions} filtersOpen={filtersOpen} onFiltersOpenChange={setFiltersOpen} />
     </>
   );
+};
+
+const WithFavouritesList = ({ transactions }: { transactions: Transaction[] }) => {
+  const [favorites, setFavorites] = useState<ReadonlySet<string>>(new Set());
+  const toggle = (id: string, favorite: boolean) =>
+    setFavorites((current) => {
+      const next = new Set(current);
+      if (favorite) next.add(id);
+      else next.delete(id);
+      return next;
+    });
+  return <Driven transactions={transactions} favorites={favorites} onFavoriteChange={toggle} />;
+};
+
+export const WithFavourites: Story = {
+  args: { transactions: generateExtendedTransactions(85) },
+  render: (args) => <WithFavouritesList transactions={args.transactions} />,
+  play: async ({ canvas, userEvent }) => {
+    const stars = await canvas.findAllByRole("button", { name: /^Favourite / });
+    await userEvent.click(stars[2]);
+    await expect(stars[2]).toHaveAttribute("aria-pressed", "true");
+
+    await userEvent.click((await canvas.findAllByRole("button", { name: /next/i }))[0]);
+    const nextPageStars = await canvas.findAllByRole("button", { name: /^Favourite / });
+    await expect(nextPageStars[2]).toHaveAttribute("aria-pressed", "false");
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Favourites are the consumer's state: the page shows the ids in `favorites` and reports a toggle through `onFavoriteChange`. Without `onFavoriteChange` there is no star column.",
+      },
+    },
+  },
 };
 
 export const ControlledFilters: Story = {
