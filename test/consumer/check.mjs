@@ -9,6 +9,7 @@
  * The declarations import each other by relative `.js` specifiers that resolve inside dist.
  *
  * Needs a built dist/. Run from the repository root: node test/consumer/check.mjs
+ * With LYDIA_REGISTRY_VERSION set, it installs that version from the npm registry instead of packing.
  */
 
 import { execFileSync } from "node:child_process";
@@ -44,13 +45,20 @@ const writeReadmeExamples = (outDir) => {
 };
 
 try {
-  run("pnpm", ["pack", "--pack-destination", work], root);
-  const tarball = readdirSync(work).find((file) => file.endsWith(".tgz"));
-  assert.ok(tarball, "pnpm pack produced no tarball");
+  const registryVersion = process.env.LYDIA_REGISTRY_VERSION;
+  let spec;
+  if (registryVersion) {
+    spec = `@msqd/lydia@${registryVersion}`;
+  } else {
+    run("pnpm", ["pack", "--pack-destination", work], root);
+    const tarball = readdirSync(work).find((file) => file.endsWith(".tgz"));
+    assert.ok(tarball, "pnpm pack produced no tarball");
+    spec = join(work, tarball);
+  }
 
   cpSync(fixture, app, { recursive: true, filter: (path) => !/node_modules|check\.mjs$/.test(path) });
   run("pnpm", ["install"], app);
-  run("pnpm", ["add", join(work, tarball)], app);
+  run("pnpm", ["add", spec], app);
 
   const installed = join(app, "node_modules", "@msqd", "lydia");
   const exportTargets = Object.entries(JSON.parse(readFileSync(join(installed, "package.json"), "utf-8")).exports)
