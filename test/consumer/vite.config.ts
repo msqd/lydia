@@ -7,5 +7,5 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: { dedupe: ["react", "react-dom"] },
-  test: { environment: "jsdom" },
+  test: { environment: "jsdom", setupFiles: ["./vitest.setup.ts"] },
 });
