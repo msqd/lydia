@@ -7,4 +7,9 @@ execFileSync("uvx", ["towncrier", "build", "--yes", "--version", version], { std
 
 // Towncrier leaves two blank lines before the previous release section; the file keeps one.
 const changelog = readFileSync("CHANGELOG.md", "utf8")
-writeFileSync("CHANGELOG.md", changelog.replace(/\n{3,}(?=## \[)/g, "\n\n"))
+const body = changelog.replace(/\n{3,}(?=## \[)/g, "\n\n").trimEnd()
+
+// The heading `## [<version>]` is a reference link; its target goes at the end, with the previous ones.
+const reference = `[${version}]: https://github.com/msqd/lydia/releases/tag/v${version}`
+const separator = /^\[[^\]]+\]: /.test(body.slice(body.lastIndexOf("\n") + 1)) ? "\n" : "\n\n"
+writeFileSync("CHANGELOG.md", `${body}${separator}${reference}\n`)
