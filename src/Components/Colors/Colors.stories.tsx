@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { ToastProvider } from "../Toast";
+import { ToastProvider, useErrorToast, useSuccessToast } from "../Toast";
 import { Colors } from "./Colors";
 
 const meta: Meta<typeof Colors> = {
@@ -26,6 +26,10 @@ const meta: Meta<typeof Colors> = {
       description: "Array of color palette objects with name and variants",
       control: "object",
     },
+    onCopy: {
+      description: "Called with the swatch's hex on click; the consumer copies and gives feedback",
+      action: "copied",
+    },
     className: {
       description: "Additional CSS classes to apply",
       control: "text",
@@ -37,6 +41,19 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  render: (args) => {
+    const success = useSuccessToast();
+    const error = useErrorToast();
+    const onCopy = async (hex: string) => {
+      try {
+        await navigator.clipboard.writeText(hex);
+        success("Color copied", `${hex} copied to clipboard`);
+      } catch {
+        error("Copy failed", `Could not copy ${hex} to the clipboard`);
+      }
+    };
+    return <Colors {...args} onCopy={onCopy} />;
+  },
   args: {},
   parameters: {
     docs: {
