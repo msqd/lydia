@@ -319,6 +319,28 @@ const generateLargeJSON = (targetSizeMB: number): string => {
   return JSON.stringify(result, null, 2);
 };
 
+export const OneLineHtmlHighlighted: Story = {
+  args: {
+    code: `<!doctype html><html><body>${'<a href="/p/1">link</a>'.repeat(200)}</body></html>`,
+    language: "html",
+    showLineNumbers: false,
+    maxHeight: 200,
+  },
+};
+
+export const OneLineHtmlTooLargeToHighlight: Story = {
+  args: {
+    code: `<!doctype html><html><body>${'<a href="/p/1">link</a>'.repeat(10_000)}</body></html>`,
+    language: "html",
+    showLineNumbers: false,
+    maxHeight: 200,
+  },
+  parameters: {
+    controls: { exclude: ["code"] },
+    docs: { description: { story: "Over 100 KB the body is drawn as plain text, with a notice." } },
+  },
+};
+
 export const LargeFile10MB: Story = {
   args: {
     code: generateLargeJSON(10),
