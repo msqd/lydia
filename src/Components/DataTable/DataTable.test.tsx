@@ -546,6 +546,52 @@ describe("DataTable", () => {
    * defect. What is asserted here is the half a type check cannot see -- that
    * what it hands back is a column this component actually reads.
    */
+  describe("cell values", () => {
+    it.each([
+      ["0", 0, "0"],
+      ["false", false, "false"],
+      ["true", true, "true"],
+      ["a string", "text", "text"],
+      ["a plain object", { a: 1 }, '{"a":1}'],
+      ["an array", [1, 2], "[1,2]"],
+      ["undefined", undefined, "-"],
+      ["null", null, "-"],
+      ["an empty string", "", "-"],
+    ])("renders %s", (_, value, text) => {
+      render(<DataTable types={{ v: { label: "V" } }} columns={["v"]} rows={[{ id: 1, v: value }]} />);
+      expect(screen.getByRole("cell")).toHaveTextContent(text);
+    });
+
+    it("renders a React element as is", () => {
+      render(<DataTable types={{ v: { label: "V" } }} columns={["v"]} rows={[{ id: 1, v: <b>bold</b> }]} />);
+      expect(screen.getByText("bold").tagName).toBe("B");
+    });
+
+    it("renders n/a when the value cannot be turned into text", () => {
+      const circular: Record<string, unknown> = {};
+      circular.self = circular;
+      const error = vi.spyOn(console, "error").mockImplementation(() => {});
+      render(<DataTable types={{ v: { label: "V" } }} columns={["v"]} rows={[{ id: 1, v: circular }]} />);
+      expect(screen.getByRole("cell")).toHaveTextContent("n/a");
+      expect(error).toHaveBeenCalledTimes(1);
+      error.mockRestore();
+    });
+  });
+
+  describe("a column missing from types", () => {
+    it("is skipped with one console.error instead of throwing", () => {
+      const error = vi.spyOn(console, "error").mockImplementation(() => {});
+      const { rerender } = render(<DataTable types={types} columns={["firstName", "ghost"]} rows={rows} />);
+      rerender(<DataTable types={types} columns={["firstName", "ghost"]} rows={rows} />);
+
+      expect(screen.getAllByRole("columnheader")).toHaveLength(1);
+      expect(screen.getAllByRole("row")[1].querySelectorAll("td")).toHaveLength(1);
+      expect(error).toHaveBeenCalledTimes(1);
+      expect(error.mock.calls[0][0]).toContain("ghost");
+      error.mockRestore();
+    });
+  });
+
   describe("columnsFor", () => {
     interface Musician extends Record<string, unknown> {
       id: number;
