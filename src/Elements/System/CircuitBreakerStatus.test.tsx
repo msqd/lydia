@@ -82,4 +82,48 @@ describe("CircuitBreakerStatus", () => {
     expect(screen.getByText("Half-Open")).toBeInTheDocument();
     expect(screen.getByText("Open")).toBeInTheDocument();
   });
+
+  it.each([
+    ["compact", true],
+    ["full", false],
+  ])("closes the menu on an outside click in %s mode", (_mode, compact) => {
+    render(
+      <>
+        <CircuitBreakerStatus circuitBreaker={{ status: "closed", failureRate: 2.5 }} compact={compact} editable />
+        <p>elsewhere</p>
+      </>,
+    );
+    fireEvent.click(screen.getByRole("button"));
+    expect(screen.getByText("Half-Open")).toBeInTheDocument();
+
+    fireEvent.mouseDown(screen.getByText("elsewhere"));
+
+    expect(screen.queryByText("Half-Open")).not.toBeInTheDocument();
+  });
+
+  it("keeps the menu open when pressing inside it, and still selects the item", () => {
+    const onChange = vi.fn();
+    render(
+      <CircuitBreakerStatus circuitBreaker={{ status: "closed", failureRate: 2.5 }} editable onChange={onChange} />,
+    );
+    fireEvent.click(screen.getByRole("button"));
+
+    fireEvent.mouseDown(screen.getByText("Half-Open"));
+    expect(screen.getByText("Half-Open")).toBeInTheDocument();
+    fireEvent.click(screen.getByText("Half-Open"));
+
+    expect(onChange).toHaveBeenCalledWith("half-open");
+  });
+
+  it("listens to the document only while the menu is open", () => {
+    const add = vi.spyOn(document, "addEventListener");
+    render(<CircuitBreakerStatus circuitBreaker={{ status: "closed", failureRate: 2.5 }} editable />);
+    const mousedowns = () => add.mock.calls.filter(([type]) => type === "mousedown").length;
+    expect(mousedowns()).toBe(0);
+
+    fireEvent.click(screen.getByRole("button"));
+
+    expect(mousedowns()).toBe(1);
+    add.mockRestore();
+  });
 });

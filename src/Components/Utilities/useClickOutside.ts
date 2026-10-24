@@ -1,55 +1,59 @@
-import { useEffect, useRef } from "react";
+import { type RefObject, useEffect, useRef } from "react";
+
+/** An element (through a ref) or a CSS selector whose clicks do not count as outside. */
+export type ClickOutsideIgnore = RefObject<Element | null> | string;
+
+export interface UseClickOutsideOptions {
+  /** Called once per mouse down or touch start outside the returned ref and every ignored target. */
+  onClickOutside: (event: MouseEvent | TouchEvent) => void;
+  /** The document listeners exist only while this is true. */
+  enabled?: boolean;
+  /**
+   * Targets that count as inside, on top of the returned ref. Nothing is ignored by default: a
+   * portal the guarded element opens has to be listed.
+   */
+  ignore?: readonly ClickOutsideIgnore[];
+}
+
+const isIgnored = (target: Element, ignored: ClickOutsideIgnore) =>
+  typeof ignored === "string" ? target.closest(ignored) !== null : (ignored.current?.contains(target) ?? false);
 
 /**
- * Hook for detecting clicks outside of a specified element
- * @param handler Function to call when clicking outside
- * @param enabled Whether the click-outside detection is enabled
+ * Detects clicks outside an element. Attach the returned ref to the element to guard.
+ *
+ * The latest `onClickOutside` and `ignore` are read at event time, so passing a new function or
+ * array on each render does not re-subscribe.
  */
-export const useClickOutside = <T extends HTMLElement = HTMLElement>(
-  handler: (event: MouseEvent | TouchEvent) => void,
-  enabled: boolean = true,
-) => {
+export const useClickOutside = <T extends HTMLElement = HTMLElement>({
+  onClickOutside,
+  enabled = true,
+  ignore = [],
+}: UseClickOutsideOptions) => {
   const ref = useRef<T>(null);
+  const latest = useRef({ onClickOutside, ignore });
+  useEffect(() => {
+    latest.current = { onClickOutside, ignore };
+  });
 
   useEffect(() => {
     if (!enabled) return;
 
-    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      const target = event.target as HTMLElement;
-
-      // Don't trigger if clicking within the ref element
-      if (ref.current && ref.current.contains(target)) {
-        return;
-      }
-
-      // Don't trigger on drawer/modal content
-      const isDrawerContent = target.closest(
-        // Our explicit drawer content marker
-        "[data-drawer-content], " +
-          // HeadlessUI dialog
-          '[role="dialog"], ' +
-          // General modal/drawer patterns
-          "[data-headlessui-state], .headlessui-portal, [data-portal]",
-      );
-      if (isDrawerContent) return;
-
-      // Don't trigger on headless UI menu content
-      const isMenuContent = target.closest('[role="menu"], [role="menuitem"]');
-      if (isMenuContent) return;
-
-      // Allow clicking anywhere else (including navbar, layout elements, etc.)
-      handler(event);
+    const handle = (event: MouseEvent | TouchEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      if (ref.current?.contains(target)) return;
+      if (latest.current.ignore.some((ignored) => isIgnored(target, ignored))) return;
+      latest.current.onClickOutside(event);
     };
 
-    // Use capture phase to ensure we catch all events before they bubble
-    document.addEventListener("mousedown", handleClickOutside, true);
-    document.addEventListener("touchstart", handleClickOutside, true);
-
+    // Capture phase, so a component that stops propagation cannot hide a click from us.
+    document.addEventListener("mousedown", handle, true);
+    document.addEventListener("touchstart", handle, true);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside, true);
-      document.removeEventListener("touchstart", handleClickOutside, true);
+      document.removeEventListener("mousedown", handle, true);
+      document.removeEventListener("touchstart", handle, true);
     };
-  }, [handler, enabled]);
+  }, [enabled]);
 
   return ref;
 };

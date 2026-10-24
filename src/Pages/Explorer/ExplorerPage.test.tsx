@@ -1,6 +1,7 @@
 import type { Transaction } from "@msqd/lydia/Models/Transactions/types";
 import { toDetailedTransaction } from "@msqd/lydia/Pages/Transactions/Detail/TransactionsDetailPage.samples";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { ExplorerPage } from "./ExplorerPage";
 
@@ -19,17 +20,20 @@ vi.mock("@msqd/lydia/Pages/Transactions/List", async (importOriginal) => ({
     className,
     onTransactionSelect,
     isDrawerOpen,
+    selectedId,
   }: {
     transactions: any[];
     variant?: "page" | "embedded";
     className?: string;
     onTransactionSelect?: (transaction: any) => void;
     isDrawerOpen?: boolean;
+    selectedId?: string | null;
   }) => (
     <div data-testid="transactions-list" className={className}>
       <div>hideTitle: {variant === "embedded" ? "true" : "false"}</div>
       <div>hideFilters: {variant === "embedded" ? "true" : "false"}</div>
       <div>isDrawerOpen: {isDrawerOpen ? "true" : "false"}</div>
+      <div>selectedId: {selectedId ?? "none"}</div>
       <div>Transactions: {transactions.length}</div>
       {transactions.slice(0, 3).map((tx, i) => (
         <div key={i} data-testid={`transaction-${i}`}>
@@ -287,6 +291,38 @@ describe("ExplorerPage", () => {
     // The real drawer leaves on a transition, so it is still mounted for a tick. The mock closed
     // instantly, which is one more thing the old test could not have caught.
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
+  });
+
+  describe("clears the list selection when the drawer closes", () => {
+    const openDrawer = () => {
+      render(<ExplorerPage transactions={mockTransactions} />);
+      fireEvent.click(screen.getByText("users-api"));
+      fireEvent.click(screen.getByRole("button", { name: "select first transaction" }));
+      expect(screen.getByText("selectedId: tx002")).toBeInTheDocument();
+    };
+    const closed = async () => {
+      await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
+      expect(screen.getByText("selectedId: none")).toBeInTheDocument();
+    };
+
+    it("with the close button", async () => {
+      openDrawer();
+      fireEvent.click(screen.getByRole("button", { name: "Close drawer" }));
+      await closed();
+    });
+
+    it("with Escape", async () => {
+      openDrawer();
+      fireEvent.keyDown(screen.getByRole("dialog"), { key: "Escape" });
+      await closed();
+    });
+
+    it("with a click on the backdrop", async () => {
+      openDrawer();
+      const backdrop = document.querySelector(".fixed.inset-0.bg-black\\/25");
+      await userEvent.click(backdrop!);
+      await closed();
+    });
   });
 
   it("ensures filters are hidden in embedded transaction list", () => {

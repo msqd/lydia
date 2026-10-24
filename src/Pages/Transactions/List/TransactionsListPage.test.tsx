@@ -344,6 +344,67 @@ describe("TransactionsListPage", () => {
     expect(onTransactionSelect).toHaveBeenCalledWith(sampleTransactions[0]);
   });
 
+  describe("selection", () => {
+    const selectedRows = (container: HTMLElement) => container.querySelectorAll('tbody tr[aria-selected="true"]');
+
+    it("highlights the row a click selects, on its own when uncontrolled", () => {
+      const { container } = render(<TransactionsListPage {...driven} transactions={sampleTransactions} />);
+
+      fireEvent.click(container.querySelectorAll("tbody tr")[1]);
+
+      expect(selectedRows(container)).toHaveLength(1);
+      expect(container.querySelectorAll("tbody tr")[1]).toHaveAttribute("aria-selected", "true");
+    });
+
+    it("highlights the row of the selectedId it is given, and nothing for null", () => {
+      const { container, rerender } = render(
+        <TransactionsListPage {...driven} transactions={sampleTransactions} selectedId={sampleTransactions[2].id} />,
+      );
+      expect(container.querySelectorAll("tbody tr")[2]).toHaveAttribute("aria-selected", "true");
+
+      rerender(<TransactionsListPage {...driven} transactions={sampleTransactions} selectedId={null} />);
+      expect(selectedRows(container)).toHaveLength(0);
+    });
+
+    it("holds no selection of its own when controlled: a click only reports", () => {
+      const onTransactionSelect = vi.fn();
+      const { container } = render(
+        <TransactionsListPage
+          {...driven}
+          transactions={sampleTransactions}
+          selectedId={null}
+          onTransactionSelect={onTransactionSelect}
+        />,
+      );
+
+      fireEvent.click(container.querySelectorAll("tbody tr")[0]);
+
+      expect(onTransactionSelect).toHaveBeenCalledWith(sampleTransactions[0]);
+      expect(selectedRows(container)).toHaveLength(0);
+    });
+
+    it("does not deselect on a click outside, and listens to nothing on the document", () => {
+      const add = vi.spyOn(document, "addEventListener");
+      const windowAdd = vi.spyOn(window, "addEventListener");
+      const onTransactionSelect = vi.fn();
+      const { container } = render(
+        <TransactionsListPage
+          {...driven}
+          transactions={sampleTransactions}
+          onTransactionSelect={onTransactionSelect}
+        />,
+      );
+      fireEvent.click(container.querySelectorAll("tbody tr")[0]);
+
+      fireEvent.mouseDown(document.body);
+
+      expect(selectedRows(container)).toHaveLength(1);
+      expect(onTransactionSelect).not.toHaveBeenCalledWith(null);
+      expect([...add.mock.calls, ...windowAdd.mock.calls].filter(([type]) => type === "mousedown")).toHaveLength(0);
+      vi.restoreAllMocks();
+    });
+  });
+
   const starName = "Favourite GET /api/users/123/profile";
 
   it("shows the favourites it is given and reports a toggle, holding no state of its own", () => {
