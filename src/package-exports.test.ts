@@ -19,7 +19,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 const srcPath = resolve(__dirname, ".");
 
 /** Mirrors tsconfig.build.json's exclude list, plus the test helper the exports map drops. */
-const NOT_SHIPPED = /\.(stories|test|samples)\.tsx?$|[/\\](Testing|App|main)\.tsx?$/;
+const NOT_SHIPPED = /\.(stories|test|bench|samples)\.tsx?$|[/\\](Testing|App|main)\.tsx?$/;
 
 /**
  * Anchored to the start of a statement and stopped by the first `;`, so a multi-line import is

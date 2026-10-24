@@ -1,6 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { refractor } from "refractor/core";
+import { describe, expect, it, vi } from "vitest";
 import { CodeFormatter } from "./CodeFormatter";
+import { HIGHLIGHT_CAP } from "./bodyLimits";
 
 describe("CodeFormatter highlighting", () => {
   const lines = (count: number) => JSON.stringify(Array.from({ length: count - 2 }, (_, i) => i));
@@ -129,5 +131,34 @@ describe("CodeFormatter Component", () => {
 
     const region = screen.getByRole("group", { name: "Code" });
     expect(region).toHaveAttribute("tabindex", "0");
+  });
+
+  describe("body too large to highlight", () => {
+    const hostile = `<script>alert(1)</script><img src=x onerror="alert(1)">`;
+    const oneLine = `${hostile}${"x".repeat(HIGHLIGHT_CAP)}`;
+
+    it("shows plain text with a notice, without highlighting", () => {
+      const highlight = vi.spyOn(refractor, "highlight");
+      const { container } = render(<CodeFormatter code={oneLine} language="html" />);
+
+      expect(screen.getByRole("status")).toHaveTextContent("Too large to highlight: shown as plain text.");
+      expect(container.querySelector(".token")).toBeNull();
+      expect(highlight).not.toHaveBeenCalled();
+      highlight.mockRestore();
+    });
+
+    it("shows no notice for a body that is highlighted", () => {
+      render(<CodeFormatter code="<p>hi</p>" language="html" />);
+      expect(screen.queryByRole("status")).not.toBeInTheDocument();
+    });
+
+    it("keeps markup as text, highlighted or not", () => {
+      for (const code of [hostile, oneLine]) {
+        const { container, unmount } = render(<CodeFormatter code={code} language="html" />);
+        expect(container.querySelector("script, img")).toBeNull();
+        expect(container).toHaveTextContent("alert(1)");
+        unmount();
+      }
+    });
   });
 });

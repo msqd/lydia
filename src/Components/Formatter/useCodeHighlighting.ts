@@ -1,6 +1,7 @@
-import { useMemo } from "react";
+import { useDeferredValue, useMemo } from "react";
 import { refractor } from "refractor/core";
 import type { SyntaxTree } from "./SyntaxHighlighter";
+import { FORMAT_CAP, HIGHLIGHT_CAP } from "./bodyLimits";
 import { normalizeLanguage } from "./syntaxTheme";
 
 import css from "refractor/css";
@@ -37,7 +38,7 @@ function tryFormatJson(content: string): string {
  * Formats code content based on language type
  */
 function formatContent(content: string, language: CodeLanguage): string {
-  if (language === "json") {
+  if (language === "json" && content.length <= FORMAT_CAP) {
     return tryFormatJson(content);
   }
   return content;
@@ -72,17 +73,27 @@ function highlightCode(content: string, language: CodeLanguage): SyntaxTree | nu
 export function useCodeHighlighting(
   content: string,
   language: CodeLanguage,
-): { formattedContent: string; lines: string[]; highlightLine: (line: string) => SyntaxTree | null } {
+): {
+  formattedContent: string;
+  lines: string[];
+  highlightLine: (line: string) => SyntaxTree | null;
+  /** Whether the body is too large to be highlighted, so the view draws it as plain text. */
+  tooLargeToHighlight: boolean;
+} {
   const formattedContent = useMemo(() => formatContent(content, language), [content, language]);
   const lines = useMemo(() => formattedContent.split("\n"), [formattedContent]);
+
+  const tooLargeToHighlight = language !== "text" && formattedContent.length > HIGHLIGHT_CAP;
+  // The first paint is plain text, tokens colour in on the next render so the drawer opens first.
+  const highlightLanguage = useDeferredValue(tooLargeToHighlight ? "text" : language, "text");
 
   const highlightLine = useMemo(() => {
     const cache = new Map<string, SyntaxTree | null>();
     return (line: string) => {
-      if (!cache.has(line)) cache.set(line, highlightCode(line, language));
+      if (!cache.has(line)) cache.set(line, highlightCode(line, highlightLanguage));
       return cache.get(line) ?? null;
     };
-  }, [language]);
+  }, [highlightLanguage]);
 
-  return { formattedContent, lines, highlightLine };
+  return { formattedContent, lines, highlightLine, tooLargeToHighlight };
 }

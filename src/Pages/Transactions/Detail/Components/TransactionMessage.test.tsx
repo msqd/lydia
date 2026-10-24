@@ -1,5 +1,6 @@
+import { FORMAT_CAP } from "@msqd/lydia/Components/Formatter/bodyLimits";
 import type { HttpMessage } from "@msqd/lydia/Models/Transactions/types";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { TransactionMessage } from "./TransactionMessage";
 
@@ -34,5 +35,26 @@ describe("TransactionMessage", () => {
 
     const names = Array.from(container.querySelectorAll(".font-mono span:first-child")).map((span) => span.textContent);
     expect(names).toEqual(["Content-Type:", "Set-Cookie:", "set-cookie:", "set-cookie:"]);
+  });
+});
+
+describe("TransactionMessage with a body too large to format", () => {
+  const big: HttpMessage = { ...message, body: "y".repeat(FORMAT_CAP + 1), contentType: "html" };
+
+  it("starts collapsed, however defaultOpen is set", () => {
+    render(<TransactionMessage title="Response" message={big} defaultOpen={true} />);
+    expect(screen.getByRole("button", { name: /Response/ })).toHaveAttribute("aria-expanded", "false");
+    expect(screen.queryByLabelText("Body preview")).not.toBeInTheDocument();
+  });
+
+  it("shows the preview once opened", () => {
+    render(<TransactionMessage title="Response" message={big} defaultOpen={true} />);
+    fireEvent.click(screen.getByRole("button", { name: /Response/ }));
+    expect(screen.getByLabelText("Body preview")).toBeInTheDocument();
+  });
+
+  it("keeps a smaller body open", () => {
+    render(<TransactionMessage title="Response" message={{ ...message, body: "{}" }} defaultOpen={true} />);
+    expect(screen.getByRole("button", { name: /Response/ })).toHaveAttribute("aria-expanded", "true");
   });
 });

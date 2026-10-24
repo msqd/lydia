@@ -5,7 +5,7 @@ import { Foldable } from "@msqd/lydia/Components/Utilities/Foldable";
 import type { HttpMessage } from "@msqd/lydia/Models/Transactions/types";
 import { type ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
-import { ContentRenderer } from "../Utils/ContentRenderer";
+import { ContentRenderer, isPreviewedBody } from "../Utils/ContentRenderer";
 
 export interface TransactionMessageProps extends ComponentProps<"div"> {
   /** Section title, e.g. "Request" or "Response". */
@@ -31,7 +31,7 @@ export function TransactionMessage({
 }: TransactionMessageProps) {
   return (
     <div className={twMerge(contentPaddingClassName, className)} {...props}>
-      <Foldable title={title} defaultOpen={defaultOpen}>
+      <Foldable title={title} defaultOpen={defaultOpen && !isPreviewedBody(message.body, message.contentType)}>
         <div className="space-y-4">
           <div>
             <Subheading className="text-sm font-medium text-gray-900 mb-2">Headers</Subheading>

@@ -27,10 +27,10 @@ describe("VirtualizedCodeView", () => {
   });
 
   it("draws only the visible window of a long body, highlighted", () => {
-    const { container } = render(<View lines={lines(10000)} language="json" containerHeight={400} />);
+    const { container } = render(<View lines={lines(5000)} language="json" containerHeight={400} />);
 
     expect(screen.getByText(/line0/)).toBeInTheDocument();
-    expect(screen.queryByText(/line9999/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/line4999/)).not.toBeInTheDocument();
     expect(container.querySelectorAll(".token.string").length).toBeGreaterThan(0);
     expect(container.querySelectorAll(".token.string").length).toBeLessThan(100);
   });

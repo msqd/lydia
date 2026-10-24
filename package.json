@@ -253,6 +253,14 @@
       "types": "./dist/Components/Formatter/index.d.ts",
       "import": "./dist/Components/Formatter/index.js"
     },
+    "./Components/Formatter/bodyLimits": {
+      "types": "./dist/Components/Formatter/bodyLimits.d.ts",
+      "import": "./dist/Components/Formatter/bodyLimits.js"
+    },
+    "./Components/Formatter/BodyNotice": {
+      "types": "./dist/Components/Formatter/BodyNotice.d.ts",
+      "import": "./dist/Components/Formatter/BodyNotice.js"
+    },
     "./Components/Formatter/CodeFormatter": {
       "types": "./dist/Components/Formatter/CodeFormatter.d.ts",
       "import": "./dist/Components/Formatter/CodeFormatter.js"
@@ -729,6 +737,10 @@
     "./Pages/Transactions/Detail/Utils": {
       "types": "./dist/Pages/Transactions/Detail/Utils/index.d.ts",
       "import": "./dist/Pages/Transactions/Detail/Utils/index.js"
+    },
+    "./Pages/Transactions/Detail/Utils/BodyPreview": {
+      "types": "./dist/Pages/Transactions/Detail/Utils/BodyPreview.d.ts",
+      "import": "./dist/Pages/Transactions/Detail/Utils/BodyPreview.js"
     },
     "./Pages/Transactions/Detail/Utils/ContentRenderer": {
       "types": "./dist/Pages/Transactions/Detail/Utils/ContentRenderer.d.ts",
