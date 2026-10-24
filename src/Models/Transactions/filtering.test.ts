@@ -242,7 +242,7 @@ describe("filterTransactions", () => {
     });
 
     it("treats no cache information at all as unknown rather than as a miss", () => {
-      // This test asserted the opposite until #100. It was the defect, written down.
+      // This test asserted the opposite: no cache information read as a miss. It was the defect, written down.
       const transactions = [transaction({ id: "plain" }), transaction({ id: "hit", cacheStatus: "hit" })];
 
       expect(filterTransactions(transactions, { filters: { cacheStatus: ["miss"] } })).toEqual([]);

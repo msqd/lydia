@@ -7,7 +7,7 @@ import { TransactionMetadata } from "./TransactionMetadata";
 
 // The toast provider is the real one, wrapped around each render below. Mocking
 // @msqd/lydia/Components/Toast replaced a design-system component this file hands props to, and the
-// stub could not have told us whether the copy action reaches a toast at all. See #56.
+// stub could not have told us whether the copy action reaches a toast at all. See Testing.mdx, What to mock.
 
 const mockTransaction: DetailedTransaction = {
   id: "tx001",

@@ -71,7 +71,6 @@ export interface PerformanceFacetProps extends ComponentProps<"div"> {
 
 /**
  * PerformanceFacet component for TPDEX performance index filtering using a range slider.
- * Based on HARP's RangeSliderFacet implementation with TPDEX-specific logic.
  *
  * @example
  * ```tsx
@@ -97,7 +96,8 @@ export function PerformanceFacet({
 
   const handleChange = (value: { min?: number; max?: number }) => {
     if (value && typeof value === "object" && "min" in value && "max" in value) {
-      // Convert slider values back to TPDEX thresholds (HARP logic)
+      // The marks follow `tpdexScale`, best rating first, so the left thumb (`min`) bounds the highest
+      // threshold and the right thumb (`max`) the lowest.
       const maxValue = markValueToThresholdForMax.get(value.min ?? -1);
       const minValue = markValueToThresholdForMin.get(value.max ?? -1);
 

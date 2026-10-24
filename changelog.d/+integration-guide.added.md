@@ -1,0 +1,1 @@
+Integration guide (`docs/integration.md`) for applications consuming `@msqd/lydia`: install, the two CSS options, fonts, theme overrides, local development against a clone with one React, and known pitfalls. Replaces `CSS_USAGE.md`.

@@ -3,7 +3,7 @@ import { vi } from "vitest";
 import { Toast } from "./Toast";
 
 // Headless UI's Transition is mocked so a closing toast is gone at once rather than after an
-// animation frame jsdom never runs. Third-party behaviour, not this component's rendering. See #56.
+// animation frame jsdom never runs. Third-party behaviour, not this component's rendering. See Testing.mdx, What to mock.
 vi.mock("@headlessui/react", () => ({
   Transition: ({ show, children, afterLeave }: any) => {
     if (afterLeave && !show) {

@@ -5,7 +5,7 @@ import { FacetList } from "./FacetList";
 describe("FacetList", () => {
   // FacetList lays its children out and provides no context, so the filter
   // state is not its business. Anything it demands and does not read is a cost
-  // charged to every consumer for nothing: jaco's dashboard builds a Filters
+  // charged to every consumer for nothing: a consumer's dashboard builds a Filters
   // map and a change handler purely to satisfy this signature, and passes the
   // same pair again to each facet inside, which is where they are actually
   // read.

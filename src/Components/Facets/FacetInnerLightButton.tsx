@@ -7,7 +7,6 @@ export interface FacetInnerLightButtonProps {
 
 /**
  * FacetInnerLightButton component for action buttons inside facet labels.
- * Based on HARP's FacetInnerLightButton implementation.
  */
 export function FacetInnerLightButton({ label, handler }: FacetInnerLightButtonProps) {
   return (

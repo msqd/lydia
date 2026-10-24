@@ -63,7 +63,7 @@ export default defineConfig({
       formats: ["es"],
     },
     cssCodeSplit: true, // Enable CSS code splitting for component library
-    emptyOutDir: false, // Ne pas vider le répertoire dist pour préserver les fichiers .d.ts
+    emptyOutDir: false, // Keep the .d.ts files already written to dist
     rollupOptions: {
       // Make sure to externalize dependencies that shouldn't be bundled
       external: externalDependencies,

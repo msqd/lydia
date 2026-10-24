@@ -95,7 +95,6 @@ interface DataTableProps<TRow extends BaseRow, TComputed extends BaseRow = BaseR
   rowKey?: keyof TRow;
 }
 
-// Classes extraites des styles twin.macro
 const tableClasses = "min-w-full divide-y divide-gray-300 text-left";
 const thClasses = "whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900";
 const tdClasses = "whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900";

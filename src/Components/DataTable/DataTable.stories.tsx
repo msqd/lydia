@@ -4,7 +4,6 @@ import { expect } from "storybook/test";
 import { DataTable, columnsFor } from "./DataTable";
 import type { BaseRow, Column } from "./DataTable";
 
-// Définir le type Musician qui sera utilisé dans nos stories
 interface Musician extends BaseRow {
   firstName: string;
   lastName: string;
@@ -48,7 +47,6 @@ const musicianTypes: Record<string, Column<Musician, unknown>> = {
   country: { label: "Country" },
 };
 
-// Définir le meta avec les génériques appropriés pour le composant
 const meta = {
   title: "Components/DataTable/DataTable",
   component: DataTable<Musician>,
@@ -57,7 +55,7 @@ const meta = {
     rows: musicians,
     types: musicianTypes,
     columns: ["firstName", "lastName", "instrument", "country"],
-    rowKey: "firstName", // Utiliser firstName comme clé par défaut pour toutes les stories
+    rowKey: "firstName",
   },
   argTypes: {
     rows: {
@@ -88,22 +86,18 @@ const meta = {
 } satisfies Meta<typeof DataTable<Musician>>;
 
 export default meta;
-// Définir le type Story avec les génériques appropriés
 type Story = StoryObj<typeof meta>;
 
-// Story par défaut sans sélection
 export const Default: Story = {};
 
-// Story avec une ligne sélectionnée
 export const WithSelection: Story = {
   args: {
     selected: musicians[2],
-    rowKey: "firstName", // Utiliser firstName comme clé de sélection
+    rowKey: "firstName",
     onRowClick: (row: unknown) => console.log("Row clicked:", row),
   },
 };
 
-// Story avec sélection interactive
 export const InteractiveSelection: Story = {
   render: () => {
     const [selectedMusician, setSelectedMusician] = React.useState<Musician>(musicians[0]);
@@ -165,8 +159,6 @@ export const KeyboardSelection: Story = {
   },
 };
 
-// Story avec formatage personnalisé
-//
 // Built through `columnsFor`, which is what lets `format` see what `get`
 // returned. Written straight into the map, the value arrives as `unknown` and
 // has to be cast back to something renderable -- which is a cast that asserts
@@ -189,7 +181,6 @@ export const CustomFormatting: Story = {
   },
 };
 
-// Story avec colonnes cliquables
 export const ClickableColumns: Story = {
   args: {
     types: {
