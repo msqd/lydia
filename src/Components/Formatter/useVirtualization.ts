@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 
 export interface VirtualizationConfig {
   /** Item height in pixels */
@@ -22,10 +22,8 @@ export interface VirtualizationResult {
   totalHeight: number;
   /** Offset from top for positioning */
   offsetY: number;
-  /** Scroll handler for container */
+  /** Scroll handler for the scrolling container */
   onScroll: (e: React.UIEvent<HTMLElement>) => void;
-  /** Ref for the container element */
-  containerRef: React.RefObject<HTMLDivElement | null>;
 }
 
 /**
@@ -35,40 +33,27 @@ export interface VirtualizationResult {
 export function useVirtualization(totalItems: number, config: VirtualizationConfig): VirtualizationResult {
   const { itemHeight, containerHeight, overscan = 5, virtualizationThreshold = 100 } = config;
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollTop, setScrollTop] = useState(0);
+  // The first row in view, not the pixel offset: scrolling within a row renders nothing.
+  const [scrolledRow, setScrolledRow] = useState(0);
+  const firstRow = Math.min(scrolledRow, Math.max(0, totalItems - 1));
 
   // Only virtualize if we have enough items to benefit from it
   const isVirtualized = totalItems > virtualizationThreshold;
 
-  // Calculate visible range based on scroll position
-  const visibleStart = Math.floor(scrollTop / itemHeight);
-  const visibleEnd = Math.min(totalItems - 1, Math.ceil((scrollTop + containerHeight) / itemHeight));
+  const visibleEnd = Math.min(totalItems - 1, firstRow + Math.ceil(containerHeight / itemHeight));
 
   // Add overscan buffer for smooth scrolling
-  const startIndex = Math.max(0, visibleStart - overscan);
+  const startIndex = Math.max(0, firstRow - overscan);
   const endIndex = Math.min(totalItems - 1, visibleEnd + overscan);
 
-  // Calculate total height and offset for positioning
   const totalHeight = totalItems * itemHeight;
   const offsetY = startIndex * itemHeight;
 
-  // Handle scroll events with throttling for performance
-  const onScroll = useCallback((e: React.UIEvent<HTMLElement>) => {
-    const target = e.currentTarget;
-    setScrollTop(target.scrollTop);
-  }, []);
-
-  // Sync external scroll changes (e.g., programmatic scrolling)
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const container = containerRef.current;
-    const handleScroll = () => setScrollTop(container.scrollTop);
-
-    container.addEventListener("scroll", handleScroll, { passive: true });
-    return () => container.removeEventListener("scroll", handleScroll);
-  }, []);
+  // The single scroll subscription: React's handler also sees programmatic scrolls.
+  const onScroll = useCallback(
+    (e: React.UIEvent<HTMLElement>) => setScrolledRow(Math.floor(e.currentTarget.scrollTop / itemHeight)),
+    [itemHeight],
+  );
 
   return {
     isVirtualized,
@@ -77,6 +62,5 @@ export function useVirtualization(totalItems: number, config: VirtualizationConf
     totalHeight: isVirtualized ? totalHeight : containerHeight,
     offsetY: isVirtualized ? offsetY : 0,
     onScroll,
-    containerRef,
   };
 }

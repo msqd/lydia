@@ -209,44 +209,51 @@ exports[`ContentRenderer > code > renders a JSON document 1`] = `
         style="height: 400px;"
         tabindex="0"
       >
-        <div
-          class="font-mono text-xs leading-5"
-        >
-          <span
-            class="token punctuation"
-            style="color: rgb(36, 41, 46);"
-          >
-            {
-          </span>
-          
-  
-          <span
-            class="token property"
-            style="color: rgb(0, 92, 197);"
-          >
-            "a"
-          </span>
-          <span
-            class="token operator"
-            style="color: rgb(215, 58, 73);"
-          >
-            :
-          </span>
-           
-          <span
-            class="token number"
-            style="color: rgb(0, 92, 197);"
-          >
-            1
-          </span>
-          
-
-          <span
-            class="token punctuation"
-            style="color: rgb(36, 41, 46);"
-          >
-            }
-          </span>
+        <div>
+          <div>
+            <div
+              class="font-mono text-xs leading-5 whitespace-pre"
+              style="height: 20px;"
+            >
+              <span
+                class="token punctuation"
+              >
+                {
+              </span>
+            </div>
+            <div
+              class="font-mono text-xs leading-5 whitespace-pre"
+              style="height: 20px;"
+            >
+                
+              <span
+                class="token property"
+              >
+                "a"
+              </span>
+              <span
+                class="token operator"
+              >
+                :
+              </span>
+               
+              <span
+                class="token number"
+              >
+                1
+              </span>
+            </div>
+            <div
+              class="font-mono text-xs leading-5 whitespace-pre"
+              style="height: 20px;"
+            >
+              <span
+                class="token punctuation"
+              >
+                }
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

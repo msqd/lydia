@@ -1,0 +1,61 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`VirtualizedCodeView > draws every line of a short body, highlighted 1`] = `
+<div
+  aria-label="Code"
+  class="overflow-auto "
+  role="group"
+  style="height: 400px;"
+  tabindex="0"
+>
+  <div>
+    <div>
+      <div
+        class="font-mono text-xs leading-5 whitespace-pre"
+        style="height: 20px;"
+      >
+        <span
+          class="text-gray-500 select-none mr-3"
+        >
+             1
+        </span>
+        <span
+          class="token string"
+        >
+          "line0"
+        </span>
+      </div>
+      <div
+        class="font-mono text-xs leading-5 whitespace-pre"
+        style="height: 20px;"
+      >
+        <span
+          class="text-gray-500 select-none mr-3"
+        >
+             2
+        </span>
+        <span
+          class="token string"
+        >
+          "line1"
+        </span>
+      </div>
+      <div
+        class="font-mono text-xs leading-5 whitespace-pre"
+        style="height: 20px;"
+      >
+        <span
+          class="text-gray-500 select-none mr-3"
+        >
+             3
+        </span>
+        <span
+          class="token string"
+        >
+          "line2"
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,6 +1,6 @@
 import { customRender, screen } from "@/Components/Utilities/Testing";
 import type { HttpHeader } from "@msqd/lydia/Models/Http/headers";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { ContentRenderer } from "./ContentRenderer";
 
 const PDF = "data:application/pdf;base64,JVBERi0=";
@@ -24,6 +24,18 @@ describe("ContentRenderer", () => {
     it("renders text", () => {
       customRender(<ContentRenderer content="hello world" contentType="text" />);
       expect(screen.getByText(/hello world/)).toBeInTheDocument();
+    });
+
+    it("serializes a document once, however often it renders", () => {
+      const stringify = vi.spyOn(JSON, "stringify");
+      const content = { a: 1 };
+      const { rerender } = customRender(<ContentRenderer content={content} contentType="json" />);
+      const afterMount = stringify.mock.calls.filter(([value]) => value === content).length;
+
+      rerender(<ContentRenderer content={content} contentType="json" maxHeight={200} />);
+
+      expect(stringify.mock.calls.filter(([value]) => value === content)).toHaveLength(afterMount);
+      stringify.mockRestore();
     });
 
     it("renders an array without a content type", () => {
