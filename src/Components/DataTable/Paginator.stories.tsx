@@ -63,6 +63,12 @@ export const LastPage: Story = {
   },
 };
 
+export const Empty: Story = {
+  args: {
+    total: 0,
+  },
+};
+
 export const NamedByAHeading: Story = {
   render: (args) => (
     <>

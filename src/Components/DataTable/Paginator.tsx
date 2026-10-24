@@ -45,7 +45,7 @@ export type PaginatorProps = {
 };
 
 export function Paginator({
-  pages = 50,
+  pages = 1,
   current = 1,
   perPage = 20,
   total = undefined,
@@ -56,38 +56,37 @@ export function Paginator({
   labelledBy = undefined,
 }: PaginatorProps) {
   const navId = useId();
-  const setPreviousPage = setPage ? () => setPage(Math.max(1, current - 1)) : undefined;
-  const setNextPage = setPage ? () => setPage(Math.min(pages, current + 1)) : undefined;
+  const lastPage = Math.max(1, pages);
+  const currentPage = Math.max(1, Math.min(current, lastPage));
+  const previousDisabled = !setPage || currentPage <= 1;
+  const nextDisabled = !setPage || currentPage >= lastPage;
+  const first = total === 0 ? 0 : (current - 1) * perPage + 1;
+  const last = total === undefined ? current * perPage : Math.min(current * perPage, total);
   return (
     <div className={twMerge("flex items-center justify-between border-gray-200 bg-white px-4 py-3 sm:px-6", className)}>
       <div className="flex flex-1 justify-between sm:hidden">
-        <a
-          href="#"
-          className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-          onClick={(e) => {
-            e.preventDefault();
-            setPreviousPage?.();
-          }}
+        <button
+          type="button"
+          disabled={previousDisabled}
+          className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white"
+          onClick={() => setPage?.(currentPage - 1)}
         >
           Previous
-        </a>
-        <a
-          href="#"
-          className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-          onClick={(e) => {
-            e.preventDefault();
-            setNextPage?.();
-          }}
+        </button>
+        <button
+          type="button"
+          disabled={nextDisabled}
+          className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white"
+          onClick={() => setPage?.(currentPage + 1)}
         >
           Next
-        </a>
+        </button>
       </div>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div className={showSummary ? "" : "invisible"}>
           <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">{(current - 1) * perPage + 1}</span> to{" "}
-            <span className="font-medium">{total ? Math.min(current * perPage, total) : current * perPage}</span>
-            {total ? (
+            Showing <span className="font-medium">{first}</span> to <span className="font-medium">{last}</span>
+            {total !== undefined ? (
               <>
                 {" "}
                 of <span className="font-medium">{total}</span> results
@@ -104,29 +103,16 @@ export function Paginator({
             aria-label={label}
             aria-labelledby={labelledBy && `${labelledBy} ${navId}`}
           >
-            <a
-              href="#"
-              className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-              onClick={(e) => {
-                e.preventDefault();
-                setPreviousPage?.();
-              }}
+            <button
+              type="button"
+              disabled={previousDisabled}
+              className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent"
+              onClick={() => setPage?.(currentPage - 1)}
             >
               <span className="sr-only">Previous</span>
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-            </a>
-            {(() => {
-              const safeCurrent = Math.max(1, Math.min(current || 1, pages || 1));
-              const safePages = Math.max(1, pages || 1);
-
-              // Ensure we have valid positive integers
-              if (safePages <= 0 || safeCurrent <= 0 || safeCurrent > safePages) {
-                // Return a minimal valid pagination when data is invalid
-                return generate(1, 1, 1, 1, "…");
-              }
-
-              return generate(safeCurrent, safePages, 1, 1, "…");
-            })().map((i: string | number, index: number) => {
+            </button>
+            {generate(currentPage, lastPage, 1, 1, "…").map((i: string | number, index: number) => {
               if (typeof i === "string") {
                 return (
                   <span
@@ -137,43 +123,35 @@ export function Paginator({
                   </span>
                 );
               } else {
-                const isCurrent = i === current;
+                const isCurrent = i === currentPage;
                 return (
-                  <a
+                  <button
                     key={index}
-                    href="#"
+                    type="button"
+                    disabled={!setPage}
                     aria-current={isCurrent ? "page" : undefined}
                     className={
                       isCurrent
                         ? "relative z-10 inline-flex items-center bg-primary-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
-                        : "relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                        : "relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 disabled:cursor-not-allowed disabled:hover:bg-transparent"
                     }
-                    onClick={
-                      setPage
-                        ? (e) => {
-                            e.preventDefault();
-                            setPage(i as number);
-                          }
-                        : undefined
-                    }
+                    onClick={() => setPage?.(i)}
                   >
                     {i}
-                  </a>
+                  </button>
                 );
               }
             })}
 
-            <a
-              href="#"
-              className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-              onClick={(e) => {
-                e.preventDefault();
-                setNextPage?.();
-              }}
+            <button
+              type="button"
+              disabled={nextDisabled}
+              className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent"
+              onClick={() => setPage?.(currentPage + 1)}
             >
               <span className="sr-only">Next</span>
               <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-            </a>
+            </button>
           </nav>
         </div>
       </div>
