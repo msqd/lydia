@@ -182,6 +182,36 @@ describe("filterTransactions", () => {
     });
   });
 
+  describe.each(["America/New_York", "Pacific/Kiritimati"])("time range day bounds in %s", (zone) => {
+    const originalTimeZone = process.env.TZ;
+
+    beforeEach(() => {
+      process.env.TZ = zone;
+    });
+
+    afterEach(() => {
+      process.env.TZ = originalTimeZone;
+    });
+
+    const transactions = [
+      transaction({ id: "before", timestamp: "2025-05-04T23:30:00" }),
+      transaction({ id: "start-day", timestamp: "2025-05-05T00:30:00" }),
+      transaction({ id: "end-day", timestamp: "2025-05-05T23:30:00" }),
+      transaction({ id: "after", timestamp: "2025-05-06T00:30:00" }),
+    ];
+    const day = { startDate: "2025-05-05", endDate: "2025-05-05" };
+
+    it("keeps the whole local end day and drops the day after", () => {
+      expect(ids(filterTransactions(transactions, { filters: { time: day } }))).toEqual(["start-day", "end-day"]);
+    });
+
+    it("treats an invalid date as no bound", () => {
+      const filters = { time: { startDate: "garbage", endDate: "2025-05-05" } };
+
+      expect(ids(filterTransactions(transactions, { filters }))).toEqual(["before", "start-day", "end-day"]);
+    });
+  });
+
   describe("tpdex", () => {
     const scored = transaction({ id: "scored", tpdex: 40 });
     const good = transaction({ id: "good", tpdex: 95 });

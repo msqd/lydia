@@ -344,19 +344,42 @@ describe("TransactionsListPage", () => {
     expect(onTransactionSelect).toHaveBeenCalledWith(sampleTransactions[0]);
   });
 
-  it("keeps a row's favorite state when another row is selected", () => {
-    const { container } = render(<TransactionsListPage {...driven} transactions={sampleTransactions} />);
+  const starName = "Favourite GET /api/users/123/profile";
 
-    const star = screen.getByRole("button", { name: "Favourite GET /api/users/123/profile" });
-    fireEvent.click(star);
+  it("shows the favourites it is given and reports a toggle, holding no state of its own", () => {
+    const onFavoriteChange = vi.fn();
+    const favorites = new Set([sampleTransactions[0].id]);
+    const { rerender } = render(
+      <TransactionsListPage
+        {...driven}
+        transactions={sampleTransactions}
+        favorites={favorites}
+        onFavoriteChange={onFavoriteChange}
+      />,
+    );
+    const star = screen.getByRole("button", { name: starName });
     expect(star).toHaveAttribute("aria-pressed", "true");
 
-    fireEvent.click(container.querySelectorAll("tbody tr")[1]);
+    fireEvent.click(star);
+    expect(onFavoriteChange).toHaveBeenCalledWith(sampleTransactions[0].id, false);
+    expect(star).toHaveAttribute("aria-pressed", "true");
 
-    expect(screen.getByRole("button", { name: "Favourite GET /api/users/123/profile" })).toHaveAttribute(
-      "aria-pressed",
-      "true",
+    rerender(
+      <TransactionsListPage
+        {...driven}
+        transactions={sampleTransactions}
+        favorites={new Set()}
+        onFavoriteChange={onFavoriteChange}
+      />,
     );
+    expect(screen.getByRole("button", { name: starName })).toHaveAttribute("aria-pressed", "false");
+  });
+
+  it("has no star column without onFavoriteChange", () => {
+    render(<TransactionsListPage {...driven} transactions={sampleTransactions} favorites={new Set(["tx-1"])} />);
+
+    expect(screen.queryByRole("columnheader", { name: "Favourite" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: starName })).not.toBeInTheDocument();
   });
 
   /**
@@ -367,23 +390,31 @@ describe("TransactionsListPage", () => {
   it("favourites a row from the keyboard, without choosing the row", async () => {
     const user = userEvent.setup();
     const onRowClick = vi.fn();
-    render(<TransactionsListPage {...driven} transactions={sampleTransactions} onRowClick={onRowClick} />);
+    const onFavoriteChange = vi.fn();
+    render(
+      <TransactionsListPage
+        {...driven}
+        transactions={sampleTransactions}
+        onRowClick={onRowClick}
+        onFavoriteChange={onFavoriteChange}
+      />,
+    );
 
-    const star = screen.getByRole("button", { name: "Favourite GET /api/users/123/profile" });
+    const star = screen.getByRole("button", { name: starName });
     expect(star).toHaveAttribute("aria-pressed", "false");
 
     star.focus();
     await user.keyboard(" ");
-    expect(star).toHaveAttribute("aria-pressed", "true");
     await user.keyboard("{Enter}");
-    expect(star).toHaveAttribute("aria-pressed", "false");
+    expect(onFavoriteChange).toHaveBeenCalledTimes(2);
+    expect(onFavoriteChange).toHaveBeenCalledWith(sampleTransactions[0].id, true);
     expect(onRowClick).not.toHaveBeenCalled();
   });
 });
 
 describe("the transactions table's headers", () => {
   it("names the favourite column, whose header shows no text", () => {
-    render(<TransactionsListPage {...driven} transactions={sampleTransactions} />);
+    render(<TransactionsListPage {...driven} transactions={sampleTransactions} onFavoriteChange={vi.fn()} />);
 
     expect(screen.getByRole("columnheader", { name: "Favourite" })).toBeInTheDocument();
   });

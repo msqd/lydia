@@ -65,6 +65,14 @@ interface TransactionsListPageBaseProps extends ComponentProps<"div"> {
   /** Called when the user asks for another page. */
   onPageChange?: (page: number) => void;
 
+  /**
+   * Ids of the favourite transactions. Favourites are per-user state only the consumer holds; the
+   * page shows them and never keeps any.
+   */
+  favorites?: ReadonlySet<string>;
+  /** Called when the user toggles a star. The star column renders only when this is provided. */
+  onFavoriteChange?: (id: string, favorite: boolean) => void;
+
   /** True while the consumer is fetching, so an empty list reads as "not yet" rather than "none". */
   isLoading?: boolean;
 }
@@ -114,9 +122,15 @@ const formatDuration = (milliseconds: number) => {
  * announce. Its keys stop at the button, since the row's own Enter and Space
  * choose the row.
  */
-const FavoriteAction = ({ transaction }: { transaction: Transaction }) => {
-  const [isFavorite, setIsFavorite] = useState(false); // TODO: connect to actual favorite state
-
+const FavoriteAction = ({
+  transaction,
+  isFavorite,
+  onChange,
+}: {
+  transaction: Transaction;
+  isFavorite: boolean;
+  onChange: (id: string, favorite: boolean) => void;
+}) => {
   return (
     <button
       type="button"
@@ -125,7 +139,7 @@ const FavoriteAction = ({ transaction }: { transaction: Transaction }) => {
       onClick={(event) => {
         event.preventDefault();
         event.stopPropagation();
-        setIsFavorite(!isFavorite);
+        onChange(transaction.id, !isFavorite);
       }}
       onKeyDown={(event) => event.stopPropagation()}
       className="rounded cursor-pointer focus-visible:outline-2 focus-visible:outline-primary-600"
@@ -176,16 +190,21 @@ const DurationDisplay = ({ transaction }: { transaction: Transaction }) => {
 };
 
 // DataTable configuration
-const columns = ["flags", "request", "response", "duration", "date"];
+const columns = ["request", "response", "duration", "date"];
+const favoriteColumn = (
+  favorites: ReadonlySet<string>,
+  onChange: (id: string, favorite: boolean) => void,
+): TypedColumn<Transaction, Transaction> => ({
+  label: "Favourite",
+  labelHidden: true,
+  get: (transaction: Transaction) => transaction,
+  format: (transaction: Transaction) => (
+    <FavoriteAction transaction={transaction} isFavorite={favorites.has(transaction.id)} onChange={onChange} />
+  ),
+  headerClassName: "w-1",
+  className: "w-8",
+});
 const types = {
-  flags: {
-    label: "Favourite",
-    labelHidden: true,
-    get: (transaction: Transaction) => transaction,
-    format: (transaction: Transaction) => <FavoriteAction transaction={transaction} />,
-    headerClassName: "w-1",
-    className: "w-8",
-  } satisfies TypedColumn<Transaction, Transaction>,
   request: {
     label: "Request",
     get: (transaction: Transaction) => transaction,
@@ -226,6 +245,8 @@ const paginatorLabel = (where: string, ariaLabel?: string, ariaLabelledby?: stri
   return `Pagination, ${where} the list`;
 };
 
+const EMPTY_FAVORITES: ReadonlySet<string> = new Set();
+
 export function TransactionsListPage({
   className,
   onRowClick,
@@ -247,6 +268,8 @@ export function TransactionsListPage({
   pageCount,
   onPageChange,
   isLoading = false,
+  favorites = EMPTY_FAVORITES,
+  onFavoriteChange,
   ...props
 }: TransactionsListPageProps) {
   const isEmbedded = variant === "embedded";
@@ -320,8 +343,8 @@ export function TransactionsListPage({
 
     return (
       <DataTable<Transaction>
-        types={types}
-        columns={columns}
+        types={onFavoriteChange ? { flags: favoriteColumn(favorites, onFavoriteChange), ...types } : types}
+        columns={onFavoriteChange ? ["flags", ...columns] : columns}
         rows={transactions}
         onRowClick={(row) => {
           const transaction = row;
