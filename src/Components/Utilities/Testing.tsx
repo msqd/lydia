@@ -57,6 +57,7 @@ export function testComponentVariants<T extends string>({
   baseClasses = [],
   getElement = (content: string) => screen.getByText(content),
 }: {
+  // Driven by prop names given at runtime, so its props cannot be typed.
   Component: React.ComponentType<any>;
   variants: T[];
   variantProp: string;
@@ -103,6 +104,7 @@ export function testClassNameMerging({
   testContent = "Test Content",
   getElement = (content: string) => screen.getByText(content),
 }: {
+  // Driven by prop names given at runtime, so its props cannot be typed.
   Component: React.ComponentType<any>;
   customClass: string;
   defaultClasses: string[];
@@ -138,7 +140,9 @@ export function testAdditionalProps({
   testContent = "Test Content",
   expectations,
 }: {
+  // Driven by prop names given at runtime, so its props cannot be typed.
   Component: React.ComponentType<any>;
+  // Passed through to a component whose props are unknown here.
   additionalProps: Record<string, any>;
   testContent?: string;
   expectations: (element: HTMLElement) => void;
@@ -170,6 +174,7 @@ export function testDisabledState({
   testContent = "Disabled Component",
   getElement = (content: string) => screen.getByText(content),
 }: {
+  // Driven by prop names given at runtime, so its props cannot be typed.
   Component: React.ComponentType<any>;
   disabledClasses?: string[];
   testContent?: string;

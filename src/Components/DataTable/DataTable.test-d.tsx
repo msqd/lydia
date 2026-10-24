@@ -1,4 +1,5 @@
-import { type Column, columnsFor } from "./DataTable";
+import type { Transaction } from "@msqd/lydia/Models/Transactions/types";
+import { type Column, DataTable, columnsFor } from "./DataTable";
 
 /**
  * What `Column<TRow, TValue>` promises, checked by the compiler.
@@ -12,7 +13,7 @@ import { type Column, columnsFor } from "./DataTable";
  * Checked by `pnpm types`, which is what CI runs.
  */
 
-interface Row extends Record<string, unknown> {
+interface Row {
   id: string;
   statusCode: number;
   url: string;
@@ -27,7 +28,8 @@ const column = columnsFor<Row>();
  * them is keyed by string and typed `Column<TRow, any>`. Written directly,
  * that `any` reaches `format` -- so a column reading a number and formatting
  * it as a string type-checked, and the mistake surfaced as `undefined is not
- * a function` in a browser.
+ * a function` in a browser. The map is now `Column<TRow, unknown>`, which
+ * typed columns still fit because `format` is declared as a method.
  */
 column({
   label: "Status",
@@ -64,12 +66,14 @@ column({
 
 /**
  * A map built this way still fits the prop, which is the point of the helper
- * rather than of a new map type: `types` stays `Record<string, Column<TRow,
- * any>>`, so nothing that already passes one has to change.
+ * rather than of a new map type.
  */
-const types: Record<string, Column<Row, any>> = {
+const types: Record<string, Column<Row, unknown>> = {
   status: column({ label: "Status", get: (row) => row.statusCode }),
   url: column({ label: "URL", get: (row) => row.url }),
 };
 
 export { types };
+
+/** A closed domain type, with no index signature, is a row like any other. */
+export const closedRows = <DataTable<Transaction> rows={[]} types={{ url: { label: "URL" } }} columns={["url"]} />;

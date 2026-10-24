@@ -1,5 +1,5 @@
 import { memo, useMemo } from "react";
-import { SyntaxHighlighter } from "./SyntaxHighlighter";
+import { SyntaxHighlighter, type SyntaxTree } from "./SyntaxHighlighter";
 import { useVirtualization } from "./useVirtualization";
 
 /**
@@ -12,7 +12,7 @@ interface VirtualizedCodeViewProps {
   /** The formatted content to display */
   content: string;
   /** Optional syntax tree for highlighting */
-  highlightedAST?: any | null;
+  highlightedAST?: SyntaxTree | null;
   /** Height of the container in pixels */
   containerHeight: number;
   /** Whether to show line numbers */

@@ -1,4 +1,5 @@
-import type { BadgeColor } from "@msqd/lydia/Components/Badges";
+/** How a status reads at a glance. A subset of what a badge can be coloured, so it can be handed to one. */
+export type StatusTone = "success" | "warning" | "danger" | "default";
 
 // Health status types
 export type HealthStatus = "healthy" | "degraded" | "unhealthy";
@@ -11,14 +12,14 @@ export type SystemStatus = HealthStatus | CircuitBreakerStatus;
 
 // Configuration for health status display
 export interface HealthStatusConfig {
-  color: BadgeColor;
+  color: StatusTone;
   label: string;
   description?: string;
 }
 
 // Configuration for circuit breaker status display
 export interface CircuitBreakerStatusConfig {
-  color: BadgeColor;
+  color: StatusTone;
   icon: string;
   label: string;
   description: string;
@@ -74,7 +75,7 @@ export function isCircuitBreakerStatus(status: string): status is CircuitBreaker
 }
 
 // Helper function to get color for any status
-export function getStatusColor(status: SystemStatus): BadgeColor {
+export function getStatusColor(status: SystemStatus): StatusTone {
   if (isHealthStatus(status)) {
     return healthStatusMap[status].color;
   }

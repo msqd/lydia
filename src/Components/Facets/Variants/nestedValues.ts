@@ -1,12 +1,6 @@
-import type { FilterMeta } from "@msqd/lydia/Models/Filters";
+import type { FacetOption, FilterMeta } from "@msqd/lydia/Models/Filters";
 
-/**
- * A value of a facet. With `under`, it is a class whose values hang beneath it (a status class and its codes): its
- * `name` is the class token and each `under` name a code token (ADR 0002).
- */
-export interface FacetOption extends FilterMeta {
-  under?: FilterMeta[];
-}
+export type { FacetOption };
 
 /** An option that has values beneath it. An empty `under` is a flat value. */
 export type NestedOption = FacetOption & { under: FilterMeta[] };

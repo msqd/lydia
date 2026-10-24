@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { refractor } from "refractor/core";
+import type { SyntaxTree } from "./SyntaxHighlighter";
 import { normalizeLanguage } from "./syntaxTheme";
 
 import css from "refractor/css";
@@ -45,7 +46,7 @@ function formatContent(content: string, language: CodeLanguage): string {
 /**
  * Performs syntax highlighting using refractor
  */
-function highlightCode(content: string, language: CodeLanguage): any | null {
+function highlightCode(content: string, language: CodeLanguage): SyntaxTree | null {
   if (language === "text") {
     return null;
   }
@@ -76,7 +77,7 @@ export function useCodeHighlighting(
   content: string,
   language: CodeLanguage,
   { enabled = true, maxLines = Number.POSITIVE_INFINITY }: HighlightingOptions = {},
-) {
+): { formattedContent: string; highlightedAST: SyntaxTree | null; isHighlighted: boolean } {
   const formattedContent = useMemo(() => {
     return formatContent(content, language);
   }, [content, language]);
