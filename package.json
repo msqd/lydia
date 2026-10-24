@@ -409,14 +409,6 @@
       "types": "./dist/Components/NavBar/NavBar.d.ts",
       "import": "./dist/Components/NavBar/NavBar.js"
     },
-    "./Components/Navigation": {
-      "types": "./dist/Components/Navigation/index.d.ts",
-      "import": "./dist/Components/Navigation/index.js"
-    },
-    "./Components/Navigation/NavigationProvider": {
-      "types": "./dist/Components/Navigation/NavigationProvider.d.ts",
-      "import": "./dist/Components/Navigation/NavigationProvider.js"
-    },
     "./Components/Tabs": {
       "types": "./dist/Components/Tabs/index.d.ts",
       "import": "./dist/Components/Tabs/index.js"
@@ -476,10 +468,6 @@
     "./Components/Utilities/useGlobalClickOutside": {
       "types": "./dist/Components/Utilities/useGlobalClickOutside.d.ts",
       "import": "./dist/Components/Utilities/useGlobalClickOutside.js"
-    },
-    "./Config/navigation": {
-      "types": "./dist/Config/navigation.d.ts",
-      "import": "./dist/Config/navigation.js"
     },
     "./Elements": {
       "types": "./dist/Elements/index.d.ts",
@@ -556,10 +544,6 @@
     "./Elements/Transactions/TransactionsFiltersSidebar": {
       "types": "./dist/Elements/Transactions/TransactionsFiltersSidebar.d.ts",
       "import": "./dist/Elements/Transactions/TransactionsFiltersSidebar.js"
-    },
-    "./Hooks/useNavigation": {
-      "types": "./dist/Hooks/useNavigation.d.ts",
-      "import": "./dist/Hooks/useNavigation.js"
     },
     "./Models": {
       "types": "./dist/Models/index.d.ts",
@@ -725,10 +709,6 @@
     "./Pages/Transactions/Detail/Utils/ContentRenderer": {
       "types": "./dist/Pages/Transactions/Detail/Utils/ContentRenderer.d.ts",
       "import": "./dist/Pages/Transactions/Detail/Utils/ContentRenderer.js"
-    },
-    "./Pages/Transactions/Filters": {
-      "types": "./dist/Pages/Transactions/Filters/index.d.ts",
-      "import": "./dist/Pages/Transactions/Filters/index.js"
     },
     "./Pages/Transactions/List": {
       "types": "./dist/Pages/Transactions/List/index.d.ts",

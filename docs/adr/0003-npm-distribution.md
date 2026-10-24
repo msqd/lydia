@@ -21,9 +21,8 @@ path ending in `.js`. The declarations then resolve under `bundler` and `nodenex
 `package.json#exports`.
 
 The tarball holds `dist` and nothing else. The build emits no declaration for `*.test.ts` and no
-module for `*.test-d.*`; `src` is not shipped. `Config/navigation` builds its demo routes from
-`*.samples` modules, so those few sample files stay in `dist` until the navigation no longer
-bundles demo data.
+module for `*.test-d.*` or `*.samples.*`; `src` is not shipped. The library holds components, not a
+demo app: sample data lives for Storybook and tests only.
 
 ### CSS
 
