@@ -74,7 +74,7 @@ export default defineConfig({
         styles: "./src/styles.css",
         ...Object.fromEntries(
           globSync("src/{Components,Elements,Pages,Models,Services,Config,Hooks}/**/*.{ts,tsx}")
-            .filter((file) => !/\.stories\.tsx$|\.test\.tsx?$|\.test-d\.tsx?$|(^|\/)Testing\.tsx$/.test(file))
+            .filter((file) => !/\.stories\.tsx$|\.samples\.tsx?$|\.test\.tsx?$|\.test-d\.tsx?$|(^|\/)Testing\.tsx$/.test(file))
             .map((file) => {
               const name = basename(file, extname(file));
               const dir = dirname(file).replace("src/", "");

@@ -16,8 +16,6 @@
     "**/*.test-d.tsx",
     "**/*.samples.ts",
     "**/*.test-utils.ts",
-    "**/Testing.tsx",
-    "src/App.tsx",
-    "src/main.tsx"
+    "**/Testing.tsx"
   ]
 }
