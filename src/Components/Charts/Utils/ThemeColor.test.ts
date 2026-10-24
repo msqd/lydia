@@ -1,3 +1,4 @@
+import { LINEAR_GROWTH_LIMIT, growthRatio } from "@/linearTime.test-utils";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { resolveThemeColor, resolveThemeColors, toEchartsColor } from "./ThemeColor";
 
@@ -167,17 +168,15 @@ describe("resolveThemeColor", () => {
 });
 
 describe("toEchartsColor on pathological input", () => {
-  const digits = "1".repeat(100_000);
   const cases = {
-    lightness: `oklch(${digits}x 0 0)`,
-    chroma: `oklch(1 ${digits}x 0)`,
-    hue: `oklch(1 0 ${digits}x)`,
-    alpha: `oklch(1 0 0 / ${digits}x)`,
+    lightness: (digits: string) => `oklch(${digits}x 0 0)`,
+    chroma: (digits: string) => `oklch(1 ${digits}x 0)`,
+    hue: (digits: string) => `oklch(1 0 ${digits}x)`,
+    alpha: (digits: string) => `oklch(1 0 0 / ${digits}x)`,
   };
 
-  it.each(Object.entries(cases))("rejects a long malformed %s in linear time", (_position, input) => {
-    const start = performance.now();
-    toEchartsColor(input);
-    expect(performance.now() - start).toBeLessThan(100);
+  it.each(Object.entries(cases))("rejects a long malformed %s in linear time", (_position, build) => {
+    const ratio = growthRatio((size) => toEchartsColor(build("1".repeat(size))), 10_000, 100_000);
+    expect(ratio).toBeLessThan(LINEAR_GROWTH_LIMIT);
   });
 });
