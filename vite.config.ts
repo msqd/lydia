@@ -1,10 +1,8 @@
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import { resolve } from "path";
-import { glob } from "glob";
-import { readFileSync } from "node:fs";
-import { extname, dirname, basename } from "node:path";
+import { globSync, readFileSync } from "node:fs";
+import { basename, dirname, extname, resolve } from "node:path";
 
 /**
  * Generates appropriate asset filenames for the component library build.
@@ -36,7 +34,7 @@ function generateAssetFilename(assetInfo: { name?: string }): string {
   return "assets/[name]-[hash][extname]";
 }
 
-const packageJson = JSON.parse(readFileSync(resolve(__dirname, "package.json"), "utf-8"));
+const packageJson = JSON.parse(readFileSync(resolve(import.meta.dirname, "package.json"), "utf-8"));
 
 /**
  * Every runtime and peer dependency, and each of its subpaths, stays an import of the published
@@ -50,16 +48,18 @@ const externalDependencies = [
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  // Vite 7 defaults to "none", which drops the Tailwind and Prism licence banners from the minified stylesheet.
+  esbuild: { legalComments: "inline" },
   resolve: {
     alias: {
-      "@": resolve(__dirname, "./src"),
+      "@": resolve(import.meta.dirname, "./src"),
       // Self-referencing: @msqd/lydia/* resolves to src/* for internal imports
-      "@msqd/lydia": resolve(__dirname, "./src"),
+      "@msqd/lydia": resolve(import.meta.dirname, "./src"),
     },
   },
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
+      entry: resolve(import.meta.dirname, "src/index.ts"),
       formats: ["es"],
     },
     cssCodeSplit: true, // Enable CSS code splitting for component library
@@ -73,10 +73,8 @@ export default defineConfig({
         index: "./src/index.ts",
         styles: "./src/styles.css",
         ...Object.fromEntries(
-          glob
-            .sync("src/{Components,Elements,Pages,Models,Services,Config,Hooks}/**/*.{ts,tsx}", {
-              ignore: ["**/*.stories.tsx", "**/*.test.tsx", "**/*.test.ts", "**/*.test-d.{ts,tsx}", "**/Testing.tsx"],
-            })
+          globSync("src/{Components,Elements,Pages,Models,Services,Config,Hooks}/**/*.{ts,tsx}")
+            .filter((file) => !/\.stories\.tsx$|\.test\.tsx?$|\.test-d\.tsx?$|(^|\/)Testing\.tsx$/.test(file))
             .map((file) => {
               const name = basename(file, extname(file));
               const dir = dirname(file).replace("src/", "");
