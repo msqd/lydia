@@ -295,16 +295,21 @@ Every transaction field Lydia renders (URL, headers, bodies, tags, names) comes 
 
 ### Content-Security-Policy
 
-The previews need two directives, and nothing else beyond what your own application uses:
+Checked in headless Chromium against a built consumer, with `securitypolicyviolation` events collected: the image and PDF previews, a chart tooltip hover and each stylesheet entry. Starting from `default-src 'self'`, Lydia needs:
 
-| Directive | Value | For |
-| --- | --- | --- |
-| `img-src` | `data:` | Image body preview |
-| `frame-src` | `data:` | PDF body preview |
+| Directive | Value | For | Entry |
+| --- | --- | --- | --- |
+| `img-src` | `data:` | Image body preview | Both |
+| `frame-src` | `data:` | PDF body preview | Both |
+| `font-src` | `data:` | Lato, embedded as `data:` URIs | `@msqd/lydia/styles` only |
+
+With `theme.css` and `components.css`, your bundler emits the fonts as files served from your own origin, so `font-src 'self'` is enough. Chart tooltips and inline `style` attributes work under `style-src 'self'`: no `'unsafe-inline'` is needed.
 
 ```
 Content-Security-Policy: default-src 'self'; img-src 'self' data:; frame-src data:
 ```
+
+Add `font-src 'self' data:` to that policy if you import `@msqd/lydia/styles`. Without it the browser blocks the fonts and falls back to a system font.
 
 ### Redaction
 
@@ -322,7 +327,7 @@ Report a vulnerability through [SECURITY.md](../SECURITY.md).
 | Two Tailwinds in the output, resets applied twice | `@msqd/lydia/styles` imported next to your own Tailwind. | Use only one option. |
 | `@theme` rejected by the CSS build | Tailwind 3. | Upgrade to Tailwind 4, or use option B. |
 | Type or runtime break after `pnpm up` | A release with breaking changes. | Read the `### Breaking` sections of [CHANGELOG.md](../CHANGELOG.md) between your version and the new one before upgrading. |
-| Image or PDF body preview stays blank, with a CSP violation in the console | The Content-Security-Policy blocks `data:` in `img-src` or `frame-src`. | Add `img-src data:` and `frame-src data:`, see [Security](#security). |
+| Image or PDF body preview stays blank, or Lato does not load, with a CSP violation in the console | The Content-Security-Policy blocks `data:` in `img-src`, `frame-src` or (`@msqd/lydia/styles` only) `font-src`. | Add `img-src data:`, `frame-src data:` and, for `styles`, `font-src data:`, see [Security](#security). |
 | Changes in the linked clone do not show | `dist` is stale. | `pnpm build` in the clone, then restart the dev server. |
 
 ## Upgrading
