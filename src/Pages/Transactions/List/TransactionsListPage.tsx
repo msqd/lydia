@@ -14,6 +14,7 @@ import { type ComponentProps, useCallback, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { type FilterChangeHandler, type Filters, hasActiveFilters } from "@msqd/lydia/Models/Filters";
+import { splitRequestTarget } from "@msqd/lydia/Models/Http/requestTarget";
 import type { TransactionFacets } from "@msqd/lydia/Models/Transactions/facets";
 import type { Transaction } from "@msqd/lydia/Models/Transactions/types";
 
@@ -141,9 +142,7 @@ const FavoriteAction = ({ transaction }: { transaction: Transaction }) => {
 
 // Request summary component (inspired by MessageSummary)
 const RequestSummary = ({ transaction }: { transaction: Transaction }) => {
-  const url = new URL(transaction.url, "http://example.com"); // Parse URL for path and query
-  const path = url.pathname;
-  const queryString = url.search;
+  const { path, query: queryString } = splitRequestTarget(transaction.url);
 
   return (
     <span className="font-normal">

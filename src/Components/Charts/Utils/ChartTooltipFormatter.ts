@@ -1,4 +1,5 @@
 import type { OverviewTransaction } from "../../../Models";
+import { escapeTooltipHtml } from "./escapeTooltipHtml";
 
 export interface TooltipData {
   count: number;
@@ -36,15 +37,17 @@ export class ChartTooltipFormatter {
     const cachedRate = ChartTooltipFormatter.formatPercentage(cached, count);
 
     return (
-      `<small>Transactions: ${count}<br/>` +
-      `Cached: ${cached} (${cachedRate})<br/>` +
-      `Errors: ${errors} (${errorRate})<br/>` +
+      `<small>Transactions: ${escapeTooltipHtml(count)}<br/>` +
+      `Cached: ${escapeTooltipHtml(cached)} (${cachedRate})<br/>` +
+      `Errors: ${escapeTooltipHtml(errors)} (${errorRate})<br/>` +
       "</small>"
     );
   }
 
   /**
    * Create tooltip content for split bar charts (wide bars with separate error/cached bars)
+   *
+   * @returns HTML, with every interpolated input escaped
    */
   static formatSplitBarsTooltip(params: SplitTooltipParams[]): string {
     const [countSerie, errorsSerie, cachedSerie] = params;
@@ -59,23 +62,27 @@ export class ChartTooltipFormatter {
 
   /**
    * Create tooltip content for unified bar charts (stacked bars)
+   *
+   * @returns HTML, with every interpolated input escaped
    */
   static formatUnifiedBarsTooltip(params: SplitTooltipParams[], data: OverviewTransaction[]): string {
     const dataIndex = params[0]?.dataIndex;
     if (dataIndex === undefined || !data[dataIndex]) {
-      return `<strong>${params[0]?.name || "Unknown"}</strong><br/><small>No data available</small>`;
+      return `<strong>${escapeTooltipHtml(params[0]?.name || "Unknown")}</strong><br/><small>No data available</small>`;
     }
 
     const { count, errors, cached } = data[dataIndex];
 
-    return `<strong>${params[0].name}</strong><br/>${ChartTooltipFormatter.formatBreakdown({ count, errors, cached })}`;
+    return `<strong>${escapeTooltipHtml(params[0].name)}</strong><br/>${ChartTooltipFormatter.formatBreakdown({ count, errors, cached })}`;
   }
 
   /**
    * Create tooltip content from transaction data directly
+   *
+   * @returns HTML, with every interpolated input escaped
    */
   static formatTooltipFromData({ count, errors, cached, name }: TooltipData): string {
-    const header = `<strong>${name}</strong><br/>`;
+    const header = `<strong>${escapeTooltipHtml(name)}</strong><br/>`;
 
     return count
       ? header + ChartTooltipFormatter.formatBreakdown({ count, errors, cached })

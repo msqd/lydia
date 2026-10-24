@@ -228,3 +228,50 @@ describe("ChartTooltipFormatter", () => {
     });
   });
 });
+
+describe("ChartTooltipFormatter with hostile input", () => {
+  const hostile = "<img src=x onerror=alert(1)>";
+  const expectEscaped = (html: string) => {
+    expect(html).toContain("&lt;img");
+    expect(html).not.toContain("<img");
+  };
+
+  it("escapes the name in formatSplitBarsTooltip", () => {
+    expectEscaped(ChartTooltipFormatter.formatSplitBarsTooltip([{ name: hostile, value: 5 }]));
+  });
+
+  it("escapes string counts in formatSplitBarsTooltip", () => {
+    const value = hostile as unknown as number;
+    expectEscaped(
+      ChartTooltipFormatter.formatSplitBarsTooltip([
+        { name: "x", value },
+        { name: "x", value },
+        { name: "x", value },
+      ]),
+    );
+  });
+
+  it("escapes the name in formatUnifiedBarsTooltip", () => {
+    const data = [{ count: 1, errors: 0, cached: 0 }] as OverviewTransaction[];
+    expectEscaped(ChartTooltipFormatter.formatUnifiedBarsTooltip([{ name: hostile, value: 1, dataIndex: 0 }], data));
+  });
+
+  it("escapes the name when there is no data in formatUnifiedBarsTooltip", () => {
+    expectEscaped(ChartTooltipFormatter.formatUnifiedBarsTooltip([{ name: hostile, value: 1 }], []));
+  });
+
+  it("escapes string counts in formatUnifiedBarsTooltip", () => {
+    const count = hostile as unknown as number;
+    const data = [{ count, errors: count, cached: count }] as OverviewTransaction[];
+    expectEscaped(ChartTooltipFormatter.formatUnifiedBarsTooltip([{ name: "x", value: 1, dataIndex: 0 }], data));
+  });
+
+  it("escapes the name in formatTooltipFromData", () => {
+    expectEscaped(ChartTooltipFormatter.formatTooltipFromData({ name: hostile, count: 0, errors: 0, cached: 0 }));
+  });
+
+  it("escapes string counts in formatTooltipFromData", () => {
+    const count = hostile as unknown as number;
+    expectEscaped(ChartTooltipFormatter.formatTooltipFromData({ name: "x", count, errors: count, cached: count }));
+  });
+});
