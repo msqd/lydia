@@ -5,15 +5,25 @@ import {
   FolderIcon,
   FolderOpenIcon,
 } from "@heroicons/react/24/outline";
+import {
+  type EndpointNodeType,
+  type Selection,
+  apiOf,
+  isUnder,
+  segmentsOf,
+} from "@msqd/lydia/Models/Transactions/endpoints";
 import type { Transaction } from "@msqd/lydia/Models/Transactions/types";
-import { type ComponentProps, useMemo } from "react";
+import { type ComponentProps, useMemo, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 export interface TreeNode {
   id: string;
   name: string;
   path: string;
-  type: "api" | "folder" | "endpoint";
+  type: EndpointNodeType;
+  apiName: string;
+  /** Path segments below the API, empty for the API node. */
+  segments: string[];
   children?: TreeNode[];
   transactionCount?: number;
 }
@@ -21,123 +31,92 @@ export interface TreeNode {
 export interface TransactionsExplorerSidebarProps extends Omit<ComponentProps<"div">, "onSelect"> {
   /** Transaction data to build the tree from */
   transactions: Transaction[];
-  /** Currently selected path */
-  selectedPath?: string | null;
-  /** Currently expanded nodes */
+  /** Currently selected node */
+  selected?: Selection | null;
+  /** Expanded node ids. When omitted the sidebar keeps its own, and `onToggleExpand` only reports. */
   expandedNodes?: Set<string>;
   /** Handler when a node is selected */
-  onSelect?: (path: string, type: string) => void;
+  onSelect?: (selection: Selection) => void;
   /** Handler when a node is expanded/collapsed */
   onToggleExpand?: (nodeId: string) => void;
   /** Custom title for the sidebar */
   title?: string;
 }
 
-// Build tree structure from transactions
+function selectionOf(node: TreeNode): Selection {
+  return { type: node.type, apiName: node.apiName, segments: node.segments };
+}
+
+const sameNode = (a: Selection, b: Selection) =>
+  a.apiName === b.apiName && a.segments.length === b.segments.length && a.segments.every((s, i) => s === b.segments[i]);
+
 function buildApiTree(transactions: Transaction[]): TreeNode[] {
-  const apiMap = new Map<string, Map<string, Set<string>>>();
+  const segmentsByApi = new Map<string, string[][]>();
+  for (const transaction of transactions) {
+    const apiName = apiOf(transaction);
+    segmentsByApi.set(apiName, [...(segmentsByApi.get(apiName) ?? []), segmentsOf(transaction)]);
+  }
 
-  // Group transactions by API and paths
-  transactions.forEach((transaction) => {
-    const apiName = transaction.apiName || "unknown-api";
-    const pathParts = transaction.url.split("/").filter(Boolean);
+  const countUnder = (apiName: string, segments: string[]) =>
+    transactions.filter((t) => isUnder(t, { apiName, segments })).length;
 
-    if (!apiMap.has(apiName)) {
-      apiMap.set(apiName, new Map());
-    }
-
-    const pathMap = apiMap.get(apiName)!;
-
-    // Build path hierarchy
-    let currentPath = "";
-    pathParts.forEach((part, index) => {
-      const parentPath = currentPath;
-      currentPath = currentPath ? `${currentPath}/${part}` : part;
-
-      if (!pathMap.has(parentPath)) {
-        pathMap.set(parentPath, new Set());
-      }
-      pathMap.get(parentPath)!.add(part);
-
-      // Add final endpoint
-      if (index === pathParts.length - 1) {
-        if (!pathMap.has(currentPath)) {
-          pathMap.set(currentPath, new Set());
-        }
-      }
+  const childrenOf = (apiName: string, parent: string[], paths: string[][]): TreeNode[] => {
+    const below = paths.filter((p) => p.length > parent.length && parent.every((segment, i) => p[i] === segment));
+    const names = new Set(below.map((p) => p[parent.length]));
+    return [...names].map((name) => {
+      const segments = [...parent, name];
+      const children = childrenOf(apiName, segments, below);
+      return {
+        id: [apiName, ...segments].join("/"),
+        name,
+        path: [apiName, ...segments].join("/"),
+        type: children.length > 0 ? "folder" : "endpoint",
+        apiName,
+        segments,
+        children: children.length > 0 ? children : undefined,
+        transactionCount: countUnder(apiName, segments),
+      };
     });
-  });
+  };
 
-  // Convert to tree structure
-  const trees: TreeNode[] = [];
-
-  apiMap.forEach((pathMap, apiName) => {
-    const apiNode: TreeNode = {
-      id: apiName,
-      name: apiName,
-      path: apiName,
-      type: "api",
-      children: [],
-      transactionCount: transactions.filter((t) => t.apiName === apiName).length,
-    };
-
-    // Build children recursively
-    const buildChildren = (parentPath: string, parentNode: TreeNode) => {
-      const children = pathMap.get(parentPath);
-      if (!children || children.size === 0) return;
-
-      children.forEach((childName) => {
-        const childPath = parentPath ? `${parentPath}/${childName}` : childName;
-        const fullPath = `${apiName}/${childPath}`;
-        const hasGrandchildren = pathMap.has(childPath) && pathMap.get(childPath)!.size > 0;
-
-        const childNode: TreeNode = {
-          id: fullPath,
-          name: childName,
-          path: fullPath,
-          type: hasGrandchildren ? "folder" : "endpoint",
-          children: hasGrandchildren ? [] : undefined,
-          transactionCount: transactions.filter((t) => t.apiName === apiName && t.url.startsWith(`/${childPath}`))
-            .length,
-        };
-
-        parentNode.children!.push(childNode);
-
-        if (hasGrandchildren) {
-          buildChildren(childPath, childNode);
-        }
-      });
-    };
-
-    buildChildren("", apiNode);
-    trees.push(apiNode);
-  });
-
-  return trees.sort((a, b) => a.name.localeCompare(b.name));
+  return [...segmentsByApi]
+    .map(
+      ([apiName, paths]): TreeNode => ({
+        id: apiName,
+        name: apiName,
+        path: apiName,
+        type: "api",
+        apiName,
+        segments: [],
+        children: childrenOf(apiName, [], paths),
+        transactionCount: countUnder(apiName, []),
+      }),
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
 }
 
 // Tree node component
 function TreeNodeComponent({
   node,
   level = 0,
-  selectedPath,
+  selected,
   expandedNodes,
   onSelect,
   onToggleExpand,
 }: {
   node: TreeNode;
   level?: number;
-  selectedPath: string | null;
+  selected: Selection | null;
   expandedNodes: Set<string>;
-  onSelect: (path: string, type: string) => void;
+  onSelect: (selection: Selection) => void;
   onToggleExpand: (id: string) => void;
 }) {
   const isExpanded = expandedNodes.has(node.id);
-  const isSelected = selectedPath === node.path;
+  const isSelected = selected !== null && sameNode(selected, selectionOf(node));
   const hasChildren = node.children && node.children.length > 0;
 
   const handleClick = () => {
-    onSelect(node.path, node.type);
+    onSelect(selectionOf(node));
     if (hasChildren) {
       onToggleExpand(node.id);
     }
@@ -212,7 +191,7 @@ function TreeNodeComponent({
               key={child.id}
               node={child}
               level={level + 1}
-              selectedPath={selectedPath}
+              selected={selected}
               expandedNodes={expandedNodes}
               onSelect={onSelect}
               onToggleExpand={onToggleExpand}
@@ -230,15 +209,28 @@ function TreeNodeComponent({
  */
 export function TransactionsExplorerSidebar({
   transactions,
-  selectedPath = null,
-  expandedNodes = new Set<string>(),
+  selected = null,
+  expandedNodes: controlledExpandedNodes,
   onSelect = () => {},
-  onToggleExpand = () => {},
+  onToggleExpand,
   title = "API Endpoints",
   className,
   ...props
 }: TransactionsExplorerSidebarProps) {
-  // Build tree from transactions
+  const [ownExpandedNodes, setOwnExpandedNodes] = useState<Set<string>>(new Set());
+  const expandedNodes = controlledExpandedNodes ?? ownExpandedNodes;
+
+  const handleToggleExpand = (nodeId: string) => {
+    if (!controlledExpandedNodes) {
+      setOwnExpandedNodes((prev) => {
+        const next = new Set(prev);
+        if (!next.delete(nodeId)) next.add(nodeId);
+        return next;
+      });
+    }
+    onToggleExpand?.(nodeId);
+  };
+
   const apiTree = useMemo(() => buildApiTree(transactions), [transactions]);
 
   return (
@@ -259,10 +251,10 @@ export function TransactionsExplorerSidebar({
             <TreeNodeComponent
               key={node.id}
               node={node}
-              selectedPath={selectedPath}
+              selected={selected}
               expandedNodes={expandedNodes}
               onSelect={onSelect}
-              onToggleExpand={onToggleExpand}
+              onToggleExpand={handleToggleExpand}
             />
           ))
         )}
@@ -273,3 +265,4 @@ export function TransactionsExplorerSidebar({
 
 // Export utility functions for external use
 export { buildApiTree };
+export type { Selection };

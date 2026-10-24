@@ -2,7 +2,7 @@ import type { Transaction } from "@msqd/lydia/Models/Transactions/types";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { expect, fn, userEvent, within } from "storybook/test";
-import { TransactionsExplorerSidebar } from "./TransactionsExplorerSidebar";
+import { type Selection, TransactionsExplorerSidebar } from "./TransactionsExplorerSidebar";
 
 const meta: Meta<typeof TransactionsExplorerSidebar> = {
   title: "Elements/Transactions/TransactionsExplorerSidebar",
@@ -28,9 +28,12 @@ const meta: Meta<typeof TransactionsExplorerSidebar> = {
     transactions: {
       description: "Array of transactions to build the tree from",
     },
-    selectedPath: {
-      control: "text",
-      description: "Currently selected path in the tree",
+    selected: {
+      control: "object",
+      description: "Currently selected node, as reported by `onSelect`",
+    },
+    expandedNodes: {
+      description: "Expanded node ids. Leave it out and the sidebar keeps its own.",
     },
     title: {
       control: "text",
@@ -124,6 +127,15 @@ export const Default: Story = {
     onSelect: fn(),
     onToggleExpand: fn(),
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const toggle = canvas.getAllByRole("button")[0];
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await userEvent.click(toggle);
+    await expect(toggle).toHaveAttribute("aria-expanded", "true");
+    await userEvent.click(toggle);
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+  },
   parameters: {
     docs: {
       description: {
@@ -137,7 +149,7 @@ export const Default: Story = {
 export const WithSelection: Story = {
   args: {
     transactions: sampleTransactions,
-    selectedPath: "users-api",
+    selected: { type: "api", apiName: "users-api", segments: [] },
     expandedNodes: new Set(["users-api"]),
     onSelect: fn(),
     onToggleExpand: fn(),
@@ -243,36 +255,16 @@ export const CustomTitle: Story = {
 // Interactive story with state management
 export const Interactive: Story = {
   render: (args) => {
-    const [selectedPath, setSelectedPath] = useState<string | null>(null);
-    const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
+    const [selected, setSelected] = useState<Selection | null>(null);
 
-    const handleSelect = (path: string, type: string) => {
-      setSelectedPath(path);
-      args.onSelect?.(path, type);
-    };
-
-    const handleToggleExpand = (nodeId: string) => {
-      setExpandedNodes((prev) => {
-        const next = new Set(prev);
-        if (next.has(nodeId)) {
-          next.delete(nodeId);
-        } else {
-          next.add(nodeId);
-        }
-        return next;
-      });
-      args.onToggleExpand?.(nodeId);
+    const handleSelect = (selection: Selection) => {
+      setSelected(selection);
+      args.onSelect?.(selection);
     };
 
     return (
       <div className="w-80 h-96">
-        <TransactionsExplorerSidebar
-          {...args}
-          selectedPath={selectedPath}
-          expandedNodes={expandedNodes}
-          onSelect={handleSelect}
-          onToggleExpand={handleToggleExpand}
-        />
+        <TransactionsExplorerSidebar {...args} selected={selected} onSelect={handleSelect} />
       </div>
     );
   },
