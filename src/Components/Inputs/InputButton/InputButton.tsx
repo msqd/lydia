@@ -41,7 +41,7 @@ export function InputButton({
   );
 
   return (
-    <Button type="button" variant={variant} className={inputButtonStyles} {...props}>
+    <Button variant={variant} className={inputButtonStyles} {...props}>
       {icon}
       {children}
     </Button>

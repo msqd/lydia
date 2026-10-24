@@ -42,7 +42,11 @@ export const Button: FunctionComponent<ButtonProps> = ({
   ...moreProps
 }) => {
   return (
-    <button className={twMerge(baseClassName, variantClassNames[variant], sizeStyles[size], className)} {...moreProps}>
+    <button
+      type="button"
+      className={twMerge(baseClassName, variantClassNames[variant], sizeStyles[size], className)}
+      {...moreProps}
+    >
       {children}
     </button>
   );
