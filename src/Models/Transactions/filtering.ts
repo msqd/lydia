@@ -2,6 +2,7 @@ import {
   type DateRangeFilter,
   type Filters,
   type MinMaxFilter,
+  parseLocalDay,
   readArray,
   readDates,
   readRange,
@@ -52,17 +53,16 @@ const statusMatcher = (selected: string[]): ((transaction: Transaction) => boole
 
 const matchesTimeRange = (transaction: Transaction, range: DateRangeFilter) => {
   const timestamp = new Date(transaction.timestamp);
+  const start = parseLocalDay(range.startDate ?? "");
+  const end = parseLocalDay(range.endDate ?? "");
 
-  if (range.startDate && timestamp < new Date(range.startDate)) {
+  if (start && timestamp < start) {
     return false;
   }
 
-  if (range.endDate) {
-    const endOfDay = new Date(range.endDate);
-    endOfDay.setHours(23, 59, 59, 999);
-    if (timestamp > endOfDay) {
-      return false;
-    }
+  if (end) {
+    const nextDay = new Date(end.getFullYear(), end.getMonth(), end.getDate() + 1);
+    return timestamp < nextDay;
   }
 
   return true;
@@ -113,7 +113,6 @@ export function filterTransactions(transactions: Transaction[], criteria: Transa
   const time = readDates(filters, "time");
   const tpdex = readRange(filters, "tpdex");
   const boundedTpdex = tpdex.min !== undefined || tpdex.max !== undefined;
-  const boundedTime = Boolean(time.startDate || time.endDate);
 
   return transactions.filter((transaction) => {
     if (term && !searchableValues(transaction).some((value) => value.toLowerCase().includes(term))) {
@@ -140,7 +139,7 @@ export function filterTransactions(transactions: Transaction[], criteria: Transa
       return false;
     }
 
-    if (boundedTime && !matchesTimeRange(transaction, time)) {
+    if (!matchesTimeRange(transaction, time)) {
       return false;
     }
 

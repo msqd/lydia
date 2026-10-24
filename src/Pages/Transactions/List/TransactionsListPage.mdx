@@ -24,6 +24,7 @@ totals, take the callbacks, fetch again.
 | `pageCount` | | Number of pages. Derived from `total` and `itemsPerPage` when omitted. |
 | `facets` | | Values each facet can offer, with counts. Displayed as given. |
 | `isLoading` | | True while you are fetching. |
+| `favorites` | `onFavoriteChange(id, favorite)` | Ids of the favourite transactions, and a star toggle. Favourites are yours: the page keeps none, and shows the star column only when `onFavoriteChange` is given. |
 
 Every one of them is optional, and **a control renders only when it can lead somewhere**: no
 `onSearchChange`, no search field; no `onFiltersChange`, no filters sidebar. A page that shows a

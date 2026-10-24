@@ -233,7 +233,7 @@ export function DataTable<TRow extends object, TComputed extends object = BaseRo
         {rows.map((row, index) => {
           return (
             <tr
-              key={index}
+              key={row[rowKey] === undefined ? index : String(row[rowKey])}
               onClick={
                 onRowClick
                   ? (e) => {

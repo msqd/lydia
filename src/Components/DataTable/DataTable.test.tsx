@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { useState } from "react";
 import { describe, expect, it, vi } from "vitest";
 import { DataTable, columnsFor } from "./DataTable";
 import type { Column, TypedColumn } from "./DataTable";
@@ -299,6 +300,55 @@ describe("DataTable", () => {
    * it, Enter or Space to choose. A hundred rows must not be a hundred tab
    * stops.
    */
+  describe("row identity", () => {
+    function Star() {
+      const [on, setOn] = useState(false);
+      return (
+        <button type="button" aria-pressed={on} onClick={() => setOn(!on)}>
+          star
+        </button>
+      );
+    }
+    const starred: Record<string, Column> = {
+      name: { label: "Name" },
+      star: { label: "Star", get: () => null, format: () => <Star /> },
+    };
+    const page = (...names: string[]) => names.map((name) => ({ id: name, name }));
+
+    it("moves a stateful cell with its row when the rows change", () => {
+      const { rerender } = render(<DataTable types={starred} columns={["name", "star"]} rows={page("a", "b")} />);
+      fireEvent.click(screen.getAllByRole("button")[0]);
+
+      rerender(<DataTable types={starred} columns={["name", "star"]} rows={page("c", "a")} />);
+
+      const [first, second] = screen.getAllByRole("button");
+      expect(first).toHaveAttribute("aria-pressed", "false");
+      expect(second).toHaveAttribute("aria-pressed", "true");
+    });
+
+    it("keys by the given rowKey", () => {
+      const keyed = (...slugs: string[]) => slugs.map((slug) => ({ slug, name: slug }));
+      const { rerender } = render(
+        <DataTable types={starred} columns={["name", "star"]} rows={keyed("a", "b")} rowKey="slug" />,
+      );
+      fireEvent.click(screen.getAllByRole("button")[0]);
+
+      rerender(<DataTable types={starred} columns={["name", "star"]} rows={keyed("b", "a")} rowKey="slug" />);
+
+      expect(screen.getAllByRole("button")[1]).toHaveAttribute("aria-pressed", "true");
+    });
+
+    it("falls back to the position for rows without the key", () => {
+      const anonymous = (...names: string[]) => names.map((name) => ({ name }));
+      const { rerender } = render(<DataTable types={starred} columns={["name", "star"]} rows={anonymous("a", "b")} />);
+      fireEvent.click(screen.getAllByRole("button")[0]);
+
+      rerender(<DataTable types={starred} columns={["name", "star"]} rows={anonymous("c", "d")} />);
+
+      expect(screen.getAllByRole("button")[0]).toHaveAttribute("aria-pressed", "true");
+    });
+  });
+
   describe("keyboard", () => {
     const body = () => within(screen.getAllByRole("rowgroup")[1]);
     const bodyRows = () => body().getAllByRole("row");

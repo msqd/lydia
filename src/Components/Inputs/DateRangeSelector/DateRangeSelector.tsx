@@ -1,3 +1,4 @@
+import { localToday } from "@msqd/lydia/Models/Filters";
 import { type ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
 import { Input } from "../Input/Input";
@@ -65,7 +66,7 @@ export function DateRangeSelector({
 }: DateRangeSelectorProps) {
   // Derived during render rather than mirrored into state. An effect would leave the first paint
   // showing no error and offering past dates, and would freeze "today" at the moment it last ran.
-  const today = new Date().toISOString().split("T")[0];
+  const today = localToday();
   const effectiveMinDate = disablePastDates && !(minDate && minDate > today) ? today : minDate;
   const effectiveMaxDate = disableFutureDates && !(maxDate && maxDate < today) ? today : maxDate;
 
