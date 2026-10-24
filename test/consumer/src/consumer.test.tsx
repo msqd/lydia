@@ -15,10 +15,6 @@ it("renders the root entry under vitest and jsdom", () => {
 });
 
 it.each(Object.entries(charts))("renders %s under vitest and jsdom", async (_name, chart) => {
-  const { container, unmount } = render(chart);
+  const { container } = render(chart);
   expect(container.firstElementChild).not.toBeNull();
-
-  // jsdom has no canvas: dispose the chart before zrender's deferred paint can reach it.
-  unmount();
-  await new Promise((resolve) => setTimeout(resolve, 100));
 });
