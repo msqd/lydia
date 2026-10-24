@@ -9,11 +9,18 @@
  * The declarations import each other by relative `.js` specifiers that resolve inside dist.
  *
  * Needs a built dist/. Run from the repository root: node test/consumer/check.mjs
- * With LYDIA_REGISTRY_VERSION set, it installs that version from the npm registry instead of packing.
+ *
+ * The install is frozen on test/consumer/pnpm-lock.yaml, so only the lockfile's versions are tested; the
+ * packed tarball is the one entry that changes, installed from a fixed `file:` path whose integrity line is
+ * regenerated here. Modes, all unlocked except the default:
+ * - LYDIA_REGISTRY_VERSION=<version>: installs that version from the npm registry instead of packing.
+ * - LYDIA_CONSUMER_LATEST=1: resolves the fixture's newest ranges (the weekly run).
+ * - LYDIA_CONSUMER_UPDATE_LOCK=1: same, then writes the resulting lockfile back to test/consumer.
  */
 
 import { execFileSync } from "node:child_process";
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { copyFileSync, cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -25,6 +32,38 @@ const work = mkdtempSync(join(tmpdir(), "lydia-consumer-"));
 const app = join(work, "app");
 
 const run = (command, args, cwd) => execFileSync(command, args, { cwd, stdio: "inherit" });
+
+// The fixture depends on the packed tarball through this fixed path, so its lockfile entry never moves.
+const tarballName = "lydia.tgz";
+
+const setLydiaSpec = (spec) => {
+  const manifestPath = join(app, "package.json");
+  const manifest = JSON.parse(readFileSync(manifestPath, "utf-8"));
+  manifest.dependencies["@msqd/lydia"] = spec;
+  writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+};
+
+/**
+ * Points the committed lockfile at the freshly packed tarball: pnpm records the tarball's integrity, which
+ * changes with every pack. The lockfile also lists the tarball's own dependencies, which a frozen install
+ * does not re-read from the tarball, so a mismatch fails here rather than testing stale versions.
+ */
+const pinTarball = (tarballPath, lockPath) => {
+  const integrity = `sha512-${createHash("sha512").update(readFileSync(tarballPath)).digest("base64")}`;
+  const lock = readFileSync(lockPath, "utf-8");
+  const entry = /('@msqd\/lydia@file:[^']*':\n\s+resolution: \{integrity: )sha512-[^,}]+/;
+  assert.match(lock, entry, "the fixture lockfile has an entry for the packed tarball");
+  writeFileSync(lockPath, lock.replace(entry, `$1${integrity}`));
+
+  const packed = JSON.parse(execFileSync("tar", ["-xzOf", tarballPath, "package/package.json"], { encoding: "utf-8" }));
+  const snapshot = lock.match(/^ {2}'@msqd\/lydia@file:[^']*\(.*\)':\n {4}dependencies:\n((?: {6}.+\n)+)/m)?.[1] ?? "";
+  const locked = snapshot.split("\n").filter(Boolean).map((line) => line.trim().replace(/^'?([^':]+)'?:.*$/, "$1"));
+  assert.deepEqual(
+    locked.sort(),
+    Object.keys({ ...packed.dependencies, ...packed.peerDependencies }).sort(),
+    "the lockfile lists the dependencies of the packed package: regenerate it with LYDIA_CONSUMER_UPDATE_LOCK=1",
+  );
+};
 
 /**
  * Writes the README's code examples into the fixture so tsc checks them: a `jsx` block is one program,
@@ -46,19 +85,28 @@ const writeReadmeExamples = (outDir) => {
 
 try {
   const registryVersion = process.env.LYDIA_REGISTRY_VERSION;
-  let spec;
+  const updateLock = Boolean(process.env.LYDIA_CONSUMER_UPDATE_LOCK);
+  const locked = !registryVersion && !updateLock && !process.env.LYDIA_CONSUMER_LATEST;
+  const tarballPath = join(app, tarballName);
+
+  cpSync(fixture, app, { recursive: true, filter: (path) => !/node_modules|check\.mjs$/.test(path) });
   if (registryVersion) {
-    spec = `@msqd/lydia@${registryVersion}`;
+    setLydiaSpec(registryVersion);
   } else {
     run("pnpm", ["pack", "--pack-destination", work], root);
     const tarball = readdirSync(work).find((file) => file.endsWith(".tgz"));
     assert.ok(tarball, "pnpm pack produced no tarball");
-    spec = join(work, tarball);
+    copyFileSync(join(work, tarball), tarballPath);
   }
 
-  cpSync(fixture, app, { recursive: true, filter: (path) => !/node_modules|check\.mjs$/.test(path) });
-  run("pnpm", ["install"], app);
-  run("pnpm", ["add", spec], app);
+  if (locked) {
+    pinTarball(tarballPath, join(app, "pnpm-lock.yaml"));
+    run("pnpm", ["install", "--frozen-lockfile"], app);
+  } else {
+    rmSync(join(app, "pnpm-lock.yaml"), { force: true });
+    run("pnpm", ["install"], app);
+    if (updateLock) copyFileSync(join(app, "pnpm-lock.yaml"), join(fixture, "pnpm-lock.yaml"));
+  }
 
   const installed = join(app, "node_modules", "@msqd", "lydia");
   const exportTargets = Object.entries(JSON.parse(readFileSync(join(installed, "package.json"), "utf-8")).exports)

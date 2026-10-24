@@ -25,7 +25,7 @@ test-all:
 
 # Package management
 install:
-	pnpm install
+	pnpm install --frozen-lockfile
 
 # Capture all undefined targets and forward them to pnpm
 .PHONY: %
@@ -38,7 +38,7 @@ help:
 	@echo "Available Make targets:"
 	@echo "  dev          - Start the Storybook development server"
 	@echo "  qa           - Run all quality assurance checks"
-	@echo "  install      - Install dependencies with pnpm"
+	@echo "  install      - Install dependencies with pnpm, from the lockfile"
 	@echo "  test-storybook - Run Storybook tests"
 	@echo "  test-all     - Run all tests (unit and Storybook tests)"
 	@echo ""
