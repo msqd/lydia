@@ -1,3 +1,4 @@
+import { LINEAR_GROWTH_LIMIT, growthRatio } from "@/linearTime.test-utils";
 import { describe, expect, it } from "vitest";
 import { contentDispositionFilename } from "./contentDisposition";
 
@@ -32,13 +33,14 @@ describe("contentDispositionFilename", () => {
     expect(contentDispositionFilename(`attachment; filename="${"a".repeat(1000)}"`)).toHaveLength(255);
   });
 
-  it.each([
-    ["repeated name without a value", `attachment; ${"filename".repeat(15_000)}`],
-    ["repeated quote and escape", `attachment; filename="${'\\"'.repeat(50_000)}`],
-    ["repeated separators", `attachment${"; filename".repeat(10_000)}`],
-  ])("parses a 100 KB hostile header in linear time (%s)", (_, header) => {
-    const start = performance.now();
-    contentDispositionFilename(header);
-    expect(performance.now() - start).toBeLessThan(50);
+  const hostileHeaders = {
+    "repeated name without a value": (size: number) => `attachment; ${"filename".repeat(size / 7)}`,
+    "repeated quote and escape": (size: number) => `attachment; filename="${'\\"'.repeat(size / 2)}`,
+    "repeated separators": (size: number) => `attachment${"; filename".repeat(size / 10)}`,
+  };
+
+  it.each(Object.entries(hostileHeaders))("parses a hostile header in linear time (%s)", (_, build) => {
+    const ratio = growthRatio((size) => contentDispositionFilename(build(size)), 10_000, 100_000);
+    expect(ratio).toBeLessThan(LINEAR_GROWTH_LIMIT);
   });
 });
