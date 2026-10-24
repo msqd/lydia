@@ -5,10 +5,10 @@ export type StatusTone = "success" | "warning" | "danger" | "default";
 export type HealthStatus = "healthy" | "degraded" | "unhealthy";
 
 // Circuit breaker status types
-export type CircuitBreakerStatus = "open" | "closed" | "half-open";
+export type CircuitBreakerState = "open" | "closed" | "half-open";
 
 // Generic status union type that could be extended
-export type SystemStatus = HealthStatus | CircuitBreakerStatus;
+export type SystemStatus = HealthStatus | CircuitBreakerState;
 
 // Configuration for health status display
 export interface HealthStatusConfig {
@@ -44,7 +44,7 @@ export const healthStatusMap: Record<HealthStatus, HealthStatusConfig> = {
   },
 } as const;
 
-export const circuitBreakerStatusMap: Record<CircuitBreakerStatus, CircuitBreakerStatusConfig> = {
+export const circuitBreakerStatusMap: Record<CircuitBreakerState, CircuitBreakerStatusConfig> = {
   closed: {
     color: "success",
     icon: "●",
@@ -70,17 +70,6 @@ export function isHealthStatus(status: string): status is HealthStatus {
   return status === "healthy" || status === "degraded" || status === "unhealthy";
 }
 
-export function isCircuitBreakerStatus(status: string): status is CircuitBreakerStatus {
+export function isCircuitBreakerStatus(status: string): status is CircuitBreakerState {
   return status === "open" || status === "closed" || status === "half-open";
-}
-
-// Helper function to get color for any status
-export function getStatusColor(status: SystemStatus): StatusTone {
-  if (isHealthStatus(status)) {
-    return healthStatusMap[status].color;
-  }
-  if (isCircuitBreakerStatus(status)) {
-    return circuitBreakerStatusMap[status].color;
-  }
-  return "default"; // fallback
 }

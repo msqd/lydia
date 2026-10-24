@@ -1,5 +1,5 @@
 import { Card } from "@msqd/lydia/Components/Cards";
-import type { CircuitBreakerStatus } from "@msqd/lydia/Models/System";
+import type { CircuitBreakerState } from "@msqd/lydia/Models/System";
 import { useMemo, useState } from "react";
 import { EndpointNode, type EndpointNodeProps } from "./EndpointNode";
 import { EntrypointNode, type EntrypointNodeProps } from "./EntrypointNode";
@@ -16,7 +16,7 @@ export type NetworkConnection =
       from: string;
       to: string;
       type: "proxy-endpoint";
-      circuitBreaker: { status: CircuitBreakerStatus; failureRate: number };
+      circuitBreaker: { status: CircuitBreakerState; failureRate: number };
     };
 
 /** Network topology: the nodes and connections rendered by the map. */
@@ -122,7 +122,7 @@ export function NetworkMap({ topology, className = "" }: NetworkMapProps) {
   const padding = 30;
   const columnWidth = (containerWidth - padding * 2) / 3;
 
-  const handleCircuitBreakerChange = (from: string, to: string, newStatus: CircuitBreakerStatus) => {
+  const handleCircuitBreakerChange = (from: string, to: string, newStatus: CircuitBreakerState) => {
     setConnections((prevConnections) =>
       prevConnections.map((conn) => {
         if (conn.from === from && conn.to === to && conn.type === "proxy-endpoint") {

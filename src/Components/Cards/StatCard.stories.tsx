@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Cards } from "./index";
+import { StatCard } from "./StatCard";
 
-const meta: Meta<typeof Cards.StatCard> = {
+const meta: Meta<typeof StatCard> = {
   title: "Components/Cards/StatCard",
-  component: Cards.StatCard,
+  component: StatCard,
   tags: ["autodocs"],
   parameters: {
     layout: "centered",

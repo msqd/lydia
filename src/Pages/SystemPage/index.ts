@@ -1,1 +1,1 @@
-export { SystemPage } from "./SystemPage";
+export { SystemPage, type SystemPageProps } from "./SystemPage";

@@ -1,5 +1,5 @@
 import { ButtonGroup } from "@msqd/lydia/Components/Buttons/ButtonGroup";
-import { Cards } from "@msqd/lydia/Components/Cards";
+import { Card } from "@msqd/lydia/Components/Cards";
 import { H2 } from "@msqd/lydia/Components/Typography/Titles";
 import type { OverviewData } from "@msqd/lydia/Models";
 import { TransactionsHistoryView } from "./Components";
@@ -37,15 +37,15 @@ export const HistorySection = ({ timeRange, onTimeRangeChange, transactions, end
         <ButtonGroup buttonProps={buttonProps} current={timeRange} setCurrent={onTimeRangeChange} />
       </div>
 
-      <Cards.Card className="mb-4">
+      <Card className="mb-4">
         <TransactionsHistoryView title="Transactions" data={transactions} />
-      </Cards.Card>
+      </Card>
 
       <div className="grid grid-cols-2 gap-4">
         {endpoints.map((endpoint) => (
-          <Cards.Card key={endpoint.name}>
+          <Card key={endpoint.name}>
             <TransactionsHistoryView title={endpoint.name} data={endpoint.data} />
-          </Cards.Card>
+          </Card>
         ))}
       </div>
     </>

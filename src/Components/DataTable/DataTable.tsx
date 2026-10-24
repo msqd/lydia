@@ -86,7 +86,7 @@ export type BaseRow = Record<string, unknown>;
  * here could only be dropped or fight them. `role` is accepted by the type and
  * then overruled — see the comment on the element itself.
  */
-interface DataTableProps<TRow extends object, TComputed extends object = BaseRow>
+export interface DataTableProps<TRow extends object, TComputed extends object = BaseRow>
   extends Omit<ComponentProps<"table">, "children"> {
   rows: TRow[];
   types: Record<string, Column<TRow, unknown>>;

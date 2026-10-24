@@ -17,7 +17,7 @@ export type BadgeColor = BadgeStatusColor | BadgePaletteColor | "default" | "pri
 
 export type BadgeSize = "default" | "jumbo";
 
-interface BadgeProps extends ComponentProps<"span"> {
+export interface BadgeProps extends ComponentProps<"span"> {
   color?: BadgeColor;
   size?: BadgeSize;
 }

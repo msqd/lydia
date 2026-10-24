@@ -1,20 +1,17 @@
 import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Badge } from "@msqd/lydia/Components/Badges";
 import { useClickOutside } from "@msqd/lydia/Components/Utilities/useClickOutside";
-import {
-  type CircuitBreakerStatus as CircuitBreakerStatusType,
-  circuitBreakerStatusMap,
-} from "@msqd/lydia/Models/System";
+import { type CircuitBreakerState, circuitBreakerStatusMap } from "@msqd/lydia/Models/System";
 import { useState } from "react";
 
 export interface CircuitBreakerStatusProps {
   circuitBreaker: {
-    status: CircuitBreakerStatusType;
+    status: CircuitBreakerState;
     failureRate: number;
   };
   compact?: boolean;
   editable?: boolean;
-  onChange?: (status: CircuitBreakerStatusType) => void;
+  onChange?: (status: CircuitBreakerState) => void;
 }
 
 export function CircuitBreakerStatus({
@@ -27,7 +24,7 @@ export function CircuitBreakerStatus({
   const dropdownRef = useClickOutside<HTMLDivElement>({ onClickOutside: () => setIsOpen(false), enabled: isOpen });
   const config = circuitBreakerStatusMap[circuitBreaker.status];
 
-  const handleStatusChange = (newStatus: CircuitBreakerStatusType) => {
+  const handleStatusChange = (newStatus: CircuitBreakerState) => {
     setIsOpen(false);
     onChange?.(newStatus);
   };
@@ -53,7 +50,7 @@ export function CircuitBreakerStatus({
               {Object.entries(circuitBreakerStatusMap).map(([status, statusInfo]) => (
                 <button
                   key={status}
-                  onClick={() => handleStatusChange(status as CircuitBreakerStatusType)}
+                  onClick={() => handleStatusChange(status as CircuitBreakerState)}
                   className={`w-full flex items-center justify-between px-2 py-1.5 text-xs hover:bg-gray-50 transition-colors cursor-pointer ${
                     status === circuitBreaker.status ? "bg-gray-50" : ""
                   } ${Object.keys(circuitBreakerStatusMap).indexOf(status) > 0 ? "border-t border-gray-100" : ""}`}
@@ -103,7 +100,7 @@ export function CircuitBreakerStatus({
                 {Object.entries(circuitBreakerStatusMap).map(([status, statusInfo]) => (
                   <button
                     key={status}
-                    onClick={() => handleStatusChange(status as CircuitBreakerStatusType)}
+                    onClick={() => handleStatusChange(status as CircuitBreakerState)}
                     className={`w-full flex items-center justify-between px-2 py-1.5 text-xs hover:bg-gray-50 transition-colors cursor-pointer ${
                       status === circuitBreaker.status ? "bg-gray-50" : ""
                     } ${Object.keys(circuitBreakerStatusMap).indexOf(status) > 0 ? "border-t border-gray-100" : ""}`}

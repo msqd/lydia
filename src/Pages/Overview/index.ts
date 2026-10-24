@@ -1,4 +1,4 @@
-export { default as OverviewPage, OverviewPage as OverviewPageComponent } from "./OverviewPage";
+export { OverviewPage } from "./OverviewPage";
 export type {
   OverviewPageProps,
   SummarySectionProps,

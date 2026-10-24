@@ -243,5 +243,3 @@ function getNodeType(value: unknown): NodeType {
       return "null";
   }
 }
-
-export default JsonTreeView;

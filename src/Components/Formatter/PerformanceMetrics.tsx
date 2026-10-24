@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-export interface PerformanceData {
+export interface PerformanceMetricsData {
   /** Number of lines in the content */
   lineCount: number;
   /** Total character count */
@@ -13,7 +13,7 @@ export interface PerformanceData {
 
 interface PerformanceMetricsProps {
   /** Performance data to display */
-  data: PerformanceData;
+  data: PerformanceMetricsData;
   /** Whether to show detailed metrics */
   showDetails?: boolean;
   /** Additional CSS classes */

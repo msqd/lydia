@@ -15,7 +15,12 @@ const SectionLevel = createContext<HeadingLevelNumber | undefined>(undefined);
  * consumer threading a level through every component (WCAG 1.3.1, axe
  * `heading-order`).
  */
-export function HeadingLevel({ level, children }: { level: HeadingLevelNumber; children: ReactNode }) {
+export interface HeadingLevelProps {
+  level: HeadingLevelNumber;
+  children: ReactNode;
+}
+
+export function HeadingLevel({ level, children }: HeadingLevelProps) {
   return <SectionLevel.Provider value={level}>{children}</SectionLevel.Provider>;
 }
 

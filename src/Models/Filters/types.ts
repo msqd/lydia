@@ -55,23 +55,5 @@ export interface RangeFilterMeta {
   }>;
 }
 
-/** Filter facet configuration */
-export interface FilterFacetConfig {
-  name: string;
-  title: string;
-  type: "checkboxes" | "radios" | "range" | "daterange";
-  defaultOpen?: boolean;
-  meta?: FilterMeta[] | RangeFilterMeta;
-  fallbackName?: string;
-}
-
 /** Unified filter state change handler */
 export type FilterChangeHandler<T = FilterValue> = (filterName: string, value: T) => void;
-
-/** URL serialization utilities type */
-export interface FilterUrlParams {
-  /** Convert filters to URL search params */
-  toSearchParams: (filters: Filters) => URLSearchParams;
-  /** Create filters from URL search params */
-  fromSearchParams: (searchParams: URLSearchParams) => Filters;
-}

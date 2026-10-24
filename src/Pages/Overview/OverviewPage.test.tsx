@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import type { LinkComponentType } from "../../Components/NavBar";
-import OverviewPage from "./OverviewPage";
+import { OverviewPage } from "./OverviewPage";
 import { sampleHistoryData } from "./Sections/HistorySection.samples";
 import { sampleSummary } from "./Sections/SummarySection.samples";
 

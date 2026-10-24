@@ -9,7 +9,7 @@ import { TransactionsListPage, useClientSideTransactions } from "@msqd/lydia/Pag
 import { useMemo, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-interface ExplorerPageProps {
+export interface ExplorerPageProps {
   transactions: DetailedTransaction[];
   className?: string;
 }
@@ -86,5 +86,3 @@ export function ExplorerPage({ transactions, className }: ExplorerPageProps) {
     </div>
   );
 }
-
-export default ExplorerPage;

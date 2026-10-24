@@ -199,7 +199,9 @@ function DrawerPanelBody({
  * Drawer.Title component for creating accessible drawer titles.
  * Use this when you need more customization than the basic title prop.
  */
-export function DrawerTitle({ className, ...props }: ComponentProps<typeof DialogTitle>) {
+export type DrawerTitleProps = ComponentProps<typeof DialogTitle>;
+
+export function DrawerTitle({ className, ...props }: DrawerTitleProps) {
   return <DialogTitle className={twMerge("text-base font-semibold text-gray-900", className)} {...props} />;
 }
 
@@ -207,6 +209,8 @@ export function DrawerTitle({ className, ...props }: ComponentProps<typeof Dialo
  * Drawer.Description component for creating accessible drawer descriptions.
  * Use this when you need more customization than the basic description prop.
  */
-export function DrawerDescription({ className, ...props }: ComponentProps<typeof DialogDescription>) {
+export type DrawerDescriptionProps = ComponentProps<typeof DialogDescription>;
+
+export function DrawerDescription({ className, ...props }: DrawerDescriptionProps) {
   return <DialogDescription className={twMerge("mt-1 text-sm text-gray-500", className)} {...props} />;
 }

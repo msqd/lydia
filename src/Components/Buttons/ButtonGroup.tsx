@@ -59,7 +59,7 @@ const StyledButton: FunctionComponent<StyledButtonProps> = ({
   );
 };
 
-interface ButtonGroupProps extends ComponentProps<"span"> {
+export interface ButtonGroupProps extends ComponentProps<"span"> {
   buttonProps: ButtonGroupButtons;
   current: string;
   setCurrent: (current: string) => void;

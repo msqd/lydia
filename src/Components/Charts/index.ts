@@ -1,6 +1,6 @@
-export { default as SummaryPerformancesChart } from "./SummaryPerformancesChart";
-export { default as SummaryRateChart } from "./SummaryRateChart";
-export { default as TransactionsChart } from "./TransactionsChart";
+export { SummaryPerformancesChart, type SummaryPerformancesChartProps } from "./SummaryPerformancesChart";
+export { SummaryRateChart, type SummaryRateChartProps } from "./SummaryRateChart";
+export { TransactionsChart, type TransactionsChartProps } from "./TransactionsChart";
 
 // Chart components
 export * from "./Components";

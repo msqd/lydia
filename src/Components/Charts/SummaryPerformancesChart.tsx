@@ -16,7 +16,7 @@ echarts.use([LineChart, CanvasRenderer, GridComponent, TooltipComponent, VisualM
 
 const tpdexTokens = Object.fromEntries(tpdexScale.map(({ label, token }) => [label, token]));
 
-interface SummaryPerformancesChartProps {
+export interface SummaryPerformancesChartProps {
   data: { value: number; datetime: string }[];
 }
 
@@ -29,7 +29,7 @@ const tooltipFormatter = (params: any[]) => {
   return tooltipContent;
 };
 
-const SummaryPerformancesChart = ({ data }: SummaryPerformancesChartProps) => {
+export const SummaryPerformancesChart = ({ data }: SummaryPerformancesChartProps) => {
   const colors = useThemeColors(tpdexTokens);
   const outOfRangeColor = useThemeColor("--color-chart-out-of-range");
 
@@ -115,5 +115,3 @@ const SummaryPerformancesChart = ({ data }: SummaryPerformancesChartProps) => {
     />
   );
 };
-
-export default SummaryPerformancesChart;
