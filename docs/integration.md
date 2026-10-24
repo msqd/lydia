@@ -283,6 +283,35 @@ single version:
 grep -ohE '19\.[0-9]+\.[0-9]+' dist/assets/*.js | sort -u
 ```
 
+## Security
+
+### Trust model
+
+Every transaction field Lydia renders (URL, headers, bodies, tags, names) comes from captured traffic, so the sender chose it. Lydia renders it as text through React, which escapes it. Two surfaces need your attention.
+
+**HTML-returning helpers.** `formatSplitBarsTooltip`, `formatUnifiedBarsTooltip` and `formatTooltipFromData`, static methods of `ChartTooltipFormatter`, return HTML strings that ECharts writes with `innerHTML`. They escape every value they interpolate. Escape your own values the same way if you write a tooltip formatter of your own.
+
+**URLs.** No exported helper returns a URL. The transaction detail turns an image body into `<img src="data:image/...">` and a PDF body into `<iframe src="data:application/pdf...">`. Links elsewhere (`NavBar`, `Tabs`, `SummarySection`) use the `href` or `to` you pass.
+
+### Content-Security-Policy
+
+The previews need two directives, and nothing else beyond what your own application uses:
+
+| Directive | Value | For |
+| --- | --- | --- |
+| `img-src` | `data:` | Image body preview |
+| `frame-src` | `data:` | PDF body preview |
+
+```
+Content-Security-Policy: default-src 'self'; img-src 'self' data:; frame-src data:
+```
+
+### Redaction
+
+Lydia shows headers and copies `method + url` as captured. `Authorization`, `Cookie`, `Set-Cookie`, `Proxy-Authorization` and `X-Api-Key` values appear in clear in the headers display, and query-string tokens in the URL appear in the detail and in the clipboard. There is no redaction prop yet: mask these values in the data you pass in.
+
+Report a vulnerability through [SECURITY.md](../SECURITY.md).
+
 ## Pitfalls
 
 | Symptom | Cause | Fix |
@@ -293,6 +322,7 @@ grep -ohE '19\.[0-9]+\.[0-9]+' dist/assets/*.js | sort -u
 | Two Tailwinds in the output, resets applied twice | `@msqd/lydia/styles` imported next to your own Tailwind. | Use only one option. |
 | `@theme` rejected by the CSS build | Tailwind 3. | Upgrade to Tailwind 4, or use option B. |
 | Type or runtime break after `pnpm up` | A release with breaking changes. | Read the `### Breaking` sections of [CHANGELOG.md](../CHANGELOG.md) between your version and the new one before upgrading. |
+| Image or PDF body preview stays blank, with a CSP violation in the console | The Content-Security-Policy blocks `data:` in `img-src` or `frame-src`. | Add `img-src data:` and `frame-src data:`, see [Security](#security). |
 | Changes in the linked clone do not show | `dist` is stale. | `pnpm build` in the clone, then restart the dev server. |
 
 ## Upgrading

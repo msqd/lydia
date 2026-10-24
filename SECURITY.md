@@ -16,4 +16,4 @@ We acknowledge a report within 7 days and triage it within 30 days. A confirmed 
 
 Lydia renders captured HTTP traffic, which is untrusted data. Rendering that lets such data run script, escape its container or corrupt the page is in scope.
 
-The application that embeds Lydia owns the rest: its Content-Security-Policy, authentication and authorization, and redaction of secrets in the data it passes in. See the Security section of the [README](README.md) for what to put in place.
+The application that embeds Lydia owns the rest: its Content-Security-Policy, authentication and authorization, and redaction of secrets in the data it passes in. See the Security section of the [README](README.md#security) for what to put in place.
