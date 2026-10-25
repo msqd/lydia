@@ -15,6 +15,14 @@ describe("ContentRenderer", () => {
     });
   });
 
+  describe("deeply nested body", () => {
+    it("shows a notice instead of throwing", () => {
+      const content = JSON.parse("[".repeat(6000) + "]".repeat(6000)) as unknown[];
+      customRender(<ContentRenderer content={content} contentType="json" />);
+      expect(screen.getByRole("alert")).toHaveTextContent("cannot be displayed");
+    });
+  });
+
   describe("code", () => {
     it("renders a JSON document", () => {
       const { container } = customRender(<ContentRenderer content={{ a: 1 }} contentType="json" />);

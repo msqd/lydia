@@ -135,6 +135,16 @@ describe("DownloadButton", () => {
       expect(onDownload).not.toHaveBeenCalled();
     });
 
+    it("shows an alert when the document is nested too deeply to serialise", () => {
+      const data = JSON.parse("[".repeat(6000) + "]".repeat(6000)) as unknown[];
+      customRender(<DownloadButton data={data} filename="f" />);
+
+      fireEvent.click(screen.getByRole("button"));
+
+      expect(screen.getByRole("alert")).toBeInTheDocument();
+      expect(createObjectURL).not.toHaveBeenCalled();
+    });
+
     it("clears the alert once a download succeeds", () => {
       const { rerender } = customRender(<DownloadButton data="data:text/plain" filename="f" />);
       fireEvent.click(screen.getByRole("button"));
