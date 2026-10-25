@@ -17,7 +17,7 @@ const mockTransaction: DetailedTransaction = {
   statusCode: 200,
   timestamp: "2024-03-20T10:30:00Z",
   responseTime: 120,
-  client: "API Lab Client",
+  client: "Test Client",
   apiName: "Users API",
   userAgent: "Mozilla/5.0",
   remoteAddress: "192.168.1.100",
@@ -68,7 +68,7 @@ describe("TransactionMetadata", () => {
     expect(screen.getByText("/api/users/123", { selector: "span.break-all" })).toBeInTheDocument();
 
     // Check for client
-    expect(screen.getByText("API Lab Client")).toBeInTheDocument();
+    expect(screen.getByText("Test Client")).toBeInTheDocument();
 
     // Check for user agent
     expect(screen.getByText("Mozilla/5.0")).toBeInTheDocument();
