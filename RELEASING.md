@@ -44,7 +44,7 @@ Run manually (`workflow_dispatch`), on any ref, the workflow stops after `build`
 
 ## Before the first tag
 
-Each prerequisite, with the command that verifies it:
+Each prerequisite, with the command that verifies it. The settings themselves (environment, rulesets, Actions policy, security features, merge settings), their commands and a full read-only check are in [docs/development/repository-settings.md](docs/development/repository-settings.md).
 
 | Prerequisite | Command | Expected |
 | --- | --- | --- |
