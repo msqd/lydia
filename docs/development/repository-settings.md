@@ -17,6 +17,16 @@ JSON
 gh api -X POST repos/msqd/lydia/environments/npm/deployment-branch-policies -f name='v*' -f type=tag
 ```
 
+While the repository is private, GitHub refuses `reviewers` ("Please ensure the billing plan supports the required reviewers protection rule") and refuses `prevent_self_review` without a reviewer. Leave both out:
+
+```sh
+gh api -X PUT repos/msqd/lydia/environments/npm --input - <<'JSON'
+{"can_admins_bypass":false,"deployment_branch_policy":{"protected_branches":false,"custom_branch_policies":true}}
+JSON
+```
+
+Run the first block's PUT again when the repository goes public (#21 step 3) to add the reviewer.
+
 ## Rulesets
 
 Both are exported, as returned by `gh api repos/msqd/lydia/rulesets/<id>`, in [`.github/rulesets/`](../../.github/rulesets). The exports are a record, not an input: they hold read-only fields (`id`, timestamps, `_links`, `current_user_can_bypass`). Apply the commands below.
@@ -83,7 +93,7 @@ Read-only: every command only reads. Each prints the value in the last column on
 | Setting | Command | Expected |
 | --- | --- | --- |
 | Environments | `gh api repos/msqd/lydia/environments --jq '[.environments[].name]'` | `["github-pages","npm"]` |
-| `npm` protection | `gh api repos/msqd/lydia/environments/npm --jq '{bypass: .can_admins_bypass, rules: [.protection_rules[].type]}'` | `{"bypass":false,"rules":["required_reviewers","branch_policy"]}` |
+| `npm` protection | `gh api repos/msqd/lydia/environments/npm --jq '{bypass: .can_admins_bypass, rules: [.protection_rules[].type]}'` | `{"bypass":false,"rules":["required_reviewers","branch_policy"]}`; `["branch_policy"]` only, until the reviewer is added at the flip (#21 step 3) |
 | `npm` deployments | `gh api repos/msqd/lydia/environments/npm/deployment-branch-policies --jq '[.branch_policies[] \| {name, type}]'` | `[{"name":"v*","type":"tag"}]` |
 | Rulesets | `gh api repos/msqd/lydia/rulesets --jq '[.[] \| {name, target, enforcement}]'` | `main` (`branch`) and `release tags` (`tag`), both `active` |
 | Actions policy | `gh api repos/msqd/lydia/actions/permissions --jq '{enabled, allowed_actions, sha_pinning_required}'` | `{"enabled":true,"allowed_actions":"selected","sha_pinning_required":true}` |
