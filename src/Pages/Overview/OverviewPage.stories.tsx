@@ -2,7 +2,6 @@ import { DefaultLayout } from "@msqd/lydia/Components/Layouts/DefaultLayout";
 import type { LinkComponentType } from "@msqd/lydia/Components/NavBar";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
-import { action } from "storybook/actions";
 import { expect, fn } from "storybook/test";
 import { OverviewPage } from "./OverviewPage";
 import { sampleHistoryData } from "./Sections/HistorySection.samples";
@@ -55,7 +54,7 @@ export const Default: Story = {
 };
 
 // Spies on the logged action: the click shows in the Actions panel and the play function can assert it.
-const onRoute = fn(action("route"));
+const onRoute = fn().mockName("route");
 
 // Stands in for the consumer's router link: it takes over the navigation instead of the browser.
 const RoutedLink: LinkComponentType = ({ href, onClick, ...props }) => (
