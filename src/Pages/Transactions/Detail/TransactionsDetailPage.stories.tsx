@@ -3,6 +3,7 @@ import type { ContentType, DetailedTransaction } from "@msqd/lydia/Models/Transa
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, waitFor, within } from "storybook/test";
 import { TransactionsDetailPage } from "./TransactionsDetailPage";
+import { LYDIAN_JPEG_DATA_URL, LYDIAN_PNG_DATA_URL } from "./TransactionsDetailPage.images.samples";
 import { sampleDetailedTransaction } from "./TransactionsDetailPage.samples";
 
 // Toast wrapper for proper functionality
@@ -270,24 +271,18 @@ export const HtmlResponse: Story = {
   },
 };
 
-const PNG_DATA_URL =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
-
-const JPEG_DATA_URL =
-  "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAr/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=";
-
 // Image Response Example (PNG)
 export const ImagePngResponse: Story = {
   args: {
-    transaction: createTransactionWithContent("tx-image-png", "image", null, PNG_DATA_URL, {
-      url: "/api/images/pixel.png",
+    transaction: createTransactionWithContent("tx-image-png", "image", null, LYDIAN_PNG_DATA_URL, {
+      url: "/api/images/c-lydian.png",
       response: {
         headers: [
           { name: "Content-Type", value: "image/png" },
-          { name: "Content-Length", value: "67" },
+          { name: "Content-Length", value: "8933" },
           { name: "Cache-Control", value: "public, max-age=3600" },
         ],
-        body: PNG_DATA_URL,
+        body: LYDIAN_PNG_DATA_URL,
         contentType: "image",
         size: 67,
       },
@@ -301,7 +296,11 @@ export const ImagePngResponse: Story = {
     },
   },
   play: async ({ canvasElement }) => {
-    await waitFor(() => expect(canvasElement.querySelector('img[src^="data:image/png"]')).not.toBeNull());
+    await waitFor(() =>
+      expect(canvasElement.querySelector<HTMLImageElement>('img[src^="data:image/png"]')?.naturalWidth).toBeGreaterThan(
+        1,
+      ),
+    );
   },
 };
 
@@ -338,15 +337,15 @@ export const ImagePlaceholder: Story = {
 // Image Response Example (JPEG)
 export const ImageJpegResponse: Story = {
   args: {
-    transaction: createTransactionWithContent("tx-image-jpeg", "image", null, JPEG_DATA_URL, {
-      url: "/api/images/photo.jpg",
+    transaction: createTransactionWithContent("tx-image-jpeg", "image", null, LYDIAN_JPEG_DATA_URL, {
+      url: "/api/images/c-lydian.jpg",
       response: {
         headers: [
           { name: "Content-Type", value: "image/jpeg" },
           { name: "Content-Length", value: "285" },
           { name: "Cache-Control", value: "public, max-age=3600" },
         ],
-        body: JPEG_DATA_URL,
+        body: LYDIAN_JPEG_DATA_URL,
         contentType: "image",
         size: 285,
       },
@@ -360,7 +359,11 @@ export const ImageJpegResponse: Story = {
     },
   },
   play: async ({ canvasElement }) => {
-    await waitFor(() => expect(canvasElement.querySelector('img[src^="data:image/jpeg"]')).not.toBeNull());
+    await waitFor(() =>
+      expect(
+        canvasElement.querySelector<HTMLImageElement>('img[src^="data:image/jpeg"]')?.naturalWidth,
+      ).toBeGreaterThan(1),
+    );
   },
 };
 
