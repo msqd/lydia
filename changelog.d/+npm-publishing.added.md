@@ -1,1 +1,0 @@
-Lydia is published to npm as `@msqd/lydia`. 0.6.0 is published by hand from the CI-built tarball, without provenance; later versions are published from CI when a `v*` tag is pushed, with no stored token and with provenance attestation.

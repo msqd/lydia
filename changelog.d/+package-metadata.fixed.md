@@ -1,1 +1,0 @@
-The PrismJS theme carries its MIT notice, kept in `@msqd/lydia/styles`. CSS imports survive bundler tree shaking (`sideEffects`), `@msqd/lydia/package.json` is exported, and the integration guide, fonts README and ADR 3 match the package.
