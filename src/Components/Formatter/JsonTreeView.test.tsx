@@ -121,3 +121,37 @@ describe("JsonTreeView Component", () => {
     expect(screen.getByText(/30/)).toBeInTheDocument();
   });
 });
+
+describe("JsonTreeView depth cap", () => {
+  const nested = (levels: number) => JSON.parse("[".repeat(levels) + "]".repeat(levels));
+
+  it("renders a very deep document without throwing, fully expanded", () => {
+    expect(() => render(<JsonTreeView data={nested(1000)} initiallyExpanded />)).not.toThrow();
+    expect(screen.getByTitle(/64/)).toBeInTheDocument();
+  });
+
+  it("renders a very deep document without throwing with a huge expandedDepth", () => {
+    expect(() => render(<JsonTreeView data={nested(1000)} expandedDepth={1000} />)).not.toThrow();
+    expect(screen.getByTitle(/64/)).toBeInTheDocument();
+  });
+
+  it("stops expanding by click at the cap and shows an inert ellipsis", () => {
+    const { container } = render(<JsonTreeView data={nested(100)} />);
+    const buttons = () => container.querySelectorAll("button");
+    let count = 0;
+    while (buttons().length > count) {
+      count = buttons().length;
+      fireEvent.click(buttons()[count - 1]);
+    }
+    expect(buttons()).toHaveLength(64);
+    const marker = screen.getByTitle(/64/);
+    expect(marker).toHaveTextContent("…");
+    expect(marker.tagName).not.toBe("BUTTON");
+  });
+
+  it("still expands a tree just under the cap", () => {
+    const { container } = render(<JsonTreeView data={nested(63)} initiallyExpanded />);
+    expect(container.querySelectorAll("button")).toHaveLength(63);
+    expect(screen.queryByTitle(/64/)).not.toBeInTheDocument();
+  });
+});

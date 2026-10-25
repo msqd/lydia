@@ -28,6 +28,9 @@ export interface JsonTreeViewProps extends Omit<ComponentProps<"div">, "onChange
   className?: string;
 }
 
+// Nodes at this depth or deeper never render their children, so React's recursive commit stays bounded
+const MAX_DEPTH = 64;
+
 // Node types for rendering
 type NodeType = "object" | "array" | "string" | "number" | "boolean" | "null";
 
@@ -94,6 +97,9 @@ function JsonNode({ data, name, path, initiallyExpanded, expandedDepth, depth, o
       : nodeType === "array"
         ? (data as unknown[]).length
         : null;
+
+  // Past the depth cap, children are never rendered, however the node was opened
+  const isCapped = depth >= MAX_DEPTH && !!size;
 
   // Toggle expansion
   const toggleExpand = () => {
@@ -176,6 +182,9 @@ function JsonNode({ data, name, path, initiallyExpanded, expandedDepth, depth, o
 
   // Render toggle button for expandable nodes
   const renderToggle = () => {
+    if (isCapped) {
+      return <span className="mr-1 inline-block w-4" />;
+    }
     if (nodeType === "object" || nodeType === "array") {
       return (
         <button type="button" onClick={toggleExpand} className="mr-1 inline-block w-4 text-gray-500 focus:outline-none">
@@ -197,11 +206,18 @@ function JsonNode({ data, name, path, initiallyExpanded, expandedDepth, depth, o
         {nodeType === "object" || nodeType === "array" ? (
           <span>
             {nodeType === "object" ? "{" : "["}
-            {!isExpanded && (
-              <span className="text-gray-500">
+            {isCapped ? (
+              <span className="text-gray-500" title={`Maximum depth of ${MAX_DEPTH} levels reached`}>
                 {" "}
-                {size} {nodeType === "object" ? "properties" : "items"} {"}"}
+                …
               </span>
+            ) : (
+              !isExpanded && (
+                <span className="text-gray-500">
+                  {" "}
+                  {size} {nodeType === "object" ? "properties" : "items"} {"}"}
+                </span>
+              )
             )}
           </span>
         ) : (
@@ -214,7 +230,7 @@ function JsonNode({ data, name, path, initiallyExpanded, expandedDepth, depth, o
         )}
       </div>
 
-      {isExpanded && (nodeType === "object" || nodeType === "array") && (
+      {isExpanded && !isCapped && (nodeType === "object" || nodeType === "array") && (
         <>
           <div>{renderChildren()}</div>
           <div className="ml-4">{nodeType === "object" ? "}" : "]"}</div>
