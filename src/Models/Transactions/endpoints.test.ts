@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { UNKNOWN_API, apiOf, isUnder, segmentsOf } from "./endpoints";
+import { MAX_TREE_DEPTH, UNKNOWN_API, apiOf, isUnder, segmentsOf } from "./endpoints";
 import type { Transaction } from "./types";
 
 const transaction = (overrides: Partial<Transaction> = {}): Transaction => ({
@@ -57,5 +57,14 @@ describe("isUnder", () => {
     ["under the unknown API", unnamed, selection(UNKNOWN_API, ["api", "x"]), true],
   ])("%s", (_label, t, sel, expected) => {
     expect(isUnder(t, sel)).toBe(expected);
+  });
+
+  it("matches a folded leaf, deeper than the tree, by its exact path only", () => {
+    const head = "/a".repeat(MAX_TREE_DEPTH);
+    const folded = transaction({ url: `${head}/x` });
+    const deeper = transaction({ url: `${head}/x/y` });
+    const sel = selection("users-api", segmentsOf(folded));
+    expect(isUnder(folded, sel)).toBe(true);
+    expect(isUnder(deeper, sel)).toBe(false);
   });
 });

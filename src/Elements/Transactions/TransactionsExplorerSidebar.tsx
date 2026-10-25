@@ -5,7 +5,13 @@ import {
   FolderIcon,
   FolderOpenIcon,
 } from "@heroicons/react/24/outline";
-import { type EndpointNodeType, type Selection, apiOf, segmentsOf } from "@msqd/lydia/Models/Transactions/endpoints";
+import {
+  type EndpointNodeType,
+  MAX_TREE_DEPTH,
+  type Selection,
+  apiOf,
+  segmentsOf,
+} from "@msqd/lydia/Models/Transactions/endpoints";
 import type { Transaction } from "@msqd/lydia/Models/Transactions/types";
 import { type ComponentProps, useMemo, useState } from "react";
 import { twMerge } from "tailwind-merge";
@@ -46,6 +52,8 @@ const sameNode = (a: Selection, b: Selection) =>
 
 interface Trie {
   count: number;
+  /** Set on a folded leaf: the full path segments it stands for. */
+  folded?: string[];
   children: Map<string, Trie>;
 }
 
@@ -61,20 +69,24 @@ function buildApiTree(transactions: Transaction[]): TreeNode[] {
     }
     root.count++;
     let node: Trie = root;
-    for (const segment of segmentsOf(transaction)) {
+    const all = segmentsOf(transaction);
+    // Past the depth cap the rest of the path folds into one leaf, so depth, and recursion, stay bounded.
+    const path =
+      all.length > MAX_TREE_DEPTH ? [...all.slice(0, MAX_TREE_DEPTH), all.slice(MAX_TREE_DEPTH).join("/")] : all;
+    path.forEach((segment, index) => {
       let child: Trie | undefined = node.children.get(segment);
       if (!child) {
-        child = { count: 0, children: new Map() };
+        child = { count: 0, children: new Map(), folded: index === MAX_TREE_DEPTH ? all : undefined };
         node.children.set(segment, child);
       }
       child.count++;
       node = child;
-    }
+    });
   }
 
   const childrenOf = (apiName: string, parent: string[], trie: Trie): TreeNode[] =>
     [...trie.children].map(([name, child]) => {
-      const segments = [...parent, name];
+      const segments = child.folded ?? [...parent, name];
       const children = childrenOf(apiName, segments, child);
       return {
         id: [apiName, ...segments].join("/"),

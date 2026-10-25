@@ -13,6 +13,9 @@ export interface Selection {
   segments: string[];
 }
 
+/** Depth of the endpoint tree: the segments past it fold into one leaf, named by the rest of the path. */
+export const MAX_TREE_DEPTH = 64;
+
 const SCHEME_AND_HOST = /^[a-z][a-z0-9+.-]*:\/\/[^/]*/i;
 
 export function apiOf(transaction: Transaction): string {
@@ -29,5 +32,7 @@ export function segmentsOf(transaction: Transaction): string[] {
 export function isUnder(transaction: Transaction, selection: Pick<Selection, "apiName" | "segments">): boolean {
   if (apiOf(transaction) !== selection.apiName) return false;
   const segments = segmentsOf(transaction);
+  // A node deeper than the tree is a folded leaf: it stands for one exact path.
+  if (selection.segments.length > MAX_TREE_DEPTH && segments.length !== selection.segments.length) return false;
   return selection.segments.every((segment, index) => segments[index] === segment);
 }
