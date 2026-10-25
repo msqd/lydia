@@ -1,0 +1,46 @@
+{
+  "id": 25812213,
+  "name": "release tags",
+  "target": "tag",
+  "source_type": "Repository",
+  "source": "msqd/lydia",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": {
+      "exclude": [],
+      "include": [
+        "refs/tags/v*"
+      ]
+    }
+  },
+  "rules": [
+    {
+      "type": "creation"
+    },
+    {
+      "type": "update"
+    },
+    {
+      "type": "deletion"
+    }
+  ],
+  "node_id": "RRS_lACqUmVwb3NpdG9yec5VCYrlzgGJ3PU",
+  "created_at": "2026-10-25T07:25:58.077+01:00",
+  "updated_at": "2026-10-25T07:25:58.123+01:00",
+  "bypass_actors": [
+    {
+      "actor_id": 5,
+      "actor_type": "RepositoryRole",
+      "bypass_mode": "always"
+    }
+  ],
+  "current_user_can_bypass": "always",
+  "_links": {
+    "self": {
+      "href": "https://api.github.com/repos/msqd/lydia/rulesets/25812213"
+    },
+    "html": {
+      "href": "https://github.com/msqd/lydia/rules/25812213"
+    }
+  }
+}
