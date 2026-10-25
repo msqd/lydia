@@ -139,6 +139,27 @@ describe("TransactionMetadata", () => {
     vi.restoreAllMocks();
   });
 
+  it("reports a rejected clipboard write as an error naming the value to copy by hand", async () => {
+    Object.defineProperty(global.navigator, "clipboard", {
+      value: { writeText: vi.fn().mockRejectedValue(new Error("denied")) },
+      writable: true,
+    });
+
+    customRender(
+      <ToastProvider>
+        <TransactionMetadata transaction={mockTransaction} defaultOpen={true} />
+      </ToastProvider>,
+    );
+
+    fireEvent.click(screen.getByText("Copy"));
+
+    const alert = await screen.findByText(/GET \/api\/users\/123/, { selector: "p" });
+    expect(alert).toBeInTheDocument();
+    expect(screen.queryByText(/copied to clipboard/i)).not.toBeInTheDocument();
+
+    vi.restoreAllMocks();
+  });
+
   it("calculates and displays TPDEX score correctly", () => {
     // Test satisfactory response time (<=100ms)
     const fastTransaction = { ...mockTransaction, responseTime: 50 };

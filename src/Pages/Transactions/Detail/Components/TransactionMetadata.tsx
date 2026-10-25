@@ -2,7 +2,7 @@ import { ArrowRightIcon, ClipboardDocumentIcon } from "@heroicons/react/24/outli
 import { Badge } from "@msqd/lydia/Components/Badges";
 import { Button } from "@msqd/lydia/Components/Buttons";
 import { contentPaddingClassName } from "@msqd/lydia/Components/Cards";
-import { useSuccessToast } from "@msqd/lydia/Components/Toast";
+import { useErrorToast, useSuccessToast } from "@msqd/lydia/Components/Toast";
 import { Foldable } from "@msqd/lydia/Components/Utilities/Foldable";
 import { CacheBadge, CacheIndicator, RequestMethodBadge, ResponseStatusBadge } from "@msqd/lydia/Elements/Http";
 import { TpdexBadge } from "@msqd/lydia/Elements/Tpdex/TpdexBadge";
@@ -38,6 +38,7 @@ export function TransactionMetadata({
   ...props
 }: TransactionMetadataProps) {
   const success = useSuccessToast();
+  const error = useErrorToast();
   const formattedDate = new Date(transaction.timestamp).toLocaleString();
 
   // Function to copy URL to clipboard
@@ -45,8 +46,8 @@ export function TransactionMetadata({
     try {
       await navigator.clipboard.writeText(text);
       success("Copied", `${label} copied to clipboard`);
-    } catch (error) {
-      success("Copy", label);
+    } catch {
+      error(`${label} not copied`, `Copy it by hand: ${text}`);
     }
   };
 
