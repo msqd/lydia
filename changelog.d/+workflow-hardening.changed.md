@@ -1,1 +1,0 @@
-Harden the workflows: every action is pinned to a commit SHA, the Storybook deploy runs in its own job holding `pages: write` and `id-token: write` while the build gets read-only access, Pages deploys queue instead of running in parallel, and the publish job checks the tarball sha256 and package name before `npm publish`.

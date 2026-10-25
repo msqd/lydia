@@ -1,1 +1,0 @@
-Harden npm publishing: the publish job (OIDC, `npm` environment) only publishes a tarball packed by a job without `id-token`, tags must sit on `main`, manual runs always dry-run, npm is pinned, workflows default to read-only permissions, and `prepublishOnly` builds.
