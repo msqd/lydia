@@ -5,12 +5,9 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  # Weekly, to see new advisories and upstream breakage between commits
-  schedule:
-    - cron: "17 5 * * 1"
   # Allow manual triggering
   workflow_dispatch:
-  # Reused as the gates of the npm publish workflow
+  # Reused as the gates of the npm publish workflow and by the weekly run
   workflow_call:
 
 permissions:
@@ -118,28 +115,3 @@ jobs:
         run: node test/consumer/check.mjs
         env:
           LYDIA_CONSUMER_LATEST: "1"
-
-  report:
-    name: Report a scheduled failure
-    needs: [test, consumer-latest]
-    if: failure() && github.event_name == 'schedule'
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      issues: write
-
-    steps:
-      # One open issue at a time: a later failure comments on it
-      - name: Open or update the issue
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          TITLE: Weekly run failed
-        run: |
-          number=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number,title --jq "map(select(.title == \"$TITLE\"))[0].number // empty")
-          if [ -n "$number" ]; then
-            gh issue comment "$number" --body "Failed again: $RUN_URL"
-          else
-            gh issue create --title "$TITLE" --body "The scheduled run failed: $RUN_URL"
-          fi
