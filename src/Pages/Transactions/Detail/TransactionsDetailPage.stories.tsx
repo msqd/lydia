@@ -1,7 +1,7 @@
 import { ToastProvider } from "@msqd/lydia/Components/Toast";
 import type { ContentType, DetailedTransaction } from "@msqd/lydia/Models/Transactions/types";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, within } from "storybook/test";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 import { TransactionsDetailPage } from "./TransactionsDetailPage";
 import { sampleDetailedTransaction } from "./TransactionsDetailPage.samples";
 
@@ -270,67 +270,97 @@ export const HtmlResponse: Story = {
   },
 };
 
+const PNG_DATA_URL =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
+
+const JPEG_DATA_URL =
+  "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAr/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=";
+
 // Image Response Example (PNG)
 export const ImagePngResponse: Story = {
   args: {
-    transaction: createTransactionWithContent(
-      "tx-image-png",
-      "image",
-      null,
-      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
-      {
-        url: "/api/images/pixel.png",
-        response: {
-          headers: [
-            { name: "Content-Type", value: "image/png" },
-            { name: "Content-Length", value: "67" },
-            { name: "Cache-Control", value: "public, max-age=3600" },
-          ],
-          body: "[Binary PNG data]",
-          contentType: "image",
-          size: 67,
-        },
+    transaction: createTransactionWithContent("tx-image-png", "image", null, PNG_DATA_URL, {
+      url: "/api/images/pixel.png",
+      response: {
+        headers: [
+          { name: "Content-Type", value: "image/png" },
+          { name: "Content-Length", value: "67" },
+          { name: "Cache-Control", value: "public, max-age=3600" },
+        ],
+        body: PNG_DATA_URL,
+        contentType: "image",
+        size: 67,
       },
-    ),
+    }),
   },
   parameters: {
     docs: {
       description: {
-        story: "Transaction with PNG image response. Shows binary content indicator for image data.",
+        story: "Transaction with PNG image response, shown as the image with a download button.",
       },
     },
+  },
+  play: async ({ canvasElement }) => {
+    await waitFor(() => expect(canvasElement.querySelector('img[src^="data:image/png"]')).not.toBeNull());
+  },
+};
+
+// Image whose body is only a placeholder string
+export const ImagePlaceholder: Story = {
+  args: {
+    transaction: createTransactionWithContent("tx-image-placeholder", "image", null, "[Binary PNG data]", {
+      url: "/api/images/pixel.png",
+      response: {
+        headers: [
+          { name: "Content-Type", value: "image/png" },
+          { name: "Content-Length", value: "67" },
+        ],
+        body: "[Binary PNG data]",
+        contentType: "image",
+        size: 67,
+      },
+    }),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Image response whose body was not captured, only a `[Binary` placeholder: shown with its size.",
+      },
+    },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(await canvas.findByText("[Binary PNG data]")).toBeVisible();
+    await expect(canvasElement.querySelector("img")).toBeNull();
   },
 };
 
 // Image Response Example (JPEG)
 export const ImageJpegResponse: Story = {
   args: {
-    transaction: createTransactionWithContent(
-      "tx-image-jpeg",
-      "image",
-      null,
-      "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAr/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=",
-      {
-        url: "/api/images/photo.jpg",
-        response: {
-          headers: [
-            { name: "Content-Type", value: "image/jpeg" },
-            { name: "Content-Length", value: "285" },
-            { name: "Cache-Control", value: "public, max-age=3600" },
-          ],
-          body: "[Binary JPEG data]",
-          contentType: "image",
-          size: 285,
-        },
+    transaction: createTransactionWithContent("tx-image-jpeg", "image", null, JPEG_DATA_URL, {
+      url: "/api/images/photo.jpg",
+      response: {
+        headers: [
+          { name: "Content-Type", value: "image/jpeg" },
+          { name: "Content-Length", value: "285" },
+          { name: "Cache-Control", value: "public, max-age=3600" },
+        ],
+        body: JPEG_DATA_URL,
+        contentType: "image",
+        size: 285,
       },
-    ),
+    }),
   },
   parameters: {
     docs: {
       description: {
-        story: "Transaction with JPEG image response. Shows binary content indicator for image data.",
+        story: "Transaction with JPEG image response, shown as the image with a download button.",
       },
     },
+  },
+  play: async ({ canvasElement }) => {
+    await waitFor(() => expect(canvasElement.querySelector('img[src^="data:image/jpeg"]')).not.toBeNull());
   },
 };
 
@@ -366,30 +396,37 @@ export const PdfResponse: Story = {
   },
 };
 
+// 16 bytes: 0x00 to 0x0f
+const BINARY_DATA_URL = "data:application/octet-stream;base64,AAECAwQFBgcICQoLDA0ODw==";
+
 // Binary Response Example
 export const BinaryResponse: Story = {
   args: {
-    transaction: createTransactionWithContent("tx-binary", "binary", null, "[Binary data]", {
+    transaction: createTransactionWithContent("tx-binary", "binary", null, BINARY_DATA_URL, {
       url: "/api/files/data.bin",
       method: "GET",
       response: {
         headers: [
           { name: "Content-Type", value: "application/octet-stream" },
-          { name: "Content-Length", value: "1048576" },
+          { name: "Content-Length", value: "16" },
           { name: "Content-Disposition", value: "attachment; filename=data.bin" },
         ],
-        body: "[Binary data - 1 MB]",
+        body: BINARY_DATA_URL,
         contentType: "binary",
-        size: 1048576,
+        size: 16,
       },
     }),
   },
   parameters: {
     docs: {
       description: {
-        story: "Transaction with generic binary response. Shows binary content indicator with file size.",
+        story: "Transaction with generic binary response: a binary notice with file size and a download button.",
       },
     },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(await canvas.findByRole("button", { name: /Download/ })).toBeVisible();
   },
 };
 
@@ -419,49 +456,45 @@ export const BinaryResponseExtendedFilename: Story = {
   },
 };
 
+const largeJsonDocument = {
+  metadata: {
+    generated: new Date().toISOString(),
+    records: 1000,
+  },
+  data: Array.from({ length: 1000 }, (_, i) => ({
+    id: i + 1,
+    uuid: `uuid-${i + 1}`,
+    name: `Record ${i + 1}`,
+    description: `This is a detailed description for record ${i + 1}`,
+    status: i % 3 === 0 ? "active" : i % 3 === 1 ? "pending" : "inactive",
+    created: new Date(Date.now() - i * 86400000).toISOString(),
+    updated: new Date(Date.now() - i * 43200000).toISOString(),
+    tags: [`tag${i % 10}`, `category${i % 5}`, `type${i % 3}`],
+    metrics: {
+      views: Math.floor(Math.random() * 10000),
+      clicks: Math.floor(Math.random() * 1000),
+      conversions: Math.floor(Math.random() * 100),
+    },
+  })),
+};
+
 // Large JSON Response Example
 export const LargeJsonResponse: Story = {
   args: {
-    transaction: createTransactionWithContent(
-      "tx-large-json",
-      "json",
-      null,
-      {
-        metadata: {
-          generated: new Date().toISOString(),
-          records: 1000,
-        },
-        data: Array.from({ length: 1000 }, (_, i) => ({
-          id: i + 1,
-          uuid: `uuid-${i + 1}`,
-          name: `Record ${i + 1}`,
-          description: `This is a detailed description for record ${i + 1}`,
-          status: i % 3 === 0 ? "active" : i % 3 === 1 ? "pending" : "inactive",
-          created: new Date(Date.now() - i * 86400000).toISOString(),
-          updated: new Date(Date.now() - i * 43200000).toISOString(),
-          tags: [`tag${i % 10}`, `category${i % 5}`, `type${i % 3}`],
-          metrics: {
-            views: Math.floor(Math.random() * 10000),
-            clicks: Math.floor(Math.random() * 1000),
-            conversions: Math.floor(Math.random() * 100),
-          },
-        })),
+    transaction: createTransactionWithContent("tx-large-json", "json", null, largeJsonDocument, {
+      url: "/api/data/export?limit=1000",
+      responseTime: 523,
+      response: {
+        headers: [
+          { name: "Content-Type", value: "application/json" },
+          { name: "X-Total-Records", value: "1000" },
+          { name: "X-Response-Time", value: "523ms" },
+        ],
+        body: largeJsonDocument,
+        contentType: "json",
+        size: 125000,
       },
-      {
-        url: "/api/data/export?limit=1000",
-        responseTime: 523,
-        response: {
-          headers: [
-            { name: "Content-Type", value: "application/json" },
-            { name: "X-Total-Records", value: "1000" },
-            { name: "X-Response-Time", value: "523ms" },
-          ],
-          body: "[Large JSON data]",
-          contentType: "json",
-          size: 125000,
-        },
-      },
-    ),
+    }),
   },
   parameters: {
     docs: {
@@ -470,6 +503,13 @@ export const LargeJsonResponse: Story = {
           "Transaction with large JSON response (1000 records). Demonstrates virtualization and performance features of the code formatter.",
       },
     },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // The code box draws only the lines in view: scroll to the end of the document.
+    const code = await canvas.findByRole("group", { name: "Code" });
+    code.scrollTop = code.scrollHeight;
+    await expect(await canvas.findByText(/Record 1000/)).toBeVisible();
   },
 };
 
