@@ -3,7 +3,7 @@ import type { ContentType, DetailedTransaction } from "@msqd/lydia/Models/Transa
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, waitFor, within } from "storybook/test";
 import { TransactionsDetailPage } from "./TransactionsDetailPage";
-import { LYDIAN_JPEG_DATA_URL, LYDIAN_PNG_DATA_URL } from "./TransactionsDetailPage.images";
+import { LYDIAN_JPEG_DATA_URL, LYDIAN_PNG_DATA_URL } from "./TransactionsDetailPage.images.samples";
 import { sampleDetailedTransaction } from "./TransactionsDetailPage.samples";
 
 // Toast wrapper for proper functionality
