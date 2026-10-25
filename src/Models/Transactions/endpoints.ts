@@ -1,4 +1,5 @@
 import { splitRequestTarget } from "@msqd/lydia/Models/Http/requestTarget";
+import { MAX_TREE_DEPTH } from "./treeDepth";
 import type { Transaction } from "./types";
 
 /** Name under which transactions without an `apiName` are grouped. */
@@ -29,5 +30,7 @@ export function segmentsOf(transaction: Transaction): string[] {
 export function isUnder(transaction: Transaction, selection: Pick<Selection, "apiName" | "segments">): boolean {
   if (apiOf(transaction) !== selection.apiName) return false;
   const segments = segmentsOf(transaction);
+  // A node deeper than the tree is a folded leaf: it stands for one exact path.
+  if (selection.segments.length > MAX_TREE_DEPTH && segments.length !== selection.segments.length) return false;
   return selection.segments.every((segment, index) => segments[index] === segment);
 }

@@ -1,4 +1,5 @@
 import { LINEAR_GROWTH_LIMIT, growthRatio } from "@/linearTime.test-utils";
+import { isUnder } from "@msqd/lydia/Models/Transactions/endpoints";
 import type { Transaction } from "@msqd/lydia/Models/Transactions/types";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
@@ -314,5 +315,38 @@ describe("buildApiTree cost", () => {
       4000,
     );
     expect(ratio).toBeLessThan(LINEAR_GROWTH_LIMIT);
+  });
+});
+
+describe("very deep request paths", () => {
+  const deep = (id: string, url: string): Transaction => ({ ...mockTransactions[0], id, url, apiName: "deep-api" });
+
+  it("folds the segments past 64 into one leaf that selects exactly its transactions", () => {
+    const head = "/a".repeat(64);
+    const transactions = [deep("d1", `${head}/x/y`), deep("d2", `${head}/x/y`), deep("d3", `${head}/x`)];
+    const [api] = buildApiTree(transactions);
+    let node = api;
+    for (let i = 0; i < 64; i++) node = node.children![0];
+    expect(node.children?.map((c) => [c.name, c.type, c.transactionCount])).toEqual([
+      ["x/y", "endpoint", 2],
+      ["x", "endpoint", 1],
+    ]);
+    const [folded, single] = node.children!;
+    const selection = { type: folded.type, apiName: folded.apiName, segments: folded.segments };
+    expect(transactions.filter((t) => isUnder(t, selection)).map((t) => t.id)).toEqual(["d1", "d2"]);
+    const own = { type: single.type, apiName: single.apiName, segments: single.segments };
+    expect(transactions.filter((t) => isUnder(t, own)).map((t) => t.id)).toEqual(["d3"]);
+  });
+
+  it("builds a 5000-segment path in a single leaf", () => {
+    const [api] = buildApiTree([deep("d1", "/a".repeat(5000))]);
+    let node = api;
+    let depth = 0;
+    while (node.children) {
+      node = node.children[0];
+      depth++;
+    }
+    expect(depth).toBe(65);
+    expect(node.name).toBe(Array(4936).fill("a").join("/"));
   });
 });
