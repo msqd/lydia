@@ -3,7 +3,7 @@
     "@bramus/pagination-sequence": "^1.2.1",
     "@heroicons/react": "^2.2.0",
     "date-fns": "^4.1.0",
-    "echarts-for-react": "^3.0.2",
+    "echarts-for-react": "^3.0.4",
     "http-status-codes": "^2.3.0",
     "refractor": "^5.0.0",
     "tailwind-merge": "^3.3.0"
