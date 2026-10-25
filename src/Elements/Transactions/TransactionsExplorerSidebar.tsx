@@ -5,13 +5,7 @@ import {
   FolderIcon,
   FolderOpenIcon,
 } from "@heroicons/react/24/outline";
-import {
-  type EndpointNodeType,
-  type Selection,
-  apiOf,
-  isUnder,
-  segmentsOf,
-} from "@msqd/lydia/Models/Transactions/endpoints";
+import { type EndpointNodeType, type Selection, apiOf, segmentsOf } from "@msqd/lydia/Models/Transactions/endpoints";
 import type { Transaction } from "@msqd/lydia/Models/Transactions/types";
 import { type ComponentProps, useMemo, useState } from "react";
 import { twMerge } from "tailwind-merge";
@@ -50,22 +44,38 @@ function selectionOf(node: TreeNode): Selection {
 const sameNode = (a: Selection, b: Selection) =>
   a.apiName === b.apiName && a.segments.length === b.segments.length && a.segments.every((s, i) => s === b.segments[i]);
 
+interface Trie {
+  count: number;
+  children: Map<string, Trie>;
+}
+
+/** One pass over the transactions: a trie per API, each node counting the transactions at or below it. */
 function buildApiTree(transactions: Transaction[]): TreeNode[] {
-  const segmentsByApi = new Map<string, string[][]>();
+  const tries = new Map<string, Trie>();
   for (const transaction of transactions) {
     const apiName = apiOf(transaction);
-    segmentsByApi.set(apiName, [...(segmentsByApi.get(apiName) ?? []), segmentsOf(transaction)]);
+    let root = tries.get(apiName);
+    if (!root) {
+      root = { count: 0, children: new Map() };
+      tries.set(apiName, root);
+    }
+    root.count++;
+    let node: Trie = root;
+    for (const segment of segmentsOf(transaction)) {
+      let child: Trie | undefined = node.children.get(segment);
+      if (!child) {
+        child = { count: 0, children: new Map() };
+        node.children.set(segment, child);
+      }
+      child.count++;
+      node = child;
+    }
   }
 
-  const countUnder = (apiName: string, segments: string[]) =>
-    transactions.filter((t) => isUnder(t, { apiName, segments })).length;
-
-  const childrenOf = (apiName: string, parent: string[], paths: string[][]): TreeNode[] => {
-    const below = paths.filter((p) => p.length > parent.length && parent.every((segment, i) => p[i] === segment));
-    const names = new Set(below.map((p) => p[parent.length]));
-    return [...names].map((name) => {
+  const childrenOf = (apiName: string, parent: string[], trie: Trie): TreeNode[] =>
+    [...trie.children].map(([name, child]) => {
       const segments = [...parent, name];
-      const children = childrenOf(apiName, segments, below);
+      const children = childrenOf(apiName, segments, child);
       return {
         id: [apiName, ...segments].join("/"),
         name,
@@ -74,22 +84,21 @@ function buildApiTree(transactions: Transaction[]): TreeNode[] {
         apiName,
         segments,
         children: children.length > 0 ? children : undefined,
-        transactionCount: countUnder(apiName, segments),
+        transactionCount: child.count,
       };
     });
-  };
 
-  return [...segmentsByApi]
+  return [...tries]
     .map(
-      ([apiName, paths]): TreeNode => ({
+      ([apiName, trie]): TreeNode => ({
         id: apiName,
         name: apiName,
         path: apiName,
         type: "api",
         apiName,
         segments: [],
-        children: childrenOf(apiName, [], paths),
-        transactionCount: countUnder(apiName, []),
+        children: childrenOf(apiName, [], trie),
+        transactionCount: trie.count,
       }),
     )
     .sort((a, b) => a.name.localeCompare(b.name));

@@ -1,3 +1,4 @@
+import { LINEAR_GROWTH_LIMIT, growthRatio } from "@/linearTime.test-utils";
 import type { Transaction } from "@msqd/lydia/Models/Transactions/types";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
@@ -299,5 +300,19 @@ describe("buildApiTree", () => {
     expect(tree).toHaveLength(1);
     expect(tree[0].children).toBeDefined();
     expect(tree[0].children!.length).toBeGreaterThan(0);
+  });
+});
+
+describe("buildApiTree cost", () => {
+  it("builds the tree in linear time with the number of transactions", () => {
+    const ratio = growthRatio(
+      (size) =>
+        buildApiTree(
+          Array.from({ length: size }, (_, i) => ({ ...mockTransactions[0], id: `tx${i}`, url: `/users/${i}/orders` })),
+        ),
+      500,
+      4000,
+    );
+    expect(ratio).toBeLessThan(LINEAR_GROWTH_LIMIT);
   });
 });
