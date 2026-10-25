@@ -321,8 +321,8 @@ describe.skipIf(!existsSync(resolve(__dirname, "../dist")))("Package Exports", (
     expect(packageJson.sideEffects).toEqual(["**/*.css"]);
   });
 
-  it("should publish only the dist directory", () => {
-    expect(packageJson.files).toEqual(["dist"]);
+  it("should publish only the dist directory and the third-party notice", () => {
+    expect(packageJson.files).toEqual(["dist", "THIRD_PARTY_NOTICES.md"]);
   });
 
   it("should have correct main and module fields", () => {

@@ -47,6 +47,17 @@ describe.skipIf(!existsSync(distPath))("Published package", () => {
     expect(paths).toContain("dist/css/theme.css");
   });
 
+  it("ships the notice crediting the vendored third-party material", () => {
+    const packed = JSON.parse(execFileSync("pnpm", ["pack", "--dry-run", "--json"], { cwd: root }).toString());
+    const paths: string[] = packed.files.map((file: { path: string }) => file.path);
+    expect(paths).toContain("THIRD_PARTY_NOTICES.md");
+
+    const notice = readFileSync(join(root, "THIRD_PARTY_NOTICES.md"), "utf-8");
+    expect(notice).toMatch(/Heroicons/);
+    expect(notice).toMatch(/Copyright \(c\) Tailwind Labs, Inc\./);
+    expect(notice).toMatch(/Permission is hereby granted, free of charge/);
+  });
+
   it("resolves every export target to a built file", () => {
     const missing = Object.entries(packageJson.exports as Record<string, string | Record<string, string>>).flatMap(
       ([key, entry]) =>
