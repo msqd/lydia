@@ -9,6 +9,14 @@ Versions 0.1.0 to 0.4.0 were internal releases consumed from git as `lydia`, nev
 
 <!-- towncrier release notes start -->
 
+## [0.6.1] - 2026-10-25
+
+### Fixed
+
+- The `echarts-for-react` dependency range is now `^3.0.4`, the first version whose peer accepts `echarts` 6, so no install resolves to an older one and fails with `ERESOLVE`. ([#113](https://github.com/msqd/lydia/issues/113))
+- A failed copy in the transaction metadata now shows an error toast naming the value to copy by hand, instead of a success toast. ([#114](https://github.com/msqd/lydia/issues/114))
+- `JsonTreeView` no longer throws on very deeply nested documents: nodes past level 64 show an inert "…" with a title stating the limit instead of their children. ([#122](https://github.com/msqd/lydia/issues/122))
+
 ## [0.6.0] - 2026-10-25
 
 ### Breaking
@@ -272,3 +280,4 @@ First release.
   system map.
 
 [0.6.0]: https://github.com/msqd/lydia/releases/tag/v0.6.0
+[0.6.1]: https://github.com/msqd/lydia/releases/tag/v0.6.1
