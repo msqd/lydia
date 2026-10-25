@@ -46,17 +46,19 @@ const setLydiaSpec = (spec) => {
 
 /**
  * Points the committed lockfile at the freshly packed tarball: pnpm records the tarball's integrity, which
- * changes with every pack. The lockfile also lists the tarball's own dependencies, which a frozen install
- * does not re-read from the tarball, so a mismatch fails here rather than testing stale versions.
+ * changes with every pack, and its version, which changes with every release. The lockfile also lists the
+ * tarball's own dependencies, which a frozen install does not re-read from the tarball, so a mismatch fails
+ * here rather than testing stale versions.
  */
 const pinTarball = (tarballPath, lockPath) => {
   const integrity = `sha512-${createHash("sha512").update(readFileSync(tarballPath)).digest("base64")}`;
-  const lock = readFileSync(lockPath, "utf-8");
-  const entry = /('@msqd\/lydia@file:[^']*':\n\s+resolution: \{integrity: )sha512-[^,}]+/;
-  assert.match(lock, entry, "the fixture lockfile has an entry for the packed tarball");
-  writeFileSync(lockPath, lock.replace(entry, `$1${integrity}`));
-
   const packed = JSON.parse(execFileSync("tar", ["-xzOf", tarballPath, "package/package.json"], { encoding: "utf-8" }));
+  const entry = /('@msqd\/lydia@file:[^']*':\n\s+resolution: \{integrity: )sha512-[^,}]+(.*\n\s+version: ).+/;
+  const initial = readFileSync(lockPath, "utf-8");
+  assert.match(initial, entry, "the fixture lockfile has an entry for the packed tarball");
+  const lock = initial.replace(entry, `$1${integrity}$2${packed.version}`);
+  writeFileSync(lockPath, lock);
+
   const snapshot = lock.match(/^ {2}'@msqd\/lydia@file:[^']*\(.*\)':\n {4}dependencies:\n((?: {6}.+\n)+)/m)?.[1] ?? "";
   const locked = snapshot.split("\n").filter(Boolean).map((line) => line.trim().replace(/^'?([^':]+)'?:.*$/, "$1"));
   assert.deepEqual(
