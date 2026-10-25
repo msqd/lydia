@@ -67,10 +67,26 @@ export function ContentRenderer({ content, contentType, headers, maxHeight = 384
   );
   const filename = dispositionFilename ?? "file.bin";
 
-  const stringContent = useMemo(() => (content === undefined ? "" : stringifyBody(content)), [content]);
+  const stringContent = useMemo(() => {
+    if (content === undefined) return "";
+    try {
+      return stringifyBody(content);
+    } catch {
+      // A document nested too deeply to serialise.
+      return undefined;
+    }
+  }, [content]);
 
   if (content === undefined || content === "") {
     return <p className="text-sm text-gray-500">Empty body</p>;
+  }
+
+  if (stringContent === undefined) {
+    return (
+      <p role="alert" className="text-sm text-red-600">
+        This body cannot be displayed: it is nested too deeply.
+      </p>
+    );
   }
 
   const contentTypeHeader = findHeader(headers, "Content-Type");
