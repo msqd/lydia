@@ -1,4 +1,5 @@
 import { splitRequestTarget } from "@msqd/lydia/Models/Http/requestTarget";
+import { MAX_TREE_DEPTH } from "./treeDepth";
 import type { Transaction } from "./types";
 
 /** Name under which transactions without an `apiName` are grouped. */
@@ -12,9 +13,6 @@ export interface Selection {
   apiName: string;
   segments: string[];
 }
-
-/** Depth of the endpoint tree: the segments past it fold into one leaf, named by the rest of the path. */
-export const MAX_TREE_DEPTH = 64;
 
 const SCHEME_AND_HOST = /^[a-z][a-z0-9+.-]*:\/\/[^/]*/i;
 

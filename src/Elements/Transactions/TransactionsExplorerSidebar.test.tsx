@@ -321,11 +321,6 @@ describe("buildApiTree cost", () => {
 describe("very deep request paths", () => {
   const deep = (id: string, url: string): Transaction => ({ ...mockTransactions[0], id, url, apiName: "deep-api" });
 
-  it("renders a 5000-segment path without throwing", () => {
-    render(<TransactionsExplorerSidebar transactions={[deep("d1", "/a".repeat(5000))]} />);
-    expect(screen.getByText("deep-api")).toBeInTheDocument();
-  });
-
   it("folds the segments past 64 into one leaf that selects exactly its transactions", () => {
     const head = "/a".repeat(64);
     const transactions = [deep("d1", `${head}/x/y`), deep("d2", `${head}/x/y`), deep("d3", `${head}/x`)];

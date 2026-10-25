@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { MAX_TREE_DEPTH, UNKNOWN_API, apiOf, isUnder, segmentsOf } from "./endpoints";
+import { UNKNOWN_API, apiOf, isUnder, segmentsOf } from "./endpoints";
+import { MAX_TREE_DEPTH } from "./treeDepth";
 import type { Transaction } from "./types";
 
 const transaction = (overrides: Partial<Transaction> = {}): Transaction => ({

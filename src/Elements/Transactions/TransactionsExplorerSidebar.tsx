@@ -5,13 +5,8 @@ import {
   FolderIcon,
   FolderOpenIcon,
 } from "@heroicons/react/24/outline";
-import {
-  type EndpointNodeType,
-  MAX_TREE_DEPTH,
-  type Selection,
-  apiOf,
-  segmentsOf,
-} from "@msqd/lydia/Models/Transactions/endpoints";
+import { type EndpointNodeType, type Selection, apiOf, segmentsOf } from "@msqd/lydia/Models/Transactions/endpoints";
+import { MAX_TREE_DEPTH } from "@msqd/lydia/Models/Transactions/treeDepth";
 import type { Transaction } from "@msqd/lydia/Models/Transactions/types";
 import { type ComponentProps, useMemo, useState } from "react";
 import { twMerge } from "tailwind-merge";
